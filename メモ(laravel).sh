@@ -38,11 +38,23 @@ php artisan make:migration create_people2_table
 php artisan make:migration create_boards_table
 php artisan make:migration cretate_restdata_table
 
+php artisan make:migration cretate_member_masters_table
+php artisan make:migration cretate_address_masters_table
+
 #セッション用マイグレーションファイル作成
 php artisan session:table
 
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate
+
+#　マイグレーションをロールバック
+php artisan migrate:rollback
+php artisan migrate:rollback --step=4
+
+#  マイグレーション（リフレッシュ：全て最初に戻してからマイグレーションやり直し）
+php artisan migrate:refresh
+php artisan migrate:refresh --step=5    #巻き戻す場所を指定もできる
+php artisan migrate:refresh --seed      #シードの実行も同時にできる。
 
 #  シーダーファイルの作成
 php artisan make:seeder ※テーブル名TableSeeder
