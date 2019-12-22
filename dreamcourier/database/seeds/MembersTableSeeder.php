@@ -12,5 +12,10 @@ class MembersTableSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('members')->insert([
+            'name' => 'メンバー１',
+            'email' => 'mem1@outlook.com',
+            'password' => bcrypt('member1')
+        ]);
     }
 }

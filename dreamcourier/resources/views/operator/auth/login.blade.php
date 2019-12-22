@@ -11,15 +11,16 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                            <label for="operator_code" class="col-sm-4 col-form-label text-md-right">{{ __('Operator_code / E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" autofocus>
+                                <input id="operator_code" type="text" class="form-control{{ $errors->has('operator_code') ? ' is-invalid' : '' }}" name="operator_code" value="{{ old('operator_code') }}" required autofocus>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                @if ($errors->has('operator_code'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('operator_code') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>

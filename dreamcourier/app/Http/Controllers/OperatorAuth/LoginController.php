@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
 
+use Illuminate\Http\Request;    //オペレーターコードでログインできるように追加
+
 class LoginController extends Controller
 {
     /*
@@ -60,4 +62,25 @@ class LoginController extends Controller
     {
         return Auth::guard('operator');
     }
+
+    //以下、オペレーターコードでログインできるように追加
+    public function username()
+    {
+        return 'operator_code';
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        $username = $request->input($this->username());
+        $password = $request->input('password');
+
+        if (filter_var($username, \FILTER_VALIDATE_EMAIL)) {
+            $credentials = ['email' => $username, 'password' => $password];
+        } else {
+            $credentials = [$this->username() => $username, 'password' => $password];
+        }
+
+        return $this->guard()->attempt($credentials, $request->filled('remember'));
+    }
+
 }
