@@ -14,11 +14,12 @@ class CretateMemberMastersTable extends Migration
     public function up()
     {
         //
+
         Schema::create('member_masters', function (Blueprint $table) {
             $table->increments('id');
             #会員基本情報
             $table->decimal('member_code',5);
-            #$table->foreign('member_code')->references('member_code')->on('members');
+            $table->foreign('member_code')->references('member_code')->on('members');   #外部KEY制約 membersのmember_codeとリンク
             $table->string('email');
             $table->string('last_name');
             $table->string('first_name');

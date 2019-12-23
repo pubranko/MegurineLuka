@@ -63,8 +63,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        #membersテーブルのmember_codeの最大値＋１を取得
+
+        $membar_code_max =  Member::max('member_code')+1;
+        echo "echoで確認".$membar_code_max;
+
         return Member::create([
             'name' => $data['name'],
+            'member_code' => $membar_code_max,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

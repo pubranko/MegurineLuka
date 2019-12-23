@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'Laravel Multi Auth Guard') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <!--link href="/css/app.css" rel="stylesheet"-->
+    <link href="/css/member.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -26,16 +27,18 @@
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
+                <!-- 標準にあったトグルバー。　不要のためコメントアウト
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                     <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
+                -->
                 <!-- Branding Image -->
+                <!-- .envにあるAPP_NAMEを取得 -->
                 <a class="navbar-brand" href="{{ url('/member') }}">
-                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: Member
+                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: メンバー用
                 </a>
             </div>
 
@@ -49,8 +52,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/member/login') }}">Login</a></li>
-                        <li><a href="{{ url('/member/register') }}">Register</a></li>
+                        <li><a href="{{ url('/member/login') }}">ログイン</a></li>
+                        <li><a href="{{ url('/member/register') }}">新規会員登録</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

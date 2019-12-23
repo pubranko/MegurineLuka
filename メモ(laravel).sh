@@ -18,10 +18,7 @@ php artisan make:controller RestappController --resource
 php artisan make:controller 〜 --resource(-r)
 php artisan make:controller 〜 --model(-m)
 php artisan make:controller 〜 --invokable(-i)
-php artisan make:controller 〜 --parent(-p)
-
-#  サービスプロバイダの作成
-php artisan make:provider HelloServiceProvider
+php artisan make:controller 〜 メンバー１ServiceProvider
 php artisan make:provider 〜
 
 #  ミドルウェアの作成
