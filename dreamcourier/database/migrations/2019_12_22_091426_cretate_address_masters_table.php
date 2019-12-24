@@ -15,11 +15,11 @@ class CretateAddressMastersTable extends Migration
     {
         //
         Schema::create('address_masters', function (Blueprint $table) {
-            $table->decimal('address_code',9);
-            $table->decimal('ken_id',2);
-            $table->decimal('city_id',5);
-            $table->decimal('town_id',9);
-            $table->decimal('zip',8);
+            $table->integer('address_code')->length(9);
+            $table->integer('ken_id')->length(2);
+            $table->integer('city_id')->length(5);
+            $table->integer('town_id')->length(9);
+            $table->integer('zip')->length(8);
             $table->boolean('office_flg');
             $table->boolean('delete_flg');
             $table->string('ken_name',8);
@@ -36,7 +36,7 @@ class CretateAddressMastersTable extends Migration
             $table->string('office_name',255);
             $table->string('office_furi',255);
             $table->string('office_address',255);
-            $table->decimal('new_id',11);
+            $table->integer('new_id')->length(11);
         });
     }
 

@@ -89,6 +89,14 @@ php artisan make:test Person2Test
 # テストの実行（カレントdir：プロジェクトtop）
 vendor/bin/phpunit
 
+### 便利コマンド
+# artisanコマンドのリストが見れる。
+php artisan list
+# ルートに関するリストが見れる。
+php artisan route:list
+# イベントの一覧が見れる。
+php artisan event:list
+
 #  テーブル作成
 create table testDB.people(
     id mediumint unsigned not null auto_increment,
