@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Validation\Rule;         #追加 Rule:inのため
+use Illuminate\Http\Request;            #追加 
+use Illuminate\Auth\Events\Registered;  #追加
+
 
 class RegisterController extends Controller
 {
@@ -43,12 +46,12 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * 新規会員登録（入力）画面のバリデータ
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function in_validator(array $data)
     {
         #全半角コンバート、空白除去、、、どうするかあとで検討
         #$cnv_data = $data;
@@ -56,11 +59,7 @@ class RegisterController extends Controller
         #項目関連チェック、テーブル関連チェックもあとで検討
 
         $rules = [
-            #'name' => 'required|max:255',  #廃止
-            #'member_codeは、入力項目ではないので不要
             'email' => 'required|email|max:255|unique:members',
-            'password' => 'required|min:6|same:password_confirmation',
-            'password_confirmation' => 'required',
             'last_name' => 'required|string|max:30',
             'first_name' => 'required|string|max:30',
             'last_name_kana' => 'required|string|max:60',
@@ -77,18 +76,9 @@ class RegisterController extends Controller
             'address2' => 'required',
             'address3' => 'required',
             'address4' => 'required|string',
-            'address5' => 'required|string',
-            'address6' => 'required|string',
             'phone_number1' => 'required|digits_between:1,11',
             'phone_number2' => 'required|digits_between:1,4',
             'phone_number3' => 'required|digits:4',
-            #'enrollment_datetime' => '',
-            #'unsubscribe_reason' => '',
-            #'status' => '',
-            #'purchase_stop_division' => '',
-            #'temporary_update_operator_code' => '',
-            #'temporary_update_approval_operator_code' => '',
-            #'remember_token' => '',
         ];
 
         $messages = [
@@ -96,15 +86,37 @@ class RegisterController extends Controller
             'email.email' => 'メールアドレスの形式ではありません。',
             'email.max' => 'メールアドレスの文字数が最大値を超えています。',
             'email.unique' => '既に登録されているアドレスです。',
-
+            #まだまだ足りない。あとで追加
         ];
 
         return Validator::make($data,$rules,$messages);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * 新規会員登録（確認）画面のバリデータ
      *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function check_validator(array $data)
+    {
+        $rules = [
+            'email' => 'unique:members',
+            'password' => 'required|min:6|same:password_confirmation',
+        ];
+
+        $messages = [
+            'email.unique' => '既に登録されているアドレスです。',
+            'password.required' => 'パスワードは必ず指定してください。',
+            'password.min' => '6文字以上のパスワードを指定してください',
+            'password.same' => 'パスワード、パスワード再入力の値が異なります。',
+        ];
+
+        return Validator::make($data,$rules,$messages);
+    }
+
+    /**
+     * membersテーブルのモデルインスタンスを生成
      * @param  array  $data
      * @return Member
      */
@@ -125,7 +137,6 @@ class RegisterController extends Controller
         }
 
         return Member::create([
-            #'name' => $data['name'],
             'member_code' => $membar_code_max,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -148,24 +159,67 @@ class RegisterController extends Controller
             'phone_number2' => $data['phone_number2'],
             'phone_number3' => $data['phone_number3'],
             'enrollment_datetime' => date('Y/m/d H:i*s',time()),
-            #'unsubscribe_reason' => '',
-
             'status' => '正式',
-            #'purchase_stop_division' => '',
-            #'temporary_update_operator_code' => '',
-            #'temporary_update_approval_operator_code' => '',
-            #'remember_token' => '',
         ]);
     }
 
     /**
-     * Show the application registration form.
+     * 新規会員登録（入力）画面
      *
      * @return \Illuminate\Http\Response
      */
-    public function showRegistrationForm()
+    public function registrationInForm()
     {
-        return view('member.auth.register');
+        return view('member.auth.registerin');
+    }
+
+    /**
+     * 新規会員登録（確認）画面
+     * 新規会員登録（入力）の入力後、内容の確認とログインパスワードの入力を行う画面を呼び出す。
+     */
+    public function registrationCheckForm(Request $request)
+    {
+        $this->in_validator($request->all())->validate();                   #前画面の入力内容をバリデート
+        #echo "var_exportで確認";
+        #var_dump($request->all());
+        $request->session()->put('register_in_request',$request->all());    #セッションにリクエストを保存
+        $item = $request->all();                                            #前画面の入力内容を$itemへ
+        return view('member.auth.registercheck',$item);
+    }
+
+    /**
+     * 新規会員登録（確認）後の会員登録処理
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     * Illuminate\Foundation\Auth\RegistersUsersをオーバーライドしカスタマイズ
+     */
+    public function register(Request $request)
+    {
+
+        $prev_scr_request = $request->session()->get('register_in_request');    #前画面のリクエストをセッションより取得
+        $merge_request = array_merge($prev_scr_request,$request->all());        #メールアドレスとパスワードのバリデートのため配列をマージ。
+        $this->check_validator($merge_request)->validate();                     #前画面の入力内容＆メールアドレスのバリデート
+
+        #新規会員登録（入力）と新規会員登録（確認）の入力内容よりmembersのモデルインスタンス生成
+        #ユーザー登録のLaravelシステムイベント発行
+        event(new Registered($user = $this->create($merge_request)));
+
+        $this->guard()->login($user);   #登録時にログインする
+
+        // 二重送信対策
+        $request->session()->regenerateToken();
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+
+    /**
+     * 会員登録後、登録結果のメッセージを表示する画面を呼び出す。
+     */
+    public function registrationResultForm()
+    {
+        return view('member.auth.registerresult');
     }
 
     /**

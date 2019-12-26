@@ -1,5 +1,6 @@
 ### テスト用のサーバー起動 ###
 cd /home/mikuras/002_study/006.laravel/laravelapp
+cd /home/mikuras/003_夢の宅配便/dreamcourier
 php artisan serve
 
 ### laravel コマンド ###

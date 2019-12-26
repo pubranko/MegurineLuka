@@ -53,7 +53,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/member/login') }}">ログイン</a></li>
-                        <li><a href="{{ url('/member/register') }}">新規会員登録</a></li>
+                        <li><a href="{{ url('/member/registerin') }}">新規会員登録</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

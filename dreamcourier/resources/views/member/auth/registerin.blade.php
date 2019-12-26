@@ -5,9 +5,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">夢の宅配便　会員新規登録</div>
+                <div class="panel-heading">夢の宅配便　会員新規登録（入力）</div>
+                <div class="mbr-message-box">
+                    以下の会員登録に必要な情報を入力してください。
+                </div>
+
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/member/register') }}">
+                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/member/registercheck') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -20,36 +24,6 @@
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">パスワード（Password）</label>
-
-                            <div class="col-md-6">
-                                <a>　必須　</a>
-                                <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password_confirmation" class="col-md-4 control-label">パスワード再入力（Confirm Password）</label>
-
-                            <div class="col-md-6">
-                                <a>　必須　</a>
-                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -124,7 +98,6 @@
                             <div class="col-md-6">
                                 <a>　必須　</a>
                                 <select id="birthday" class="form-control" name="birthday_era">
-                                    #@if(old('birthday_era')=='') selected  @endif
                                     <option value="" @if(old('birthday_era')=='') selected  @endif>選択してください</option>
                                     <option value="西暦" @if(old('birthday_era')=='西暦') selected  @endif>西暦</option>
                                     <option value="令和" @if(old('birthday_era')=='令和') selected  @endif>令和</option>
@@ -166,11 +139,8 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <select id="sex" class="form-control" name="sex">
-                                    <option value=""  @if(old('sex')=='') selected  @endif>選択してください</option>
-                                    <option value="男性" @if(old('sex')=='男性') selected  @endif>男性</option>
-                                    <option value="女性" @if(old('sex')=='女性') selected  @endif>女性</option>
-                                </select>
+                                <input type="radio" name="sex" value="男性">男性
+                                <input type="radio" name="sex" value="女性">女性
 
                                 @if ($errors->has('sex'))
                                     <span class="help-block">
@@ -197,7 +167,7 @@
                                     <span class="help-block">
                                         <strong>{{ $errors->first('postal_code2') }}</strong>
                                     </span>
-                                @endif••••••
+                                @endif
                             </div>
                         </div>
                         </div>
