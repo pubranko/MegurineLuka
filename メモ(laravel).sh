@@ -39,8 +39,13 @@ php artisan make:migration cretate_restdata_table
 php artisan make:migration cretate_member_masters_table
 php artisan make:migration cretate_address_masters_table
 
-#セッション用マイグレーションファイル作成
+#  セッション用マイグレーションファイル作成
 php artisan session:table
+
+#  テーブル変更のマイグレーション(前提：composer require doctrine/dbal　のインストールが必要)
+php artisan make:migration add_column_〜_table --table=members
+php artisan make:migration change_〜_table --table members
+php artisan make:migration change_address_table --table members
 
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate

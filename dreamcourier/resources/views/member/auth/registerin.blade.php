@@ -139,8 +139,8 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input type="radio" name="sex" value="男性">男性
-                                <input type="radio" name="sex" value="女性">女性
+                                <input type="radio" name="sex" value="男性" @if(old('sex')=='男性') checked @endif>男性
+                                <input type="radio" name="sex" value="女性" @if(old('sex')=='女性') checked @endif>女性
 
                                 @if ($errors->has('sex'))
                                     <span class="help-block">

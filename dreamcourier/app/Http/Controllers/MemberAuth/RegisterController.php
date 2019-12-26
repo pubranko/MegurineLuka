@@ -180,11 +180,8 @@ class RegisterController extends Controller
     public function registrationCheckForm(Request $request)
     {
         $this->in_validator($request->all())->validate();                   #前画面の入力内容をバリデート
-        #echo "var_exportで確認";
-        #var_dump($request->all());
         $request->session()->put('register_in_request',$request->all());    #セッションにリクエストを保存
-        $item = $request->all();                                            #前画面の入力内容を$itemへ
-        return view('member.auth.registercheck',$item);
+        return view('member.auth.registercheck',$request->all());           #前画面の入力内容を引き渡して次の画面へ
     }
 
     /**
@@ -210,8 +207,9 @@ class RegisterController extends Controller
         // 二重送信対策
         $request->session()->regenerateToken();
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        #return $this->registered($request, $user)
+        #                ?: redirect($this->redirectPath());
+        return view('member.auth.registerresult');
     }
 
     /**
