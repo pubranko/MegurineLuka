@@ -12,23 +12,30 @@ laravel new プロジェクト名
 #  コントローラーの作成
 php artisan make:controller HelloController
 php artisan make:controller 〜
-#  リソースコントローラーの作成
+#  リソースコントローラーの作成（CRUD用）
 php artisan make:controller 〜 --resource
 php artisan make:controller RestappController --resource
+#  サービスプロバイダーの作成
+php artisan make:provider 〜
 #  その他コントローラーコマンド
 php artisan make:controller 〜 --resource(-r)
 php artisan make:controller 〜 --model(-m)
 php artisan make:controller 〜 --invokable(-i)
 php artisan make:controller 〜 メンバー１ServiceProvider
-php artisan make:provider 〜
 
 #  ミドルウェアの作成
+#    ※グローバルミドルウェアとして使用したい場合、App/Http/Kernel.phpの$middlewareへの登録も必要
+#    ※ルートミドルウェアとして使用したい場合、App/Http/Kernel.phpの$routeMiddlewareへの登録も必要
 php artisan make:middleware HelloMiddleware
 php artisan make:middleware 〜
+php artisan make:middleware RequestConvertMiddleware
+php artisan make:middleware MembersConvertMiddleware
 
 #  バリデーション（フォームリクエスト）の作成
 php artisan make:request HelloRequest
 php artisan make:request 〜
+php artisan make:request MemberRegisterCheckRequest
+php artisan make:request MemberRegisterRequest
 
 #  マイグレーションファイル作成（テーブル名は複数形が理想）
 php artisan make:migration create_※テーブル名_table

@@ -93,7 +93,9 @@
                         <div class="form-group{{ $errors->has('birthday_year') ? ' has-error' : '' }}">
                         <div class="form-group{{ $errors->has('birthday_month') ? ' has-error' : '' }}">
                         <div class="form-group{{ $errors->has('birthday_day') ? ' has-error' : '' }}">
-                            <label for="birthday" class="col-md-4 control-label">元号/西暦(選択)</label>
+                        <div class="form-group{{ $errors->has('wk_birthday_ymd') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('wk_birthday_era_ymd') ? ' has-error' : '' }}">
+                                <label for="birthday" class="col-md-4 control-label">元号/西暦(選択)</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
@@ -126,6 +128,14 @@
                                 @elseif($errors->has('birthday_day'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('birthday_day') }}</strong>
+                                    </span>
+                                @elseif($errors->has('wk_birthday_ymd'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('wk_birthday_ymd') }}</strong>
+                                    </span>
+                                @elseif($errors->has('wk_birthday_era_ymd'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('wk_birthday_era_ymd') }}</strong>
                                     </span>
                                 @endif
                             </div>

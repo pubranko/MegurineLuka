@@ -120,6 +120,9 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/member/register') }}">
                         {{ csrf_field() }}
 
+                        <!-- emailのバリデート（存在チェック）のため、非表示のemailフィールドを含める -->
+                        <input id="email" type="hidden" class="form-control" name="email" value="{{$email}}">
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">パスワード（Password）</label>
 

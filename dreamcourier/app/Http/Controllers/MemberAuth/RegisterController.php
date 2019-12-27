@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;         #追加 Rule:inのため
 use Illuminate\Http\Request;            #追加 
 use Illuminate\Auth\Events\Registered;  #追加
-
+use App\Http\Requests\MemberRegisterCheckRequest; #追加
+use App\Http\Requests\MemberRegisterRequest; #追加
 
 class RegisterController extends Controller
 {
@@ -46,76 +47,6 @@ class RegisterController extends Controller
     }
 
     /**
-     * 新規会員登録（入力）画面のバリデータ
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function in_validator(array $data)
-    {
-        #全半角コンバート、空白除去、、、どうするかあとで検討
-        #$cnv_data = $data;
-        #$cnv_data['last_name'] = mb_convert_kana($cnv_data['last_name'],'RN');  #RN:半角英字、半角数字を全角へ
-        #項目関連チェック、テーブル関連チェックもあとで検討
-
-        $rules = [
-            'email' => 'required|email|max:255|unique:members',
-            'last_name' => 'required|string|max:30',
-            'first_name' => 'required|string|max:30',
-            'last_name_kana' => 'required|string|max:60',
-            'first_name_kana' => 'required|string|max:60',
-            #生年月日のバリデーションもあとで検討 'birthday' => 'required',
-            'birthday_era' => ['required',Rule::in("西暦","令和","平成","昭和","大正","明治")],
-            'birthday_year' => 'required|digits:4',
-            'birthday_month' => 'required|between:1,12',
-            'birthday_day' => 'required|between:1,31',
-            'sex' => ['required',Rule::in("男性","女性")],
-            'postal_code1' => 'required|digits:3',
-            'postal_code2' => 'required|digits:4',
-            'address1' => 'required',
-            'address2' => 'required',
-            'address3' => 'required',
-            'address4' => 'required|string',
-            'phone_number1' => 'required|digits_between:1,11',
-            'phone_number2' => 'required|digits_between:1,4',
-            'phone_number3' => 'required|digits:4',
-        ];
-
-        $messages = [
-            'email.required' => 'メールアドレスは必ず指定してください。',
-            'email.email' => 'メールアドレスの形式ではありません。',
-            'email.max' => 'メールアドレスの文字数が最大値を超えています。',
-            'email.unique' => '既に登録されているアドレスです。',
-            #まだまだ足りない。あとで追加
-        ];
-
-        return Validator::make($data,$rules,$messages);
-    }
-
-    /**
-     * 新規会員登録（確認）画面のバリデータ
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function check_validator(array $data)
-    {
-        $rules = [
-            'email' => 'unique:members',
-            'password' => 'required|min:6|same:password_confirmation',
-        ];
-
-        $messages = [
-            'email.unique' => '既に登録されているアドレスです。',
-            'password.required' => 'パスワードは必ず指定してください。',
-            'password.min' => '6文字以上のパスワードを指定してください',
-            'password.same' => 'パスワード、パスワード再入力の値が異なります。',
-        ];
-
-        return Validator::make($data,$rules,$messages);
-    }
-
-    /**
      * membersテーブルのモデルインスタンスを生成
      * @param  array  $data
      * @return Member
@@ -126,11 +57,6 @@ class RegisterController extends Controller
 
         $membar_code_max =  Member::max('member_code')+1;
         echo "echoで確認".$membar_code_max;
-
-        #'birthday_era' => ['required',Rule::in("西暦","令和","平成","昭和","大正","明治")],
-        #'birthday_year' => 'required|digits:4',
-        #'birthday_month' => 'required|between:1,12',
-        #'birthday_day' => 'required|between:1,31',
 
         if($data['birthday_era']=="西暦"){
             $birthday = $data['birthday_year']."/".$data['birthday_month']."/".$data['birthday_day'];
@@ -177,9 +103,10 @@ class RegisterController extends Controller
      * 新規会員登録（確認）画面
      * 新規会員登録（入力）の入力後、内容の確認とログインパスワードの入力を行う画面を呼び出す。
      */
-    public function registrationCheckForm(Request $request)
+    #public function registrationCheckForm(Request $request)
+    public function registrationCheckForm(MemberRegisterCheckRequest $request)
     {
-        $this->in_validator($request->all())->validate();                   #前画面の入力内容をバリデート
+        #正常な場合、以下を処理        
         $request->session()->put('register_in_request',$request->all());    #セッションにリクエストを保存
         return view('member.auth.registercheck',$request->all());           #前画面の入力内容を引き渡して次の画面へ
     }
@@ -191,12 +118,12 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      * Illuminate\Foundation\Auth\RegistersUsersをオーバーライドしカスタマイズ
      */
-    public function register(Request $request)
+    #public function register(Request $request)
+    public function register(MemberRegisterRequest $request)
     {
-
-        $prev_scr_request = $request->session()->get('register_in_request');    #前画面のリクエストをセッションより取得
-        $merge_request = array_merge($prev_scr_request,$request->all());        #メールアドレスとパスワードのバリデートのため配列をマージ。
-        $this->check_validator($merge_request)->validate();                     #前画面の入力内容＆メールアドレスのバリデート
+        #$prev_scr_request = $request->session()->get('register_in_request');    #前画面のリクエストをセッションより取得
+        #$merge_request = array_merge($prev_scr_request,$request->all());        #メールアドレスとパスワードのバリデートのため配列をマージ。
+        #$this->check_validator($merge_request)->validate();                     #前画面の入力内容＆メールアドレスのバリデート
 
         #新規会員登録（入力）と新規会員登録（確認）の入力内容よりmembersのモデルインスタンス生成
         #ユーザー登録のLaravelシステムイベント発行

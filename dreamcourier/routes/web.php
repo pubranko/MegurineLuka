@@ -35,7 +35,8 @@ Route::group(['prefix' => 'member'], function () {
   Route::post('/logout', 'MemberAuth\LoginController@logout')->name('logout');
 
   Route::get('/registerin', 'MemberAuth\RegisterController@registrationInForm')->name('registerin');               #会員登録画面（入力）
-  Route::get('/registercheck', 'MemberAuth\RegisterController@registrationCheckForm')->name('register.check');     #会員登録画面（確認）
+  Route::get('/registercheck', 'MemberAuth\RegisterController@registrationCheckForm')
+        ->middleware('membersconvert')->name('register.check');     #会員登録画面（確認）
   Route::post('/register', 'MemberAuth\RegisterController@register');                                              #会員登録（処理）
   Route::get('/registerresult', 'MemberAuth\RegisterController@registrationResultForm')->name('register.result');  #会員登録画面（結果）
 
