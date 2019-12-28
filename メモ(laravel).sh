@@ -99,6 +99,7 @@ npm install && npm run dev
 ### Unit Test
 # テスト用スクリプト作成 ./tests/featureの直下に作成される
 php artisan make:test Person2Test
+php artisan make:test MembersTest
 # テストの実行（カレントdir：プロジェクトtop）
 vendor/bin/phpunit
 
