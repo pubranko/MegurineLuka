@@ -44,7 +44,8 @@ class MemberRegisterRequest extends FormRequest
         return [
             //
             'email' => 'unique:members',
-            'password' => 'required|min:6|same:password_confirmation',
+            'password' => 'required|min:8|same:password_confirmation',
+            'password_confirmation' => 'required',
         ];
     }
 
@@ -65,10 +66,11 @@ class MemberRegisterRequest extends FormRequest
      */
     public function messages(){
         return [
-            'email.unique' => '既に登録されているアドレスです。',
-            'password.required' => 'パスワードは必ず指定してください。',
-            'password.min' => '6文字以上のパスワードを指定してください',
+            'email.unique' => '既に登録されているメールアドレスです。',
+            'password.required' => '入力が漏れています',
+            'password.min' => '８文字以上のパスワードを指定してください',
             'password.same' => 'パスワード、パスワード再入力の値が異なります。',
+            'password_confirmation.required' => '入力が漏れています',
         ];
     }
 }

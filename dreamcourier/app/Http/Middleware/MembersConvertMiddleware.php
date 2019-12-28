@@ -83,7 +83,7 @@ class MembersConvertMiddleware
                     $data['wk_birthday_ymd'] = ($data['birthday_year']+1867)."/".$data['birthday_month']."/".$data['birthday_day'];
                     break;
             }
-            #生年月日（和暦）：各元号ごとの範囲内チェック用（例：”010109”）
+            #生年月日（和暦）：各元号ごとの範囲内チェック用（例：”10109”）
             if($data['birthday_era']!=="西暦"){
                 $data['wk_birthday_era_ymd'] =  intval($data['birthday_year'].
                                                         str_pad($data['birthday_month'], 2, "0", STR_PAD_LEFT).

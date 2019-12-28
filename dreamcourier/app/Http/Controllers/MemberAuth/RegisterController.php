@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Validation\Rule;         #追加 Rule:inのため
-use Illuminate\Http\Request;            #追加 
 use Illuminate\Auth\Events\Registered;  #追加
 use App\Http\Requests\MemberRegisterCheckRequest; #追加
 use App\Http\Requests\MemberRegisterRequest; #追加
@@ -54,24 +52,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         #membersテーブルのmember_codeの最大値＋１を取得
-
         $membar_code_max =  Member::max('member_code')+1;
-        echo "echoで確認".$membar_code_max;
-
-        if($data['birthday_era']=="西暦"){
-            $birthday = $data['birthday_year']."/".$data['birthday_month']."/".$data['birthday_day'];
-        }
 
         return Member::create([
             'member_code' => $membar_code_max,
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-
+            'password' => bcrypt($data['password']),        #パスワードはハッシュ値で保存
             'last_name' => $data['last_name'],
             'first_name' => $data['first_name'],
             'last_name_kana' => $data['last_name_kana'],
             'first_name_kana' => $data['first_name_kana'],
-            'birthday' => $birthday,
+            'birthday' => $data['wk_birthday_ymd'],         #ミドルウェアで付与したwk_birthday_ymdを使用(西暦に統一した値　例:2019/5/1)
             'sex' => $data['sex'],
             'postal_code1' => $data['postal_code1'],
             'postal_code2' => $data['postal_code2'],
@@ -103,48 +94,32 @@ class RegisterController extends Controller
      * 新規会員登録（確認）画面
      * 新規会員登録（入力）の入力後、内容の確認とログインパスワードの入力を行う画面を呼び出す。
      */
-    #public function registrationCheckForm(Request $request)
-    public function registrationCheckForm(MemberRegisterCheckRequest $request)
+    public function registrationCheckForm(MemberRegisterCheckRequest $request)  #カスタムしたフォームリクエスト使用
     {
-        #正常な場合、以下を処理        
         $request->session()->put('register_in_request',$request->all());    #セッションにリクエストを保存
         return view('member.auth.registercheck',$request->all());           #前画面の入力内容を引き渡して次の画面へ
     }
 
     /**
      * 新規会員登録（確認）後の会員登録処理
+     * 新規会員登録（確認）画面へ遷移
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      * Illuminate\Foundation\Auth\RegistersUsersをオーバーライドしカスタマイズ
      */
-    #public function register(Request $request)
-    public function register(MemberRegisterRequest $request)
+    public function register(MemberRegisterRequest $request)  #カスタムしたフォームリクエスト使用
     {
-        #$prev_scr_request = $request->session()->get('register_in_request');    #前画面のリクエストをセッションより取得
-        #$merge_request = array_merge($prev_scr_request,$request->all());        #メールアドレスとパスワードのバリデートのため配列をマージ。
-        #$this->check_validator($merge_request)->validate();                     #前画面の入力内容＆メールアドレスのバリデート
-
-        #新規会員登録（入力）と新規会員登録（確認）の入力内容よりmembersのモデルインスタンス生成
-        #ユーザー登録のLaravelシステムイベント発行
-        event(new Registered($user = $this->create($merge_request)));
+        #新規会員登録（入力）＋新規会員登録（確認）のリクエストをマージ
+        $register_in_request = $request->session()->get('register_in_request');
+        $request_merge = array_merge($request->all(),$register_in_request);
+        #membersのモデルインスタンス生成。ユーザー登録のLaravelシステムイベント発行
+        event(new Registered($user = $this->create($request_merge)));
 
         $this->guard()->login($user);   #登録時にログインする
+        $request->session()->regenerateToken(); #二重送信対策
 
-        // 二重送信対策
-        $request->session()->regenerateToken();
-
-        #return $this->registered($request, $user)
-        #                ?: redirect($this->redirectPath());
-        return view('member.auth.registerresult');
-    }
-
-    /**
-     * 会員登録後、登録結果のメッセージを表示する画面を呼び出す。
-     */
-    public function registrationResultForm()
-    {
-        return view('member.auth.registerresult');
+        return view('member.auth.registerresult');  #新規会員登録（結果）画面へ
     }
 
     /**

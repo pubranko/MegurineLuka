@@ -17,18 +17,21 @@ class RequestConvertMiddleware
      */
     public function handle($request, Closure $next)
     {
-
         $input = $request->all();
+
+        #例外：パスワードに関しては空白の除去の対象外
+        unset($input['password']);
+        unset($input['password_confirmation']);
 
         $convert = [];
         foreach($input as $key => $val)
         {
             // 入力フォームの前後のスペース(全角・半角)を除去する
             $convert[$key] = preg_replace('/(^\s+)|(\s+$)/u', '', $val);
-            #$trimmed[$key] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $pString);
+            #$trimmed[$key] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $pString);   #タブ等も消す場合、こんな方法もある。
         }
 
-        $request->merge($convert);
+        $request->merge($convert);  #空白除去後の値でリクエストを上書き
         return $next($request);
     }
 }
