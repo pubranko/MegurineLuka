@@ -51,7 +51,7 @@ class MemberRegisterCheckRequest extends FormRequest
             'last_name_kana' => 'required|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u|max:60',
             'first_name_kana' => 'required|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u|max:60',
             'birthday_era' => ['required',Rule::in("西暦","令和","平成","昭和","大正","明治")],
-            #'birthday_year' => 'required|digits:4',
+            'birthday_year' => 'required|integer',
             'birthday_month' => 'required|integer|between:1,12',    #integerがないと桁数1-12でチェックしてしまった。
             'birthday_day' => 'required|integer|between:1,31',
             'sex' => ['required',Rule::in("男性","女性")],
@@ -61,10 +61,10 @@ class MemberRegisterCheckRequest extends FormRequest
             'address2' => 'required',
             'address3' => 'required',
             'address4' => 'required',
-            'phone_number1' => 'required|digits_between:1,11',
-            'phone_number2' => 'required|digits_between:1,4',
+            'phone_number1' => 'required|max:11',
+            'phone_number2' => 'required|max:4',
             'phone_number3' => 'required|digits:4',
-            'wk_birthday_ymd'=>'date',  #ミドルウェアでバリデート用に付与したリクエスト（和暦入力でも西暦に変換した状態）
+            'wk_birthday_ymd'=>'required|date',  #ミドルウェアでバリデート用に付与したリクエスト（和暦入力でも西暦に変換した状態）
         ];
     }
 

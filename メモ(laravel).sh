@@ -100,8 +100,14 @@ npm install && npm run dev
 # テスト用スクリプト作成 ./tests/featureの直下に作成される
 php artisan make:test Person2Test
 php artisan make:test MembersTest
-# テストの実行（カレントdir：プロジェクトtop）
+php artisan make:test MemberRegisterCheckTest
+php artisan make:test MemberRegisterTest
+# テスト用スクリプト作成 ./tests/unitの直下に作成される
+php artisan make:test 〜Test --unit
+# テストの実行：全件 （カレントdir：プロジェクトtop）
 vendor/bin/phpunit
+# テストの実行：ファイル指定
+vendor/bin/phpunit tests/Feature/MemberRegisterTest.php
 
 ### 便利コマンド
 # artisanコマンドのリストが見れる。

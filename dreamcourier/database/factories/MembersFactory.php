@@ -21,8 +21,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
-    ];
+        'remember_token' => Str::random(10),#$factory->define(Member::class, function (Faker $faker) {
 });
 */
 
@@ -35,7 +34,8 @@ $factory->define(Member::class, function (Faker $faker) {
     $phone_number3 = explode("-",$faker->phoneNumber)[2];
 
     return [
-        'member_code' => $faker->randomDigit(1, 90000),
+        #'member_code' => $faker->unique()->randomDigit(1, 90000),
+        'member_code' => $faker->unique()->randomDigit(1, 90000),
         'email' => $faker->unique()->safeEmail,
         'password'  => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'last_name' => $faker->lastName,
@@ -68,13 +68,11 @@ $factory->define(Member::class, function (Faker $faker) {
     ];
 });
 
-/*
-'member_code', 'email', 'password',
-'last_name','first_name','last_name_kana','first_name_kana','birthday','sex',
-'postal_code1','postal_code2',
-'address1','address2','address3','address4','address5','address6',
-'phone_number1','phone_number2','phone_number3',
-'enrollment_datetime','unsubscribe_reason','status','purchase_stop_division',
-'temporary_update_operator_code','temporary_update_approval_operator_code',
-'create_at','update_at',
-*/
+/**
+ * E-mailの重複チェックのバリデート用
+ */
+$factory->state(Member::class, 'EmailUnique', function () {
+    return [
+        'email' => 'unique@ex.com',
+    ];
+});
