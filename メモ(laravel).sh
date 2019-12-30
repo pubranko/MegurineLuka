@@ -12,9 +12,11 @@ laravel new プロジェクト名
 #  コントローラーの作成
 php artisan make:controller HelloController
 php artisan make:controller 〜
+php artisan make:controller AddressMastersController
 #  リソースコントローラーの作成（CRUD用）
 php artisan make:controller 〜 --resource
 php artisan make:controller RestappController --resource
+
 #  サービスプロバイダーの作成
 php artisan make:provider 〜
 #  その他コントローラーコマンド
@@ -36,15 +38,7 @@ php artisan make:request HelloRequest
 php artisan make:request 〜
 php artisan make:request MemberRegisterCheckRequest
 php artisan make:request MemberRegisterRequest
-
-#  マイグレーションファイル作成（テーブル名は複数形が理想）
-php artisan make:migration create_※テーブル名_table
-php artisan make:migration create_people2_table
-php artisan make:migration create_boards_table
-php artisan make:migration cretate_restdata_table
-
-php artisan make:migration cretate_member_masters_table
-php artisan make:migration cretate_address_masters_table
+リソース cretate_address_masters_table
 
 #  セッション用マイグレーションファイル作成
 php artisan session:table
@@ -53,6 +47,7 @@ php artisan session:table
 php artisan make:migration add_column_〜_table --table=members
 php artisan make:migration change_〜_table --table members
 php artisan make:migration change_address_table --table members
+php artisan make:migration change_column_zip_table --table=address_masters
 
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate
@@ -79,6 +74,7 @@ php artisan db:seed --class=RestdataTableSeeder
 #  モデルの作成(単数形の名前が理想)
 php artisan make:model Person
 php artisan make:model Board
+php artisan make:model AddressMaster
 
 ### ペジネーションのテンプレートの用意
 # これで「/resources/views/vendor/pagination」にテンプレートがコピーされるようだ

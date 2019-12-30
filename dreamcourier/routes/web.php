@@ -36,11 +36,14 @@ Route::group(['prefix' => 'member'], function () {
 
   Route::get('/registerin', 'MemberAuth\RegisterController@registrationInForm')->name('registerin');        #会員登録画面（入力）
   Route::get('/registercheck', 'MemberAuth\RegisterController@registrationCheckForm')                       #会員登録画面（確認）
-        ->middleware('membersconvert')->name('register.check');     
+        ->middleware('membersconvert')->name('register.check');
   Route::post('/register', 'MemberAuth\RegisterController@register')->name('register');                     #会員登録（処理）
 
   Route::post('/password/email', 'MemberAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
   Route::post('/password/reset', 'MemberAuth\ResetPasswordController@reset')->name('password.email');
   Route::get('/password/reset', 'MemberAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'MemberAuth\ResetPasswordController@showResetForm');
+
+  #Route::resource('rest','AddressMastersController');
 });
+Route::get('/addresssearch', 'AddressMastersController@postCodeSearch')->name('postcodesearch');        #郵便番号から住所を取得

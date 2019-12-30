@@ -178,6 +178,7 @@
                                         <strong>{{ $errors->first('postal_code2') }}</strong>
                                     </span>
                                 @endif
+                                <input type="button" class="btn btn-primary" value="郵便番号より住所を検索" onclick="f_address_get()">
                             </div>
                         </div>
                         </div>
