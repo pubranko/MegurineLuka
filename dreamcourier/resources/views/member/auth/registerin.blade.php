@@ -188,7 +188,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address1" type="text" class="form-control" name="address1" value={{old('address1')}}>
+                                <input id="address1" type="text" class="form-control" name="address1" disabled value={{old('address1')}}>
 
                                 @if ($errors->has('address1'))
                                     <span class="help-block">••••••
@@ -203,7 +203,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address2" type="text" class="form-control" name="address2" value={{old('address2')}}>
+                                <input id="address2" type="text" class="form-control" name="address2" disabled value={{old('address2')}}>
 
                                 @if ($errors->has('address2'))
                                     <span class="help-block">
@@ -218,7 +218,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address3" type="text" class="form-control" name="address3" value={{old('address3')}}>
+                                <input id="address3" type="text" class="form-control" name="address3" disabled value={{old('address3')}}>
 
                                 @if ($errors->has('address3'))
                                     <span class="help-block">
