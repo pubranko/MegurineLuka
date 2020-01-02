@@ -12,13 +12,15 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-
-    <!-- Scripts -->
+    <link href="/css/operator.css" rel="stylesheet">
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <!-- Java Script -->
+    <!--<script type="application/javascript" src="/js/address_get.js"></script>-->
+
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -26,16 +28,18 @@
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
+                <!-- 標準にあったトグルバー。　不要のためコメントアウト
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                     <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
+                -->
                 <!-- Branding Image -->
+                <!-- .envにあるAPP_NAMEを取得 -->
                 <a class="navbar-brand" href="{{ url('/operator') }}">
-                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: Operator
+                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: オペレーター用
                 </a>
             </div>
 
@@ -49,8 +53,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/operator/login') }}">Login</a></li>
-                        <li><a href="{{ url('/operator/register') }}">Register</a></li>
+                        <li><a href="{{ url('/operator/login') }}">ログイン</a></li>
+                        <!--<li><a href="{{ url('/operator/register') }}">Register</a></li>-->
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -62,7 +66,7 @@
                                     <a href="{{ url('/operator/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        Logout
+                                        ログアウト
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/operator/logout') }}" method="POST" style="display: none;">

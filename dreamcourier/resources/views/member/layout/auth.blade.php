@@ -66,7 +66,7 @@
                                     <a href="{{ url('/member/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        Logout
+                                        ログアウト
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/member/logout') }}" method="POST" style="display: none;">

@@ -13,6 +13,7 @@ laravel new プロジェクト名
 php artisan make:controller HelloController
 php artisan make:controller 〜
 php artisan make:controller AddressMastersController
+php artisan make:controller OperatorMenu/ProductRegisterController
 #  リソースコントローラーの作成（CRUD用）
 php artisan make:controller 〜 --resource
 php artisan make:controller RestappController --resource
@@ -32,13 +33,25 @@ php artisan make:middleware HelloMiddleware
 php artisan make:middleware 〜
 php artisan make:middleware RequestConvertMiddleware
 php artisan make:middleware MembersConvertMiddleware
+php artisan make:middleware ProductRegisterConvertMiddleware
 
 #  バリデーション（フォームリクエスト）の作成
 php artisan make:request HelloRequest
 php artisan make:request 〜
 php artisan make:request MemberRegisterCheckRequest
 php artisan make:request MemberRegisterRequest
+php artisan make:request ProductRegisterCheckRequest
 リソース cretate_address_masters_table
+
+#  マイグレーションファイル作成（テーブル名は複数形が理想）
+php artisan make:migration create_※テーブル名_table
+php artisan make:migration create_people2_table
+php artisan make:migration create_boards_table
+php artisan make:migration cretate_restdata_table
+
+php artisan make:migration cretate_member_masters_table
+php artisan make:migration cretate_address_masters_table
+php artisan make:migration create_product_masters_table
 
 #  セッション用マイグレーションファイル作成
 php artisan session:table
@@ -48,7 +61,7 @@ php artisan make:migration add_column_〜_table --table=members
 php artisan make:migration change_〜_table --table members
 php artisan make:migration change_address_table --table members
 php artisan make:migration change_column_zip_table --table=address_masters
-
+a
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate
 
@@ -64,17 +77,20 @@ php artisan migrate:refresh --seed      #シードの実行も同時にできる
 #  シーダーファイルの作成
 php artisan make:seeder ※テーブル名TableSeeder
 php artisan make:seeder People2TableSeeder
+php artisan make:seeder OperatorsTableSeeder
 
 #  シーディングを実行
 php artisan db:seed
 #  シーディングを行いたいクラスを指定したい場合
 php artisan db:seed --class=※クラス名
 php artisan db:seed --class=RestdataTableSeeder
+php artisan db:seed --class=OperatorsTableSeeder
 
 #  モデルの作成(単数形の名前が理想)
 php artisan make:model Person
 php artisan make:model Board
 php artisan make:model AddressMaster
+php artisan make:model ProductMasters
 
 ### ペジネーションのテンプレートの用意
 # これで「/resources/views/vendor/pagination」にテンプレートがコピーされるようだ

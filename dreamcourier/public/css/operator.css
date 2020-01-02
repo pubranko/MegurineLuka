@@ -1,0 +1,25 @@
+body {
+    background-color:#faebd7; /*ページ全体の背景色*/
+}
+
+/* 各メニュー枠の枠線の上に見出しを表示する設定 */
+.menu_box{
+    position: relative; /*ポジション：相対位置*/
+    margin-top: 1em;    /*boxの上の要素との余白*/
+    margin-bottom: 1em;    /*boxの上の要素との余白*/
+    margin-left: 1em;    /*boxの上の要素との余白*/
+    margin-right: 1em;    /*boxの上の要素との余白*/
+    padding: 1em 2em;   /*上下余白、左右余白*/
+    border: 1px solid black;  /*枠線の太さ、線種、色*/
+    display:inline-block; /*配置する要素に合わせて枠線を自動調整*/
+ }
+.menu_name{
+    position: absolute; /*ポジション：絶対位置*/
+    top: 0;             /*文字を上に出す*/
+    left: 0;            /*文字を左に出す*/
+    font-size: 1em;     /*文字のフォントサイズ*/
+    padding: 0 1em;     /*文字周りの余白　上下0，左右1em*/
+    margin: 0;          /*文字の枠線内での余白。marginだけだと枠線内に文字が表示されるが、下のtransformで上に半文字分移動している。結果線と文字が重なる*/
+    transform: translateY(-50%) translateX(1em);
+    background-color: #faebd7;  /*表示する文字の背景色*/
+}
