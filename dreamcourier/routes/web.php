@@ -27,8 +27,6 @@ Route::group(['prefix' => 'operator'], function () {
   Route::get('/password/reset', 'OperatorAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
   Route::get('/password/reset/{token}', 'OperatorAuth\ResetPasswordController@showResetForm');
 
-  Route::get('/product', 'OperatorMenu\ProductRegisterController@？？')->name('product.register');
-
 });
 
 Route::group(['prefix' => 'member'], function () {

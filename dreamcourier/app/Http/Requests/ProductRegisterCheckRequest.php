@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;         #追加 Rule:exstisのため
+use App\Rules\SalesPeriodDuplicationRule;
 
 class ProductRegisterCheckRequest extends FormRequest
 {
@@ -13,12 +15,11 @@ class ProductRegisterCheckRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'operator/register'){
-            if($this->all()['check']){              #クエリーに"check"があれば、バリデーションを実行
-                return true;
-            }
+        if($this->path() == 'operator/product/check'){
+            return true;
+        }else{
+            return false;
         }
-        return false;
     }
 
     /**
@@ -47,14 +48,26 @@ class ProductRegisterCheckRequest extends FormRequest
             #'email' => 'required|email|max:255|unique:members',
             #'last_name' => 'required|max:30',
 
-            'product_code' => 'required|regex:/^[a-zA-Z0-9]*-[0-9]+$/u',   #商品コード
-            'sales_period_from' => 'required|date',                 #販売期間（FROM）
+            #'product_code' => 'required|regex:/^[a-zA-Z0-9]*-[0-9]+$/u',   #商品コード
+            
+            'product_code' => ['required','regex:/^[a-zA-Z0-9]*-[0-9]+$/u',
+                            new SalesPeriodDuplicationRule(
+                                $this->product_code, // 部屋番号
+                                $this->wk_sales_period_from, // 開始日時
+                                $this->wk_sales_period_to // 終了日時
+                                )],
+            
+            'sales_period_date_from' => 'required|date',                 #販売期間（FROM）
+            'sales_period_time_from' => 'required|regex:/^[0-9]{2}:[0-9]{2}+$/u',                 #販売期間（FROM）
+            'wk_sales_period_from' => 'required|date',                 #販売期間（FROM）
             #'sales_period_to' => 'date',                           #販売期間（TO）
             'product_name' => 'required|max:200',                           #商品名
             'product_description' => 'required|max:1500',                    #商品説明
             'product_price' => 'required|integer',                  #商品価格
-            'product_image' => 'required|image|dimensions:ratio=1/1',       #商品画像
-            'product_thumbnail' => 'required|image|dimensions:ratio=1/1',   #商品サムネイル画像
+            #'product_image' => 'required|image|dimensions:ratio=1/1',       #商品画像
+            'product_image' => 'required|image',       #商品画像
+            #'product_thumbnail' => 'required|image|dimensions:ratio=1/1',   #商品サムネイル画像
+            'product_thumbnail' => 'required|image',   #商品サムネイル画像
             'product_search_keyword' => 'required',                 #商品検索キーワード
             'product_tag' => 'required',                            #商品タグ
             'product_stock_quantity' => 'required|integer',         #商品在庫数
@@ -73,8 +86,14 @@ class ProductRegisterCheckRequest extends FormRequest
      */
     public function withValidator ($validator){
         #販売期間（TO）
+        $validator->sometimes('wk_sales_period_to','date|after:wk_sales_period_from',function($input){
+            return isset($input->wk_sales_period_to);
+        });
+        #同一の商品コードがproduct_mastersテーブルに存在した場合、
         $validator->sometimes('sales_period_to','date|after:sales_period_from',function($input){
-            return isset($input->sales_period_to);
+            return Rule::exists('product_masters')->where(function ($query) {
+                $query->where('product_code', $input->product_code);
+            });
         });
     }
 

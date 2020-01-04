@@ -20,11 +20,13 @@ php artisan make:controller RestappController --resource
 
 #  サービスプロバイダーの作成
 php artisan make:provider 〜
+php artisan make:provider OperatorServiceProvider
 #  その他コントローラーコマンド
 php artisan make:controller 〜 --resource(-r)
 php artisan make:controller 〜 --model(-m)
 php artisan make:controller 〜 --invokable(-i)
 php artisan make:controller 〜 メンバー１ServiceProvider
+
 
 #  ミドルウェアの作成
 #    ※グローバルミドルウェアとして使用したい場合、App/Http/Kernel.phpの$middlewareへの登録も必要
@@ -91,6 +93,10 @@ php artisan make:model Person
 php artisan make:model Board
 php artisan make:model AddressMaster
 php artisan make:model ProductMasters
+
+#  ルールの作成（カスタムバリデーション）
+php artisan make:rule 〜
+php artisan make:rule SalesPeriodDuplicationRule
 
 ### ペジネーションのテンプレートの用意
 # これで「/resources/views/vendor/pagination」にテンプレートがコピーされるようだ
