@@ -1,0 +1,10 @@
+body {
+    background-color:#b0c4de;
+  }
+
+.mbr-message-box{
+  border:5px solid #FFCC33;
+  padding:10px;
+  background:#ffffcc;
+  font-size:20px;
+}

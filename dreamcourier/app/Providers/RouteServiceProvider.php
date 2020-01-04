@@ -46,7 +46,49 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapMemberRoutes();
+
+        $this->mapOperatorRoutes();
+
         //
+    }
+
+    /**
+     * Define the "operator" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapOperatorRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'operator', 'auth:operator'],
+            'prefix' => 'operator',
+            'as' => 'operator.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/operator.php');
+        });
+    }
+
+    /**
+     * Define the "member" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapMemberRoutes()
+    {
+        Route::group([
+            'middleware' => ['web', 'member', 'auth:member'],
+            'prefix' => 'member',
+            'as' => 'member.',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/member.php');
+        });
     }
 
     /**
