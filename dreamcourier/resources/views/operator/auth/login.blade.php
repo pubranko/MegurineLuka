@@ -12,7 +12,7 @@
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
-                            <label for="operator_code" class="col-sm-4 col-form-label text-md-right">{{ __('オペレーターコード / Ｅメールアドレス') }}</label>
+                            <label for="operator_code" class="col-sm-5 col-form-label ">オペレーターコード / Ｅメールアドレス</label>
 
                             <div class="col-md-6">
                                 <input id="operator_code" type="text" class="form-control{{ $errors->has('operator_code') ? ' is-invalid' : '' }}" name="operator_code" value="{{ old('operator_code') }}" required autofocus>

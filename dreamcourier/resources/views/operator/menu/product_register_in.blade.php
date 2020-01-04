@@ -92,7 +92,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="product_thumbnail" type="file" class="form-control" name="product_thumbnail" value={{old('product_thumbnail')}}>
+                                <input id="product_thumbnail" type="file" class="form-control" name="product_thumbnail">
 
                                 @if ($errors->has('product_thumbnail'))
                                     <span class="help-block">
@@ -107,7 +107,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="product_image" type="file" class="form-control" name="product_image" value={{old('product_image')}}>
+                                <input id="product_image" type="file" class="form-control" name="product_image">
 
                                 @if ($errors->has('product_image'))
                                     <span class="help-block">

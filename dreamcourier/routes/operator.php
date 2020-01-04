@@ -23,6 +23,11 @@ Route::post('/product/check', 'OperatorMenu\ProductRegisterController@registerCh
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('operator')->user();
 })->middleware('productregisterconvert')->name('product.register.check');
+#Route::get('/product/check', 'OperatorMenu\ProductRegisterController@registerCheck', function () {
+#    $users[] = Auth::user();
+#    $users[] = Auth::guard()->user();
+#    $users[] = Auth::guard('operator')->user();
+#})->name('get.product.register.check');
 Route::post('/product/register', 'OperatorMenu\ProductRegisterController@register', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
