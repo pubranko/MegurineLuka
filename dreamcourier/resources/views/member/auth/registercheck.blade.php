@@ -159,6 +159,9 @@
                                     上記の内容で入会する
                                 </button>
                             </div>
+                            <div class="col-md-6">
+                                <button type="button" onclick=history.back()>戻る</button>
+                            </div>
                         </div>
                     </form>
 

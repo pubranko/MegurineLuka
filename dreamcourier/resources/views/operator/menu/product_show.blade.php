@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">夢の宅配便　商品情報_仮登録（確認）</div>
+                <div class="panel-heading">夢の宅配便　商品情報_参照</div>
 
                 <div class="panel-body">
 

@@ -14,6 +14,7 @@ php artisan make:controller HelloController
 php artisan make:controller 〜
 php artisan make:controller AddressMastersController
 php artisan make:controller OperatorMenu/ProductRegisterController
+php artisan make:controller OperatorMenu/ProductReferenceController
 #  リソースコントローラーの作成（CRUD用）
 php artisan make:controller 〜 --resource
 php artisan make:controller RestappController --resource
@@ -22,11 +23,11 @@ php artisan make:controller RestappController --resource
 php artisan make:provider 〜
 php artisan make:provider OperatorServiceProvider
 #  その他コントローラーコマンド
-php artisan make:controller 〜 --resource(-r)
-php artisan make:controller 〜 --model(-m)
-php artisan make:controller 〜 --invokable(-i)
+php artisan make:controller 〜 --resource 略(-r)
+php artisan make:controller 〜 --model　略(-m)
+php artisan make:controller 〜 --invokable　略(-i)  #シングルアクション限定(たぶん)
 php artisan make:controller 〜 メンバー１ServiceProvider
-
+php artisan make:controller 〜 --api    #api向け
 
 #  ミドルウェアの作成
 #    ※グローバルミドルウェアとして使用したい場合、App/Http/Kernel.phpの$middlewareへの登録も必要
@@ -43,6 +44,8 @@ php artisan make:request 〜
 php artisan make:request MemberRegisterCheckRequest
 php artisan make:request MemberRegisterRequest
 php artisan make:request ProductRegisterCheckRequest
+php artisan make:request ProductRegisterRequest
+php artisan make:request ProductSearchRequest
 リソース cretate_address_masters_table
 
 #  マイグレーションファイル作成（テーブル名は複数形が理想）
@@ -63,7 +66,10 @@ php artisan make:migration add_column_〜_table --table=members
 php artisan make:migration change_〜_table --table members
 php artisan make:migration change_address_table --table members
 php artisan make:migration change_column_zip_table --table=address_masters
-a
+php artisan make:migration change_column_product_image --table=product_masters
+php artisan make:migration change_column_product_thumbnail --table=product_masters
+
+
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate
 
