@@ -32,3 +32,20 @@ body {
     width: 480px;    /* 横幅を固定 */
     height: auto;    /* 高さは自動指定 */
 }
+/* 検索画面のテーブル書式*/
+.search_conditions{
+    border-collapse: collapse;
+    border:3px solid black;
+}
+.search_conditions > tr,th,td{
+    border-collapse: collapse;
+    border:1px solid black;
+}
+.search_list{
+    border-collapse: collapse;
+    border:3px solid black;
+}
+.search_list > tr,th,td{
+    border-collapse: collapse;
+    border:1px solid black;
+}
