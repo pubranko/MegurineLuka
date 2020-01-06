@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\SalesPeriodDuplicationRule;   #追加　独自ルール
 
-class MemberRegisterRequest extends FormRequest
+class ProductRegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class MemberRegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'member/register'){
+        if($this->path() == 'operator/product/register'){
             return true;
         }else{
             return false;
@@ -27,10 +28,11 @@ class MemberRegisterRequest extends FormRequest
      */
     public function validationData()
     {
-        #例
-        #$data = $this->all();
-        #if (isset($data['last_name']))
-        #    $data['last_name'] = mb_convert_kana($data['last_name'], 'RNKS');
+        #再度バリデーションが必要な項目があるため、入力画面のリクエストをセッションより復元する。
+        $data = $this->session()->get('product_register_in_request');
+        #上述の追加項目をリクエストに反映させる
+        $this->merge($data);
+
         return $this->all();
     }
 
@@ -42,35 +44,28 @@ class MemberRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'email' => 'unique:members',
-            'password' => 'required|min:8|same:password_confirmation',
-            'password_confirmation' => 'required',
+            'product_code' => [new SalesPeriodDuplicationRule(     #同一商品コードで販売期間が重複するレコードがある場合エラー
+                                $this->product_code,
+                                $this->wk_sales_period_from,
+                                $this->wk_sales_period_to
+                                )],
         ];
     }
-
     /**
      * sometimesでバリデートしたい場合に使用する。
      * rules を評価する前の状態の Validator を受け取り、afterフックしてくれる。
-     *
      * @return array
      */
-    public function withValidator (){
+    public function withValidator ($validator){
 
     }
 
     /**
      * バリデータのエラーメッセージをカスタマイズする。
-     *
      * @return array
      */
     public function messages(){
         return [
-            'email.unique' => '既に登録されているメールアドレスです。',
-            'password.required' => '入力が漏れています',
-            'password.min' => '８文字以上のパスワードを指定してください',
-            'password.same' => 'パスワード、パスワード再入力の値が異なります。',
-            'password_confirmation.required' => '入力が漏れています',
         ];
     }
 }

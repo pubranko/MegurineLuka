@@ -3,8 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;         #追加 Rule:exstisのため
-use App\Rules\SalesPeriodDuplicationRule;
+use App\Rules\SalesPeriodDuplicationRule;   #追加
 
 class ProductRegisterCheckRequest extends FormRequest
 {
@@ -15,7 +14,7 @@ class ProductRegisterCheckRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'operator/product/check'){
+        if($this->path() == 'operator/product/register/check'){
             return true;
         }else{
             return false;
@@ -29,10 +28,6 @@ class ProductRegisterCheckRequest extends FormRequest
      */
     public function validationData()
     {
-        #例
-        #$data = $this->all();
-        #if (isset($data['last_name']))
-        #    $data['last_name'] = mb_convert_kana($data['last_name'], 'RNKS');
         return $this->all();
     }
 
@@ -44,33 +39,25 @@ class ProductRegisterCheckRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            #'email' => 'required|email|max:255|unique:members',
-            #'last_name' => 'required|max:30',
-
-            #'product_code' => 'required|regex:/^[a-zA-Z0-9]*-[0-9]+$/u',   #商品コード
-            
-            'product_code' => ['required','regex:/^[a-zA-Z0-9]*-[0-9]+$/u',
-                            new SalesPeriodDuplicationRule(
-                                $this->product_code, // 部屋番号
-                                $this->wk_sales_period_from, // 開始日時
-                                $this->wk_sales_period_to // 終了日時
+            'product_code' => ['required','regex:/^[a-zA-Z0-9]*-[0-9]{3}$/u',   #商品コード
+                            new SalesPeriodDuplicationRule(     #同一商品コードで販売期間が重複するレコードがある場合エラー
+                                $this->product_code,
+                                $this->wk_sales_period_from,
+                                $this->wk_sales_period_to
                                 )],
-            
-            'sales_period_date_from' => 'required|date',                 #販売期間（FROM）
-            'sales_period_time_from' => 'required|regex:/^[0-9]{2}:[0-9]{2}+$/u',                 #販売期間（FROM）
-            'wk_sales_period_from' => 'required|date',                 #販売期間（FROM）
-            #'sales_period_to' => 'date',                           #販売期間（TO）
+            'sales_period_date_from' => 'required|date',                                              #販売期間（FROM日付）
+            'sales_period_time_from' => ['required','regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],   #販売期間（FROM時間）
+            'sales_period_date_to' => 'required_with:sales_period_time_to|date',                      #販売期間（TO日付）
+            'sales_period_time_to' => ['required_with:sales_period_daProductSearchte_to',                          #販売期間（TO時間）
+                                       'regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],
             'product_name' => 'required|max:200',                           #商品名
-            'product_description' => 'required|max:1500',                    #商品説明
-            'product_price' => 'required|integer',                  #商品価格
-            #'product_image' => 'required|image|dimensions:ratio=1/1',       #商品画像
-            'product_image' => 'required|image',       #商品画像
-            #'product_thumbnail' => 'required|image|dimensions:ratio=1/1',   #商品サムネイル画像
-            'product_thumbnail' => 'required|image',   #商品サムネイル画像
-            'product_search_keyword' => 'required',                 #商品検索キーワード
-            'product_tag' => 'required',                            #商品タグ
-            'product_stock_quantity' => 'required|integer',         #商品在庫数
+            'product_description' => 'required|max:1500',                   #商品説明
+            'product_price' => 'required|integer',                          #商品価格
+            'product_image' => 'required|image|dimensions:ratio=1/1',       #商品画像
+            'product_thumbnail' => 'required|image|dimensions:ratio=1/1',   #商品サムネイル画像
+            'product_search_keyword' => 'required',                         #商品検索キーワード
+            'product_tag' => 'required',                                    #商品タグ
+            'product_stock_quantity' => 'required|integer',                 #商品在庫数
 
             #こんな記述方法もある
             # use Illuminate\Validation\Rule;
@@ -86,14 +73,8 @@ class ProductRegisterCheckRequest extends FormRequest
      */
     public function withValidator ($validator){
         #販売期間（TO）
-        $validator->sometimes('wk_sales_period_to','date|after:wk_sales_period_from',function($input){
+        $validator->sometimes('wk_sales_period_to','after:wk_sales_period_from',function($input){
             return isset($input->wk_sales_period_to);
-        });
-        #同一の商品コードがproduct_mastersテーブルに存在した場合、
-        $validator->sometimes('sales_period_to','date|after:sales_period_from',function($input){
-            return Rule::exists('product_masters')->where(function ($query) {
-                $query->where('product_code', $input->product_code);
-            });
         });
     }
 
@@ -104,8 +85,28 @@ class ProductRegisterCheckRequest extends FormRequest
      */
     public function messages(){
         return [
-            #'email.required' => '入力が漏れています',
-            #'wk_birthday_era_ymd.between' => '実在する日付で入力してください'
+            'product_code.required' => '入力が漏れています',
+            'product_code.regex' => '入力パターンが不正です　※例:Syouhin001-003,S10-123',
+            'sales_period_date_from.required' => '入力が漏れています',
+            'sales_period_date_from.date' => '日付形式が不正です',
+            'sales_period_time_from.required' => '入力が漏れています',
+            'sales_period_time_from.regex' => '時間形式が不正な値です',
+            'sales_period_date_to.required_with' => '入力が漏れています',
+            'sales_period_date_to.date' => '日付形式が不正です',
+            'sales_period_time_to.required_with' => '入力が漏れています',
+            'sales_period_time_to.regex' => '時間形式が不正な値です',
+            'wk_sales_period_to.after' => '販売期間の範囲が不正です',
+            'product_price.integer' => '数値で入力してください',
+            'product_image.required' => '入力が漏れています',
+            'product_image.image' => '画像ファイル（jpg、png、bmp、gif、svg）を指定してください',
+            'product_image.dimensions' => '画像の縦横比は１：１のみ登録可能です',
+            'product_thumbnail.required' => '入力が漏れています',
+            'product_thumbnail.image' => '画像ファイル（jpg、png、bmp、gif、svg）を指定してください',
+            'product_thumbnail.dimensions' => '画像の縦横比は１：１のみ登録可能です',
+            'product_search_keyword.required' => '入力が漏れています',
+            'product_tag.required' => '入力が漏れています',
+            'product_stock_quantity.required' => '入力が漏れています',
+            'product_stock_quantity.integer' => '数値で入力してください',
         ];
     }
 }

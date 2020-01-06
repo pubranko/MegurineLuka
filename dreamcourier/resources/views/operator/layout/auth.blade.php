@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel Multi Auth Guard') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <!--link href="/css/app.css" rel="stylesheet"-->
     <link href="/css/operator.css" rel="stylesheet">
     <script>
         window.Laravel = <?php echo json_encode([
@@ -84,6 +84,6 @@
     @yield('content')
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <!--<script src="/js/app.js"></script>-->
 </body>
 </html>

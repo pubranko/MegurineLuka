@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MemberRegisterRequest extends FormRequest
+class ProductSearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class MemberRegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'member/register'){
+        if($this->path() == 'operator/product/search'){
             return true;
         }else{
             return false;
@@ -27,10 +27,6 @@ class MemberRegisterRequest extends FormRequest
      */
     public function validationData()
     {
-        #例
-        #$data = $this->all();
-        #if (isset($data['last_name']))
-        #    $data['last_name'] = mb_convert_kana($data['last_name'], 'RNKS');
         return $this->all();
     }
 
@@ -43,20 +39,15 @@ class MemberRegisterRequest extends FormRequest
     {
         return [
             //
-            'email' => 'unique:members',
-            'password' => 'required|min:8|same:password_confirmation',
-            'password_confirmation' => 'required',
         ];
     }
-
     /**
      * sometimesでバリデートしたい場合に使用する。
      * rules を評価する前の状態の Validator を受け取り、afterフックしてくれる。
      *
      * @return array
      */
-    public function withValidator (){
-
+    public function withValidator ($validator){
     }
 
     /**
@@ -66,11 +57,6 @@ class MemberRegisterRequest extends FormRequest
      */
     public function messages(){
         return [
-            'email.unique' => '既に登録されているメールアドレスです。',
-            'password.required' => '入力が漏れています',
-            'password.min' => '８文字以上のパスワードを指定してください',
-            'password.same' => 'パスワード、パスワード再入力の値が異なります。',
-            'password_confirmation.required' => '入力が漏れています',
         ];
     }
 }
