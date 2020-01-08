@@ -7,14 +7,14 @@ Route::get('/home', function () {
     return view('operator.home');
 })->name('home');
 
-#メニュー選択
+#オペレーターメニュー選択
 Route::get('/product/menu', 'OperatorMenu\MenuController@ProductMenu', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('operator')->user();
 })->name('product.register.menu');
 
-#商品関連
+#商品登録関連
 Route::get('/product/register/in', 'OperatorMenu\ProductRegisterController@registerIn', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
@@ -41,11 +41,17 @@ Route::post('/product/register/result', 'OperatorMenu\ProductRegisterController@
     $users[] = Auth::guard('operator')->user();
 })->name('product.register.result');
 
+#商品検索・参照
+#Route::get('/product/search', 'OperatorMenu\ProductReferenceController@searchIn', function () {
+#    $users[] = Auth::user();
+#    $users[] = Auth::guard()->user();
+#    $users[] = Auth::guard('operator')->user();
+#})->name('product.search.in');
 Route::get('/product/search', 'OperatorMenu\ProductReferenceController@search', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('operator')->user();
-})->name('product.search');
+})->middleware('productregisterconvert')->name('product.search');
 Route::get('/product/show', 'OperatorMenu\ProductReferenceController@show', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();

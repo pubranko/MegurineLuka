@@ -45,7 +45,7 @@ class ProductRegisterCheckRequest extends FormRequest
                                 $this->wk_sales_period_from,
                                 $this->wk_sales_period_to
                                 )],
-            'sales_period_date_from' => 'required|date',                                              #販売期間（FROM日付）
+            'sales_period_date_from' => 'required|date|after:2019-01-01',                                              #販売期間（FROM日付）
             'sales_period_time_from' => ['required','regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],   #販売期間（FROM時間）
             'sales_period_date_to' => 'required_with:sales_period_time_to|date',                      #販売期間（TO日付）
             'sales_period_time_to' => ['required_with:sales_period_daProductSearchte_to',                          #販売期間（TO時間）
@@ -89,6 +89,7 @@ class ProductRegisterCheckRequest extends FormRequest
             'product_code.regex' => '入力パターンが不正です　※例:Syouhin001-003,S10-123',
             'sales_period_date_from.required' => '入力が漏れています',
             'sales_period_date_from.date' => '日付形式が不正です',
+            'sales_period_date_from.after' => '2019年より以前の日付は入力不可です',
             'sales_period_time_from.required' => '入力が漏れています',
             'sales_period_time_from.regex' => '時間形式が不正な値です',
             'sales_period_date_to.required_with' => '入力が漏れています',

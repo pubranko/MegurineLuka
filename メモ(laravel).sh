@@ -68,6 +68,7 @@ php artisan make:migration change_address_table --table members
 php artisan make:migration change_column_zip_table --table=address_masters
 php artisan make:migration change_column_product_image --table=product_masters
 php artisan make:migration change_column_product_thumbnail --table=product_masters
+php artisan make:migration change_column_sales_period_to --table=product_masters
 
 
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)

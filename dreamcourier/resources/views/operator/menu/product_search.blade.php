@@ -10,6 +10,7 @@
                 <div class="panel-body">
 
                     <form class="form-horizontal" role="form" method="GET" action="{{ url('/operator/product/search') }}">
+                        {{ csrf_field() }}
 
                         <table class="search_conditions">
                             <caption>○　検索条件入力</caption>
@@ -18,67 +19,77 @@
                                     <th>商品コード</th>
                                     <th>キーワード検索</th>
                                     <th>商品タグ</th>
-                                    <th>ステータス</th>
-                                    <th>商品在庫数</th>
-                                </tr>
-                                <tr>
-                                    <th>販売状況</th>
-                                    <th>販売期間FROM</th>
-                                    <th>販売期間TO</th>
-                                    <th>販売中止</th>
-                                    <th></th>
+                                    <th>商品在庫数（以上）</th>
+                                    <th>商品在庫数（以下）</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="text" name="product_code" value="{{ old('product_code') }}"></td>
-                                    <td><input type="text" name="product_search_keyword" value={{old('product_search_keyword')}}></td>
-                                    <td><input type="text" name="product_tag" value={{old('product_tag')}}></td>
-                                    <td>
-                                        <select name="status" >
-                                            <option value="" @if(old('status')=='') selected  @endif>選択してください</option>
-                                            <option value="正式" @if(old('status')=='正式') selected  @endif>正式</option>
-                                            <option value="仮登録" @if(old('status')=='仮登録') selected  @endif>仮登録</option>
-                                            <option value="仮変更" @if(old('status')=='仮変更') selected  @endif>仮変更</option>
-                                        </select>
-                                    </td>
-                                    <td><input type="text" name="product_stock_quantity" value="{{ old('product_stock_quantity') }}"></td>
-
+                                    <td><input type="text" name="product_code" value=@if(count($errors)>0){{old('product_code')}}@else @isset($product_code){{$product_code}}@endisset @endif></td>
+                                    <td><input type="text" name="product_search_keyword" value=@if(count($errors)>0){{old('product_search_keyword')}}@else @isset($product_search_keyword){{$product_search_keyword}}@endisset @endif></td>
+                                    <td><input type="text" name="product_tag" value=@if(count($errors)>0){{old('product_tag')}}@else @isset($product_tag){{$product_tag}}@endisset @endif></td>
+                                    <td><input type="text" name="product_stock_quantity_from" value=@if(count($errors)>0){{old('product_stock_quantity_from')}}@else @isset($product_stock_quantity_from){{$product_stock_quantity_from}}@endisset @endif></td>
+                                    <td><input type="text" name="product_stock_quantity_to" value=@if(count($errors)>0){{old('product_stock_quantity_to')}}@else @isset($product_stock_quantity_to){{$product_stock_quantity_to}}@endisset @endif></td>
                                 </tr>
+                            </tbody>
+                            <thead>
+                                    <tr>
+                                        <th>販売期間FROM</th>
+                                        <th>販売期間TO</th>
+                                        <th>ステータス</th>
+                                        <th>販売状況</th>
+                                        <th></th>
+                                    </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
                                     <td>
-                                        <select name="seles_status" >
-                                            <option value="" @if(old('seles_status')=='') selected  @endif>選択してください</option>
-                                            <option value="未販売" @if(old('seles_status')=='未販売') selected  @endif>未販売</option>
-                                            <option value="販売中" @if(old('seles_status')=='販売中') selected  @endif>販売中</option>
-                                            <option value="販売終了" @if(old('seles_status')=='販売終了') selected  @endif>販売終了</option>
-                                        </select>
+                                        <input type="date" name="sales_period_date_from" value=@if(count($errors)>0) {{ old('sales_period_date_from') }} @else @isset($sales_period_date_from) {{$sales_period_date_from}} @endisset  @endif>
+                                        <input type="time" name="sales_period_time_from" value=@if(count($errors)>0) {{ old('sales_period_time_from') }} @else @isset($sales_period_time_from) {{$sales_period_time_from}} @endisset  @endif>
                                     </td>
                                     <td>
-                                        <input type="date" name="sales_period_date_from" value={{old('sales_period_date_from')}}>
-                                        <input type="time" name="sales_period_time_from" value={{old('sales_period_time_from')}}>
+                                        <input type="date" name="sales_period_date_to" value=@if(count($errors)>0) {{ old('sales_period_date_to') }} @else @isset($sales_period_date_to) {{$sales_period_date_to}} @endisset  @endif>
+                                        <input type="time" name="sales_period_time_to" value=@if(count($errors)>0) {{ old('sales_period_time_to') }} @else @isset($sales_period_time_to) {{$sales_period_time_to}} @endisset  @endif>
                                     </td>
                                     <td>
-                                        <input type="date" name="sales_period_date_to" value={{old('sales_period_date_to')}}>
-                                        <input type="time" name="sales_period_time_to" value={{old('sales_period_time_to')}}>
+                                        <!--販売状況のチェックボックス：'販売可','仮販売中止','販売中止','仮販売再開'の４種を用意する。-->
+                                        <!--入力値時のチェックを維持する。またエラー時はチェック状態を復元する。-->
+                                        @foreach(['販売可','仮販売中止','販売中止','仮販売再開'] as $pattern)
+                                            <input type="checkbox" name="selling_discontinued_classification[]" value="{{$pattern}}"
+                                            @isset($selling_discontinued_classification)
+                                                @foreach($selling_discontinued_classification as $st)
+                                                    @if($pattern == $st) checked="" @endif
+                                                @endforeach
+                                            @endisset
+                                            @if (is_array(old("selling_discontinued_classification")) && in_array("$pattern", old('selling_discontinued_classification'), true)) checked @endif
+                                            >{{$pattern}}
+                                            @if($pattern == "仮販売中止")
+                                                <br>
+                                            @endif
+                                        @endforeach
                                     </td>
                                     <td>
-                                        <select name="selling_discontinued_classification" >
-                                            <option value="" @if(old('selling_discontinued_classification')=='') selected  @endif>選択してください</option>
-                                            <option value="販売可" @if(old('selling_discontinued_classification')=='販売可') selected  @endif>販売可</option>
-                                            <option value="仮販売中止" @if(old('selling_discontinued_classification')=='仮販売中止') selected  @endif>仮販売中止</option>
-                                            <option value="販売中止" @if(old('selling_discontinued_classification')=='販売中止') selected  @endif>販売中止</option>
-                                            <option value="仮販売再開" @if(old('selling_discontinued_classification')=='仮販売再開') selected  @endif>仮販売再開</option>
-                                        </select>
+                                        <!--ステータスのチェックボックス：正式、仮登録、仮変更の３種を用意する。-->
+                                        <!--入力値時のチェックを維持する。またエラー時はチェック状態を復元する。-->
+                                        @foreach(['正式','仮登録','仮変更'] as $pattern)
+                                            <input type="checkbox" name="status[]" value="{{$pattern}}"
+                                            @isset($status)
+                                                @foreach($status as $st)
+                                                    @if($pattern == $st) checked="" @endif
+                                                @endforeach
+                                            @endisset
+                                            @if (is_array(old("status")) && in_array("$pattern", old('status'), true)) checked @endif
+                                            >{{$pattern}}
+                                        @endforeach
                                     </td>
-                                    <td></td>
+                                    <td>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <table class="search_conditions">
                             <th>表示明細数</th>
-                            <td><input type="text" name="product_list_details" 
-                                value="20"></td>
+                            <td><input type="text" name="product_list_details" value=@if(count($errors)>0){{old('product_list_details')}}@else @isset($product_list_details){{$product_list_details}}@else "20" @endisset @endif></td>
                         </table>
                         <!-- ボタン -->
                         <div class="form-group">
@@ -89,6 +100,10 @@
                             </div>
                         </div>
                     </form>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+
                     <hr class="separator_line">
 
                     <table class="search_list">
@@ -105,17 +120,31 @@
                                 <th>商品価格</th>
                                 <th>商品在庫数</th>
                                 <th>参照</th>
-                                <th>参照</th>
                                 <th>変更</th>
                                 <th>削除</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td><td>test</td>
-                            </tr>
-                        </tbody>
+                            @foreach ($search_queries as $search_query)
+                                <tr>
+                                    <td></td>
+                                    <td>{{$search_query->product_code}}</td>
+                                    <td>{{$search_query->product_name}}</td>
+                                    <td>{{$search_query->product_tag}}</td>
+                                    <td>{{substr($search_query->sales_period_from,0,-3)."〜".substr($search_query->sales_period_to,0,-3)}}</td>
+                                    <td>{{$search_query->status}}</td>
+                                    <td>{{$search_query->selling_discontinued_classification}}</td>
+                                    <td>{{$search_query->product_price}}</td>
+                                    <td>{{$search_query->product_stock_quantity}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            @endforeach
                     </table>
+
+                    @empty($search_queries) @else {{ $search_queries->links() }} @endif
 
                     <!-- ボタン -->
                     <div class="form-group">
