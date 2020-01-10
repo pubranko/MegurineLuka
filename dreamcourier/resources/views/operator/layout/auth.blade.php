@@ -20,6 +20,7 @@
     </script>
     <!-- Java Script -->
     <!--<script type="application/javascript" src="/js/address_get.js"></script>-->
+    <script type="application/javascript" src="/js/select_link.js"></script>
 
 </head>
 <body>

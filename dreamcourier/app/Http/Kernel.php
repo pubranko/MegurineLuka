@@ -68,7 +68,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         'membersconvert' => \App\Http\Middleware\MembersConvertMiddleware::class,   #membersテーブルへの画面入力値を前処理でコンバート
-        'productregisterconvert' => \App\Http\Middleware\ProductRegisterConvertMiddleware::class,
+        'productregisterconvert' => \App\Http\Middleware\ProductRegisterConvertMiddleware::class,   #商品情報マスタへの画面入力値を前処理でコンバート
+        'operatorcodeadd' => \App\Http\Middleware\OperatorCodeAddMiddleware::class, #操作中のオペレーターコードを、バリデーションのためにリクエストに付与
     ];
 
     /**

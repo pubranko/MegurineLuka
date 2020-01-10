@@ -55,6 +55,7 @@ class ProductRegisterController extends Controller
         #オペレーター画面へ戻す。（次画面でのバリデーションエラーで戻れるのはGETメソッドの画面のみのため）
         return redirect('/operator/product/register/checkview');
     }
+
     /**
      * 商品情報登録（確認）画面を表示する。
      */
@@ -91,7 +92,7 @@ class ProductRegisterController extends Controller
         $model->product_stock_quantity = $data['product_stock_quantity'];
         $model->status = "仮登録";
         $model->selling_discontinued_classification = "";
-        $model->temporary_updater_operator_code = "";
+        $model->temporary_updater_operator_code = $request->user()->operator_code;
         $model->temporary_update_approver_operator_code = "";
         $model->save();
 

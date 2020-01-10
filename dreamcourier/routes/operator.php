@@ -42,11 +42,6 @@ Route::post('/product/register/result', 'OperatorMenu\ProductRegisterController@
 })->name('product.register.result');
 
 #商品検索・参照
-#Route::get('/product/search', 'OperatorMenu\ProductReferenceController@searchIn', function () {
-#    $users[] = Auth::user();
-#    $users[] = Auth::guard()->user();
-#    $users[] = Auth::guard('operator')->user();
-#})->name('product.search.in');
 Route::get('/product/search', 'OperatorMenu\ProductReferenceController@search', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
@@ -57,5 +52,8 @@ Route::get('/product/show', 'OperatorMenu\ProductReferenceController@show', func
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('operator')->user();
 })->name('product.show');
-
-
+Route::get('/product/approval', 'OperatorMenu\ProductApprovalController@approval', function () {
+    $users[] = Auth::user();
+    $users[] = Auth::guard()->user();
+    $users[] = Auth::guard('operator')->user();
+})->middleware('operatorcodeadd')->name('product.approval');

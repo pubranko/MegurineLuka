@@ -14,7 +14,7 @@ class MenuController extends Controller
         if($request->get('product_menu')=="登録"){
             return redirect('/operator/product/register/in');
         }elseif($request->get('product_menu')=="検索"){
-            return redirect('/operator/product/search');
+            return redirect('/operator/product/search?first_flg=on');
         }
     }
 

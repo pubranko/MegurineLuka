@@ -15,6 +15,8 @@ php artisan make:controller 〜
 php artisan make:controller AddressMastersController
 php artisan make:controller OperatorMenu/ProductRegisterController
 php artisan make:controller OperatorMenu/ProductReferenceController
+php artisan make:controller OperatorMenu/ProductApprovalController
+
 #  リソースコントローラーの作成（CRUD用）
 php artisan make:controller 〜 --resource
 php artisan make:controller RestappController --resource
@@ -37,6 +39,7 @@ php artisan make:middleware 〜
 php artisan make:middleware RequestConvertMiddleware
 php artisan make:middleware MembersConvertMiddleware
 php artisan make:middleware ProductRegisterConvertMiddleware
+php artisan make:middleware OperatorCodeAddMiddleware
 
 #  バリデーション（フォームリクエスト）の作成
 php artisan make:request HelloRequest
@@ -46,7 +49,12 @@ php artisan make:request MemberRegisterRequest
 php artisan make:request ProductRegisterCheckRequest
 php artisan make:request ProductRegisterRequest
 php artisan make:request ProductSearchRequest
+php artisan make:request ProductApprovalRequest
 リソース cretate_address_masters_table
+
+#  ルールの作成（カスタムバリデーション）
+php artisan make:rule 〜
+php artisan make:rule SalesPeriodDuplicationRule
 
 #  マイグレーションファイル作成（テーブル名は複数形が理想）
 php artisan make:migration create_※テーブル名_table
@@ -100,10 +108,6 @@ php artisan make:model Person
 php artisan make:model Board
 php artisan make:model AddressMaster
 php artisan make:model ProductMasters
-
-#  ルールの作成（カスタムバリデーション）
-php artisan make:rule 〜
-php artisan make:rule SalesPeriodDuplicationRule
 
 ### ペジネーションのテンプレートの用意
 # これで「/resources/views/vendor/pagination」にテンプレートがコピーされるようだ

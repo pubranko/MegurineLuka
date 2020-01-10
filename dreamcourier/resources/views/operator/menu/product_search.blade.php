@@ -25,9 +25,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type="text" name="product_code" value=@if(count($errors)>0){{old('product_code')}}@else @isset($product_code){{$product_code}}@endisset @endif></td>
-                                    <td><input type="text" name="product_search_keyword" value=@if(count($errors)>0){{old('product_search_keyword')}}@else @isset($product_search_keyword){{$product_search_keyword}}@endisset @endif></td>
-                                    <td><input type="text" name="product_tag" value=@if(count($errors)>0){{old('product_tag')}}@else @isset($product_tag){{$product_tag}}@endisset @endif></td>
+                                    <td><input type="text" name="product_code" value=@if(count($errors)>0) "{{old('product_code')}}" @else @isset($product_code) "{{$product_code}}" @endisset @endif></td>
+                                    <td><input type="text" name="product_search_keyword" value=@if(count($errors)>0) "{{old('product_search_keyword')}}" @else @isset($product_search_keyword) "{{$product_search_keyword}}" @endisset @endif></td>
+                                    <td><input type="text" name="product_tag" value=@if(count($errors)>0)"{{old('product_tag')}}" @else @isset($product_tag) "{{$product_tag}}" @endisset @endif></td>
                                     <td><input type="text" name="product_stock_quantity_from" value=@if(count($errors)>0){{old('product_stock_quantity_from')}}@else @isset($product_stock_quantity_from){{$product_stock_quantity_from}}@endisset @endif></td>
                                     <td><input type="text" name="product_stock_quantity_to" value=@if(count($errors)>0){{old('product_stock_quantity_to')}}@else @isset($product_stock_quantity_to){{$product_stock_quantity_to}}@endisset @endif></td>
                                 </tr>
@@ -36,8 +36,8 @@
                                     <tr>
                                         <th>販売期間FROM</th>
                                         <th>販売期間TO</th>
-                                        <th>ステータス</th>
                                         <th>販売状況</th>
+                                        <th>ステータス</th>
                                         <th></th>
                                     </tr>
                             </thead>
@@ -106,53 +106,56 @@
 
                     <hr class="separator_line">
 
-                    <table class="search_list">
-                        <caption>○　商品一覧</caption>
-                        <thead>
-                            <tr>
-                                <th>選択</th>
-                                <th>商品コード</th>
-                                <th>商品名</th>
-                                <th>商品タグ</th>
-                                <th>販売期間</th>
-                                <th>ステータス</th>
-                                <th>販売中止</th>
-                                <th>商品価格</th>
-                                <th>商品在庫数</th>
-                                <th>参照</th>
-                                <th>変更</th>
-                                <th>削除</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($search_queries as $search_query)
+                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/operator/product/approval') }}">
+                        <table class="search_list">
+                            <caption>○　商品一覧</caption>
+                            <thead>
                                 <tr>
-                                    <td></td>
-                                    <td>{{$search_query->product_code}}</td>
-                                    <td>{{$search_query->product_name}}</td>
-                                    <td>{{$search_query->product_tag}}</td>
-                                    <td>{{substr($search_query->sales_period_from,0,-3)."〜".substr($search_query->sales_period_to,0,-3)}}</td>
-                                    <td>{{$search_query->status}}</td>
-                                    <td>{{$search_query->selling_discontinued_classification}}</td>
-                                    <td>{{$search_query->product_price}}</td>
-                                    <td>{{$search_query->product_stock_quantity}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <th>選択</th>
+                                    <th>商品コード</th>
+                                    <th>商品名</th>
+                                    <th>商品タグ</th>
+                                    <th>販売期間</th>
+                                    <th>ステータス</th>
+                                    <th>販売中止</th>
+                                    <th>商品価格</th>
+                                    <th>商品在庫数</th>
+                                    <th>参照</th>
+                                    <th>変更</th>
+                                    <th>削除</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($search_queries as $search_query)
+                                    <tr>
+                                        <td><input type="checkbox" name="select_id[]" value="{{$search_query->id}}"></td>
+                                        <td>{{$search_query->product_code}}</td>
+                                        <td>{{$search_query->product_name}}</td>
+                                        <td>{{$search_query->product_tag}}</td>
+                                        <td>{{substr($search_query->sales_period_from,0,-3)."〜".substr($search_query->sales_period_to,0,-3)}}</td>
+                                        <td>{{$search_query->status}}</td>
+                                        <td>{{$search_query->selling_discontinued_classification}}</td>
+                                        <td>{{$search_query->product_price}}</td>
+                                        <td>{{$search_query->product_stock_quantity}}</td>
+                                        <td>
+                                            <input type="button" value="参照" onclick="f_select_link('/operator/product/show?',{{$search_query->id}})">
+                                        </td>
+                                        <td>未実装</td>
+                                        <td>未実装</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
-                            @endforeach
-                    </table>
+                        </table>
+                        <input type="submit" name="product_menu" value="承認">
+                    </form>
 
                     @empty($search_queries) @else {{ $search_queries->links() }} @endif
 
                     <!-- ボタン -->
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <div class="col-md-6">
-                                <button type="button" onclick=history.back()>戻る</button>
-                            </div>
-                        </div>
+                    <div class="col-md-6">
+                        <form class="form-horizontal" role="form" method="GET" action="{{ url('/operator/home') }}">
+                            <input type="submit" value="TOPページへ戻る">
+                        </form>
                     </div>
                 </div>
             </div>
