@@ -28,8 +28,8 @@ class MembersTest extends TestCase
         $response = $this->get('/member/registerin');
         $response->assertStatus(200);
 
-        factory(Member::class,2)->create(); //Memberモデルクラスを、factory(※~/database/factores/MemberFactory)に元々定義されていたメソッドに渡してインスタンスにしているっぽい。
-        #factory(Member::class,2)->states('EmailUnique') ->create(); //Memberモデルクラスを、factory(※~/database/factores/MemberFactory)に元々定義されていたメソッドに渡してインスタンスにしているっぽい。
+        #factory(Member::class,2)->create(); //Memberモデルクラスを、factory(※~/database/factores/MemberFactory)に元々定義されていたメソッドに渡してインスタンスにしているっぽい。
+        factory(Member::class,2)->states('EmailUnique') ->create(); //Memberモデルクラスを、factory(※~/database/factores/MemberFactory)に元々定義されていたメソッドに渡してインスタンスにしているっぽい。
         #$response = $this->actingAs($member)->get('/member');  #これでログインした状態でgetとなる。
 
         #エラーデータ（入力漏れ）

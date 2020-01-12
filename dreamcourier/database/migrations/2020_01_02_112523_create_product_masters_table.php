@@ -17,12 +17,12 @@ class CreateProductMastersTable extends Migration
             $table->bigIncrements('id');
             $table->string('product_code');
             $table->datetime('sales_period_from');
-            $table->datetime('sales_period_to');
+            $table->datetime('sales_period_to')->nullable(true);
             $table->string('product_name');
             $table->text('product_description');    #65535文字
             $table->integer('product_price');
-            $table->binary('product_image');
-            $table->binary('product_thumbnail');
+            $table->string('product_image');
+            $table->string('product_thumbnail');
             $table->string('product_search_keyword');
             $table->string('product_tag');
             $table->integer('product_stock_quantity');

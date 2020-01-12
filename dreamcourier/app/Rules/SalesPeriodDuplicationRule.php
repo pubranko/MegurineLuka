@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\ProductMasters;
+use App\ProductMaster;
 
 #class ReservationRule implements Rule
 class SalesPeriodDuplicationRule implements Rule
@@ -38,7 +38,7 @@ class SalesPeriodDuplicationRule implements Rule
     public function passes($attribute, $value)
     {
         //サンプル
-        return \App\ProductMasters::where('product_code', $this->_product_code)             #同一の商品コードのレコードに対して、
+        return \App\ProductMaster::where('product_code', $this->_product_code)             #同一の商品コードのレコードに対して、
         ->SalesPeriodDuplicationCheck($this->_sales_period_from, $this->_sales_period_to)   #モデルのスコープで販売期間の重複があるレコードの有無を調査。
         ->doesntExist();                                                                    #該当するものがなければ、trueを返す。
     }

@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations; #追加
 use Illuminate\Support\Facades\Validator; #追加
 use App\Http\Requests\MemberRegisterCheckRequest;   #追加
-use Illuminate\Foundation\Testing\DatabaseMigrations; #追加
 use App\Member;                                                #追加
 /**
  * 新規会員登録（入力）で入力された値のバリデートのテスト

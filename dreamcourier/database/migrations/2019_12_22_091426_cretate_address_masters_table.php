@@ -19,7 +19,7 @@ class CretateAddressMastersTable extends Migration
             $table->integer('ken_id')->length(2);
             $table->integer('city_id')->length(5);
             $table->integer('town_id')->length(9);
-            $table->integer('zip')->length(8);
+            $table->string('zip')->length(8);
             $table->boolean('office_flg');
             $table->boolean('delete_flg');
             $table->string('ken_name',8);

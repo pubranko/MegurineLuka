@@ -46,17 +46,16 @@ class ProductSearchRequest extends FormRequest
     public function rules()
     {
         return [
-            #'product_code' => 'regex:/^[a-zA-Z0-9]*-[0-9]{3}$/u',                           #商品コード
+            'product_stock_quantity_from' => 'integer',                                     #商品在庫数（以上）
+            'product_stock_quantity_to' => 'integer',                                       #商品在庫数（以下）
             'sales_period_date_from' => 'date|required_with:sales_period_time_from',        #販売期間（FROM日付）
-            'sales_period_time_from' =>['regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],       #販売期間（FROM時間）
-            'sales_period_date_to' => 'date|required_with:sales_period_time_to',          #販売期間（TO日付）
-            'sales_period_time_to' => ['regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],        #販売期間（TO時間）
-            'product_price' => 'integer',                                                   #商品価格
+            'sales_period_time_from' =>['regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],     #販売期間（FROM時間）
+            'sales_period_date_to' => 'date|required_with:sales_period_time_to',            #販売期間（TO日付）
+            'sales_period_time_to' => ['regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],      #販売期間（TO時間）
+            'status.*' => [Rule::in("正式","仮登録","仮変更")],                             #ステータス
+            'selling_discontinued_classification.*' =>
+                [Rule::in("販売可","仮販売中止","販売中止","仮販売再開")],                  #販売状況ステータス
             'product_list_details' => 'required|integer',                                   #表示明細数
-            #'status[]' => [Rule::in("正式","仮登録","仮変更")],
-            'status[]' => 'array',
-            'product_stock_quantity_from' => 'integer',
-            'product_stock_quantity_to' => 'integer',
         ];
     }
     /**
@@ -70,6 +69,9 @@ class ProductSearchRequest extends FormRequest
         $validator->sometimes('wk_sales_period_to','after:wk_sales_period_from',function($input){
             return isset($input->wk_sales_period_to) && isset($input->wk_sales_period_from);
         });
+        $validator->sometimes('product_stock_quantity_to','gte:product_stock_quantity_from',function($input){
+            return isset($input->product_stock_quantity_from) && isset($input->product_stock_quantity_to);
+        });
     }
 
     /**
@@ -80,16 +82,18 @@ class ProductSearchRequest extends FormRequest
     public function messages(){
         return [
             #'product_code.regex' => '入力パターンが不正です　※例:Syouhin001-003,S10-123',
-            'sales_period_date_from.date' => '日付形式が不正です',
-            'sales_period_time_from.regex' => '時間形式が不正な値です',
-            'sales_period_date_to.required_with' => '入力が漏れています',
-            'sales_period_date_to.date' => '日付形式が不正です',
-            'sales_period_time_to.required_with' => '入力が漏れています',
-            'sales_period_time_to.regex' => '時間形式が不正な値です',
+            'sales_period_date_from.date' => '販売期間FROM：日付形式が不正です',
+            'sales_period_time_from.regex' => '販売期間FROM：時間形式が不正な値です',
+            'sales_period_date_from.required_with' => '販売期間FROM：入力が漏れています',
+            'sales_period_date_to.date' => '販売期間TO：日付形式が不正です',
+            'sales_period_time_to.required_with' => '販売期間TO：入力が漏れています',
+            'sales_period_time_to.regex' => '販売期間TO：時間形式が不正な値です',
             'wk_sales_period_to.after' => '販売期間の範囲が不正です',
-            'product_price.integer' => '数値で入力してください',
-            'product_stock_quantity_from.integer' => '数値で入力してください',
-            'product_stock_quantity_to.integer' => '数値で入力してください',
+            'product_stock_quantity_from.integer' => '商品在庫数（以上）：数値で入力してください',
+            'product_stock_quantity_to.integer' => '商品在庫数（以下）：数値で入力してください',
+            'product_stock_quantity_to.gte' => '商品在庫数の範囲が不正です',
+            'product_list_details.required' => '表示明細数：入力が漏れています',
+            'product_list_details.integer' => '表示明細数：数値で入力してください',
         ];
     }
 }

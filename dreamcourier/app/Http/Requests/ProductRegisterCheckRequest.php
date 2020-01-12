@@ -43,12 +43,12 @@ class ProductRegisterCheckRequest extends FormRequest
                             new SalesPeriodDuplicationRule(     #同一商品コードで販売期間が重複するレコードがある場合エラー
                                 $this->product_code,
                                 $this->wk_sales_period_from,
-                                $this->wk_sales_period_to
-                                )],
+                                $this->wk_sales_period_to)
+                                ],
             'sales_period_date_from' => 'required|date|after:2019-01-01',                                              #販売期間（FROM日付）
             'sales_period_time_from' => ['required','regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],   #販売期間（FROM時間）
             'sales_period_date_to' => 'required_with:sales_period_time_to|date',                      #販売期間（TO日付）
-            'sales_period_time_to' => ['required_with:sales_period_daProductSearchte_to',                          #販売期間（TO時間）
+            'sales_period_time_to' => ['required_with:sales_period_date_to',                          #販売期間（TO時間）
                                        'regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],
             'product_name' => 'required|max:200',                           #商品名
             'product_description' => 'required|max:1500',                   #商品説明

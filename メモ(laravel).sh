@@ -78,7 +78,6 @@ php artisan make:migration change_column_product_image --table=product_masters
 php artisan make:migration change_column_product_thumbnail --table=product_masters
 php artisan make:migration change_column_sales_period_to --table=product_masters
 
-
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate
 
@@ -131,12 +130,19 @@ php artisan make:test Person2Test
 php artisan make:test MembersTest
 php artisan make:test MemberRegisterCheckTest
 php artisan make:test MemberRegisterTest
+php artisan make:test ProductRegisterTest
+php artisan make:test ProductTest
 # テスト用スクリプト作成 ./tests/unitの直下に作成される
 php artisan make:test 〜Test --unit
+
 # テストの実行：全件 （カレントdir：プロジェクトtop）
 vendor/bin/phpunit
 # テストの実行：ファイル指定
+vendor/bin/phpunit tests/Feature/MemberRegisterCheckTest.php
 vendor/bin/phpunit tests/Feature/MemberRegisterTest.php
+vendor/bin/phpunit tests/Feature/MemberTest.php
+vendor/bin/phpunit tests/Feature/ProductRegisterTest.php
+vendor/bin/phpunit tests/Feature/ProductTest.php
 
 ### 便利コマンド
 # artisanコマンドのリストが見れる。

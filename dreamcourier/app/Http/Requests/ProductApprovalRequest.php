@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\ProductMasters;                         #追加
+use App\ProductMaster;                         #追加
 use Illuminate\Validation\Rule;         #追加 Rule:inのため
 
 class ProductApprovalRequest extends FormRequest
@@ -57,7 +57,7 @@ class ProductApprovalRequest extends FormRequest
             foreach($select_id as $id){
                 #商品情報マスタ（product_masters）より該当のIDのレコードを取得し、仮更新者_操作者コードを取得する。
                 #今回操作しているオペレーターと、仮登録・仮変更を行ったオペレーターが同一の場合エラー
-                $model = ProductMasters::find($id);
+                $model = ProductMaster::find($id);
                 $temporary_updater_operator_code = $model->temporary_updater_operator_code;
                 $validator->sometimes('approval_operator_code',[Rule::notIn($temporary_updater_operator_code)],function($input){
                     return isset($input->select_id);

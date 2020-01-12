@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductMasters extends Model
+class ProductMaster extends Model
 {
     #Scope
     #販売期間の重複チェック

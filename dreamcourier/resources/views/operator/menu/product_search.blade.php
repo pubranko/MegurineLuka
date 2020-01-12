@@ -128,7 +128,7 @@
                             <tbody>
                                 @foreach ($search_queries as $search_query)
                                     <tr>
-                                        <td><input type="checkbox" name="select_id[]" value="{{$search_query->id}}"></td>
+                                        <td><input type="checkbox" name="select_id[]" value="{{$search_query->id}}" @if (is_array(old("select_id")) && in_array("$search_query->id", old('select_id'), true)) checked @endif></td>
                                         <td>{{$search_query->product_code}}</td>
                                         <td>{{$search_query->product_name}}</td>
                                         <td>{{$search_query->product_tag}}</td>

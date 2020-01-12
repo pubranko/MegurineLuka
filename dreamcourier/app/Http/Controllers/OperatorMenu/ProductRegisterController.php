@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRegisterCheckRequest; #追加
 use App\Http\Requests\ProductRegisterRequest; #追加
-use App\ProductMasters;                         #追加
+use App\ProductMaster;                         #追加
 use Illuminate\Support\Facades\Storage;         #追加
 
 class ProductRegisterController extends Controller
@@ -78,7 +78,7 @@ class ProductRegisterController extends Controller
         Storage::move('public/temp/'.$data['wk_product_thumbnail_filename'], 'public/product_thumbnail/'.$data['wk_product_thumbnail_filename']);
 
         #商品情報マスタ（product_masters）のモデル作成→値を編集→保存
-        $model = new ProductMasters;
+        $model = new ProductMaster;
         $model->product_code = $data['product_code'];
         $model->sales_period_from = $data['wk_sales_period_from'];
         $model->sales_period_to = $data['wk_sales_period_to'];
