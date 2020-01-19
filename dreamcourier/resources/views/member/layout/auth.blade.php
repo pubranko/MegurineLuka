@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <!--link href="/css/app.css" rel="stylesheet"-->
+    <!--link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"-->
     <link href="/css/member.css" rel="stylesheet">
     <script>
         window.Laravel = <?php echo json_encode([
@@ -25,55 +26,57 @@
 <body>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <!-- 標準にあったトグルバー。　不要のためコメントアウト
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                -->
-                <!-- Branding Image -->
-                <!-- .envにあるAPP_NAMEを取得 -->
-                <a class="navbar-brand" href="{{ url('/member') }}">
-                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: メンバー用
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    &nbsp;
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
+            <div class="header-box">
+                <a class="header-line title-font" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+                <ul class="header-line">
+                    <li class="header-line">
+                        @if (Auth::guest())
+                            <form class="header-line" method="GET" action="{{ url('/keyword') }}">
+                                <input placeholder="商品をキーワードで検索" id="product_search_keyword" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                                <input type="submit" name="search" value="検索">
+                            </form>
+                        @else
+                            <form class="header-line" method="GET" action="{{ url('/member/keyword') }}">
+                                <input placeholder="商品をキーワードで検索" id="product_search_keyword" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                                <input type="submit" name="search" value="検索">
+                            </form>
+                        @endif
+                    </li>
                     @if (Auth::guest())
-                        <li><a href="{{ url('/member/login') }}">ログイン</a></li>
-                        <li><a href="{{ url('/member/registerin') }}">新規会員登録</a></li>
+                        <li class="header-line">
+                            <a href="{{ url('/member/login') }}">ログイン</a>
+                        </li>
+                        <li class="header-line">
+                            <a href="{{ url('/member/registerin') }}">新規会員登録</a>
+                        </li>
                     @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                        <li class="header-line">
+                            {{ "こんにちは、".Auth::user()->last_name." ".Auth::user()->first_name."さん" }}
+                        </li>
+                        <li class="header-line">
+                            <a href="{{ url('/member/cart_index') }}"　onclick="event.preventDefault(); document.getElementById('member-cart-form').submit();">
+                                カート一覧へ
+                            </a>
+                            <!--<form id="member-cart-form" action="{{ url('/member/cart_index') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>-->
+                        </li>
+                        <li class="header-line">
+                            <a href="{{ url('/member/menu') }}"　onclick="event.preventDefault(); document.getElementById('member-menu-form').submit();">
+                                会員メニュー
+                            </a>
+                            <form id="member-menu-form" action="{{ url('/member/menu') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                        <li class="header-line">
+                            <a href="{{ url('/member/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        ログアウト
                             </a>
 
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/member/logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        ログアウト
-                                    </a>
-
-                                    <form id="logout-form" action="{{ url('/member/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
+                            <form id="logout-form" action="{{ url('/member/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         </li>
                     @endif
                 </ul>

@@ -38,8 +38,8 @@ class ProductReferenceController extends Controller
         }
         if(!empty($request->get('product_search_keyword'))){    #商品検索キーワード
             $product_search_keyword_convert = str_replace("　"," ",$request->get('product_search_keyword'));    #全角の空白は半角の空白へ置き換え
-            $product_search_keyword_convert = "%".str_replace(" ","% %",$product_search_keyword_convert)."%";   #先頭・末尾・空白の前後の前後に%(ワイルドカード)を付与
-            $product_search_keyword_lists = explode(" ",$product_search_keyword_convert);                       #半角の空白で分割した商品コード配列を生成
+            $product_search_keyword_convert = "%".str_replace(" ","% %",$product_search_keyword_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
+            $product_search_keyword_lists = explode(" ",$product_search_keyword_convert);                       #半角の空白で分割した検索キーワード配列を生成
             $query->where(function($query) use($product_search_keyword_lists){                                  #いずれかの単語を含むレコードを取得する。
                 foreach($product_search_keyword_lists as $keyword){
                         $query->orWhere("product_search_keyword","like",$keyword,);
@@ -47,10 +47,9 @@ class ProductReferenceController extends Controller
             });
         }
         if(!empty($request->get('product_tag'))){                    #商品タグ
-            #$query->where('product_tag','like',"%".$request->get('product_tag')."%");
             $product_tag_convert = str_replace("　"," ",$request->get('product_tag'));    #全角の空白は半角の空白へ置き換え
-            $product_tag_convert = "%".str_replace(" ","% %",$product_tag_convert)."%";   #先頭・末尾・空白の前後の前後に%(ワイルドカード)を付与
-            $product_tag_lists = explode(" ",$product_tag_convert);                       #半角の空白で分割した商品コード配列を生成
+            $product_tag_convert = "%".str_replace(" ","% %",$product_tag_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
+            $product_tag_lists = explode(" ",$product_tag_convert);                       #半角の空白で分割した商品タグ配列を生成
             $query->where(function($query) use($product_tag_lists){                       #いずれかの単語を含むレコードを取得する。
                 foreach($product_tag_lists as $tag){
                         $query->orWhere("product_tag","like",$tag,);
@@ -96,6 +95,7 @@ class ProductReferenceController extends Controller
         #テーブルに登録されている商品画像・商品サムネイルのファイルパスを、クライアント側からアクセスするパスへ変換する。
         $query['product_image'] = str_replace("public","/storage",$query['product_image']);
         $query['product_thumbnail'] = str_replace("public","/storage",$query['product_thumbnail']);
+
         return view('operator.menu.product_show',$query);
     }
 }

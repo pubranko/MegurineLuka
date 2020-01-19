@@ -16,6 +16,11 @@ php artisan make:controller AddressMastersController
 php artisan make:controller OperatorMenu/ProductRegisterController
 php artisan make:controller OperatorMenu/ProductReferenceController
 php artisan make:controller OperatorMenu/ProductApprovalController
+php artisan make:controller SalesSiteController
+php artisan make:controller ProductSearchController
+php artisan make:controller MemberMenu/ProductCartListController
+php artisan make:controller MemberMenu/ProductTransactionController
+
 
 #  リソースコントローラーの作成（CRUD用）
 php artisan make:controller 〜 --resource
@@ -50,6 +55,12 @@ php artisan make:request ProductRegisterCheckRequest
 php artisan make:request ProductRegisterRequest
 php artisan make:request ProductSearchRequest
 php artisan make:request ProductApprovalRequest
+php artisan make:request ProductShowRequest
+php artisan make:request ProductCartAddRequest
+php artisan make:request ProductCartDeleteRequest
+php artisan make:request ProductCartDeleteRequest
+php artisan make:request DeliveryAddressCheckRequest
+php artisan make:request DeliveryDatetimeCheckRequest
 リソース cretate_address_masters_table
 
 #  ルールの作成（カスタムバリデーション）
@@ -65,6 +76,9 @@ php artisan make:migration cretate_restdata_table
 php artisan make:migration cretate_member_masters_table
 php artisan make:migration cretate_address_masters_table
 php artisan make:migration create_product_masters_table
+php artisan make:migration create_featured_product_masters_table
+php artisan make:migration create_product_cart_lists_table
+php artisan make:migration create_product_stock_lists_table
 
 #  セッション用マイグレーションファイル作成
 php artisan session:table
@@ -90,6 +104,15 @@ php artisan migrate:refresh
 php artisan migrate:refresh --step=5    #巻き戻す場所を指定もできる
 php artisan migrate:refresh --seed      #シードの実行も同時にできる。
 
+#  モデルの作成(単数形の名前が理想)
+php artisan make:model Person
+php artisan make:model Board
+php artisan make:model AddressMaster
+php artisan make:model ProductMaster
+php artisan make:model FeaturedProductMaster
+php artisan make:model ProductCartList
+php artisan make:model ProductStockList
+
 #  シーダーファイルの作成
 php artisan make:seeder ※テーブル名TableSeeder
 php artisan make:seeder People2TableSeeder
@@ -101,12 +124,6 @@ php artisan db:seed
 php artisan db:seed --class=※クラス名
 php artisan db:seed --class=RestdataTableSeeder
 php artisan db:seed --class=OperatorsTableSeeder
-
-#  モデルの作成(単数形の名前が理想)
-php artisan make:model Person
-php artisan make:model Board
-php artisan make:model AddressMaster
-php artisan make:model ProductMasters
 
 ### ペジネーションのテンプレートの用意
 # これで「/resources/views/vendor/pagination」にテンプレートがコピーされるようだ

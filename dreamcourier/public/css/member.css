@@ -1,10 +1,340 @@
-body {
-    background-color:#b0c4de;
+body {  /* 会員向けページの全体のテーマカラー */
+    /*background-color:#b0c4de;  /*ページ全体の背景色*/
+    padding: 0px 10px 10px 10px;  /*ページ全体の余白*/
+    /*background: linear-gradient(#05FBFF, #1D62F0 ) fixed;*/
+    background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226) ) fixed;
   }
 
-.mbr-message-box{
+/* ヘッダー部の要素 */
+.header-line{
+  display: inline;  /* リストを横に並べる */
+  font-size:1.1em;
+}
+.header-line li{  /* リストの間隔を調整 */
+  margin-right: 5px;
+}
+.title-font{
+  font-size:1.5em;
+}
+
+/* サイトのメニューバーボタンの設定 */
+.btn-gradient-3d {
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
+  text-decoration: none;  /* テキストの装飾：なし */
+  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
+  width: 200px;           /* ボタンの横幅位 */
+  height: 50px;           /* ボタンの高さ */
+  line-height: 50px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
+  text-align: center;     /* テキストの中央寄せ */
+  border-radius: 4px;     /* 角の丸み */
+  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
+  font-size:2em;          /* 文字サイズ*/
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
+  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
+  margin-top:10px;         /*メニューバーの上のマージン*/
+}
+.btn-gradient-3d:active {
+  -webkit-transform: translateY(4px); /* webkit：ブラウザーによっては、translateYが開発中の場合がある。webkitをつけるとそれが使える */
+  transform: translateY(4px);         /* translateY：縦方向に移動：下に4px動く */
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  border-bottom: none;  /* ボタン下辺の線の設定 */
+}
+
+/* 会員向けの説明用の枠の書式 */
+.mbr-message-box{ 
   border:5px solid #FFCC33;
   padding:10px;
   background:#ffffcc;
   font-size:20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* サムネイルとイメージのサイズ調整*/
+.img_product_thumbnail{
+  width: 160px;    /* 横幅を固定 */
+  height: auto;    /* 高さは自動指定 */
+}
+.img_product_image{
+  width: 480px;    /* 横幅を固定 */
+  height: auto;    /* 高さは自動指定 */
+}
+/*各商品のboxを横に並べて表示する*/
+.product-contents{
+  overflow:hidden;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.product-contents li{
+  float:left;         /*要素を左から並べる*/
+  border:1px solid #dadada; /* #b0c4de*/
+  margin-right: 5px;  /*boxの右のマージン*/
+  margin-bottom:5px;  /*boxの下のマージン*/
+  width:160px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+}
+.product-contents li:last-child{
+  margin-right:0;
+}
+.product-contents li div img{
+  margin:0 0 0px 0;  /*boxの下のマージン*/
+}
+.product-contents li p{
+  line-height:2px;      /*商品名・価格・在庫状況の行間*/
+  margin-top: 3px;  /*boxの下のマージン*/
+  text-align: center;
+}
+
+/* 会員向けの商品タグ見出しの書式 */
+.mbr-tag-message-box{ 
+  position: relative; /*ボックスの配置方法：相対位置*/
+  padding: 0.1em 0.5em; /*内側の余白*/
+  background: -webkit-linear-gradient(to right, rgb(255, 186, 115), transparent); /*背景色　webkit:古いブラウザー用*/
+  background: linear-gradient(to right, rgb(255, 186, 115), transparent);         /*背景色　グラデーション*/
+  color: #545454;   /*文字色*/
+}
+
+/*商品の詳細画面の書式*/
+.show-product-tag{
+  font-size:1.1em;
+  border:solid 2px black;
+  /*width:1057px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  /*min-width:20%;*/
+  max-width:1057px;
+  margin-top:5px;
+  margin-bottom:5px;
+  border-left: solid 10px #6795fd;
+}
+.show-product-tag ul{  /* リストの間隔を調整 */
+  display: inline;  /* リストを横に並べる */
+  margin-left: -3%; /* 【商品タグ】とタグ名称の隙間を縮める*/
+}
+.show-product-tag ul li{  /* リストの間隔を調整 */
+  display: inline;  /* リストを横に並べる */
+  margin-right: 5px;
+}
+
+.show-product-image{
+  max-width: 480px;
+  height: auto;    /* 高さは自動指定 */
+  margin-right: 10px;
+}
+
+.product-info{
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  vertical-align:top;     /*商品画像の右の情報を、上寄せにする*/
+}
+.show-product-name{
+  font-size:24px;
+  border:solid 2px black;
+  max-width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  height:100px;
+  margin-bottom:5px;
+  border-left: solid 10px #6795fd;
+
+}
+.show-product-description{
+  font-size:20px;
+  border:solid 2px black;
+  max-width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  height:300px;
+  margin-bottom:5px;
+  border-left: solid 10px #6795fd;
+}
+.show-product-code{
+  font-size:18px;
+  border:solid 2px black;
+  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  margin-bottom:5px;
+  border-left: solid 10px #6795fd;
+}
+.show-product-price{
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  font-size:18px;
+  border:solid 2px black;
+  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  margin-bottom:5px;
+  margin-right:10px;
+  border-left: solid 10px #6795fd;
+}
+.show-product-stock_quantity_status{
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  font-size:18px;
+  border:solid 2px black;
+  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  border-left: solid 10px #6795fd;
+}
+.show-product-botton {    /*ボタンの書式*/
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
+  text-decoration: none;  /* テキストの装飾：なし */
+  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
+  width: 150px;           /* ボタンの横幅位 */
+  height: 50px;           /* ボタンの高さ */
+  line-height: 27px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
+  text-align: center;     /* テキストの中央寄せ */
+  border-radius: 4px;     /* 角の丸み */
+  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
+  font-size:1.5em;          /* 文字サイズ*/
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
+  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
+  margin-top:10px;         /*メニューバーの上のマージン*/
+}
+.show-product-botton-add {    /*カートへ追加ボタンの書式*/
+  line-height: 45px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
+}
+
+.show-product-cartlist{
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  font-size:1.2em;
+  border:solid 2px black;
+  width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  height:100px;
+  margin-bottom:5px;
+  border-left: solid 10px #6795fd;
+}
+
+/*商品*/
+.cartlists-product-name{
+  font-size:1.1em;
+  border:solid 2px black;
+  max-width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  height:95px;
+  margin-bottom:5px;
+  border-left: solid 10px #6795fd;
+}
+.cartlists-product-code{
+  font-size:1em;
+  border:solid 2px black;
+  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  margin-bottom:5px;
+  border-left: solid 10px #6795fd;
+}
+.cartlists-product-price{
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  font-size:1em;
+  border:solid 2px black;
+  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  margin-bottom:5px;
+  margin-right:10px;
+  border-left: solid 10px #6795fd;
+}
+.cartlists-product-stock_quantity_status{
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  font-size:1em;
+  border:solid 2px black;
+  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+  border-left: solid 10px #6795fd;
+}
+
+/*ページネーションの設定*/
+.pagination {
+  display: -webkit-box;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #3490dc;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+.page-link:hover {
+  z-index: 2;
+  color: #1d68a7;
+  text-decoration: none;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
+.page-link:focus {
+  z-index: 3;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+}
+.page-item:first-child .page-link {
+  margin-left: 0;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+.page-item:last-child .page-link {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #3490dc;
+  border-color: #3490dc;
+}
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+/*カート一覧画面の枠調整*/
+.cart-lists-box-all{
+  margin-top:10px;
+}
+.cart-lists-box{
+  margin-top:10px;
+  border:groove 6px #5e7fca;
+  padding: 5px;
+  max-width:950px;
+}
+/*カート一覧画面のボタン*/
+.cartlists-button {       /*ボタンの書式*/
+  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
+  text-decoration: none;  /* テキストの装飾：なし */
+  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
+  width: 150px;           /* ボタンの横幅位 */
+  height: 50px;           /* ボタンの高さ */
+  line-height: 45px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
+  text-align: center;     /* テキストの中央寄せ */
+  border-radius: 4px;     /* 角の丸み */
+  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
+  font-size:1.5em;          /* 文字サイズ*/
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
+  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
+  margin-top:10px;         /*メニューバーの上のマージン*/
+}
+.cartlists-button2 {      /*ボタンの書式*/
+  display: block;         /*要素を横に並べる＆ブロックにする＆隙間有り*/
+  height: 30px;           /* ボタンの高さ */
+  line-height: 35px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
+}
+
+.delivery-button{
+  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
+  text-decoration: none;  /* テキストの装飾：なし */
+  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
+  width: 250px;           /* ボタンの横幅位 */
+  height: 50px;           /* ボタンの高さ */
+  line-height: 25px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
+  text-align: center;     /* テキストの中央寄せ */
+  border-radius: 4px;     /* 角の丸み */
+  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
+  font-size:1.5em;          /* 文字サイズ*/
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
+  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
+  margin-top:10px;         /*メニューバーの上のマージン*/
+
 }
