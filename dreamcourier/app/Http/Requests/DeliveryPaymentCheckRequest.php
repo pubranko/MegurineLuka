@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;         #追加 Rule:inのため
 
-class DeliveryAddressCheckRequest extends FormRequest
+class DeliveryPaymentCheckRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,11 +14,25 @@ class DeliveryAddressCheckRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'member/delivery_address'){
+        if($this->path() == 'member/delivery_payment'){
             return true;
         }else{
             return false;
         }
+    }
+
+    /**
+     * バリデーションの前処理（オーバーライド）。
+     * 必要に応じて使用する予定。
+     * @return array
+     */
+    public function validationData()
+    {
+        #例
+        #$data = $this->all();
+        #if (isset($data['last_name']))
+        #    $data['last_name'] = mb_convert_kana($data['last_name'], 'RNKS');
+        return $this->all();
     }
 
     /**
@@ -29,11 +43,9 @@ class DeliveryAddressCheckRequest extends FormRequest
     public function rules()
     {
         return [
-            'address_select' => ['required',Rule::in("登録済み住所","個別指定住所")],
-            'phone_select' => ['required',Rule::in("登録済み電話番号","個別指定電話番号")],
+            'payment_select' => ['required',Rule::in("登録済みクレジットカード","個別指定クレジットカード")],
         ];
     }
-
     /**
      * sometimesでバリデートしたい場合に使用する。
      * rules を評価する前の状態の Validator を受け取り、afterフックしてくれる。
@@ -42,35 +54,20 @@ class DeliveryAddressCheckRequest extends FormRequest
      */
     public function withValidator ($validator){
         #格元号ごとの年月日の範囲チェック
-        $validator->sometimes('receiver_name','required|max:60',function($input){
-            return $input->address_select == "個別指定住所";
+        $validator->sometimes('card_number',['required','max:19','regex:/^[0-9-]+$/u'],function($input){
+            return $input->payment_select == "個別指定クレジットカード";
         });
-        $validator->sometimes('postal_code1','required|digits:3',function($input){
-            return $input->address_select == "個別指定住所";
+        $validator->sometimes('card_month','required|digits:2',function($input){
+            return $input->payment_select == "個別指定クレジットカード";
         });
-        $validator->sometimes('postal_code2','required|digits:4',function($input){
-            return $input->address_select == "個別指定住所";
+        $validator->sometimes('card_year','required|digits:2',function($input){
+            return $input->payment_select == "個別指定クレジットカード";
         });
-        $validator->sometimes('address1','required',function($input){
-            return $input->address_select == "個別指定住所";
+        $validator->sometimes('card_name',['required','max:50','regex:/^[a-zA-Z0-9-,. \/]+$/u'],function($input){
+            return $input->payment_select == "個別指定クレジットカード";
         });
-        $validator->sometimes('address2','required',function($input){
-            return $input->address_select == "個別指定住所";
-        });
-        $validator->sometimes('address3','required',function($input){
-            return $input->address_select == "個別指定住所";
-        });
-        $validator->sometimes('address4','required',function($input){
-            return $input->address_select == "個別指定住所";
-        });
-        $validator->sometimes('phone_number1','required|max:11',function($input){
-            return $input->phone_select == "個別指定電話番号";
-        });
-        $validator->sometimes('phone_number2','required|max:4',function($input){
-            return $input->phone_select == "個別指定電話番号";
-        });
-        $validator->sometimes('phone_number3','required|digits:4',function($input){
-            return $input->phone_select == "個別指定電話番号";
+        $validator->sometimes('card_security_code','required|digits_between:3,4',function($input){
+            return $input->payment_select == "個別指定クレジットカード";
         });
     }
 

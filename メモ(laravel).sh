@@ -45,6 +45,7 @@ php artisan make:middleware RequestConvertMiddleware
 php artisan make:middleware MembersConvertMiddleware
 php artisan make:middleware ProductRegisterConvertMiddleware
 php artisan make:middleware OperatorCodeAddMiddleware
+php artisan make:middleware DeliveryProcedureMiddleware #配送手続き
 
 #  バリデーション（フォームリクエスト）の作成
 php artisan make:request HelloRequest
@@ -61,6 +62,7 @@ php artisan make:request ProductCartDeleteRequest
 php artisan make:request ProductCartDeleteRequest
 php artisan make:request DeliveryAddressCheckRequest
 php artisan make:request DeliveryDatetimeCheckRequest
+php artisan make:request DeliveryPaymentCheckRequest
 リソース cretate_address_masters_table
 
 #  ルールの作成（カスタムバリデーション）
@@ -79,6 +81,8 @@ php artisan make:migration create_product_masters_table
 php artisan make:migration create_featured_product_masters_table
 php artisan make:migration create_product_cart_lists_table
 php artisan make:migration create_product_stock_lists_table
+php artisan make:migration create_product_transaction_lists_table
+php artisan make:migration create_product_delivery_status_lists_table
 
 #  セッション用マイグレーションファイル作成
 php artisan session:table

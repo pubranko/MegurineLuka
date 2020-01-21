@@ -51,6 +51,7 @@ body {  /* 会員向けページの全体のテーマカラー */
   font-size:20px;
   margin-top: 10px;
   margin-bottom: 10px;
+  max-width: 1040px;
 }
 
 /* サムネイルとイメージのサイズ調整*/
@@ -337,4 +338,62 @@ body {  /* 会員向けページの全体のテーマカラー */
   border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
   margin-top:10px;         /*メニューバーの上のマージン*/
 
+}
+/*バリデーションエラーで表示される文言のフォント*/
+.help-block{
+  color: red;
+}
+
+/*配達先情報の入力ボックス*/
+.delivery-Individual-box{
+  margin-top:5px;
+  margin-left:25px;
+  border:solid 2px #b6acac;
+  max-width:650px;
+  padding:10px;
+}
+.delivery-Individual-box > p{
+  margin-top:-5px;
+  margin-bottom:2px;
+  font-size:1.2em;
+  font:bold;
+}
+
+/*入力フィールドの書式 id指定*/
+#receiver_name{
+  width:500px;
+}
+#postal_code1,#postal_code2{
+  width:40px;
+}
+#address1{
+  width:80px;
+}
+#address2,#address3,#address4,#address5,#address6{
+  width:500px;
+}
+#phone_number1,#phone_number2,#phone_number3,#card_security_code{
+  width:50px;
+}
+#card_number{
+  width:160px;
+}
+
+/*購入手続き（確認）画面*/
+.delivery_check{
+  margin-left:1em;
+}
+/*購入手続き（確認）のテーブル書式*/
+.delivery_check_table{
+  border-collapse: collapse;
+  margin-top:10px;
+  border:groove 6px #5e7fca;
+  padding: 5px;
+  max-width:950px;
+}
+.delivery_check_table > tr,th,td{
+  border-collapse: collapse;
+  border:1px solid black;
+  padding-left: 1em;
+  padding-right: 1em;
 }
