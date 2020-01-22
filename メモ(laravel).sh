@@ -63,11 +63,16 @@ php artisan make:request ProductCartDeleteRequest
 php artisan make:request DeliveryAddressCheckRequest
 php artisan make:request DeliveryDatetimeCheckRequest
 php artisan make:request DeliveryPaymentCheckRequest
+php artisan make:request DeliveryRegisterRequest
 リソース cretate_address_masters_table
 
 #  ルールの作成（カスタムバリデーション）
 php artisan make:rule 〜
 php artisan make:rule SalesPeriodDuplicationRule
+php artisan make:rule PaymentStatusUnsettledRule
+php artisan make:rule ProductStockRule
+php artisan make:rule MemberPurchaseStopDivisionRule
+php artisan make:rule SellingDiscontinuedRule
 
 #  マイグレーションファイル作成（テーブル名は複数形が理想）
 php artisan make:migration create_※テーブル名_table
@@ -116,6 +121,8 @@ php artisan make:model ProductMaster
 php artisan make:model FeaturedProductMaster
 php artisan make:model ProductCartList
 php artisan make:model ProductStockList
+php artisan make:model ProductTransactionList
+php artisan make:model ProductDeliveryStatusList
 
 #  シーダーファイルの作成
 php artisan make:seeder ※テーブル名TableSeeder
@@ -153,6 +160,7 @@ php artisan make:test MemberRegisterCheckTest
 php artisan make:test MemberRegisterTest
 php artisan make:test ProductRegisterTest
 php artisan make:test ProductTest
+php artisan make:test Delivery1Test
 # テスト用スクリプト作成 ./tests/unitの直下に作成される
 php artisan make:test 〜Test --unit
 
@@ -164,6 +172,7 @@ vendor/bin/phpunit tests/Feature/MemberRegisterTest.php
 vendor/bin/phpunit tests/Feature/MemberTest.php
 vendor/bin/phpunit tests/Feature/ProductRegisterTest.php
 vendor/bin/phpunit tests/Feature/ProductTest.php
+vendor/bin/phpunit tests/Feature/Delivery1Test.php
 
 ### 便利コマンド
 # artisanコマンドのリストが見れる。

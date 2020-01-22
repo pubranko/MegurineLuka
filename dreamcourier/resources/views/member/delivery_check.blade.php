@@ -6,6 +6,11 @@
 <div class="mbr-message-box">
     下記の内容でお間違えがないでしょうか？<br/>
     ご確認の上、「上記の内容で購入」ボタンを押してください。
+    @foreach($errors->all() as $error)
+        <div>
+            <a>※エラー発生：</a><a>{{$error}}</a><br/>
+        </div>
+    @endforeach
 </div>
     <p>◎商品情報</p>
     <div class="delivery_check">

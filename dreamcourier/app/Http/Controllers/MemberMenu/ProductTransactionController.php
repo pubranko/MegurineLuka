@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DeliveryAddressCheckRequest; #追加
 use App\Http\Requests\DeliveryDatetimeCheckRequest; #追加
 use App\Http\Requests\DeliveryPaymentCheckRequest; #追加
+use App\Http\Requests\DeliveryRegisterRequest;     #追加
 use App\ProductCartList;            #追加
 use App\ProductStockList;           #追加
 use App\Member;                     #追加
@@ -24,6 +25,7 @@ class ProductTransactionController extends Controller
 
         $queries = ProductCartList::query();
         $queries->Where('member_code',Auth::user()->member_code);   #ログインしてるユーザーのカートリストを取得
+        $queries->Where('payment_status','未決済');                 #未決済のデータのみ取得
         $cart_lists = $queries->paginate(15);
 
         $wk_products=[];  #初期化
@@ -49,12 +51,11 @@ class ProductTransactionController extends Controller
         }
 
         $items = ['wk_products' => $wk_products,'cart_lists'=>$cart_lists];
-
         return view('member.cart_lists',$items);
     }
 
     /**
-     * 配送先指定画面
+     * 配送先指定画面表示
      */
     public function deliveryAddress(Request $request){
         $request->session()->put('cartLists',$request->all());
@@ -70,7 +71,7 @@ class ProductTransactionController extends Controller
     }
 
     /**
-     * 配達日時指定画面
+     * 配達日時指定画面表示
      */
     public function deliveryDatetime(Request $request){
         return view('member.delivery_datetime');
@@ -85,13 +86,12 @@ class ProductTransactionController extends Controller
     }
 
     /**
-     * 支払い方法指定画面
+     * 支払い方法指定画面表示
      */
     public function deliveryPayment(Request $request){
 
         $y = date("y",time());      #現在の年（西暦下２桁）
         $years = range($y,$y+6);    #現在の年から７年分の配列を作成
-
         return view('member.delivery_payment',['years' => $years]);
     }
 
@@ -181,12 +181,12 @@ class ProductTransactionController extends Controller
         ############################################################################################
         $date= strtotime($data['deliveryDatetime']['delivery_date']);
 
-        $wk_datetime['delivery_date_edit'] = date('Y 年 m 月 d 日',$date);
+        $wk_datetime['delivery_date_edit'] = date('Y 年 m 月 d 日',$date);          #ブラウザー表示用の日付フォーマット
         $wk_datetime['delivery_date'] =$data['deliveryDatetime']['delivery_date'];
         $wk_datetime['delivery_time'] =$data['deliveryDatetime']['delivery_time'];
 
         ############################################################################################
-        #支払いを行うクレジットカード情報を取得する。（！！！未実装！！！　フェーズ２以降で開発予定）
+        #支払いを行うクレジットカード情報を取得する。
         #また、viewに渡すデータへ加工する。
         ############################################################################################
         $wk_credit_card['payment_select'] =$request->get('payment_select');
@@ -206,27 +206,26 @@ class ProductTransactionController extends Controller
             $wk_credit_card['card_security_code'] = $request->get('card_security_code');
         }
 
+        #セッションに商品情報、配達先情報、配達日時情報、クレジットカード情報を保存
         $items = ['wk_product'=>$wk_product,'wk_delivery_destination'=>$wk_delivery_destination,'wk_datetime'=>$wk_datetime,'wk_credit_card'=>$wk_credit_card];
-
         $request->session()->put('items',$items);
         return redirect('/member/delivery_check');
     }
 
     /**
-     * 購入手続き（確認）画面を表示する。
+     * 購入手続き（確認）画面を表示
      */
     public function deliveryCheck(Request $request){
-        #$data['items'] = $request->session()->get('items');
         return view('/member/delivery_check',$request->session()->get('items'));
     }
 
     /**
      * 1.商品取引リスト(product_transaction_lists)、商品配送状況リスト(product_delivery_status_lists)へ登録する。
-     * 2.商品カートリスト(product_cart_lists)を決済済みにする。(未着！！！！！！！！！！！！！)
-     * 3.商品在庫リスト(product_stock_lists)より在庫を削減する。(未着！！！！！！！！！！！！！)
+     * 2.商品カートリスト(product_cart_lists)を決済済みにする。
+     * 3.商品在庫リスト(product_stock_lists)より在庫を削減する。
      * 4.購入手続き（結果）画面を表示する。
      */
-    public function deliveryRegister(Request $request){
+    public function deliveryRegister(DeliveryRegisterRequest $request){
         #購入手続きの前画面（カート一覧、配達先指定、配達日時指定、クレジットカード指定）の情報をセッションより取得する
         $data['cartLists'] = $request->session()->get('cartLists');
         $data['items'] = $request->session()->get('items');
@@ -235,9 +234,8 @@ class ProductTransactionController extends Controller
         $wk_datetime = $data['items']['wk_datetime'];
         $wk_credit_card = $data['items']['wk_credit_card'];
 
-        #テーブルロック
+        #商品取引リスト(product_transaction_lists)編集 ※テーブルロック(お取引番号のカウントアップのためロックする)
         ProductTransactionList::lockForUpdate()->get();
-
         $transaction_model = new ProductTransactionList;
         $transaction_number = ProductTransactionList::max('transaction_number')+1;   #お取引番号：最大値＋１
         $transaction_model->transaction_number = $transaction_number;
@@ -267,6 +265,7 @@ class ProductTransactionController extends Controller
         $transaction_model->temporary_updater_operator_code = '';
         $transaction_model->temporary_update_approver_operator_code = '';
 
+        #商品配送状況リスト(product_delivery_status_lists)
         $delivery_status_model = new ProductDeliveryStatusList;
         $delivery_status_model->transaction_number = $transaction_model->transaction_number;
         $delivery_status_model->delivery_status = '配達準備中';
@@ -277,14 +276,24 @@ class ProductTransactionController extends Controller
         $delivery_status_model->temporary_updater_operator_code = '';
         $delivery_status_model->temporary_update_approver_operator_code = '';
 
+        #商品カートリスト(product_cart_lists)
+        $cart_model = ProductCartList::lockForUpdate()->find($data['cartLists']['cartlist_id']);
+        $cart_model->payment_status = '決済';
+
+        #商品在庫リスト(product_stock_lists)
+        $stock_model = ProductStockList::lockForUpdate()->where('product_code',$wk_product['product_code'])->first();
+        $stock_model->decrement('product_stock_quantity',1);
+
+        #最後に４テーブルをセーブ
         $transaction_model->save();
         $delivery_status_model->save();
+        $cart_model->save();
+        $stock_model->save();
 
         $data['items']['transaction_number'] = $transaction_number;
         #テーブル登録後の後処理
         #二重送信対策(セッションの再作成)
         $request->session()->regenerateToken();
-        #return redirect('/member/delivery_result');
         return view('member.delivery_result',$data['items']);
     }
 

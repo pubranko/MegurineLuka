@@ -53,7 +53,7 @@ class DeliveryPaymentCheckRequest extends FormRequest
      * @return array
      */
     public function withValidator ($validator){
-        #格元号ごとの年月日の範囲チェック
+        #個別指定クレジットカードを指定した場合、以下のチェックを行う
         $validator->sometimes('card_number',['required','max:19','regex:/^[0-9-]+$/u'],function($input){
             return $input->payment_select == "個別指定クレジットカード";
         });

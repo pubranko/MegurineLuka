@@ -55,8 +55,6 @@ class DeliveryProcedureMiddleware
 
             $data['wk_delivery_datetime'] = $wk_delivery_datetime;      #配達希望日時を設定
             $data['wk_available_datetime'] = $wk_available_datetime;    #配達可能日時（現在時刻＋１２時間）を設定
-
-            #dd($data);
         }
 
         $request->merge($data);
