@@ -28,10 +28,17 @@ class DeliveryPaymentCheckRequest extends FormRequest
      */
     public function validationData()
     {
-        #例
-        #$data = $this->all();
-        #if (isset($data['last_name']))
-        #    $data['last_name'] = mb_convert_kana($data['last_name'], 'RNKS');
+        $data = $this->all();
+
+        #全角→半角に変換 (n:数字,a:英数字,s:空白)
+        if (isset($data['card_number']))
+            $data['card_number'] = mb_convert_kana($data['card_number'], 'a');
+        if (isset($data['card_name']))
+            $data['card_name'] = mb_convert_kana($data['card_name'], 'as');
+        if (isset($data['card_security_code']))
+            $data['card_security_code'] = mb_convert_kana($data['card_security_code'], 'n');
+
+        $this->merge($data);
         return $this->all();
     }
 
@@ -57,7 +64,7 @@ class DeliveryPaymentCheckRequest extends FormRequest
         $validator->sometimes('card_number',['required','max:19','regex:/^[0-9-]+$/u'],function($input){
             return $input->payment_select == "個別指定クレジットカード";
         });
-        $validator->sometimes('card_month','required|digits:2',function($input){
+        $validator->sometimes('card_month',['required','digits:2','regex:/^([0][1-9]|[1][0-2])+$/u'],function($input){
             return $input->payment_select == "個別指定クレジットカード";
         });
         $validator->sometimes('card_year','required|digits:2',function($input){

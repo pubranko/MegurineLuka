@@ -17,7 +17,8 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+    #'default' => env('LOG_CHANNEL', 'stack'),
+    'default' => env('LOG_CHANNEL', 'daily'),   #ログを日別で保存するように修正:後述のchannelsの設定により１４日間保存されるようだ。
 
     /*
     |--------------------------------------------------------------------------

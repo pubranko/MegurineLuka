@@ -22,6 +22,24 @@ class DeliveryDatetimeCheckRequest extends FormRequest
     }
 
     /**
+     * バリデーションの前処理（オーバーライド）。
+     * 必要に応じて使用する予定。
+     * @return array
+     */
+    public function validationData()
+    {
+        #配達日時のバリデーション用データをリクエストに追加
+        if (isset($data['delivery_date']) && isset($data['delivery_time'])){
+            $data = $this->all();
+            $wk_delivery_time = explode("〜",$data['delivery_time'])[0];                    #例）「0:00〜2:00」の手前の時刻を取得
+            $data['wk_delivery_datetime'] = $data['delivery_date']." ".$wk_delivery_time;   #配達希望日時を設定(yyyy-mm-dd hh:mm:ss形式)
+            $data['wk_available_datetime'] = date("Y-m-d H:i:s",time() + (60*60*12));       #配達可能日時（現在時刻＋１２時間）を設定(yyyy-mm-dd hh:mm:ss形式)
+            $this->merge($data);
+        }
+        return $this->all();
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

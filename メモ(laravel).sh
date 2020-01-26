@@ -59,7 +59,7 @@ php artisan make:request ProductApprovalRequest
 php artisan make:request ProductShowRequest
 php artisan make:request ProductCartAddRequest
 php artisan make:request ProductCartDeleteRequest
-php artisan make:request ProductCartDeleteRequest
+php artisan make:request ProductCartSelectRequest
 php artisan make:request DeliveryAddressCheckRequest
 php artisan make:request DeliveryDatetimeCheckRequest
 php artisan make:request DeliveryPaymentCheckRequest
@@ -161,6 +161,10 @@ php artisan make:test MemberRegisterTest
 php artisan make:test ProductRegisterTest
 php artisan make:test ProductTest
 php artisan make:test Delivery1Test
+php artisan make:test Delivery2Test
+php artisan make:test Delivery3Test
+php artisan make:test Delivery4Test
+php artisan make:test Delivery5Test
 # テスト用スクリプト作成 ./tests/unitの直下に作成される
 php artisan make:test 〜Test --unit
 
@@ -173,6 +177,12 @@ vendor/bin/phpunit tests/Feature/MemberTest.php
 vendor/bin/phpunit tests/Feature/ProductRegisterTest.php
 vendor/bin/phpunit tests/Feature/ProductTest.php
 vendor/bin/phpunit tests/Feature/Delivery1Test.php
+
+# ファクトリの作成(database/factoriesに作成される)
+php artisan make:factory PostFactory --model=Post
+php artisan make:factory product_stock_lists --model=ProductStockList
+php artisan make:factory product_cart_lists --model=ProductCartList
+php artisan make:factory featured_product_masters --model=FeaturedProductMaster
 
 ### 便利コマンド
 # artisanコマンドのリストが見れる。

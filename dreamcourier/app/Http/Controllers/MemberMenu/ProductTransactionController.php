@@ -4,10 +4,11 @@ namespace App\Http\Controllers\MemberMenu;
 
 use App\Http\Controllers\Controller;    #追加
 use Illuminate\Http\Request;
-use App\Http\Requests\DeliveryAddressCheckRequest; #追加
+use App\Http\Requests\DeliveryAddressCheckRequest;  #追加
 use App\Http\Requests\DeliveryDatetimeCheckRequest; #追加
-use App\Http\Requests\DeliveryPaymentCheckRequest; #追加
-use App\Http\Requests\DeliveryRegisterRequest;     #追加
+use App\Http\Requests\DeliveryPaymentCheckRequest;  #追加
+use App\Http\Requests\DeliveryRegisterRequest;      #追加
+use App\Http\Requests\ProductCartSelectRequest;     #追加
 use App\ProductCartList;            #追加
 use App\ProductStockList;           #追加
 use App\Member;                     #追加
@@ -57,7 +58,7 @@ class ProductTransactionController extends Controller
     /**
      * 配送先指定画面表示
      */
-    public function deliveryAddress(Request $request){
+    public function deliveryAddress(ProductCartSelectRequest $request){
         $request->session()->put('cartLists',$request->all());
         return view('member.delivery_address');
     }
@@ -296,5 +297,4 @@ class ProductTransactionController extends Controller
         $request->session()->regenerateToken();
         return view('member.delivery_result',$data['items']);
     }
-
 }

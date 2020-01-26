@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(ProductMaster::class, function (Faker $faker) {
 
     return [
-
+        #'id'=>$faker->unique()->numberBetween(0,999),
         'product_code' => 'akagi-'.$faker->unique()->numberBetween(0,999),
         'sales_period_from' => $faker->dateTimeBetween("2020-01-01 00:00","2050-12-31 23:59"),
         'sales_period_to' => $faker->dateTimeBetween("2020-01-02 00:00","2050-12-31 23:59"),

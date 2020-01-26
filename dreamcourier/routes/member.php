@@ -57,7 +57,7 @@ Route::post('/delivery_address', 'MemberMenu\ProductTransactionController@delive
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('member')->user();
-})->middleware('deliveryprocedure')->name('member.delivery.address_check');
+})->name('member.delivery.address_check');
 
 Route::get('/delivery_datetime', 'MemberMenu\ProductTransactionController@deliveryDatetime', function () {
     $users[] = Auth::user();
@@ -68,7 +68,7 @@ Route::post('/delivery_datetime', 'MemberMenu\ProductTransactionController@deliv
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('member')->user();
-})->middleware('deliveryprocedure')->name('member.delivery.datetime_check');
+})->name('member.delivery.datetime_check');
 
 Route::get('/delivery_payment', 'MemberMenu\ProductTransactionController@deliveryPayment', function () {
     $users[] = Auth::user();
