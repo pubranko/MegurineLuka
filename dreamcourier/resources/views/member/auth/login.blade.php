@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">ログイン</div>
+                <div class="panel-heading">＜＜ログイン情報を入力してください。＞＞</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/member/login') }}">
                         {{ csrf_field() }}

@@ -11,7 +11,7 @@ class MembersConvertMiddleware
      * １．全角しか認めていない項目へ半角が含まれていた場合、全角へ変換する。
      * ２．半角しか認めていない項目へ全角が含まれていた場合、半角へ変換する。
      * ３．必要な項目だけゼロサプレス
-     * ４．個別の年月日を結合した年月日をリクエストに付与する。
+     * ４．個別の年月日を、結合した年月日にしてリクエストに付与する。
      * Handle an incoming request.
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

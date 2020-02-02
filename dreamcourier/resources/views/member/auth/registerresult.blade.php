@@ -12,16 +12,16 @@
                         <a>入会の手続きは終わりましたが、お買い物をしていただくには支払方法の登録が必要です。<br/>></a>
                         <a>よろしければ、支払方法のご登録を下記のボタンより行ってください。</a>
                     </div>
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('あとで決める') }}">
+                    <form class="form-horizontal" role="form" method="GET" action="{{ url('あとで決める') }}">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    支払い方法登録へ
+                                    支払い方法登録へ(※フェーズ２以降で実装予定)
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('あとで決める') }}">
+                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/member/home') }}">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

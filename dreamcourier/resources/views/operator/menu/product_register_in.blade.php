@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/operator/product/check') }}" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/operator/product/register/check') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('product_code') ? ' has-error' : '' }}">
@@ -92,7 +92,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="product_thumbnail" type="file" class="form-control" name="product_thumbnail" value={{old('product_thumbnail')}}>
+                                <input id="product_thumbnail" type="file" class="form-control" name="product_thumbnail">
 
                                 @if ($errors->has('product_thumbnail'))
                                     <span class="help-block">
@@ -107,7 +107,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="product_image" type="file" class="form-control" name="product_image" value={{old('product_image')}}>
+                                <input id="product_image" type="file" class="form-control" name="product_image">
 
                                 @if ($errors->has('product_image'))
                                     <span class="help-block">
@@ -210,6 +210,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     次へ
                                 </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" onclick=history.back()>戻る</button>
                             </div>
                         </div>
                     </form>

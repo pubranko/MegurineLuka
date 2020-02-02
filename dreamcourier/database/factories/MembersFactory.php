@@ -52,8 +52,8 @@ $factory->define(Member::class, function (Faker $faker) {
         'address2' => $faker->city,
         'address3' => $faker->ward,
         'address4' => $faker->areaNumber,
-        'address5' => $faker->buildingNumber,   #ビルと部屋番号が一体、、、まあ、任意項目だからとりあえずこのまま。
-        #'address6' => $faker->building_number,
+        'address5' => '',  #$faker->buildingNumber,   #ビルと部屋番号が一体、、、まあ、任意項目だからとりあえずこのまま。
+        'address6' => '',  #$faker->building_number,
         'phone_number1' => $phone_number1,
         'phone_number2' => $phone_number2,
         'phone_number3' => $phone_number3,

@@ -12,7 +12,7 @@
                 </div>
                 <div class="panel-body">
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Ｅメールアドレス（E-Mail Address）</label>
+                            <label for="email" class="col-md-4 control-label">Ｅメールアドレス</label>
 
                             <div class="col-md-6">
                                 <a>　{{ $email }}　</a>
@@ -25,13 +25,13 @@
                         </div>
 
                         <!--ここからカスタム-->
-                            <label for="last_name" class="col-md-4 control-label">姓名（last_name）</label>
+                            <label for="last_name" class="col-md-4 control-label">姓名</label>
 
                             <div class="col-md-6">
                                 <a>　{{$last_name}}　</a>
                             </div>
 
-                            <label for="first_name" class="col-md-4 control-label">名前（first_name）</label>
+                            <label for="first_name" class="col-md-4 control-label">名前</label>
 
                             <div class="col-md-6">
                                 <a>　{{$first_name}}　</a>
@@ -58,13 +58,13 @@
                                 <a> {{$birthday_day}} </a>
                             </div>
 
-                            <label for="sex" class="col-md-4 control-label">性別（sex）</label>
+                            <label for="sex" class="col-md-4 control-label">性別</label>
 
                             <div class="col-md-6">
                                 <a> {{$sex}} </a>
                             </div>
 
-                            <label for="postal_code" class="col-md-4 control-label">郵便番号（postal_code）</label>
+                            <label for="postal_code" class="col-md-4 control-label">郵便番号</label>
 
                             <div class="col-md-6">
                                 <a>　{{$postal_code1}}-{{$postal_code2}}　</a>
@@ -124,7 +124,7 @@
                         <input id="email" type="hidden" class="form-control" name="email" value="{{$email}}">
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">パスワード（Password）</label>
+                            <label for="password" class="col-md-4 control-label">パスワード</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
@@ -139,7 +139,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password_confirmation" class="col-md-4 control-label">パスワード再入力（Confirm Password）</label>
+                            <label for="password_confirmation" class="col-md-4 control-label">パスワード再入力</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
@@ -158,6 +158,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     上記の内容で入会する
                                 </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" onclick=history.back()>戻る</button>
                             </div>
                         </div>
                     </form>

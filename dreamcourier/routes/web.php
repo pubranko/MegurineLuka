@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+#Route::get('/', function () {
+#    return view('welcome');
+#});
+Route::get('/', 'SalesSiteController@siteTop')->name('site.top');
+Route::get('/tag', 'SalesSiteController@siteProduct')->name('site.tag');;
+Route::get('/keyword', 'ProductListController@productSearch')->name('site.keyword');;
+Route::get('/show', 'ProductListController@productShow')->name('site.show');;
+
+#Route::get('/', 'SalesSiteController@topSite')->name('top.site');
 
 Route::group(['prefix' => 'operator'], function () {
   Route::get('/login', 'OperatorAuth\LoginController@showLoginForm')->name('login');
@@ -46,4 +52,4 @@ Route::group(['prefix' => 'member'], function () {
 
   #Route::resource('rest','AddressMastersController');
 });
-Route::get('/addresssearch', 'AddressMastersController@postCodeSearch')->name('postcodesearch');        #郵便番号から住所を取得
+Route::get('/addresssearch', 'AddressMastersController@postCodeSearch')->name('postcodesearch');        #郵便番号から住所を取得(ajax)

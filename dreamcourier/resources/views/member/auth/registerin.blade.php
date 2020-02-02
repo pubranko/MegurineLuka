@@ -15,7 +15,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Ｅメールアドレス（E-Mail Address）</label>
+                            <label for="email" class="col-md-4 control-label">Ｅメールアドレス</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
@@ -31,7 +31,7 @@
 
                         <!--ここからカスタム-->
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
-                            <label for="last_name" class="col-md-4 control-label">姓名（last_name）</label>
+                            <label for="last_name" class="col-md-4 control-label">姓名</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <label for="first_name" class="col-md-4 control-label">名前（first_name）</label>
+                            <label for="first_name" class="col-md-4 control-label">名前</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
@@ -110,9 +110,9 @@
                                 </select>
                                 <input id="birthday_year" type="text" class="form-control" name="birthday_year" value={{old('birthday_year')}}>
                                 /
-                                <input id="birthday_year" type="text" class="form-control" name="birthday_month" value={{old('birthday_month')}}>
+                                <input id="birthday_month" type="text" class="form-control" name="birthday_month" value={{old('birthday_month')}}>
                                 /
-                                <input id="birthday_year" type="text" class="form-control" name="birthday_day" value={{old('birthday_day')}}>
+                                <input id="birthday_day" type="text" class="form-control" name="birthday_day" value={{old('birthday_day')}}>
                                 @if ($errors->has('birthday_era'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('birthday_era') }}</strong>
@@ -145,7 +145,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('sex') ? ' has-error' : '' }}">
-                            <label for="sex" class="col-md-4 control-label">性別（sex）</label>
+                            <label for="sex" class="col-md-4 control-label">性別</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
@@ -162,13 +162,13 @@
 
                         <div class="form-group{{ $errors->has('postal_code1') ? ' has-error' : '' }}">
                         <div class="form-group{{ $errors->has('postal_code2') ? ' has-error' : '' }}">
-                            <label for="postal_code" class="col-md-4 control-label">郵便番号（postal_code）</label>
+                            <label for="postal_code1" class="col-md-4 control-label">郵便番号</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="postal_code" type="text" class="form-control" name="postal_code1" value={{old('postal_code1')}}>
+                                <input id="postal_code1" type="text" class="form-control" name="postal_code1" value={{old('postal_code1')}}>
                                 -
-                                <input id="postal_code" type="text" class="form-control" name="postal_code2" value={{old('postal_code2')}}>
+                                <input id="postal_code2" type="text" class="form-control" name="postal_code2" value={{old('postal_code2')}}>
                                 @if ($errors->has('postal_code1'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('postal_code1') }}</strong>
@@ -188,10 +188,10 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address1" type="text" class="form-control" name="address1" disabled value={{old('address1')}}>
+                                <input id="address1" type="text" class="form-control" name="address1" readonly value={{old('address1')}}>
 
                                 @if ($errors->has('address1'))
-                                    <span class="help-block">••••••
+                                    <span class="help-block">
                                         <strong>{{ $errors->first('address1') }}</strong>
                                     </span>
                                 @endif
@@ -203,7 +203,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address2" type="text" class="form-control" name="address2" disabled value={{old('address2')}}>
+                                <input id="address2" type="text" class="form-control" name="address2" readonly value={{old('address2')}}>
 
                                 @if ($errors->has('address2'))
                                     <span class="help-block">
@@ -218,7 +218,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address3" type="text" class="form-control" name="address3" disabled value={{old('address3')}}>
+                                <input id="address3" type="text" class="form-control" name="address3" readonly value={{old('address3')}}>
 
                                 @if ($errors->has('address3'))
                                     <span class="help-block">
@@ -276,15 +276,15 @@
                         <div class="form-group{{ $errors->has('phone_number1') ? ' has-error' : '' }}">
                         <div class="form-group{{ $errors->has('phone_number2') ? ' has-error' : '' }}">
                         <div class="form-group{{ $errors->has('phone_number3') ? ' has-error' : '' }}">
-                            <label for="phone_number" class="col-md-4 control-label">電話番号</label>
+                            <label for="phone_number1" class="col-md-4 control-label">電話番号</label>
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="phone_number" type="text" class="form-control" name="phone_number1" value={{old('phone_number1')}}>
+                                <input id="phone_number1" type="text" class="form-control" name="phone_number1" value={{old('phone_number1')}}>
                                 -
-                                <input id="phone_number" type="text" class="form-control" name="phone_number2" value={{old('phone_number2')}}>
+                                <input id="phone_number2" type="text" class="form-control" name="phone_number2" value={{old('phone_number2')}}>
                                 -
-                                <input id="phone_number" type="text" class="form-control" name="phone_number3" value={{old('phone_number3')}}>
+                                <input id="phone_number3" type="text" class="form-control" name="phone_number3" value={{old('phone_number3')}}>
 
                                 @if ($errors->has('phone_number1'))
                                     <span class="help-block">

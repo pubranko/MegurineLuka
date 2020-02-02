@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeColumnZipTable extends Migration
+class CreateProductStockListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class ChangeColumnZipTable extends Migration
      */
     public function up()
     {
-        Schema::table('address_masters', function (Blueprint $table) {
-            //
-            $table->string('zip')->length(8)->change();
+        Schema::create('product_stock_lists', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('product_code');
+            $table->integer('product_stock_quantity');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +28,6 @@ class ChangeColumnZipTable extends Migration
      */
     public function down()
     {
-        Schema::table('address_masters', function (Blueprint $table) {
-            //
-            $table->integer('zip')->length(8)->change();
-        });
+        Schema::dropIfExists('product_stock_lists');
     }
 }
