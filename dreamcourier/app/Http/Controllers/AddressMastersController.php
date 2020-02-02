@@ -13,15 +13,12 @@ class AddressMastersController extends Controller
      */
     public function postCodeSearch(Request $request)
     {
-        #$request->session()->put('register_in_request',$request->all());    #セッションにリクエストを保存
-        $postcode1 = $request->all()['postal_code1'];
-        $postcode2 = $request->all()['postal_code2'];
+        $postcode1 = $request->get('postal_code1');
+        $postcode2 = $request->get('postal_code2');
 
-        #AddressMaster::where('postcode1',$postcode1)->first();
         $q = AddressMaster::query();
         $address = $q->where('zip',$postcode1."-".$postcode2)->first();
         if($address){
-            //return view('member.auth.registercheck',$request->all());           #前画面の入力内容を引き渡して次の画面へ
             $response = '{"result_flg":"有り",'.
                         '"ken_name":"'.$address["ken_name"].
                         '","city_name":"'.$address["city_name"].

@@ -20,7 +20,7 @@ body {  /* 会員向けページの全体のテーマカラー */
 /* サイトのメニューバーボタンの設定 */
 .btn-gradient-3d {
   display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
+  padding: 0.5em 0.5em;     /* ボタンの内側余白：上下、左右*/
   text-decoration: none;  /* テキストの装飾：なし */
   font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
   width: 200px;           /* ボタンの横幅位 */
@@ -360,7 +360,7 @@ body {  /* 会員向けページの全体のテーマカラー */
 }
 
 /*入力フィールドの書式 id指定*/
-#receiver_name{
+#receiver_name,#last_name,#first_name,#last_name_kana,#first_name_kana{
   width:500px;
 }
 #postal_code1,#postal_code2{
@@ -372,7 +372,7 @@ body {  /* 会員向けページの全体のテーマカラー */
 #address2,#address3,#address4,#address5,#address6{
   width:500px;
 }
-#phone_number1,#phone_number2,#phone_number3,#card_security_code{
+#phone_number1,#phone_number2,#phone_number3,#card_security_code,#birthday_year,#birthday_month,#birthday_day{
   width:50px;
 }
 #card_number{

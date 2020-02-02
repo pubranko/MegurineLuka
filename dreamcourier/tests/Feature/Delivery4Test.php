@@ -15,7 +15,8 @@ use App\FeaturedProductMaster;
 
 class Delivery4Test extends TestCase
 {
-    use RefreshDatabase;
+    #use RefreshDatabase;
+    use DatabaseMigrations;
 
     /**
      * A basic feature test example.
@@ -40,13 +41,20 @@ class Delivery4Test extends TestCase
             'product_code'=>'akagi-001',
             'product_stock_quantity' => 3,
         ]);
+        #商品カートリストのテストデータ生成
+        factory(ProductCartList::class)->create([
+            'id'=>400,
+            'product_id'=>'1',
+            'member_code' => $user->member_code,
+            'payment_status'=>'未決済',
+        ]);
 
         #①カートに商品を追加
-        $response = $this->actingAs($user,'member')->get('/member/cart_add?id=1'); #商品ID
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('product_cart_lists', ['id'=>1]);  #DBに追加されたことを確認
+        #$response = $this->actingAs($user,'member')->get('/member/cart_add?id=1'); #商品ID
+        #$response->assertStatus(302);
+        $this->assertDatabaseHas('product_cart_lists', ['id'=>400]);  #DBに追加されたことを確認
         #③カート一覧で購入手続きを行う商品を選択
-        $response = $this->actingAs($user,'member')->get('/member/delivery_address?cartlist_id=1'); #存在するカートリストID
+        $response = $this->actingAs($user,'member')->get('/member/delivery_address?cartlist_id=400'); #存在するカートリストID
         $response->assertStatus(200);
         #④購入手続き_配達先指定で、配達先を指定。
         #正常データの雛形２

@@ -15,7 +15,8 @@ use App\FeaturedProductMaster;
 
 class Delivery5Test extends TestCase
 {
-    use RefreshDatabase;
+    #use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * A basic feature test example.
      *
@@ -66,13 +67,13 @@ class Delivery5Test extends TestCase
 
         #商品カートリスト
         #１件目：未決済（正常用）
-        factory(ProductCartList::class)->create(['product_id'=>'1','member_code'=>'1','payment_status' => '未決済',]);
+        factory(ProductCartList::class)->create(['id'=>'501','product_id'=>'1','member_code'=>'1','payment_status' => '未決済',]);
         #２件目：キャンセル（エラー用）
-        factory(ProductCartList::class)->create(['product_id'=>'1','member_code'=>'1','payment_status' => 'キャンセル',]);
+        factory(ProductCartList::class)->create(['id'=>'502','product_id'=>'1','member_code'=>'1','payment_status' => 'キャンセル',]);
         #３件目：エラー用
-        factory(ProductCartList::class)->create(['product_id'=>'2','member_code'=>'1','payment_status' => '未決済',]);
+        factory(ProductCartList::class)->create(['id'=>'503','product_id'=>'2','member_code'=>'1','payment_status' => '未決済',]);
         #４件目：エラー用
-        factory(ProductCartList::class)->create(['product_id'=>'3','member_code'=>'1','payment_status' => '未決済',]);
+        factory(ProductCartList::class)->create(['id'=>'504','product_id'=>'3','member_code'=>'1','payment_status' => '未決済',]);
 
         #①カートに商品を追加
         #(ProductCartAddRequestのバリデーションテスト)
@@ -92,7 +93,7 @@ class Delivery5Test extends TestCase
 
         #⑦購入手続き（結果）
         #--正常パターンのセッション値
-        $s=['cartLists'=>['cartlist_id'=>1],
+        $s=['cartLists'=>['cartlist_id'=>501],
             'items'=>[
                 'wk_product'=>[
                     'wk_product_thumbnail'=>'storage/product_thumbnail/ComingSoon.jpg',
@@ -113,7 +114,7 @@ class Delivery5Test extends TestCase
 
         ### エラーパターン
         #--cartlist_id(payment_status) :キャンセルされていた場合
-        $response = $this->actingAs($user,'member')->withSession(array_merge($s,['cartLists'=>['cartlist_id'=>2]]))->post('/member/delivery_register',[]);
+        $response = $this->actingAs($user,'member')->withSession(array_merge($s,['cartLists'=>['cartlist_id'=>502]]))->post('/member/delivery_register',[]);
         $response->assertStatus(302);
 
         ############################################
@@ -122,25 +123,25 @@ class Delivery5Test extends TestCase
 
         #--product_code(selling_discontinued_classification) :商品が販売中止
         $e = $s;
-        $e['cartLists']['cartlist_id'] = 3;
+        $e['cartLists']['cartlist_id'] = 503;
         $e['items']['wk_product']['product_code']='akagi-002';
         $response = $this->actingAs($user,'member')->withSession($e)->post('/member/delivery_register',[]);
         $response->assertStatus(302);
         #--product_code(product_stock_quantity) :商品が在庫なし
-        $e['cartLists']['cartlist_id'] = 4;
+        $e['cartLists']['cartlist_id'] = 504;
         $e['items']['wk_product']['product_code']='akagi-003';
         $response = $this->actingAs($user,'member')->withSession($e)->post('/member/delivery_register',[]);
         $response->assertStatus(302);
-
+        #--販売中止中の会員の場合
         $response = $this->actingAs($err_user,'member')->withSession(array_merge($s,[]))->post('/member/delivery_register',[]);
         $response->assertStatus(302);
 
         ### 正常パターン
         $response = $this->actingAs($user,'member')->withSession(array_merge($s,[]))->post('/member/delivery_register',[]);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('product_transaction_lists', ['id'=>1]);  #DBに追加されたことを確認
-        $this->assertDatabaseHas('product_delivery_status_lists', ['id'=>1]);  #DBに追加されたことを確認
-        $this->assertDatabaseHas('product_cart_lists', ['id'=>1,'payment_status'=>'決済']);  #決済へ更新されたことを確認
+        $this->assertDatabaseHas('product_transaction_lists', ['transaction_number'=>1]);  #DBに追加されたことを確認
+        $this->assertDatabaseHas('product_delivery_status_lists', ['transaction_number'=>1]);  #DBに追加されたことを確認
+        $this->assertDatabaseHas('product_cart_lists', ['id'=>501,'payment_status'=>'決済']);  #決済へ更新されたことを確認
         $this->assertDatabaseHas('product_stock_lists', ['id'=>1,'product_stock_quantity'=>2]);  #在庫が３から２へ減算されたことを確認
 
     }

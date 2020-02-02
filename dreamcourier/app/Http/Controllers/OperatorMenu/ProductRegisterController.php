@@ -91,15 +91,16 @@ class ProductRegisterController extends Controller
         $model->product_tag = $data['product_tag'];
         $model->product_stock_quantity = $data['product_stock_quantity'];
         $model->status = "仮登録";
-        $model->selling_discontinued_classification = "";
+        $model->selling_discontinued_classification = "販売可";
         $model->temporary_updater_operator_code = $request->user()->operator_code;
         $model->temporary_update_approver_operator_code = "";
         $model->save();
 
+        $items = ['product_id'=>$model->id];    #saveしたレコードのid
         #テーブル登録後の後処理
         #二重送信対策(セッションの再作成)
         $request->session()->regenerateToken();
         #登録結果画面を表示させる
-        return view('operator.menu.product_register_result');
+        return view('operator.menu.product_register_result',$items);
     }
 }

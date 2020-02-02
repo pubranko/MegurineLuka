@@ -72,10 +72,6 @@
         </table>
     </div>
 
-    @if (Auth::guest())
-        <a href="/" class="btn-gradient-3d">HOMEへ戻る</a>
-    @else
-        <a href="/member/home" class="btn-gradient-3d">HOMEへ戻る</a>
-    @endif
+    <a href="/member/cart_index" class="btn-gradient-3d">カート一覧へ</a>
 
 @endsection

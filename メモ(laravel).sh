@@ -128,13 +128,19 @@ php artisan make:model ProductDeliveryStatusList
 php artisan make:seeder ※テーブル名TableSeeder
 php artisan make:seeder People2TableSeeder
 php artisan make:seeder OperatorsTableSeeder
+php artisan make:seeder ProductMastersTableSeeder
+php artisan make:seeder FeaturedProductMasters
+php artisan make:seeder ProductStockListsTableSeeder
 
 #  シーディングを実行
 php artisan db:seed
 #  シーディングを行いたいクラスを指定したい場合
-php artisan db:seed --class=※クラス名
+php artisan db:seed --class=
 php artisan db:seed --class=RestdataTableSeeder
 php artisan db:seed --class=OperatorsTableSeeder
+php artisan db:seed --class=ProductMastersTableSeeder
+php artisan db:seed --class=FeaturedProductMasters
+php artisan db:seed --class=ProductStockListsTableSeeder
 
 ### ペジネーションのテンプレートの用意
 # これで「/resources/views/vendor/pagination」にテンプレートがコピーされるようだ
@@ -177,6 +183,10 @@ vendor/bin/phpunit tests/Feature/MemberTest.php
 vendor/bin/phpunit tests/Feature/ProductRegisterTest.php
 vendor/bin/phpunit tests/Feature/ProductTest.php
 vendor/bin/phpunit tests/Feature/Delivery1Test.php
+vendor/bin/phpunit tests/Feature/Delivery2Test.php
+vendor/bin/phpunit tests/Feature/Delivery3Test.php
+vendor/bin/phpunit tests/Feature/Delivery4Test.php
+vendor/bin/phpunit tests/Feature/Delivery5Test.php
 
 # ファクトリの作成(database/factoriesに作成される)
 php artisan make:factory PostFactory --model=Post

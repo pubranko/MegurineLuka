@@ -24,8 +24,8 @@
                     </div>
                     <div class="col-md-6">
                         <!-- 参照は後日実装 -->
-                        <form class="form-horizontal" role="form" method="GET" action="{{ url('/operator/home') }}">
-                            <input type="submit" class="form-control" name="product_register_reference" value="登録した商品情報を参照する">（後日実装予定）
+                        <form class="form-horizontal" role="form" method="GET" action="{{ url('/operator/product/show')}}">
+                            <input type="button" value="参照" onclick="f_select_link('/operator/product/show?',{{$product_id}})">
                         </form>
                     </div>
                 </div>

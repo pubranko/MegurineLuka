@@ -62,7 +62,7 @@
 
         <div class="form-group">
             <button type="submit" class="delivery-button">
-                支払い方法選択へ
+                支払い方法指定へ
             </button>
         </div>
     </form>

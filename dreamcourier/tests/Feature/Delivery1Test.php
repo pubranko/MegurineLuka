@@ -15,8 +15,8 @@ use App\FeaturedProductMaster;
 
 class Delivery1Test extends TestCase
 {
-    #use DatabaseMigrations;
-    use RefreshDatabase;
+    use DatabaseMigrations;
+    #use RefreshDatabase;
     /**
      * A basic feature test example.
      *

@@ -15,7 +15,8 @@ use App\FeaturedProductMaster;
 
 class Delivery2Test extends TestCase
 {
-    use RefreshDatabase;
+    #use RefreshDatabase;
+    use DatabaseMigrations;
 
     #public $first_flg = true;
 
@@ -44,13 +45,20 @@ class Delivery2Test extends TestCase
             'product_code'=>'akagi-001',
             'product_stock_quantity' => 3,
         ]);
+        #商品カートリストのテストデータ生成
+        factory(ProductCartList::class)->create([
+            'id'=>200,
+            'product_id'=>'1',
+            'member_code' => $user->member_code,
+            'payment_status'=>'未決済',
+        ]);
 
         #①カートに商品を追加
-        $response = $this->actingAs($user,'member')->get('/member/cart_add?id=1'); #商品ID
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('product_cart_lists', ['id'=>1]);  #DBに追加されたことを確認
+        #$response = $this->actingAs($user,'member')->get('/member/cart_add?id=1'); #商品ID
+        #$response->assertStatus(302);
+        $this->assertDatabaseHas('product_cart_lists', ['id'=>200]);  #DBに追加されたことを確認
         #③カート一覧で購入手続きを行う商品を選択
-        $response = $this->actingAs($user,'member')->get('/member/delivery_address?cartlist_id=1'); #存在するカートリストID
+        $response = $this->actingAs($user,'member')->get('/member/delivery_address?cartlist_id=200'); #存在するカートリストID
         $response->assertStatus(200);
 
         #④購入手続き_配達先指定で、配達先を指定。
@@ -79,33 +87,33 @@ class Delivery2Test extends TestCase
         unset($data_temp['address_select']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address_selectに不正値
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['address_select'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
 
         #--- phone_selectが存在しない場合
         $data_temp = $data1;
         unset($data_temp['phone_select']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_selectが不正値
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_select'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
 
         #--- receiver_nameが存在しない
         $data_temp = $data2;
         unset($data_temp['receiver_name']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- receiver_nameが空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['receiver_name'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- receiver_name：桁数MAX
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,[
             'receiver_name'=>'あああああいいいいいうううううえええええおおおおおあああああいいいいいうううううえええええおおおおおかかかかかききききき'
@@ -117,86 +125,86 @@ class Delivery2Test extends TestCase
             'receiver_name'=>'あああああいいいいいうううううえええええおおおおおあああああいいいいいうううううえええええおおおおおかかかかかきききききく'
             ]));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- postal_code1 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['postal_code1']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- postal_code1 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['postal_code1'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- postal_code1 ：桁不足
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['postal_code1'=>69]));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- postal_code2 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['postal_code2']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- postal_code2 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['postal_code2'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- postal_code2 ：桁不足
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['postal_code2'=>815]));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address1 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['address1']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address1 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['address1'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address2 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['address2']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address2 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['address2'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address3 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['address3']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address3 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['address3'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address4 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['address4']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- address4 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['address4'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
 
         #--- phone_number1 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['phone_number1']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number1 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number1'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number1 ：桁max
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number1'=>12345678901]));
         $response->assertStatus(302);
@@ -204,17 +212,17 @@ class Delivery2Test extends TestCase
         #--- phone_number1 ：桁maxオーバー
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number1'=>123456789012]));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number2 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['phone_number2']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number2 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number2'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number2 ：桁max
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number2'=>1234]));
         $response->assertStatus(302);
@@ -222,21 +230,21 @@ class Delivery2Test extends TestCase
         #--- phone_number2 ：桁maxオーバー
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number2'=>12345]));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number3 ： 存在しない
         $data_temp = $data2;
         unset($data_temp['phone_number3']);
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',$data_temp);
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number3 ：空
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number3'=>'']));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
         #--- phone_number3 ：桁エラー
         $response = $this->actingAs($user,'member')->post('/member/delivery_address',array_merge($data2,['phone_number3'=>123]));
         $response->assertStatus(302);
-        $response->assertRedirect("/member/delivery_address?cartlist_id=1");  #バリデーションエラー時のリダイレクト先
+        $response->assertRedirect("/member/delivery_address?cartlist_id=200");  #バリデーションエラー時のリダイレクト先
     }
 }
 /*

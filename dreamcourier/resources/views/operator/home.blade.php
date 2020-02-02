@@ -45,7 +45,7 @@
                         <!--form role="form" method="GET" action="{{ url('/operator/deposits_withdrawals') }}"-->
                             <input type="submit" name="search" value="検索">
                             <input type="submit" name="deposit_register_in" value="入金登録">
-                            <input type="submit" name="withdraw_register_in" value="出勤登録">
+                            <input type="submit" name="withdraw_register_in" value="出金登録">
                         <!--/form-->
                     </div>
                 </div>

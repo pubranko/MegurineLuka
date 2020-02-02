@@ -14,6 +14,21 @@
                         <a>　{{ $product_code }}　</a>
                     </div>
 
+                    <label class="col-md-4 control-label">販売期間（ＦＲＯＭ）</label>
+                    <div class="col-md-6">
+                        <a>　{{$sales_period_from}}　</a>
+                    </div>
+
+                    <label class="col-md-4 control-label">販売期間（ＴＯ）</label>
+                    <div class="col-md-6">
+                        <a>　{{$sales_period_to}}　</a>
+                    </div>
+
+                    <label class="col-md-4 control-label">商品在庫数</label>
+                    <div class="col-md-6">
+                        <a>　{{$product_stock_quantity}}　</a>
+                    </div>
+
                     <label class="col-md-4 control-label">商品名</label>
                     <div class="col-md-6">
                         <a>　{{$product_name}}　</a>
@@ -29,9 +44,14 @@
                         <a>　{{$product_price}}　</a>
                     </div>
 
-                    <label class="col-md-4 control-label">商品在庫数</label>
+                    <label class="col-md-4 control-label">商品検索キーワード</label>
                     <div class="col-md-6">
-                        <a>　{{$product_stock_quantity}}　</a>
+                        <a>　{{$product_search_keyword}}　</a>
+                    </div>
+
+                    <label class="col-md-4 control-label">商品タグ</label>
+                    <div class="col-md-6">
+                        <a>　{{$product_tag}}　</a>
                     </div>
 
                     <label class="col-md-4 control-label">商品サムネイル</label>
@@ -44,25 +64,31 @@
                         <img class="img_product_image" src="{{$product_image}}">
                     </div>
 
-                    <label class="col-md-4 control-label">商品検索キーワード</label>
+                    <label class="col-md-4 control-label">ステータス</label>
                     <div class="col-md-6">
-                        <a>　{{$product_search_keyword}}　</a>
+                        <a>　{{$status}}　</a>
                     </div>
 
-                    <label class="col-md-4 control-label">商品タグ</label>
+                    <label class="col-md-4 control-label">販売状況区分</label>
                     <div class="col-md-6">
-                        <a>　{{$product_tag}}　</a>
+                        <a>　{{$selling_discontinued_classification}}　</a>
                     </div>
 
-                    <label class="col-md-4 control-label">販売期間（ＦＲＯＭ）</label>
+                    <label class="col-md-4 control-label">仮更新者</label>
                     <div class="col-md-6">
-                        <a>　{{$sales_period_from}}　</a>
+                        <a>　{{$temporary_updater_operator_code}}　</a>
                     </div>
 
-                    <label class="col-md-4 control-label">販売期間（ＴＯ）</label>
+                    <label class="col-md-4 control-label">仮更新承認者</label>
                     <div class="col-md-6">
-                        <a>　{{$sales_period_to}}　</a>
+                        <a>　{{$temporary_update_approver_operator_code}}　</a>
                     </div>
+
+                    <label class="col-md-4 control-label">最終更新日時</label>
+                    <div class="col-md-6">
+                        <a>　{{$updated_at}}　</a>
+                    </div>
+
                 </div>
             </div>
         </div>

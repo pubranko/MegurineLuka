@@ -104,6 +104,12 @@ class DeliveryAddressCheckRequest extends FormRequest
         $validator->sometimes('address4','required',function($input){
             return $input->address_select == "個別指定住所";
         });
+        $validator->sometimes('address5','required_with:address6',function($input){
+            return $input->address_select == "個別指定住所";
+        });
+        $validator->sometimes('address6','required_with:address5',function($input){
+            return $input->address_select == "個別指定住所";
+        });
         $validator->sometimes('phone_number1','required|max:11',function($input){
             return $input->phone_select == "個別指定電話番号";
         });
@@ -134,6 +140,8 @@ class DeliveryAddressCheckRequest extends FormRequest
             'address2.required' => '入力が漏れています',
             'address3.required' => '入力が漏れています',
             'address4.required' => '入力が漏れています',
+            'address5.required_with' => 'マンション名の入力が漏れています',
+            'address6.required_with' => '部屋番号の入力が漏れています',
             'phone_select.required'=> '選択が漏れています',
             'phone_select.in'=> '不正な値です',
             'phone_number1.required' => '入力が漏れています',

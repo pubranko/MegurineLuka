@@ -45,7 +45,7 @@ class MemberRegisterCheckRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:255|unique:members',
+            'email' => 'required|email|unique:members',
             'last_name' => 'required|max:30',
             'first_name' => 'required|max:30',
             'last_name_kana' => 'required|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u|max:60',
@@ -61,6 +61,8 @@ class MemberRegisterCheckRequest extends FormRequest
             'address2' => 'required',
             'address3' => 'required',
             'address4' => 'required',
+            'address5' => 'required_with:address6',
+            'address6' => 'required_with:address5',
             'phone_number1' => 'required|max:11',
             'phone_number2' => 'required|max:4',
             'phone_number3' => 'required|digits:4',
@@ -134,6 +136,8 @@ class MemberRegisterCheckRequest extends FormRequest
             'address2.required' => '入力が漏れています',
             'address3.required' => '入力が漏れています',
             'address4.required' => '入力が漏れています',
+            'address5.required_with' => 'マンション名の入力が漏れています',
+            'address6.required_with' => '部屋番号の入力が漏れています',
             'phone_number1.required' => '入力が漏れています',
             'phone_number1.digits_between' => '１〜１１桁で入力してください',
             'phone_number2.required' => '入力が漏れています',

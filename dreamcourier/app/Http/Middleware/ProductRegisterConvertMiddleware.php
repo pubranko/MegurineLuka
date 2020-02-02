@@ -43,10 +43,6 @@ class ProductRegisterConvertMiddleware
                 $data['wk_sales_period_to'] = $data['sales_period_date_to']." ".$data['sales_period_time_to'];
             }
         }
-        #$abc = $request->get('status');
-        #dd($abc);
-        #var_export(gettype($request->get('product_image')));
-        #dd($request->get('product_image'));
 
         #上述のコンバート内容をリクエストに反映させる
         $request->merge($data);
