@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProductRegisterCheckRequest; #追加
 use App\Http\Requests\ProductRegisterRequest; #追加
 use App\ProductMaster;                         #追加
+use App\ProductStockList;                         #追加
 use Illuminate\Support\Facades\Storage;         #追加
 
 class ProductRegisterController extends Controller
@@ -78,25 +79,33 @@ class ProductRegisterController extends Controller
         Storage::move('public/temp/'.$data['wk_product_thumbnail_filename'], 'public/product_thumbnail/'.$data['wk_product_thumbnail_filename']);
 
         #商品情報マスタ（product_masters）のモデル作成→値を編集→保存
-        $model = new ProductMaster;
-        $model->product_code = $data['product_code'];
-        $model->sales_period_from = $data['wk_sales_period_from'];
-        $model->sales_period_to = $data['wk_sales_period_to'];
-        $model->product_name = $data['product_name'];
-        $model->product_description = $data['product_description'];
-        $model->product_price = $data['product_price'];
-        $model->product_image =  'public/product_image/'.$data['wk_product_image_filename'];
-        $model->product_thumbnail =  'public/product_thumbnail/'.$data['wk_product_thumbnail_filename'];
-        $model->product_search_keyword = $data['product_search_keyword'];
-        $model->product_tag = $data['product_tag'];
-        $model->product_stock_quantity = $data['product_stock_quantity'];
-        $model->status = "仮登録";
-        $model->selling_discontinued_classification = "販売可";
-        $model->temporary_updater_operator_code = $request->user()->operator_code;
-        $model->temporary_update_approver_operator_code = "";
-        $model->save();
+        $product_master = new ProductMaster;
+        $product_master->product_code = $data['product_code'];
+        $product_master->sales_period_from = $data['wk_sales_period_from'];
+        $product_master->sales_period_to = $data['wk_sales_period_to'];
+        $product_master->product_name = $data['product_name'];
+        $product_master->product_description = $data['product_description'];
+        $product_master->product_price = $data['product_price'];
+        $product_master->product_image =  'public/product_image/'.$data['wk_product_image_filename'];
+        $product_master->product_thumbnail =  'public/product_thumbnail/'.$data['wk_product_thumbnail_filename'];
+        $product_master->product_search_keyword = $data['product_search_keyword'];
+        $product_master->product_tag = $data['product_tag'];
+        $product_master->status = "仮登録";
+        $product_master->selling_discontinued_classification = "販売可";
+        $product_master->temporary_updater_operator_code = $request->user()->operator_code;
+        $product_master->temporary_update_approver_operator_code = "";
+        $product_master->save();
 
-        $items = ['product_id'=>$model->id];    #saveしたレコードのid
+        #まだ商品在庫リストに登録されていない商品コードの場合、商品在庫リストへ空データを登録する。
+        if(ProductStockList::where('product_code',$data['product_code'])->get()->count() == 0){
+            #商品在庫リスト（product_stock_lists)のモデル作成→値を編集→保存
+            $product_stock_list = new ProductStockList;
+            $product_stock_list->product_code = $data['product_code'];
+            $product_stock_list->product_stock_quantity = 0;
+            $product_stock_list->save();
+        };
+
+        $items = ['product_id'=>$product_master->id];    #saveしたレコードのid
         #テーブル登録後の後処理
         #二重送信対策(セッションの再作成)
         $request->session()->regenerateToken();

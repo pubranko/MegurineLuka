@@ -57,7 +57,6 @@ class ProductRegisterCheckRequest extends FormRequest
             'product_thumbnail' => 'required|image|dimensions:ratio=1/1',   #商品サムネイル画像
             'product_search_keyword' => 'required',                         #商品検索キーワード
             'product_tag' => 'required',                                    #商品タグ
-            'product_stock_quantity' => 'required|integer',                 #商品在庫数
 
             #こんな記述方法もある
             # use Illuminate\Validation\Rule;
@@ -111,8 +110,6 @@ class ProductRegisterCheckRequest extends FormRequest
             'product_thumbnail.dimensions' => '画像の縦横比は１：１のみ登録可能です',
             'product_search_keyword.required' => '入力が漏れています',
             'product_tag.required' => '入力が漏れています',
-            'product_stock_quantity.required' => '入力が漏れています',
-            'product_stock_quantity.integer' => '数値で入力してください',
         ];
     }
 }

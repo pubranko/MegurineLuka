@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductSearchRequest; #追加
 use App\ProductMaster;                     #追加
+use App\ProductStockList;                     #追加
+use Illuminate\Support\Facades\DB;  #追加
 
 class ProductReferenceController extends Controller
 {
@@ -25,7 +27,13 @@ class ProductReferenceController extends Controller
         ######################################################
         ### 以下画面より入力された条件を満たすレコードを検索
         ######################################################
+
+        $q = DB::table('product_stock_lists');
+
+        
+
         $query = ProductMaster::query();
+
         if(!empty($request->get('product_code'))){              #商品コード
             $product_code_convert = str_replace("　"," ",$request->get('product_code'));    #全角の空白は半角の空白へ置き換え
             $product_code_convert = "%".str_replace(" ","% %",$product_code_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
@@ -57,10 +65,14 @@ class ProductReferenceController extends Controller
             });
         }
         if(!empty($request->get('product_stock_quantity_from'))){    #商品在庫数（以上）
-            $query->where('product_stock_quantity','>=',$request->get('product_stock_quantity_from'));
+            #$query->where('product_stock_quantity','>=',$request->get('product_stock_quantity_from'));
+            $q = $q->where('product_stock_quantity','>=',$request->get('product_stock_quantity_to'));
         }
         if(!empty($request->get('product_stock_quantity_to'))){      #商品在庫数（以下）
-            $query->where('product_stock_quantity','<=',$request->get('product_stock_quantity_to'));
+            #$query->where('product_stock_quantity','<=',$request->get('product_stock_quantity_to'));
+            $q = $q->where('product_stock_quantity','<=',$request->get('product_stock_quantity_to'));
+            $g = $q->first();
+            dd($g);
         }
         if(!empty($request->get('sales_period_date_from')) ||        #販売期間FROM~TO
            !empty($request->get('sales_period_date_to'))){
@@ -75,6 +87,7 @@ class ProductReferenceController extends Controller
 
         #１ページに出力する明細を取得し、マージした配列をビューへ渡す。
         $search_queries = $query->paginate($request->get('product_list_details'));
+
         $item  = array_merge($request->all(),['search_queries' => $search_queries]);
         #承認画面(ProductApproval)から遷移してきた場合、リクエストをセッションより取得し復元する。
         $item2 = $request->session()->get('product_approval_request');
