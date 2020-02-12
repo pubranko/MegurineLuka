@@ -100,6 +100,8 @@ php artisan make:migration change_column_zip_table --table=address_masters
 php artisan make:migration change_column_product_image --table=product_masters
 php artisan make:migration change_column_product_thumbnail --table=product_masters
 php artisan make:migration change_column_sales_period_to --table=product_masters
+php artisan make:migration drop_column_product_stock_quantity --table=product_masters
+php artisan make:migration change_column_product_code --table=product_stock_lists
 
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate

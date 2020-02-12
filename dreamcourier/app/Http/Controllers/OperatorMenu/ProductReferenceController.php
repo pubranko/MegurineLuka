@@ -27,12 +27,10 @@ class ProductReferenceController extends Controller
         ######################################################
         ### 以下画面より入力された条件を満たすレコードを検索
         ######################################################
-
-        $q = DB::table('product_stock_lists');
-
-        
-
-        $query = ProductMaster::query();
+        #商品情報マスタに、商品在庫リストの在庫数をjoinで付与する。
+        $query = DB::table('product_masters')
+                    ->join('product_stock_lists','product_masters.product_code','=','product_stock_lists.product_code')
+                    ->select('product_masters.*','product_stock_lists.product_stock_quantity');
 
         if(!empty($request->get('product_code'))){              #商品コード
             $product_code_convert = str_replace("　"," ",$request->get('product_code'));    #全角の空白は半角の空白へ置き換え
@@ -40,7 +38,7 @@ class ProductReferenceController extends Controller
             $product_code_lists = explode(" ",$product_code_convert);                       #半角の空白で分割した商品コード配列を生成
             $query->where(function($query) use($product_code_lists){                        #いずれかの単語を含むレコードを取得する。
                 foreach($product_code_lists as $code){
-                        $query->orWhere("product_code","like",$code,);
+                        $query->orWhere("product_masters.product_code","like",$code,);
                 }
             });
         }
@@ -64,22 +62,33 @@ class ProductReferenceController extends Controller
                 }
             });
         }
-        if(!empty($request->get('product_stock_quantity_from'))){    #商品在庫数（以上）
-            #$query->where('product_stock_quantity','>=',$request->get('product_stock_quantity_from'));
-            $q = $q->where('product_stock_quantity','>=',$request->get('product_stock_quantity_to'));
+        if($request->get('product_stock_quantity_from')!==""){    #商品在庫数（以上）
+            $query->where('product_stock_quantity','>=',$request->get('product_stock_quantity_from'));
         }
-        if(!empty($request->get('product_stock_quantity_to'))){      #商品在庫数（以下）
-            #$query->where('product_stock_quantity','<=',$request->get('product_stock_quantity_to'));
-            $q = $q->where('product_stock_quantity','<=',$request->get('product_stock_quantity_to'));
-            $g = $q->first();
-            dd($g);
+        if($request->get('product_stock_quantity_to')!==""){      #商品在庫数（以下）
+            $query->where('product_stock_quantity','<=',$request->get('product_stock_quantity_to'));
         }
         if(!empty($request->get('sales_period_date_from')) ||        #販売期間FROM~TO
            !empty($request->get('sales_period_date_to'))){
-            $query->SalesPeriodDuplicationCheck($request->get('wk_sales_period_from'), $request->get('wk_sales_period_to'));
+            $from = $request->get('wk_sales_period_from');
+            $to = $request->get('wk_sales_period_to');
+            $query->where(function($query) use($from,$to){
+                $query->where(function($q) use($from, $to) {
+                    $q->where('sales_period_from', '>=', $from)
+                        ->where('sales_period_from', '<', $to);
+                })
+                ->orWhere(function($q) use($from, $to) {
+                    $q->where('sales_period_to', '>', $from)
+                        ->where('sales_period_to', '<=', $to);
+                })
+                ->orWhere(function($q) use ($from, $to) {
+                    $q->where('sales_period_from', '<', $from)
+                        ->where('sales_period_to', '>', $to);
+                });
+            });
         }
-        if(!empty($request->get('seles_status'))){                   #販売状況
-            $query->whereIn('seles_status',$request->get('seles_status'));
+        if(!empty($request->get('selling_discontinued_classification'))){  #販売中止区分
+            $query->whereIn('selling_discontinued_classification',$request->get('selling_discontinued_classification'));
         }
         if(!empty($request->get('status'))){                         #ステータス
             $query->whereIn('status',$request->get('status'));
