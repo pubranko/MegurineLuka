@@ -113,11 +113,18 @@ class ProductReferenceController extends Controller
      */
     public function show(Request $request){
         $id = $request->get("id");          #指定されたIDより商品情報マスタを取得する。
-        $query = ProductMaster::find($id);
-        #テーブルに登録されている商品画像・商品サムネイルのファイルパスを、クライアント側からアクセスするパスへ変換する。
-        $query['product_image'] = str_replace("public","/storage",$query['product_image']);
-        $query['product_thumbnail'] = str_replace("public","/storage",$query['product_thumbnail']);
 
-        return view('operator.menu.product_show',$query);
+        #商品情報マスタに、商品在庫リストの在庫数をjoinで付与する。
+        $query = DB::table('product_masters')
+                    ->join('product_stock_lists','product_masters.product_code','=','product_stock_lists.product_code')
+                    ->select('product_masters.*','product_stock_lists.product_stock_quantity');
+        $search_query = $query->where('product_masters.id',$id)->first();
+
+        #テーブルに登録されている商品画像・商品サムネイルのファイルパスを、クライアント側からアクセスするパスへ変換する。
+        $search_query->product_image = str_replace("public","/storage",$search_query->product_image);
+        $search_query->product_thumbnail = str_replace("public","/storage",$search_query->product_thumbnail);
+
+        $item = ['search_query'=>$search_query];
+        return view('operator.menu.product_show',$item);
     }
 }
