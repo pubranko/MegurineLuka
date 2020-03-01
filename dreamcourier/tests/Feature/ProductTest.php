@@ -49,7 +49,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"23:00",
             "sales_period_date_to"=>"2020-01-10",   #←接点
             "sales_period_time_to"=>"00:00",        #←接点
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/checkview");  #正常時のリダイレクト先
@@ -60,7 +60,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"23:00",
             "sales_period_date_to"=>"2020-01-10",   #←重複
             "sales_period_time_to"=>"00:01",        #←重複
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
@@ -71,7 +71,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"23:00",
             "sales_period_date_to"=>"2020-01-10",   #←重複
             "sales_period_time_to"=>"01:00",        #←重複
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
@@ -82,7 +82,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"23:59",      #←接点　内包
             "sales_period_date_to"=>"2020-01-10",   #←接点
             "sales_period_time_to"=>"01:01",        #←接点
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
@@ -93,7 +93,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"00:00",      #←重複
             "sales_period_date_to"=>"2020-01-10",   #←接点
             "sales_period_time_to"=>"01:01",        #←接点
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
@@ -104,7 +104,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"00:59",      #←重複
             "sales_period_date_to"=>"2020-01-10",   #←接点
             "sales_period_time_to"=>"01:01",        #←接点
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
@@ -115,7 +115,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"01:00",      #←接点
             "sales_period_date_to"=>"2020-01-10",   #
             "sales_period_time_to"=>"01:01",        #
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/checkview");  #正常時のリダイレクト先
@@ -128,7 +128,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"01:00",
             "sales_period_date_to"=>"2020-01-11",
             "sales_period_time_to"=>"01:01",
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/checkview");  #正常時のリダイレクト先
@@ -139,7 +139,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"01:00",
             "sales_period_date_to"=>"2020-01-11",
             "sales_period_time_to"=>"01:00",
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
@@ -150,7 +150,7 @@ class ProductTest extends TestCase
             "sales_period_time_from"=>"01:01",
             "sales_period_date_to"=>"2020-01-11",
             "sales_period_time_to"=>"01:00",
-            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
+            "product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル","product_image"=> $file,"product_thumbnail"=> $file,
         ]);
         $response->assertStatus(302);
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
@@ -158,7 +158,7 @@ class ProductTest extends TestCase
 
         ###イメージ、サムネイルの有無、比率のエラーテスト
         $response = $this->actingAs($user,'operator')->post('/operator/product/register/check', [
-            "product_code"=>"akagi-999","sales_period_date_from"=>"2020-01-12","sales_period_time_from"=>"00:00","sales_period_date_to"=>"2020-01-12","sales_period_time_to"=>"01:00","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
+            "product_code"=>"akagi-999","sales_period_date_from"=>"2020-01-12","sales_period_time_from"=>"00:00","sales_period_date_to"=>"2020-01-12","sales_period_time_to"=>"01:00","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
             "product_image"=> $errorfile,
             "product_thumbnail"=> $file,
         ]);
@@ -166,7 +166,7 @@ class ProductTest extends TestCase
         $response->assertRedirect("/operator/product/register/in");  #エラー時のリダイレクト先
 
         $response = $this->actingAs($user,'operator')->post('/operator/product/register/check', [
-            "product_code"=>"akagi-999","sales_period_date_from"=>"2020-01-12","sales_period_time_from"=>"00:00","sales_period_date_to"=>"2020-01-12","sales_period_time_to"=>"01:00","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
+            "product_code"=>"akagi-999","sales_period_date_from"=>"2020-01-12","sales_period_time_from"=>"00:00","sales_period_date_to"=>"2020-01-12","sales_period_time_to"=>"01:00","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
             "product_image"=> $file,
             "product_thumbnail"=> $errorfile,
         ]);
@@ -210,7 +210,7 @@ class ProductTest extends TestCase
         #正常パターン
         $response = $this->actingAs($user,'operator')->withSession([
                 "product_register_in_request" => [
-                "product_code"=>"akagi-999","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
+                "product_code"=>"akagi-999","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
                 "sales_period_date_from"=>"2020-01-08","sales_period_time_from"=>"01:00",
                 "wk_sales_period_from"=>"2020-01-08 00:00",  #<=wk
                 "sales_period_date_to"=>"2020-01-08","sales_period_time_to"=>"02:00",
@@ -234,7 +234,7 @@ class ProductTest extends TestCase
         ### 販売期間の重複テスト　重複期間（akagi-999、2020-01-10 00:00〜2020-01-10 01:00）
         $response = $this->actingAs($user,'operator')->withSession([
                 "product_register_in_request" => [
-                "product_code"=>"akagi-999","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_stock_quantity"=>"10","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
+                "product_code"=>"akagi-999","product_name"=>"アカギ","product_description"=>"アカギと対戦","product_price"=>"1000","product_search_keyword"=>"アカギ　akagi あかぎ","product_tag"=>"akagi　ギャンブル",
                 "sales_period_date_from"=>"2020-01-10","sales_period_time_from"=>"00:00",
                 "wk_sales_period_from"=>"2020-01-10 00:00",  #<=wk
                 "sales_period_date_to"=>"2020-01-10","sales_period_time_to"=>"01:00",

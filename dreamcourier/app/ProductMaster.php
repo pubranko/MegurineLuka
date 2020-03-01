@@ -32,6 +32,24 @@ class ProductMaster extends Model
     public function productStockList(){
         return $this->hasOne('App\ProductStockList','product_code','product_code');    #商品在庫リストの商品コードと当テーブルの商品コードを紐付け
     }
+    /**
+     * 商品の販売状況を確認した結果を戻す
+     */
+    public function productStockStatus(){
+        $product_stock_quantity = $this->productStockList->product_stock_quantity;          #商品在庫数を取得
+
+        if($this->selling_discontinued_classification=="販売中止"){     #販売中止区分
+            $wk_product_stock_quantity_status = "販売中止";
+        }elseif($product_stock_quantity > 3){                           #商品在庫数
+            $wk_product_stock_quantity_status = "在庫あり";
+        }elseif($product_stock_quantity > 0){
+            $wk_product_stock_quantity_status = "在庫あとわずか！";
+        }else{
+            $wk_product_stock_quantity_status = "在庫なし";
+        }
+
+        return $wk_product_stock_quantity_status;
+    }
 
     /**
      * 商品画像ファイルパス（クライアント側）

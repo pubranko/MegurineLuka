@@ -13,7 +13,6 @@ class ProductListController extends Controller
      */
     public function productSearch(Request $request){
 
-
         $wk_lists = [];    #初期化
 
         $product_queries = ProductMaster::query();                    #商品情報マスタ
@@ -31,22 +30,14 @@ class ProductListController extends Controller
         $product_lists = $product_queries->paginate(15);
         $links = $product_lists->links();
 
-        $wk_products = [];  #初期化
-        $cnt = $product_lists->count();   #取得した商品情報レコードの件数分繰り返す
+        $wk_products = [];              #初期化
+        $cnt = $product_lists->count(); #取得した商品情報レコードの件数分繰り返す
         for ($i=0;$i<$cnt;++$i){
 
-            $wk_product = $product_lists[$i]->toArray(); #クエリーから商品情報レコードの連想配列を取得
-            $wk_product['wk_product_thumbnail'] = str_replace("public","storage",$wk_product['product_thumbnail']);  #サムネイルのパスをクライアント側用に加工
+            $wk_product = $product_lists[$i]->toArray();                                                #クエリーから商品情報レコードの連想配列を取得
+            $wk_product['wk_product_thumbnail'] = $product_lists[$i]->productThumbnailPath();           #サムネイルのパスをクライアント側用に加工
+            $wk_product['wk_product_stock_quantity_status'] = $product_lists[$i]->productStockStatus(); #商品販売状況を取得
 
-            if($wk_product['selling_discontinued_classification']=="販売中止"){     #販売中止区分
-                $wk_product['wk_product_stock_quantity_status'] = "販売中止";
-            }elseif($wk_product['product_stock_quantity'] > 3){                     #商品在庫状況を追加
-                $wk_product['wk_product_stock_quantity_status'] = "在庫あり";
-            }elseif($wk_product['product_stock_quantity'] > 0){
-                $wk_product['wk_product_stock_quantity_status'] = "在庫あとわずか！";
-            }else{
-                $wk_product['wk_product_stock_quantity_status'] = "在庫なし";
-            }
             $wk_products[] = $wk_product;   #1商品の情報を配列に追加
         }
         $wk_list["wk_products"] = $wk_products;                             #１商品の情報をまとめて格納
@@ -58,11 +49,10 @@ class ProductListController extends Controller
         /* 呼び出し元へ渡すデータ構造
             $wk_lists = [[
                     "introduction_tag"=>キャンペーン等のカテゴリ名称,
-                    "$wk_products"=>[1カテゴリに含まれる商品レコードの配列]
+                    "wk_products"=>[1カテゴリに含まれる商品レコードの配列]
                     "links"=>topはnull、それ以外はページネイトのlinks()
                 ],〜略〜
             ]*/
-        #return $wk_lists;
         return view('member.site_product_lists',["wk_lists" => $wk_lists]);
     }
 
@@ -72,28 +62,17 @@ class ProductListController extends Controller
     public function productShow(ProductShowRequest $request){
         $id = $request->get('id');
 
-        $product_queries = ProductMaster::query();                    #商品情報マスタ
-        $wk_product = $product_queries->find($id);
+        $wk_product = ProductMaster::find($id); #対象の商品情報を取得
 
-        $product_tag_convert = str_replace("　"," ",$wk_product['product_tag']);    #全角の空白は半角の空白へ置き換え
-        $wk_product['wk_product_tag_lists'] = explode(" ",$product_tag_convert);                     #半角の空白で分割した商品タグ配列を生成
-
-        $wk_product['wk_product_image'] = str_replace("public","storage",$wk_product['product_image']);  #商品画像のパスをクライアント側用に加工
-
-        if($wk_product['selling_discontinued_classification']=="販売中止"){     #販売中止区分
-            $wk_product['wk_product_stock_quantity_status'] = "販売中止";
-        }elseif($wk_product['product_stock_quantity'] > 3){                     #商品在庫状況を追加
-            $wk_product['wk_product_stock_quantity_status'] = "在庫あり";
-        }elseif($wk_product['product_stock_quantity'] > 0){
-            $wk_product['wk_product_stock_quantity_status'] = "在庫あとわずか！";
-        }else{
-            $wk_product['wk_product_stock_quantity_status'] = "在庫なし";
-        }
+        $product_tag_convert = str_replace("　"," ",$wk_product['product_tag']);            #全角の空白は半角の空白へ置き換え
+        $wk_product['wk_product_tag_lists'] = explode(" ",$product_tag_convert);            #半角の空白で分割した商品タグ配列を生成
+        $wk_product['wk_product_image'] = $wk_product->productImagePath();                  #商品画像のパスをクライアント側用に加工
+        $wk_product['wk_product_stock_quantity_status'] = $wk_product->productStockStatus();#商品販売状況を取得
 
         $cart_add_flg = $request->session()->get('cart_add_flg');
         #カートへ追加後のリダイレクトの場合
         if($cart_add_flg =="on"){
-            $wk_product['cart_add_flg'] = $request->session()->get('cart_add_flg');
+            $wk_product['cart_add_flg'] = $cart_add_flg;
             $request->session()->forget('cart_add_flg');        #セッションよりcart_add_flgを削除
         }
 

@@ -37,7 +37,10 @@ class SalesSiteController extends Controller
         $featured_queries->Where("status","正式");                      #正式に登録されているものをselect
         if($path =="site_product"){
             $featured_queries->Where("product_tag",$request->get("tag"));      #タグ別のページの場合、指定されたタグのみselect
+        }else{
+            $featured_queries->Where("priority","<",100);                   #優先度順が１００未満(TOPページに表示する対象)に限定してselect
         }
+
         $featured_queries = $featured_queries->orderBy('priority', 'asc')->get();   #表示の優先度順に取得
 
         $wk_lists = [];    #初期化
@@ -61,18 +64,12 @@ class SalesSiteController extends Controller
             $cnt = $product_lists->count();   #取得した商品情報レコードの件数分繰り返す
             for ($i=0;$i<$cnt;++$i){
 
-                $wk_product = $product_lists[$i]->toArray(); #クエリーから商品情報レコードの連想配列を取得
-                $wk_product['wk_product_thumbnail'] = str_replace("public","storage",$wk_product['product_thumbnail']);  #サムネイルのパスをクライアント側用に加工
+                #商品在庫リストより商品在庫数を取得
+                $wk_stock = $product_lists[$i]->productStockList;
 
-                if($wk_product['selling_discontinued_classification']=="販売中止"){     #販売中止区分
-                    $wk_product['wk_product_stock_quantity_status'] = "販売中止";
-                }elseif($wk_product['product_stock_quantity'] > 3){                     #商品在庫状況を追加
-                    $wk_product['wk_product_stock_quantity_status'] = "在庫あり";
-                }elseif($wk_product['product_stock_quantity'] > 0){
-                    $wk_product['wk_product_stock_quantity_status'] = "在庫あとわずか！";
-                }else{
-                    $wk_product['wk_product_stock_quantity_status'] = "在庫なし";
-                }
+                $wk_product = $product_lists[$i]->toArray(); #クエリーから商品情報レコードの連想配列を取得
+                $wk_product['wk_product_thumbnail'] = $product_lists[$i]->productThumbnailPath();  #サムネイルのパスをクライアント側用に加工
+                $wk_product['wk_product_stock_quantity_status'] = $product_lists[$i]->productStockStatus(); #商品販売状況を確認
 
                 $wk_products[] = $wk_product;   #1商品の情報を配列に追加
             }

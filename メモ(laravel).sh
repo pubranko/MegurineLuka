@@ -189,6 +189,8 @@ vendor/bin/phpunit tests/Feature/Delivery2Test.php
 vendor/bin/phpunit tests/Feature/Delivery3Test.php
 vendor/bin/phpunit tests/Feature/Delivery4Test.php
 vendor/bin/phpunit tests/Feature/Delivery5Test.php
+vendor/bin/phpunit tests/Feature/ProductSearchTest.php
+
 
 # ファクトリの作成(database/factoriesに作成される)
 php artisan make:factory PostFactory --model=Post
