@@ -27,14 +27,22 @@ class ProductMaster extends Model
     }
 
     /**
-     * 商品在庫リストより商品在庫数を取得する。
+     * 商品在庫リストを紐付け
      */
-    public function productStockQuantity(){
-        #return $this->hasOne('App\ProductStockList','product_code','product_code')->product_stock_quantity;    #商品在庫リストの商品コードと当テーブルの商品コードを紐付け、商品在庫数をリターン
+    public function productStockList(){
         return $this->hasOne('App\ProductStockList','product_code','product_code');    #商品在庫リストの商品コードと当テーブルの商品コードを紐付け
     }
-    #public function productMaster(){
-    #    return $this->hasOne('App\ProductMaster','id','product_id');    #productMasterのidと、カートリストのproduct_idを紐付け
-    #}
 
+    /**
+     * 商品画像ファイルパス（クライアント側）
+     */
+    public function productImagePath(){
+        return str_replace("public","/storage",$this->product_image);
+    }
+    /**
+     * 商品サムネイルファイルパス（クライアント側）
+     */
+    public function productThumbnailPath(){
+        return str_replace("public","/storage",$this->product_thumbnail);
+    }
 }
