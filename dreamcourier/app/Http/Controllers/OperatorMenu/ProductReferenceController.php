@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductSearchRequest; #追加
 use App\ProductMaster;                     #追加
-use App\ProductStockList;                     #追加
+use App\Operator;                     #追加
 use Illuminate\Support\Facades\DB;  #追加
 
 class ProductReferenceController extends Controller
@@ -109,22 +109,35 @@ class ProductReferenceController extends Controller
     }
 
     /**
-     * 商品情報の詳細を表示する。
+     * 商品情報マスタと関連情報の詳細を表示する。
      */
     public function show(Request $request){
         $id = $request->get("id");          #指定されたIDより商品情報マスタを取得する。
-
-        #商品情報マスタに、商品在庫リストの在庫数をjoinで付与する。
-        $query = DB::table('product_masters')
-                    ->join('product_stock_lists','product_masters.product_code','=','product_stock_lists.product_code')
-                    ->select('product_masters.*','product_stock_lists.product_stock_quantity');
-        $search_query = $query->where('product_masters.id',$id)->first();
-
+        $product = ProductMaster::find($id);
         #テーブルに登録されている商品画像・商品サムネイルのファイルパスを、クライアント側からアクセスするパスへ変換する。
-        $search_query->product_image = str_replace("public","/storage",$search_query->product_image);
-        $search_query->product_thumbnail = str_replace("public","/storage",$search_query->product_thumbnail);
+        $product['product_image'] = $product->productImagePath();
+        $product['product_thumbnail'] = $product->productThumbnailPath();
 
-        $item = ['search_query'=>$search_query];
+        #商品在庫リストより商品在庫数を取得
+        $stock = $product->productStockList;
+
+        #商品情報の仮更新者、仮更新承認者の名前を取得
+        $temporary_updater_operator_name = '';
+        if($product->temporary_updater_operator_code){
+            $temporary_updater_operator_name  = Operator::where('operator_code',$product->temporary_updater_operator_code)->first()->name;
+        }
+        $temporary_update_approver_operator_name = '';
+        if($product->temporary_update_approver_operator_code){
+            $temporary_update_approver_operator_name  = Operator::where('operator_code',$product->temporary_update_approver_operator_code)->first()->name;
+        }
+
+        #商品情報マスタレコード、商品在庫数、仮更新者、仮更新承認者をビューへ渡す
+        $item = [
+            'product_master'=>$product,
+            'product_stock_quantity'=>$stock['product_stock_quantity'],
+            'temporary_updater_operator_name'=> $temporary_updater_operator_name,
+            'temporary_update_approver_operator_name'=> $temporary_update_approver_operator_name,
+        ];
         return view('operator.menu.product_show',$item);
     }
 }
