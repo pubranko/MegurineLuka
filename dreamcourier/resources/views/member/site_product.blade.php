@@ -9,9 +9,9 @@
         @foreach($wk_product_tag_lists as $wk_product_tag)
                 <li>
                     @if (Auth::guest())
-                        <a href="/tag?tag={{$wk_product_tag}}" class="">{{$wk_product_tag}}</a>
+                        <a href="/keyword?product_search_tag={{$wk_product_tag}}" class="">{{$wk_product_tag}}</a>
                     @else
-                        <a href="/member/tag?tag={{$wk_product_tag}}" class="">{{$wk_product_tag}}</a>
+                        <a href="/member/keyword?product_search_tag={{$wk_product_tag}}" class="">{{$wk_product_tag}}</a>
                     @endif
                 </li>
         @endforeach

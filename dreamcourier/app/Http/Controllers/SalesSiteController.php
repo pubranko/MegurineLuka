@@ -13,33 +13,11 @@ class SalesSiteController extends Controller
      */
     public function siteTop(Request $request){
 
-        $wk_lists = $this->productInfomation($request,"site_top");
-
-        return view('member.site_top',["wk_lists" => $wk_lists]);
-    }
-
-    /**
-     * 指定されたタグの商品情報レコードを取得し、タグ別ページを表示する。
-     */
-    public function siteProduct(Request $request){
-
-        $wk_lists = $this->productInfomation($request,"site_product");
-
-        return view('member.site_product_lists',["wk_lists" => $wk_lists]);
-    }
-    /**
-     * タグごとの情報を配列に取りまとめてreturnする。
-     */
-    private function productInfomation(Request $request,string $path){
         $featured_queries = FeaturedProductMaster::query(); #注目商品マスタ
         $featured_queries->Where("validity_period_from","<=",now());    #現在、有効期間中の紹介タグをselect
         $featured_queries->Where("validity_period_to",">",now());
         $featured_queries->Where("status","正式");                      #正式に登録されているものをselect
-        if($path =="site_product"){
-            $featured_queries->Where("product_tag",$request->get("tag"));      #タグ別のページの場合、指定されたタグのみselect
-        }else{
-            $featured_queries->Where("priority","<",100);                   #優先度順が１００未満(TOPページに表示する対象)に限定してselect
-        }
+        $featured_queries->Where("priority","<",100);                   #優先度順が１００未満(TOPページに表示する対象)に限定してselect
 
         $featured_queries = $featured_queries->orderBy('priority', 'asc')->get();   #表示の優先度順に取得
 
@@ -52,13 +30,8 @@ class SalesSiteController extends Controller
             $product_queries->Where("sales_period_to",">",now());
             $product_queries->Where("status","正式");                     #正式に登録されているものをselect
 
-            if($path =="site_product"){
-                $product_lists = $product_queries->paginate(15);
-                $links = $product_lists->links();
-            }else{
-                $product_lists = $product_queries->get();
-                $links = null;
-            }
+            $product_lists = $product_queries->get();
+            $links = null;
 
             $wk_products = [];  #初期化
             $cnt = $product_lists->count();   #取得した商品情報レコードの件数分繰り返す
@@ -80,6 +53,7 @@ class SalesSiteController extends Controller
             $wk_lists[] = $wk_list;    #まとめた１カテゴリー単位の情報を配列へ格納
         }
 
+        return view('member.site_top',["wk_lists" => $wk_lists]);
         /* 呼び出し元へ渡すデータ構造
             $wk_lists = [[
                     "introduction_tag"=>キャンペーン等のカテゴリ名称,
@@ -87,10 +61,5 @@ class SalesSiteController extends Controller
                     "links"=>topはnull、それ以外はページネイトのlinks()
                 ],〜略〜
             ]*/
-        return $wk_lists;
-
     }
-
 }
-
-

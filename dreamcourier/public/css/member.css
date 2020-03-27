@@ -4,7 +4,9 @@ body {  /* 会員向けページの全体のテーマカラー */
     /*background: linear-gradient(#05FBFF, #1D62F0 ) fixed;*/
     background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226) ) fixed;
   }
-
+html, body{
+  height:100%;
+}
 /* ヘッダー部の要素 */
 .header-line{
   display: inline;  /* リストを横に並べる */
@@ -65,10 +67,10 @@ body {  /* 会員向けページの全体のテーマカラー */
 }
 /*各商品のboxを横に並べて表示する*/
 .product-contents{
-  overflow:hidden;
+  overflow:hidden;    /*ボックスの範囲内に内容が収まらない場合に、はみ出た部分の表示の仕方：表示しない*/
   margin:0;
   padding:0;
-  list-style:none;
+  list-style:none;    /*リストのマーカーの種類：なし*/
 }
 .product-contents li{
   float:left;         /*要素を左から並べる*/
@@ -89,9 +91,35 @@ body {  /* 会員向けページの全体のテーマカラー */
   text-align: center;
 }
 
-/* 会員向けの商品タグ見出しの書式 */
-.mbr-tag-message-box{ 
-  position: relative; /*ボックスの配置方法：相対位置*/
+/*サイドバーとカテゴリー一覧を並べて表示させる*/
+.side-bar-fixed{
+  display:flex; /*横並び*/
+}
+/*サイドバー*/
+.side-bar-box{
+  position: -webkit-sticky;
+  position: sticky;
+  bottom:50;
+  width:10em;
+  /*min-height:500px;*/
+  /*height:auto;*/
+  height:100%;
+  /*background-color:#009b9f;*/
+  margin-top:10px;
+  /*float:left;*/
+  flex-shrink: 0;
+}
+.side-bar-box ul{
+  padding-left: 0;        /*リストの文字を左寄せ*/
+}
+.side-bar-box li{
+  list-style: none;       /*リストのマーカーの種類：なし*/
+}
+
+
+/* カテゴリーの見出しの書式 */
+.category-message{ 
+  /*position: relative; /*ボックスの配置方法：相対位置*/
   padding: 0.1em 0.5em; /*内側の余白*/
   background: -webkit-linear-gradient(to right, rgb(255, 186, 115), transparent); /*背景色　webkit:古いブラウザー用*/
   background: linear-gradient(to right, rgb(255, 186, 115), transparent);         /*背景色　グラデーション*/
@@ -238,7 +266,7 @@ body {  /* 会員向けページの全体のテーマカラー */
   display: -webkit-box;
   display: flex;
   padding-left: 0;
-  list-style: none;
+  list-style: none;       /*リストのマーカーの種類：なし*/
   border-radius: 0.25rem;
 }
 .page-link {
@@ -397,3 +425,4 @@ body {  /* 会員向けページの全体のテーマカラー */
   padding-left: 1em;
   padding-right: 1em;
 }
+
