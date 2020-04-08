@@ -10,8 +10,8 @@ $factory->define(ProductMaster::class, function (Faker $faker) {
     return [
         #'id'=>$faker->unique()->numberBetween(0,999),
         'product_code' => 'akagi-'.$faker->unique()->numberBetween(0,999),
-        'sales_period_from' => $faker->dateTimeBetween("2020-01-01 00:00","2050-12-31 23:59"),
-        'sales_period_to' => $faker->dateTimeBetween("2020-01-02 00:00","2050-12-31 23:59"),
+        'sales_period_from' => $faker->dateTimeBetween("2020-01-01 00:00","2020-01-10 23:59"),
+        'sales_period_to' => $faker->dateTimeBetween("2100-12-01 00:00","2100-12-31 23:59"),
         'product_name' => $faker->streetName,
         'product_description' => $faker->paragraph(),
         'product_price' => $faker->randomDigit(),

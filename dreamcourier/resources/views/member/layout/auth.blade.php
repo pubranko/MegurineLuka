@@ -24,8 +24,6 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
             <div class="header-box">
                 <a class="header-line title-font" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
                 <ul class="header-line">
@@ -81,8 +79,6 @@
                     @endif
                 </ul>
             </div>
-        </div>
-    </nav>
 
     @yield('content')
 
