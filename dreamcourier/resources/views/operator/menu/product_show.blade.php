@@ -26,7 +26,7 @@
 
                     <label class="col-md-4 control-label">商品在庫数</label>
                     <div class="col-md-6">
-                        <a>　{{$search_query->product_stock_quantity}}　</a>
+                        <a>　{{$product_stock_quantity['product_stock_quantity']}}　</a>
                     </div>
 
                     <label class="col-md-4 control-label">商品名</label>

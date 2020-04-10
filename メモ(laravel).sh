@@ -206,6 +206,7 @@ php artisan make:factory PostFactory --model=Post
 php artisan make:factory product_stock_lists --model=ProductStockList
 php artisan make:factory product_cart_lists --model=ProductCartList
 php artisan make:factory featured_product_masters --model=FeaturedProductMaster
+php artisan make:factory tag_masters --model=TagMaster
 
 ### 便利コマンド
 # artisanコマンドのリストが見れる。

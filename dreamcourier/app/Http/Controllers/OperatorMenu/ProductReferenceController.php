@@ -27,13 +27,20 @@ class ProductReferenceController extends Controller
         ######################################################
         ### 以下画面より入力された条件を満たすレコードを検索
         ######################################################
+        $page = $request->get('page');  #ページ指定がある場合、
+        if(isset($page)){
+            $search_word = $request->session()->get('product_search');
+        }else{                          #ページ指定がない場合（初回）
+            $search_word = $request->all();
+        }
+
         #商品情報マスタに、商品在庫リストの在庫数をjoinで付与する。
         $query = DB::table('product_masters')
                     ->join('product_stock_lists','product_masters.product_code','=','product_stock_lists.product_code')
                     ->select('product_masters.*','product_stock_lists.product_stock_quantity');
 
-        if(!empty($request->get('product_code'))){              #商品コード
-            $product_code_convert = str_replace("　"," ",$request->get('product_code'));    #全角の空白は半角の空白へ置き換え
+        if(!empty($search_word['product_code'])){              #商品コード
+            $product_code_convert = str_replace("　"," ",$search_word['product_code']);    #全角の空白は半角の空白へ置き換え
             $product_code_convert = "%".str_replace(" ","% %",$product_code_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
             $product_code_lists = explode(" ",$product_code_convert);                       #半角の空白で分割した商品コード配列を生成
             $query->where(function($query) use($product_code_lists){                        #いずれかの単語を含むレコードを取得する。
@@ -42,8 +49,8 @@ class ProductReferenceController extends Controller
                 }
             });
         }
-        if(!empty($request->get('product_search_keyword'))){    #商品検索キーワード
-            $product_search_keyword_convert = str_replace("　"," ",$request->get('product_search_keyword'));    #全角の空白は半角の空白へ置き換え
+        if(!empty($search_word['product_search_keyword'])){    #商品検索キーワード
+            $product_search_keyword_convert = str_replace("　"," ",$search_word['product_search_keyword']);    #全角の空白は半角の空白へ置き換え
             $product_search_keyword_convert = "%".str_replace(" ","% %",$product_search_keyword_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
             $product_search_keyword_lists = explode(" ",$product_search_keyword_convert);                       #半角の空白で分割した検索キーワード配列を生成
             $query->where(function($query) use($product_search_keyword_lists){                                  #いずれかの単語を含むレコードを取得する。
@@ -52,8 +59,8 @@ class ProductReferenceController extends Controller
                 }
             });
         }
-        if(!empty($request->get('product_tag'))){                    #商品タグ
-            $product_tag_convert = str_replace("　"," ",$request->get('product_tag'));    #全角の空白は半角の空白へ置き換え
+        if(!empty($search_word['product_tag'])){                    #商品タグ
+            $product_tag_convert = str_replace("　"," ",$search_word['product_tag']);    #全角の空白は半角の空白へ置き換え
             $product_tag_convert = "%".str_replace(" ","% %",$product_tag_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
             $product_tag_lists = explode(" ",$product_tag_convert);                       #半角の空白で分割した商品タグ配列を生成
             $query->where(function($query) use($product_tag_lists){                       #いずれかの単語を含むレコードを取得する。
@@ -62,16 +69,17 @@ class ProductReferenceController extends Controller
                 }
             });
         }
-        if($request->get('product_stock_quantity_from')!==""){    #商品在庫数（以上）
-            $query->where('product_stock_quantity','>=',$request->get('product_stock_quantity_from'));
+
+        if($search_word['product_stock_quantity_from']!==""){    #商品在庫数（以上）
+            $query->where('product_stock_quantity','>=',$search_word['product_stock_quantity_from']);
         }
-        if($request->get('product_stock_quantity_to')!==""){      #商品在庫数（以下）
-            $query->where('product_stock_quantity','<=',$request->get('product_stock_quantity_to'));
+        if($search_word['product_stock_quantity_to']!==""){      #商品在庫数（以下）
+            $query->where('product_stock_quantity','<=',$search_word['product_stock_quantity_to']);
         }
-        if(!empty($request->get('sales_period_date_from')) ||        #販売期間FROM~TO
-           !empty($request->get('sales_period_date_to'))){
-            $from = $request->get('wk_sales_period_from');
-            $to = $request->get('wk_sales_period_to');
+        if(!empty($search_word['sales_period_date_from']) ||        #販売期間FROM~TO
+           !empty($search_word['sales_period_date_to'])){
+            $from = $search_word['wk_sales_period_from'];
+            $to = $search_word['wk_sales_period_to'];
             $query->where(function($query) use($from,$to){
                 $query->where(function($q) use($from, $to) {
                     $q->where('sales_period_from', '>=', $from)
@@ -87,15 +95,15 @@ class ProductReferenceController extends Controller
                 });
             });
         }
-        if(!empty($request->get('selling_discontinued_classification'))){  #販売中止区分
-            $query->whereIn('selling_discontinued_classification',$request->get('selling_discontinued_classification'));
+        if(!empty($search_word['selling_discontinued_classification'])){  #販売中止区分
+            $query->whereIn('selling_discontinued_classification',$search_word['selling_discontinued_classification']);
         }
-        if(!empty($request->get('status'))){                         #ステータス
-            $query->whereIn('status',$request->get('status'));
+        if(!empty($search_word['status'])){                         #ステータス
+            $query->whereIn('status',$search_word['status']);
         }
 
         #１ページに出力する明細を取得し、マージした配列をビューへ渡す。
-        $search_queries = $query->paginate($request->get('product_list_details'));
+        $search_queries = $query->paginate($search_word['product_list_details']);
 
         $item  = array_merge($request->all(),['search_queries' => $search_queries]);
         #承認画面(ProductApproval)から遷移してきた場合、リクエストをセッションより取得し復元する。
@@ -103,6 +111,10 @@ class ProductReferenceController extends Controller
         if(isset($item2)){
             $item  = array_merge($item,$item2);
             $request->session()->forget('product_approval_request');
+        }
+
+        if(!isset($page)){  #ページ指定がない場合（初回）、セッションに検索キーワードを保存
+            $request->session()->put('product_search',$request->all());
         }
 
         return view('operator.menu.product_search',$item);

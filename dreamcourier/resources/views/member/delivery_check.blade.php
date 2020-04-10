@@ -1,17 +1,16 @@
 @extends('member.layout.auth')
 
 @section('content')
-@include('member.subviews.menu_bar')
-
-<div class="mbr-message-box">
-    下記の内容でお間違えがないでしょうか？<br/>
-    ご確認の上、「上記の内容で購入」ボタンを押してください。
-    @foreach($errors->all() as $error)
-        <div>
-            <a>※エラー発生：</a><a>{{$error}}</a><br/>
-        </div>
-    @endforeach
-</div>
+<div class="content-left-box">
+    <div class="mbr-message-box">
+        下記の内容でお間違えがないでしょうか？<br/>
+        ご確認の上、「上記の内容で購入」ボタンを押してください。
+        @foreach($errors->all() as $error)
+            <div>
+                <a>※エラー発生：</a><a>{{$error}}</a><br/>
+            </div>
+        @endforeach
+    </div>
     <p>◎商品情報</p>
     <div class="delivery_check">
         <div class="cart-lists-box">
@@ -81,5 +80,5 @@
     <div class="col-md-6">
         <button class="delivery-button" type="button" onclick=history.back()>戻る</button>
     </div>
-
+</div>
 @endsection

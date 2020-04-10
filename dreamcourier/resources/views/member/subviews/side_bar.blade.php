@@ -1,8 +1,17 @@
 <div class=side-bar-box>
     <ul>
-        <li>カテゴリ一覧</li>
-        <li><a href="/">HOME</a></li>
-        <li><a href="/keyword?product_search_tag=ギャンブル">ギャンブル</a></li>
-        <li><a href="/keyword?product_search_tag=異世界転生">異世界転生</a></li>
+        <li><b>＜カテゴリー＞</b></li>
+        @if (Auth::guest())
+            <li><a href="/">HOME</a></li>
+        @else
+            <li><a href="/member/home">HOME</a></li>
+        @endif
+        @foreach($wk_side_bar_lists as $list)
+            @if (Auth::guest())
+                <li><a href="/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
+            @else
+                <li><a href="/member/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
+            @endif
+        @endforeach
     </ul>
 </div>

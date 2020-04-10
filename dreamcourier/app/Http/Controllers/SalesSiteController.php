@@ -83,7 +83,6 @@ class SalesSiteController extends Controller
         $wk_product['wk_product_stock_quantity_status'] = $wk_product->productStockStatus();#商品販売状況を取得
 
         $cart_add_flg = $request->session()->get('cart_add_flg');
-
         if($cart_add_flg =="on"){                           #カートへ追加後のリダイレクトの場合
             $wk_product['cart_add_flg'] = $cart_add_flg;    #「購入手続きへ」ボタンをページに表示させる。
             $request->session()->forget('cart_add_flg');    #セッションよりcart_add_flgを削除

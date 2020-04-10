@@ -2,19 +2,7 @@
 
 @section('content')
 <div class=contents-flex>
-    <div class=side-bar-box>
-        <ul>
-            <li><b>＜カテゴリー＞</b></li>
-            <li><a href="/">HOME</a></li>
-            @foreach($wk_side_bar_lists as $list)
-                @if (Auth::guest())
-                    <li><a href="/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
-                @else
-                    <li><a href="/member/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
-                @endif
-            @endforeach
-        </ul>
-    </div>
+    @include('member.subviews.side_bar')
 
     <div class=center-box>
         <div class="show-product-tag">
@@ -59,12 +47,12 @@
                     <a  @if($wk_product["wk_product_stock_quantity_status"] == "販売中止") 
                         @elseif($wk_product["wk_product_stock_quantity_status"] == "在庫なし") 
                         @else
-                            href="/member/cart_add?id={{$id}}" 
+                            href="/member/cart_add?id={{$wk_product["id"]}}" 
                         @endif
                         >カートへ追加
                     </a>
                 </div>
-                @isset ($cart_add_flg)
+                @isset ($wk_product["cart_add_flg"])
                     <div class="show-product-botton show-product-botton-add" >
                         <a  href="/member/cart_index">購入手続きへ</a>
                     </div>

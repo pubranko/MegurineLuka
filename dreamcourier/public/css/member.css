@@ -61,7 +61,10 @@ html, body{
   margin-bottom: 10px;
   max-width: 1040px;
 }
+.mbr-register-box{
+  padding-top:3.5em;
 
+}
 /*サイドバーとコンテンツ（カテゴリー一覧、商品の詳細）を横に並べて表示させる*/
 .contents-flex{
   display:flex;     /*横並び*/
@@ -322,10 +325,14 @@ html, body{
   border-color: #dee2e6;
 }
 
-/*カート一覧画面の枠調整*/
-.cart-lists-box-all{
-  margin-top:10px;
+/*カート一覧、購入手続き画面のコンテンツボックス*/
+.content-left-box{
+  position: absolute;
+  margin-top:3em;/**/
+  margin-left:1em;/**/
 }
+
+/*カート一覧画面の枠調整*/
 .cart-lists-box{
   margin-top:10px;
   border:groove 6px #5e7fca;

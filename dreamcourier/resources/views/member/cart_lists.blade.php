@@ -1,8 +1,8 @@
 @extends('member.layout.auth')
 
 @section('content')
-@include('member.subviews.menu_bar')
-<div class="cart-lists-box-all">
+
+<div class="content-left-box">
     @foreach($wk_products as $wk_product)
         <div class="cart-lists-box">
             <img class="img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">

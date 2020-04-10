@@ -3,22 +3,7 @@
 @section('content')
 
 <div class=contents-flex>
-    <div class=side-bar-box>
-        <ul>
-            <li><b>＜カテゴリー＞</b></li>
-            @if (Auth::guest())
-                <li><a href="/">HOME</a></li>
-                @foreach($wk_side_bar_lists as $list)
-                    <li><a href="/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
-                @endforeach
-            @else
-                <li><a href="/member/home">HOME</a></li>
-                @foreach($wk_side_bar_lists as $list)
-                    <li><a href="/member/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
-                @endforeach
-            @endif
-        </ul>
-    </div>
+    @include('member.subviews.side_bar')
 
     <div class=center-box>
         @foreach($wk_lists as $list)
