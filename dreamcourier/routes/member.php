@@ -13,17 +13,12 @@ Route::get('/home', 'SalesSiteController@siteTop', function () {
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('member')->user();
 })->name('member.home');
-Route::get('/tag', 'SalesSiteController@siteProduct', function () {
-    $users[] = Auth::user();
-    $users[] = Auth::guard()->user();
-    $users[] = Auth::guard('member')->user();
-})->name('member.site.tag');
-Route::get('/keyword', 'ProductListController@productSearch', function () {
+Route::get('/keyword', 'SalesSiteController@productSearch', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('member')->user();
 })->name('member.site.keyword');
-Route::get('/show', 'ProductListController@productShow', function () {
+Route::get('/show', 'SalesSiteController@productShow', function () {
     $users[] = Auth::user();
     $users[] = Auth::guard()->user();
     $users[] = Auth::guard('member')->user();

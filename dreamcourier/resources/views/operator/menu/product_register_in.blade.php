@@ -72,21 +72,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('product_stock_quantity') ? ' has-error' : '' }}">
-                            <label for="product_stock_quantity" class="col-md-4 control-label">商品在庫数</label>
-
-                            <div class="col-md-6">
-                                <a>　必須　</a>
-                                <input id="aaproduct_stock_quantitya" type="text" class="form-control" name="product_stock_quantity" value={{old('product_stock_quantity')}}>
-
-                                @if ($errors->has('product_stock_quantity'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('product_stock_quantity') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('product_thumbnail') ? ' has-error' : '' }}">
                             <label for="product_thumbnail" class="col-md-4 control-label">商品サムネイル</label>
 

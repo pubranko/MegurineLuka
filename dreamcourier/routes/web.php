@@ -15,9 +15,8 @@
 #    return view('welcome');
 #});
 Route::get('/', 'SalesSiteController@siteTop')->name('site.top');
-Route::get('/tag', 'SalesSiteController@siteProduct')->name('site.tag');;
-Route::get('/keyword', 'ProductListController@productSearch')->name('site.keyword');;
-Route::get('/show', 'ProductListController@productShow')->name('site.show');;
+Route::get('/keyword', 'SalesSiteController@productSearch')->name('site.keyword');;
+Route::get('/show', 'SalesSiteController@productShow')->name('site.show');;
 
 #Route::get('/', 'SalesSiteController@topSite')->name('top.site');
 

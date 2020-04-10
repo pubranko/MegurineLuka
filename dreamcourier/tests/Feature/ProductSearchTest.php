@@ -11,6 +11,7 @@ use Illuminate\Http\UploadedFile;                       #追加
 use Illuminate\Support\Facades\Storage;                 #追加
 use App\Operator;                                       #追加
 use App\ProductMaster;                                  #追加
+use App\ProductStockList;                                  #追加
 
 class ProductSearchTest extends TestCase
 {
@@ -29,10 +30,28 @@ class ProductSearchTest extends TestCase
         #商品マスタのテストデータ生成
         #statesで、akagi-999、2020-01-10 00:00〜2020-01-10 01:00のデータを生成
         #factory(ProductMaster::class,1)->states('SalesPeriodDuplicationCheck')->create();
-        factory(ProductMaster::class,50)->create();
+        #factory(ProductMaster::class,50)->create();
+
+        #商品マスタのテストデータ生成
+        $product = factory(ProductMaster::class)->create([
+            'id' => 1,
+            'product_code' => 'akagi-001',
+            'product_tag'=>'ギャンブル',
+            'sales_period_from'=>'2020-01-01 00:00:00',
+            'sales_period_to'=>'2030-12-31 00:00:00',
+            'selling_discontinued_classification'=>'販売可',
+        ]);
+        #商品在庫リストのテストデータ生成
+        factory(ProductStockList::class)->create([
+            'product_code'=>'akagi-001',
+            'product_stock_quantity' => 3,
+        ]);
+
+
+        #$this->withoutExceptionHandling();  #予期せぬエラーが発生した場合、どこで落ちたかのルートを表示してくれるようになる。
 
         #初期表示テスト
-        $response = $this->actingAs($user,'operator')->get('/operator/product/search?first=on');
+        $response = $this->actingAs($user,'operator')->get('/operator/product/search?first_flg=on');
         $response->assertStatus(200);
 
         #無指定検索テスト
@@ -176,9 +195,7 @@ class ProductSearchTest extends TestCase
         $response = $this->actingAs($user,'operator')->get(
             '/operator/product/search?product_code=akagi&'.'product_search_keyword=&'.'product_tag=&'.'product_stock_quantity_from=&'.'product_stock_quantity_to=&'.'sales_period_date_from=&'.'sales_period_time_from=&'.'sales_period_date_to=&'.'sales_period_time_to=&'.
             'selling_discontinued_classification[]=販売可&'.
-            'selling_discontinued_classification[]=仮販売中止&'.
             'selling_discontinued_classification[]=販売中止&'.
-            'selling_discontinued_classification[]=仮販売再開&'.
             'product_list_details=20'
         );
         $response->assertStatus(200);
@@ -186,9 +203,7 @@ class ProductSearchTest extends TestCase
         $response = $this->actingAs($user,'operator')->get(
             '/operator/product/search?product_code=akagi&'.'product_search_keyword=&'.'product_tag=&'.'product_stock_quantity_from=&'.'product_stock_quantity_to=&'.'sales_period_date_from=&'.'sales_period_time_from=&'.'sales_period_date_to=&'.'sales_period_time_to=&'.
             'selling_discontinued_classification[]=あ&'.  #←エラー箇所
-            'selling_discontinued_classification[]=仮販売中止&'.
             'selling_discontinued_classification[]=販売中止&'.
-            'selling_discontinued_classification[]=仮販売再開&'.
             'product_list_details=20'
         );
         $response->assertStatus(302);

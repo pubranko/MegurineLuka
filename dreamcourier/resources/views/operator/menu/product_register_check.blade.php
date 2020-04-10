@@ -38,11 +38,6 @@
                         <a>　{{$product_price}}　</a>
                     </div>
 
-                    <label class="col-md-4 control-label">商品在庫数</label>
-                    <div class="col-md-6">
-                        <a>　{{$product_stock_quantity}}　</a>
-                    </div>
-
                     <label class="col-md-4 control-label">商品サムネイル</label>
                     <div class="col-md-6">
                         <a>{{$wk_product_thumbnail_original_filename}}</a>

@@ -53,8 +53,7 @@ class ProductSearchRequest extends FormRequest
             'sales_period_date_to' => 'date|required_with:sales_period_time_to',            #販売期間（TO日付）
             'sales_period_time_to' => ['regex:/^([0-1][0-9]|[2][0-3]):[0-5][0-9]$/u'],      #販売期間（TO時間）
             'status.*' => [Rule::in("正式","仮登録","仮変更")],                             #ステータス
-            'selling_discontinued_classification.*' =>
-                [Rule::in("販売可","仮販売中止","販売中止","仮販売再開")],                  #販売状況ステータス
+            'selling_discontinued_classification.*' => [Rule::in("販売可","販売中止")],     #販売状況ステータス
             'product_list_details' => 'required|integer',                                   #表示明細数
         ];
     }

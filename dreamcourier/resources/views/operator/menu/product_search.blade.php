@@ -52,34 +52,31 @@
                                         <input type="time" name="sales_period_time_to" value=@if(count($errors)>0) {{ old('sales_period_time_to') }} @else @isset($sales_period_time_to) {{$sales_period_time_to}} @endisset  @endif>
                                     </td>
                                     <td>
-                                        <!--販売状況のチェックボックス：'販売可','仮販売中止','販売中止','仮販売再開'の４種を用意する。-->
+                                        <!--販売状況のチェックボックス：'販売可','販売中止'の２種を用意する。-->
                                         <!--入力値時のチェックを維持する。またエラー時はチェック状態を復元する。-->
-                                        @foreach(['販売可','仮販売中止','販売中止','仮販売再開'] as $pattern)
-                                            <input type="checkbox" name="selling_discontinued_classification[]" value="{{$pattern}}"
+                                        @foreach(['販売可','販売中止'] as $pattern)
+                                            <label><input type="checkbox" name="selling_discontinued_classification[]" value="{{$pattern}}"
                                             @isset($selling_discontinued_classification)
                                                 @foreach($selling_discontinued_classification as $st)
                                                     @if($pattern == $st) checked="" @endif
                                                 @endforeach
                                             @endisset
                                             @if (is_array(old("selling_discontinued_classification")) && in_array("$pattern", old('selling_discontinued_classification'), true)) checked @endif
-                                            >{{$pattern}}
-                                            @if($pattern == "仮販売中止")
-                                                <br>
-                                            @endif
+                                            >{{$pattern}}</label>
                                         @endforeach
                                     </td>
                                     <td>
                                         <!--ステータスのチェックボックス：正式、仮登録、仮変更の３種を用意する。-->
                                         <!--入力値時のチェックを維持する。またエラー時はチェック状態を復元する。-->
                                         @foreach(['正式','仮登録','仮変更'] as $pattern)
-                                            <input type="checkbox" name="status[]" value="{{$pattern}}"
+                                            <label><input type="checkbox" name="status[]" value="{{$pattern}}"
                                             @isset($status)
                                                 @foreach($status as $st)
                                                     @if($pattern == $st) checked="" @endif
                                                 @endforeach
                                             @endisset
                                             @if (is_array(old("status")) && in_array("$pattern", old('status'), true)) checked @endif
-                                            >{{$pattern}}
+                                            >{{$pattern}}</label>
                                         @endforeach
                                     </td>
                                     <td>
@@ -117,7 +114,7 @@
                                     <th>商品タグ</th>
                                     <th>販売期間</th>
                                     <th>ステータス</th>
-                                    <th>販売中止</th>
+                                    <th>販売状況</th>
                                     <th>商品価格</th>
                                     <th>商品在庫数</th>
                                     <th>参照</th>

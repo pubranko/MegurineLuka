@@ -33,21 +33,11 @@ class ProductTransactionController extends Controller
         foreach( $cart_lists as $cart){
             $wk_product_master = $cart->productMaster;
             $wk_product['cartlist_id']=$cart->id;
-            $wk_product['wk_product_thumbnail'] = str_replace("public","storage",$wk_product_master->product_thumbnail);  #サムネイルのパスをクライアント側用に加工
+            $wk_product['wk_product_thumbnail'] = $wk_product_master->productThumbnailPath();           #サムネイルのパスをクライアント側用に加工
             $wk_product['product_code']=$wk_product_master->product_code;
             $wk_product['product_name']=$wk_product_master->product_name;
             $wk_product['product_price']=$wk_product_master->product_price;
-
-            $stock_queries = ProductStockList::where('product_code',$wk_product_master->product_code)->first();
-            if($wk_product_master->selling_discontinued_classification=="販売中止"){     #販売中止区分
-                $wk_product['wk_product_stock_quantity_status'] = "販売中止";
-            }elseif($stock_queries->product_stock_quantity  > 3){                     #商品在庫状況を追加
-                $wk_product['wk_product_stock_quantity_status'] = "在庫あり";
-            }elseif($stock_queries->product_stock_quantity  > 0){
-                $wk_product['wk_product_stock_quantity_status'] = "在庫あとわずか！";
-            }else{
-                $wk_product['wk_product_stock_quantity_status'] = "在庫なし";
-            }
+            $wk_product['wk_product_stock_quantity_status'] = $wk_product_master->productStockStatus(); #商品販売状況を取得
             $wk_products[] = $wk_product;
         }
 
@@ -113,21 +103,12 @@ class ProductTransactionController extends Controller
         #また、viewに渡すデータへ加工する。
         ############################################################################################
         $wk_product_master = ProductCartList::find($data['cartLists']['cartlist_id'])->productMaster;
-        $wk_product['wk_product_thumbnail'] = str_replace("public","storage",$wk_product_master->product_thumbnail);  #サムネイルのパスをクライアント側用に加工
+        $wk_product['wk_product_thumbnail'] = $wk_product_master->productThumbnailPath();           #サムネイルのパスをクライアント側用に加工
         $wk_product['product_code']=$wk_product_master->product_code;
         $wk_product['product_name']=$wk_product_master->product_name;
         $wk_product['product_price']=$wk_product_master->product_price;
 
-        $stock_queries = ProductStockList::where('product_code',$wk_product_master->product_code)->first();
-        if($wk_product_master->selling_discontinued_classification=="販売中止"){     #販売中止区分
-            $wk_product['wk_product_stock_quantity_status'] = "販売中止";
-        }elseif($stock_queries->product_stock_quantity  > 3){                     #商品在庫状況を追加
-            $wk_product['wk_product_stock_quantity_status'] = "在庫あり";
-        }elseif($stock_queries->product_stock_quantity  > 0){
-            $wk_product['wk_product_stock_quantity_status'] = "在庫あとわずか！";
-        }else{
-            $wk_product['wk_product_stock_quantity_status'] = "在庫なし";
-        }
+        $wk_product['wk_product_stock_quantity_status'] = $wk_product_master->productStockStatus(); #商品販売状況を取得
 
         ############################################################################################
         #ログイン中のメンバー情報を取得する。

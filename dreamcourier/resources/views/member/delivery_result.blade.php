@@ -1,12 +1,11 @@
 @extends('member.layout.auth')
 
 @section('content')
-@include('member.subviews.menu_bar')
-
-<div class="mbr-message-box">
-    お買い上げいただきまして、ありがとうございます。<br/>
-    ご希望いただきました配達日時に商品をお届けいたします。
-</div>
+<div class="content-left-box">
+    <div class="mbr-message-box">
+        お買い上げいただきまして、ありがとうございます。<br/>
+        ご希望いただきました配達日時に商品をお届けいたします。
+    </div>
     <p>◎お取引情報</p>    
     <div class="delivery_check">
         <table class="delivery_check_table">
@@ -73,5 +72,5 @@
     </div>
 
     <a href="/member/cart_index" class="btn-gradient-3d">カート一覧へ</a>
-
+</div>
 @endsection

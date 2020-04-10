@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Member;
 use App\ProductMaster;
 use App\ProductStockList;
+use App\TagMaster;
 use App\ProductCartList;
 use App\FeaturedProductMaster;
 
@@ -41,12 +42,14 @@ class Delivery1Test extends TestCase
             'product_code'=>'akagi-001',
             'product_stock_quantity' => 3,
         ]);
+        #タグマスタ
+        factory(TagMaster::class)->create();
 
         ###非ログイン状態###
         #非会員向けのページへアクセス
         $response = $this->get('');
         $response->assertStatus(200);
-        $response = $this->get('tag?tag=ギャンブル');
+        $response = $this->get('keyword?product_search_tag=ギャンブル');
         $response->assertStatus(200);
         $response = $this->get('keyword?product_search_keyword=アカギ&search=検索');
         $response->assertStatus(200);
@@ -56,7 +59,7 @@ class Delivery1Test extends TestCase
         #非ログインでメンバーエリアにアクセスしてエラーとなること
         $response = $this->get('/member/home');
         $response->assertStatus(302);
-        $response = $this->get('/member/tag?tag=ギャンブル');
+        $response = $this->get('/member/keyword?product_search_tag=ギャンブル');
         $response->assertStatus(302);
         $response = $this->get('member/keyword?product_search_keyword=アカギ&search=検索');
         $response->assertStatus(302);
@@ -74,7 +77,7 @@ class Delivery1Test extends TestCase
         #商品閲覧サイト
         $response = $this->actingAs($user,'member')->get('/member/home');
         $response->assertStatus(200);
-        $response = $this->actingAs($user,'member')->get('/member/tag?tag=ギャンブル');
+        $response = $this->actingAs($user,'member')->get('/member/keyword?product_search_tag=ギャンブル');
         $response->assertStatus(200);
         $response = $this->actingAs($user,'member')->get('member/keyword?product_search_keyword=アカギ&search=検索');
         $response->assertStatus(200);

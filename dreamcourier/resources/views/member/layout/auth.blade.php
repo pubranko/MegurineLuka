@@ -24,10 +24,12 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
             <div class="header-box">
-                <a class="header-line title-font" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+                @if (Auth::guest())
+                    <a class="header-line title-font" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+                @else
+                    <a class="header-line title-font" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+                @endif
                 <ul class="header-line">
                     <li class="header-line">
                         @if (Auth::guest())
@@ -81,8 +83,6 @@
                     @endif
                 </ul>
             </div>
-        </div>
-    </nav>
 
     @yield('content')
 

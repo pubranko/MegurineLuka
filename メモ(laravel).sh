@@ -100,6 +100,14 @@ php artisan make:migration change_column_zip_table --table=address_masters
 php artisan make:migration change_column_product_image --table=product_masters
 php artisan make:migration change_column_product_thumbnail --table=product_masters
 php artisan make:migration change_column_sales_period_to --table=product_masters
+php artisan make:migration drop_column_product_stock_quantity --table=product_masters
+php artisan make:migration change_column_product_code --table=product_stock_lists
+php artisan make:migration add_column_tag_level --table=featured_product_masters
+php artisan make:migration add_column_parent_tag --table=featured_product_masters
+php artisan make:migration change_column_priority --table=featured_product_masters
+php artisan make:migration rename_table_featured_product_masters_tag_masters --table=featured_product_masters
+
+
 
 #  マイグレーション実行(上記のマイグレーションファイルにカラムの記述後、以下のコマンドで実際のテーブルが作成される)
 php artisan migrate
@@ -123,6 +131,7 @@ php artisan make:model ProductCartList
 php artisan make:model ProductStockList
 php artisan make:model ProductTransactionList
 php artisan make:model ProductDeliveryStatusList
+php artisan make:model TagMaster
 
 #  シーダーファイルの作成
 php artisan make:seeder ※テーブル名TableSeeder
@@ -131,6 +140,7 @@ php artisan make:seeder OperatorsTableSeeder
 php artisan make:seeder ProductMastersTableSeeder
 php artisan make:seeder FeaturedProductMasters
 php artisan make:seeder ProductStockListsTableSeeder
+php artisan make:seeder ProductMastersTableSeeder2
 
 #  シーディングを実行
 php artisan db:seed
@@ -141,6 +151,7 @@ php artisan db:seed --class=OperatorsTableSeeder
 php artisan db:seed --class=ProductMastersTableSeeder
 php artisan db:seed --class=FeaturedProductMasters
 php artisan db:seed --class=ProductStockListsTableSeeder
+php artisan db:seed --class=ProductMastersTableSeeder2
 
 ### ペジネーションのテンプレートの用意
 # これで「/resources/views/vendor/pagination」にテンプレートがコピーされるようだ
@@ -187,12 +198,15 @@ vendor/bin/phpunit tests/Feature/Delivery2Test.php
 vendor/bin/phpunit tests/Feature/Delivery3Test.php
 vendor/bin/phpunit tests/Feature/Delivery4Test.php
 vendor/bin/phpunit tests/Feature/Delivery5Test.php
+vendor/bin/phpunit tests/Feature/ProductSearchTest.php
+
 
 # ファクトリの作成(database/factoriesに作成される)
 php artisan make:factory PostFactory --model=Post
 php artisan make:factory product_stock_lists --model=ProductStockList
 php artisan make:factory product_cart_lists --model=ProductCartList
 php artisan make:factory featured_product_masters --model=FeaturedProductMaster
+php artisan make:factory tag_masters --model=TagMaster
 
 ### 便利コマンド
 # artisanコマンドのリストが見れる。

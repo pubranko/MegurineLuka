@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Member;                                                #追加
+use App\ProductMaster;
+use App\ProductStockList;
+use App\TagMaster;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 /**
  * 新規会員登録（入力）で入力された値のバリデートのテスト
@@ -21,6 +24,22 @@ class MembersTest extends TestCase
      */
     public function testExample()
     {
+        $product = factory(ProductMaster::class)->create([
+            'id' => 1,
+            'product_code' => 'akagi-001',
+            'product_tag'=>'ギャンブル',
+            'sales_period_from'=>'2020-01-01 00:00:00',
+            'sales_period_to'=>'2030-12-31 00:00:00',
+            'selling_discontinued_classification'=>'販売可',
+        ]);
+        #商品在庫リストのテストデータ生成
+        factory(ProductStockList::class)->create([
+            'product_code'=>'akagi-001',
+            'product_stock_quantity' => 3,
+        ]);
+        #タグマスタ
+        factory(TagMaster::class)->create();
+
         $response = $this->get('/');
         $response->assertStatus(200);
     }

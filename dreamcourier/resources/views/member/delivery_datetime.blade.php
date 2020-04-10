@@ -1,15 +1,14 @@
 @extends('member.layout.auth')
 
 @section('content')
-@include('member.subviews.menu_bar')
-
-<div class="mbr-message-box">
-    <ul>
-        <li>商品の配達日時を指定してください。</li>
-        <li>最短お届け時間は、現時点より12時間以降となります。</li>
-        <li>同じ時間帯に複数の商品のお届けはできません。</li>
-    </ul>
-</div>
+<div class="content-left-box">
+    <div class="mbr-message-box">
+        <ul>
+            <li>商品の配達日時を指定してください。</li>
+            <li>最短お届け時間は、現時点より12時間以降となります。</li>
+            <li>同じ時間帯に複数の商品のお届けはできません。</li>
+        </ul>
+    </div>
 
     <form id="member-address-form" method="POST" action="{{ url('/member/delivery_datetime') }}">
         {{ csrf_field() }}
@@ -69,5 +68,5 @@
     <div class="col-md-6">
         <button class="delivery-button" type="button" onclick=history.back()>戻る</button>
     </div>
-
+</div>
 @endsection
