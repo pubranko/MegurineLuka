@@ -14,7 +14,7 @@ class MemberRegisterCheckRequest extends FormRequest
      */
     public function authorize()
     {
-        #echo "フォームリクエスト！";
+        #echo 'フォームリクエスト！';
         #return true;
         if($this->path() == 'member/register/check'){
             return true;
@@ -50,11 +50,11 @@ class MemberRegisterCheckRequest extends FormRequest
             'first_name' => 'required|max:30',
             'last_name_kana' => 'required|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u|max:60',
             'first_name_kana' => 'required|regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u|max:60',
-            'birthday_era' => ['required',Rule::in("西暦","令和","平成","昭和","大正","明治")],
+            'birthday_era' => ['required',Rule::in('西暦','令和','平成','昭和','大正','明治')],
             'birthday_year' => 'required|integer',
             'birthday_month' => 'required|integer|between:1,12',    #integerがないと桁数1-12でチェックしてしまった。
             'birthday_day' => 'required|integer|between:1,31',
-            'sex' => ['required',Rule::in("男性","女性")],
+            'sex' => ['required',Rule::in('男性','女性')],
             'postal_code1' => 'required|digits:3',
             'postal_code2' => 'required|digits:4',
             'address1' => 'required',
@@ -79,19 +79,19 @@ class MemberRegisterCheckRequest extends FormRequest
     public function withValidator ($validator){
         #格元号ごとの年月日の範囲チェック
         /*$validator->sometimes('wk_birthday_era_ymd','integer|min:10501',function($input){
-            return $input->birthday_era == "令和";
+            return $input->birthday_era == '令和';
         });
         $validator->sometimes('wk_birthday_era_ymd','integer|between:10108,310430',function($input){
-            return $input->birthday_era == "平成";
+            return $input->birthday_era == '平成';
         });
         $validator->sometimes('wk_birthday_era_ymd','integer|between:11225,640107',function($input){
-            return $input->birthday_era == "昭和";
+            return $input->birthday_era == '昭和';
         });
         $validator->sometimes('wk_birthday_era_ymd','integer|between:10730,151224',function($input){
-            return $input->birthday_era == "大正";
+            return $input->birthday_era == '大正';
         });
         $validator->sometimes('wk_birthday_era_ymd','integer|between:10125,450729',function($input){
-            return $input->birthday_era == "明治";
+            return $input->birthday_era == '明治';
         });*/
     }
 

@@ -70,8 +70,8 @@ class DeliveryAddressCheckRequest extends FormRequest
     public function rules()
     {
         return [
-            'address_select' => ['required',Rule::in("登録済み住所","個別指定住所")],
-            'phone_select' => ['required',Rule::in("登録済み電話番号","個別指定電話番号")],
+            'address_select' => ['required',Rule::in('登録済み住所','個別指定住所')],
+            'phone_select' => ['required',Rule::in('登録済み電話番号','個別指定電話番号')],
         ];
     }
 
@@ -84,40 +84,40 @@ class DeliveryAddressCheckRequest extends FormRequest
     public function withValidator ($validator){
         #格元号ごとの年月日の範囲チェック
         $validator->sometimes('receiver_name','required|max:60',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('postal_code1','required|digits:3',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('postal_code2','required|digits:4',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('address1','required',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('address2','required',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('address3','required',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('address4','required',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('address5','required_with:address6',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('address6','required_with:address5',function($input){
-            return $input->address_select == "個別指定住所";
+            return $input->address_select == '個別指定住所';
         });
         $validator->sometimes('phone_number1','required|max:11',function($input){
-            return $input->phone_select == "個別指定電話番号";
+            return $input->phone_select == '個別指定電話番号';
         });
         $validator->sometimes('phone_number2','required|max:4',function($input){
-            return $input->phone_select == "個別指定電話番号";
+            return $input->phone_select == '個別指定電話番号';
         });
         $validator->sometimes('phone_number3','required|digits:4',function($input){
-            return $input->phone_select == "個別指定電話番号";
+            return $input->phone_select == '個別指定電話番号';
         });
     }
 

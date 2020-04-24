@@ -41,40 +41,40 @@ class ProductReferenceController extends Controller
                     ->select('product_masters.*','product_stock_lists.product_stock_quantity');
 
         if(!empty($search_word['product_code'])){              #商品コード
-            $product_code_convert = str_replace("　"," ",$search_word['product_code']);    #全角の空白は半角の空白へ置き換え
-            $product_code_convert = "%".str_replace(" ","% %",$product_code_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
-            $product_code_lists = explode(" ",$product_code_convert);                       #半角の空白で分割した商品コード配列を生成
+            $product_code_convert = str_replace('　',' ',$search_word['product_code']);    #全角の空白は半角の空白へ置き換え
+            $product_code_convert = '%'.str_replace(' ','% %',$product_code_convert).'%';   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
+            $product_code_lists = explode(' ',$product_code_convert);                       #半角の空白で分割した商品コード配列を生成
             $query->where(function($query) use($product_code_lists){                        #いずれかの単語を含むレコードを取得する。
                 foreach($product_code_lists as $code){
-                        $query->orWhere("product_masters.product_code","like",$code,);
+                        $query->orWhere('product_masters.product_code','like',$code,);
                 }
             });
         }
         if(!empty($search_word['product_search_keyword'])){    #商品検索キーワード
-            $product_search_keyword_convert = str_replace("　"," ",$search_word['product_search_keyword']);    #全角の空白は半角の空白へ置き換え
-            $product_search_keyword_convert = "%".str_replace(" ","% %",$product_search_keyword_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
-            $product_search_keyword_lists = explode(" ",$product_search_keyword_convert);                       #半角の空白で分割した検索キーワード配列を生成
+            $product_search_keyword_convert = str_replace('　',' ',$search_word['product_search_keyword']);    #全角の空白は半角の空白へ置き換え
+            $product_search_keyword_convert = '%'.str_replace(' ','% %',$product_search_keyword_convert).'%';   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
+            $product_search_keyword_lists = explode(' ',$product_search_keyword_convert);                       #半角の空白で分割した検索キーワード配列を生成
             $query->where(function($query) use($product_search_keyword_lists){                                  #いずれかの単語を含むレコードを取得する。
                 foreach($product_search_keyword_lists as $keyword){
-                        $query->orWhere("product_search_keyword","like",$keyword,);
+                        $query->orWhere('product_search_keyword','like',$keyword,);
                 }
             });
         }
         if(!empty($search_word['product_tag'])){                    #商品タグ
-            $product_tag_convert = str_replace("　"," ",$search_word['product_tag']);    #全角の空白は半角の空白へ置き換え
-            $product_tag_convert = "%".str_replace(" ","% %",$product_tag_convert)."%";   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
-            $product_tag_lists = explode(" ",$product_tag_convert);                       #半角の空白で分割した商品タグ配列を生成
+            $product_tag_convert = str_replace('　',' ',$search_word['product_tag']);    #全角の空白は半角の空白へ置き換え
+            $product_tag_convert = '%'.str_replace(' ','% %',$product_tag_convert).'%';   #先頭・末尾・空白の前後に%(ワイルドカード)を付与
+            $product_tag_lists = explode(' ',$product_tag_convert);                       #半角の空白で分割した商品タグ配列を生成
             $query->where(function($query) use($product_tag_lists){                       #いずれかの単語を含むレコードを取得する。
                 foreach($product_tag_lists as $tag){
-                        $query->orWhere("product_tag","like",$tag,);
+                        $query->orWhere('product_tag','like',$tag,);
                 }
             });
         }
 
-        if($search_word['product_stock_quantity_from']!==""){    #商品在庫数（以上）
+        if($search_word['product_stock_quantity_from']!==''){    #商品在庫数（以上）
             $query->where('product_stock_quantity','>=',$search_word['product_stock_quantity_from']);
         }
-        if($search_word['product_stock_quantity_to']!==""){      #商品在庫数（以下）
+        if($search_word['product_stock_quantity_to']!==''){      #商品在庫数（以下）
             $query->where('product_stock_quantity','<=',$search_word['product_stock_quantity_to']);
         }
         if(!empty($search_word['sales_period_date_from']) ||        #販売期間FROM~TO
@@ -125,7 +125,7 @@ class ProductReferenceController extends Controller
      * 商品情報マスタと関連情報の詳細を表示する。
      */
     public function show(ProductMasterIdCheckRequest $request){
-        $id = $request->get("id");          #指定されたIDより商品情報マスタを取得する。
+        $id = $request->get('id');          #指定されたIDより商品情報マスタを取得する。
         $product = ProductMaster::find($id);
         #テーブルに登録されている商品画像・商品サムネイルのファイルパスを、クライアント側からアクセスするパスへ変換する。
         $product['product_image'] = $product->productImagePath();

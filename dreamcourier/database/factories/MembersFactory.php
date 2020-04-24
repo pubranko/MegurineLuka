@@ -29,9 +29,9 @@ $factory->define(Member::class, function (Faker $faker) {
 
     #$faker = \Faker\Factory::create('ja_JP');
 
-    $phone_number1 = explode("-",$faker->phoneNumber)[0];
-    $phone_number2 = explode("-",$faker->phoneNumber)[1];
-    $phone_number3 = explode("-",$faker->phoneNumber)[2];
+    $phone_number1 = explode('-',$faker->phoneNumber)[0];
+    $phone_number2 = explode('-',$faker->phoneNumber)[1];
+    $phone_number3 = explode('-',$faker->phoneNumber)[2];
 
     return [
         #'member_code' => $faker->unique()->randomDigit(1, 90000),
@@ -43,8 +43,8 @@ $factory->define(Member::class, function (Faker $faker) {
         'last_name_kana' => $faker->lastKanaName,
         'first_name_kana' => $faker->firstKanaName,
         'birthday' => $faker->dateTimeBetween('-30 years', 'now',),
-        #date_of_birth("", 0, 115),
-        #date_between("-30y", "today"),
+        #date_of_birth('', 0, 115),
+        #date_between('-30y', 'today'),
         'sex' => $faker->randomElement(['男性', '女性']),
         'postal_code1' => $faker->postcode1,
         'postal_code2' => $faker->postcode2,
@@ -59,7 +59,7 @@ $factory->define(Member::class, function (Faker $faker) {
         'phone_number3' => $phone_number3,
         'enrollment_datetime' => $faker->dateTimeBetween('-30 years', 'now',),
         #'unsubscribe_reason' => $faker->,
-        'status' => "正式",
+        'status' => '正式',
         #'purchase_stop_division' => $faker->,
         #'temporary_update_operator_code' => $faker->,
         #'temporary_update_approval_operator_code' => $faker->,

@@ -33,14 +33,14 @@ class ProductRegisterConvertMiddleware
             if(empty($data['sales_period_date_from'])){
                 $data['wk_sales_period_from'] = '2019-01-01 00:00'; #日付が未入力の場合の初期値を設定
             }else{
-                $data['wk_sales_period_from'] = $data['sales_period_date_from']." ".$data['sales_period_time_from'];
+                $data['wk_sales_period_from'] = $data['sales_period_date_from'].' '.$data['sales_period_time_from'];
             }
         }
         if(isset($data['sales_period_date_to']) && isset($data['sales_period_time_to'])){
             if(empty($data['sales_period_date_to'])){
                 $data['wk_sales_period_to'] = '9999-12-31 23:59'; #日付が未入力の場合の初期値を設定
             }else{
-                $data['wk_sales_period_to'] = $data['sales_period_date_to']." ".$data['sales_period_time_to'];
+                $data['wk_sales_period_to'] = $data['sales_period_date_to'].' '.$data['sales_period_time_to'];
             }
         }
 

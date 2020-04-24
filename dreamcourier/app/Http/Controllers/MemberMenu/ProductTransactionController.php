@@ -81,7 +81,7 @@ class ProductTransactionController extends Controller
      */
     public function deliveryPayment(Request $request){
 
-        $y = date("y",Carbon::now()->timestamp);      #現在の年（西暦下２桁）
+        $y = date('y',Carbon::now()->timestamp);      #現在の年（西暦下２桁）
         $years = range($y,$y+6);    #現在の年から７年分の配列を作成
         return view('member.delivery_payment',['years' => $years]);
     }
@@ -116,7 +116,7 @@ class ProductTransactionController extends Controller
         ############################################################################################
         $member_query = Member::query();
         $member_query->where('member_code',Auth::user()->member_code);
-        $member_query->where('status',"正式");
+        $member_query->where('status','正式');
         $member = $member_query->first();
 
         $wk_delivery_destination['address_select'] = $data['deliveryAddress']['address_select'];
@@ -124,10 +124,10 @@ class ProductTransactionController extends Controller
 
         #登録済み住所へ配達する場合は、会員情報マスタの内容を設定する。
         #個別指定住所へ配達する場合、画面より入力された情報を設定する。
-        if($data['deliveryAddress']['address_select']=="登録済み住所"){
-            $wk_delivery_destination['receiver_name'] = $member->last_name." ".$member->first_name;
-            $wk_delivery_destination['postal_code1'] = str_pad($member->postal_code1, 3, "0", STR_PAD_LEFT);
-            $wk_delivery_destination['postal_code2'] = str_pad($member->postal_code2, 4, "0", STR_PAD_LEFT);
+        if($data['deliveryAddress']['address_select']=='登録済み住所'){
+            $wk_delivery_destination['receiver_name'] = $member->last_name.' '.$member->first_name;
+            $wk_delivery_destination['postal_code1'] = str_pad($member->postal_code1, 3, '0', STR_PAD_LEFT);
+            $wk_delivery_destination['postal_code2'] = str_pad($member->postal_code2, 4, '0', STR_PAD_LEFT);
             $wk_delivery_destination['address1'] = $member->address1;
             $wk_delivery_destination['address2'] = $member->address2;
             $wk_delivery_destination['address3'] = $member->address3;
@@ -148,7 +148,7 @@ class ProductTransactionController extends Controller
 
         #連絡先が、登録済み電話番号は、会員情報マスタの内容を設定する。
         #個別指定電話番号の場合、画面より入力された情報を設定する。
-        if($data['deliveryAddress']['phone_select']=="登録済み電話番号"){
+        if($data['deliveryAddress']['phone_select']=='登録済み電話番号'){
             $wk_delivery_destination['phone_number1'] = $member->phone_number1;
             $wk_delivery_destination['phone_number2'] = $member->phone_number2;
             $wk_delivery_destination['phone_number3'] = $member->phone_number3;
