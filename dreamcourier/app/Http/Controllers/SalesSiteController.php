@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProductMaster;                      #追加
 use App\TagMaster;                          #追加
-use App\Http\Requests\ProductShowRequest;   #追加
+use App\Http\Requests\ProductMasterIdCheckRequest;   #追加
 
 class SalesSiteController extends Controller
 {
@@ -71,7 +71,7 @@ class SalesSiteController extends Controller
     /**
      * 選択された商品の詳細情報ページを表示する。
      */
-    public function productShow(ProductShowRequest $request){
+    public function productShow(ProductMasterIdCheckRequest $request){
         $id = $request->get('id');
 
         $wk_product = ProductMaster::find($id);                                             #対象の商品情報を取得

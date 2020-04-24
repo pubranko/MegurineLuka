@@ -16,7 +16,7 @@ class MemberRegisterCheckRequest extends FormRequest
     {
         #echo "フォームリクエスト！";
         #return true;
-        if($this->path() == 'member/registercheck'){
+        if($this->path() == 'member/register/check'){
             return true;
         }else{
             return false;
@@ -66,7 +66,7 @@ class MemberRegisterCheckRequest extends FormRequest
             'phone_number1' => 'required|max:11',
             'phone_number2' => 'required|max:4',
             'phone_number3' => 'required|digits:4',
-            'wk_birthday_ymd'=>'required|date',  #ミドルウェアでバリデート用に付与したリクエスト（和暦入力でも西暦に変換した状態）
+            #'wk_birthday_ymd'=>'required|date',  #ミドルウェアでバリデート用に付与したリクエスト（和暦入力でも西暦に変換した状態）
         ];
     }
 
@@ -78,7 +78,7 @@ class MemberRegisterCheckRequest extends FormRequest
      */
     public function withValidator ($validator){
         #格元号ごとの年月日の範囲チェック
-        $validator->sometimes('wk_birthday_era_ymd','integer|min:10501',function($input){
+        /*$validator->sometimes('wk_birthday_era_ymd','integer|min:10501',function($input){
             return $input->birthday_era == "令和";
         });
         $validator->sometimes('wk_birthday_era_ymd','integer|between:10108,310430',function($input){
@@ -92,7 +92,7 @@ class MemberRegisterCheckRequest extends FormRequest
         });
         $validator->sometimes('wk_birthday_era_ymd','integer|between:10125,450729',function($input){
             return $input->birthday_era == "明治";
-        });
+        });*/
     }
 
     /**
@@ -104,7 +104,7 @@ class MemberRegisterCheckRequest extends FormRequest
         return [
             'email.required' => '入力が漏れています',
             'email.email' => 'メールアドレスの形式ではありません',
-            'email.max' => 'メールアドレスの文字数が最大値を超えています',
+            #'email.max' => 'メールアドレスの文字数が最大値を超えています',
             'email.unique' => '既に登録されているアドレスです',
 
             'last_name.required' => '入力が漏れています',
@@ -119,14 +119,17 @@ class MemberRegisterCheckRequest extends FormRequest
             'first_name_kana.max' => '６０文字まで入力可能です',
             'birthday_era.required' => '入力が漏れています',
             'birthday_era.in' => '不正な値です',
-            #'birthday_year' => 'required|digits:4',
+
+            'birthday_year.required' => '入力が漏れています',
+            'birthday_year.integer' => '数値で入力してください',
+
             'birthday_month.required' => '入力が漏れています',
             'birthday_month.integer' => '数値で入力してください',
             'birthday_month.between' => '不正な値です',
             'birthday_day.required' => '入力が漏れています',
             'birthday_day.integer' => '数値で入力してください',
             'birthday_day.between' => '不正な値です',
-            'sex.required.required' => '入力が漏れています',
+            'sex.required' => '入力が漏れています',
             'sex.in' => '不正な値です',
             'postal_code1.required' => '入力が漏れています',
             'postal_code1.digits' => '３桁で入力してください',
@@ -139,13 +142,13 @@ class MemberRegisterCheckRequest extends FormRequest
             'address5.required_with' => 'マンション名の入力が漏れています',
             'address6.required_with' => '部屋番号の入力が漏れています',
             'phone_number1.required' => '入力が漏れています',
-            'phone_number1.digits_between' => '１〜１１桁で入力してください',
+            'phone_number1.max' => '１〜１１桁で入力してください',
             'phone_number2.required' => '入力が漏れています',
-            'phone_number2.digits_between' => '１〜４桁で入力してください',
+            'phone_number2.max' => '１〜４桁で入力してください',
             'phone_number3.required' => '入力が漏れています',
             'phone_number3.digits' => '４桁で入力してください',
-            'wk_birthday_ymd.date'=> '実在する日付で入力してください',
-            'wk_birthday_era_ymd.between' => '実在する日付で入力してください'
+            #'wk_birthday_ymd.date'=> '実在する日付で入力してください',
+            #'wk_birthday_era_ymd.between' => '実在する日付で入力してください'
         ];
     }
 }

@@ -8,14 +8,14 @@ use App\Http\Requests\DeliveryAddressCheckRequest;  #追加
 use App\Http\Requests\DeliveryDatetimeCheckRequest; #追加
 use App\Http\Requests\DeliveryPaymentCheckRequest;  #追加
 use App\Http\Requests\DeliveryRegisterRequest;      #追加
-use App\Http\Requests\ProductCartSelectRequest;     #追加
+use App\Http\Requests\CartListIdCheckRequest;     #追加
 use App\ProductCartList;            #追加
 use App\ProductStockList;           #追加
 use App\Member;                     #追加
 use App\ProductTransactionList;     #追加
 use App\ProductDeliveryStatusList;  #追加
 use Auth;   #追加
-
+use Carbon\Carbon;  #追加
 
 class ProductTransactionController extends Controller
 {
@@ -48,7 +48,7 @@ class ProductTransactionController extends Controller
     /**
      * 配送先指定画面表示
      */
-    public function deliveryAddress(ProductCartSelectRequest $request){
+    public function deliveryAddress(CartListIdCheckRequest $request){
         $request->session()->put('cartLists',$request->all());
         return view('member.delivery_address');
     }
@@ -81,7 +81,7 @@ class ProductTransactionController extends Controller
      */
     public function deliveryPayment(Request $request){
 
-        $y = date("y",time());      #現在の年（西暦下２桁）
+        $y = date("y",Carbon::now()->timestamp);      #現在の年（西暦下２桁）
         $years = range($y,$y+6);    #現在の年から７年分の配列を作成
         return view('member.delivery_payment',['years' => $years]);
     }

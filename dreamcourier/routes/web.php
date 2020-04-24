@@ -39,9 +39,10 @@ Route::group(['prefix' => 'member'], function () {
   Route::post('/login', 'MemberAuth\LoginController@login');
   Route::post('/logout', 'MemberAuth\LoginController@logout')->name('logout');
 
-  Route::get('/registerin', 'MemberAuth\RegisterController@registrationInForm')->name('registerin');        #会員登録画面（入力）
-  Route::get('/registercheck', 'MemberAuth\RegisterController@registrationCheckForm')                       #会員登録画面（確認）
+  Route::get('/register/in', 'MemberAuth\RegisterController@registerIn')->name('registerin');        #会員登録画面（入力）
+  Route::post('/register/check', 'MemberAuth\RegisterController@registerCheck')                       #会員登録画面（確認）
         ->middleware('membersconvert')->name('register.check');
+  Route::get('/register/checkview', 'MemberAuth\RegisterController@registerCheckView')->name('registerin');        #会員登録画面（入力）
   Route::post('/register', 'MemberAuth\RegisterController@register')->name('register');                     #会員登録（処理）
 
   Route::post('/password/email', 'MemberAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');

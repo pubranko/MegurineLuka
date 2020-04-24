@@ -21,7 +21,7 @@ $factory->define(ProductMaster::class, function (Faker $faker) {
         'product_tag' => $faker->sentence,
         #'product_stock_quantity' => $faker->randomDigit(),
         'status' => '正式',
-        'selling_discontinued_classification' => '',
+        'selling_discontinued_classification' => '販売可',
         'temporary_updater_operator_code' => 'ope2',
         'temporary_update_approver_operator_code' => 'ope3',
     ];

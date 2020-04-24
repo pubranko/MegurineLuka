@@ -5,8 +5,8 @@ namespace App\Http\Controllers\MemberMenu;
 use App\Http\Controllers\Controller;
 #use Illuminate\Http\Request;
 use App\ProductCartList;                     #追加
-use App\Http\Requests\ProductCartAddRequest; #追加
-use App\Http\Requests\ProductCartDeleteRequest; #追加
+use App\Http\Requests\ProductMasterIdCheckRequest; #追加
+use App\Http\Requests\CartListIdCheckRequest; #追加
 use Auth;   #追加
 
 
@@ -15,7 +15,7 @@ class ProductCartListController extends Controller
     /**
      * 選択された商品をカートリストへ登録する。
      */
-    public function cartAdd(ProductCartAddRequest $request){
+    public function cartAdd(ProductMasterIdCheckRequest $request){
         $model = new ProductCartList;
         $model->product_id = $request->get('id');
         $model->member_code = Auth::user()->member_code;
@@ -29,7 +29,7 @@ class ProductCartListController extends Controller
     /**
      * 選択されたカートをカートリストから削除する。
      */
-    public function cartDelete(ProductCartDeleteRequest $request){
+    public function cartDelete(CartListIdCheckRequest $request){
         ProductCartList::find($request->get('cartlist_id'))->delete();
         return redirect('/member/cart_index');
     }

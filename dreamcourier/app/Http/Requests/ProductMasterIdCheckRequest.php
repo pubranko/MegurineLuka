@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductShowRequest extends FormRequest
+class ProductMasterIdCheckRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,13 +13,16 @@ class ProductShowRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'member/show'){
+        /*if($this->path() == 'member/show'){
             return true;
         }elseif($this->path() == 'show'){
             return true;
+        }elseif($this->path() == 'member/cart_add'){
+            return true;
         }else{
             return false;
-        }
+        }*/
+        return true;
     }
 
     /**
@@ -42,6 +45,7 @@ class ProductShowRequest extends FormRequest
             'id' => 'required|integer|exists:product_masters',
         ];
     }
+
     /**
      * バリデータのエラーメッセージをカスタマイズする。
      *

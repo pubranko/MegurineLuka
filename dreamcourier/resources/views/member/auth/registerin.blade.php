@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/member/registercheck') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/member/register/check') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

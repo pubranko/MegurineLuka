@@ -85,7 +85,7 @@ class ProductSearchRequest extends FormRequest
             'sales_period_time_from.regex' => '販売期間FROM：時間形式が不正な値です',
             'sales_period_date_from.required_with' => '販売期間FROM：入力が漏れています',
             'sales_period_date_to.date' => '販売期間TO：日付形式が不正です',
-            'sales_period_time_to.required_with' => '販売期間TO：入力が漏れています',
+            'sales_period_date_to.required_with' => '販売期間TO：入力が漏れています',
             'sales_period_time_to.regex' => '販売期間TO：時間形式が不正な値です',
             'wk_sales_period_to.after' => '販売期間の範囲が不正です',
             'product_stock_quantity_from.integer' => '商品在庫数（以上）：数値で入力してください',
@@ -93,6 +93,8 @@ class ProductSearchRequest extends FormRequest
             'product_stock_quantity_to.gte' => '商品在庫数の範囲が不正です',
             'product_list_details.required' => '表示明細数：入力が漏れています',
             'product_list_details.integer' => '表示明細数：数値で入力してください',
+            'selling_discontinued_classification.*' => '不正な値が選択されています',
+            'status.*' => '不正な値が選択されています',
         ];
     }
 }
