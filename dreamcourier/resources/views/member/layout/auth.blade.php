@@ -49,7 +49,7 @@
                             <a href="{{ url('/member/login') }}">ログイン</a>
                         </li>
                         <li class="header-line">
-                            <a href="{{ url('/member/registerin') }}">新規会員登録</a>
+                            <a href="{{ url('/member/register/in') }}">新規会員登録</a>
                         </li>
                     @else
                         <li class="header-line">

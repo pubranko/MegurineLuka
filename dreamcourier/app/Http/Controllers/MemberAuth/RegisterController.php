@@ -7,10 +7,16 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Dotenv\Validator as DotenvValidator;
+use Illuminate\Validation\Validator as ValidationValidator;
+use Illuminate\Http\Request;
 
 use Illuminate\Auth\Events\Registered;  #追加
 use App\Http\Requests\MemberRegisterCheckRequest; #追加
 use App\Http\Requests\MemberRegisterRequest; #追加
+use App\Http\Controllers\CommonProcess\BirthdayValidator; #追加
+
+use Carbon\Carbon;  #追加
 
 class RegisterController extends Controller
 {
@@ -75,7 +81,7 @@ class RegisterController extends Controller
             'phone_number1' => $data['phone_number1'],
             'phone_number2' => $data['phone_number2'],
             'phone_number3' => $data['phone_number3'],
-            'enrollment_datetime' => date('Y/m/d H:i*s',time()),
+            'enrollment_datetime' => date('Y/m/d H:i*s',Carbon::now()->timestamp),
             'status' => '正式',
         ]);
     }
@@ -85,7 +91,7 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function registrationInForm()
+    public function registerIn()
     {
         return view('member.auth.registerin');
     }
@@ -94,10 +100,25 @@ class RegisterController extends Controller
      * 新規会員登録（確認）画面
      * 新規会員登録（入力）の入力後、内容の確認とログインパスワードの入力を行う画面を呼び出す。
      */
-    public function registrationCheckForm(MemberRegisterCheckRequest $request)  #カスタムしたフォームリクエスト使用
+    public function registerCheck(MemberRegisterCheckRequest $request)  #カスタムしたフォームリクエスト使用
     {
-        $request->session()->put('register_in_request',$request->all());    #セッションにリクエストを保存
-        return view('member.auth.registercheck',$request->all());           #前画面の入力内容を引き渡して次の画面へ
+        $birthday = new BirthdayValidator;
+        $validator = $birthday->birthdayCheck($request);
+        if($validator->fails()){
+            return redirect('/member/register/in')->withErrors($validator)->withInput();
+        }else{
+            $request->session()->put('register_in_request',$request->all());    #セッションにリクエストを保存
+            #return view('member.auth.registercheck',$request->all());           #前画面の入力内容を引き渡して次の画面へ
+            return redirect('/member/register/checkview');
+        }
+    }
+
+    /**
+     * 新規会員登録（確認）画面を表示する。
+     */
+    public function registerCheckView(Request $request){
+        $data = $request->session()->get('register_in_request');    #新規会員登録（入力）の入力情報をセッションより取得
+        return view('member.auth.registercheck',$data);   #前画面の入力内容を引き渡して次の画面へ
     }
 
     /**

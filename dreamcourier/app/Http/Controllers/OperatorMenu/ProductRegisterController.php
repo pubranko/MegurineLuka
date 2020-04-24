@@ -9,6 +9,7 @@ use App\Http\Requests\ProductRegisterRequest; #追加
 use App\ProductMaster;                         #追加
 use App\ProductStockList;                         #追加
 use Illuminate\Support\Facades\Storage;         #追加
+use Carbon\Carbon;  #追加
 
 class ProductRegisterController extends Controller
 {
@@ -34,14 +35,14 @@ class ProductRegisterController extends Controller
         # 3.上記2.のファイル名で添付フォルダ（storage/app/public/tmep）へ保存
         # 4.上記のファイルにクライアントからアクセスするパスをリクエストに保存　※クライアント側からアクセスできるpublicにはstorage/appへのシンボルがある
         $data['wk_product_image_original_filename'] = $request->file('product_image')->getClientOriginalName();
-        $data['wk_product_image_filename'] = $data['product_code']."_product_image_".time().".".$request->file('product_image')->getClientOriginalExtension();
+        $data['wk_product_image_filename'] = $data['product_code']."_product_image_".Carbon::now()->timestamp.".".$request->file('product_image')->getClientOriginalExtension();
         $request->file('product_image')
                 ->storeAs('public/temp/',$data['wk_product_image_filename']);
         $data['wk_product_image_pathname_client'] = "/storage/temp/".$data['wk_product_image_filename'];
         ### 商品サムネイルファイルの処理
         # 上記1.〜4.参照
         $data['wk_product_thumbnail_original_filename'] = $request->file('product_thumbnail')->getClientOriginalName();
-        $data['wk_product_thumbnail_filename'] = $data['product_code']."_product_thumbnail_".time().".".$request->file('product_thumbnail')->getClientOriginalExtension();
+        $data['wk_product_thumbnail_filename'] = $data['product_code']."_product_thumbnail_".Carbon::now()->timestamp.".".$request->file('product_thumbnail')->getClientOriginalExtension();
         $request->file('product_thumbnail')
                 ->storeAs('public/temp/',$data['wk_product_thumbnail_filename']);
         $data['wk_product_thumbnail_pathname_client'] = "/storage/temp/".$data['wk_product_thumbnail_filename'];

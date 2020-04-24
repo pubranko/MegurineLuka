@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductCartSelectRequest extends FormRequest
+class CartListIdCheckRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,12 +13,7 @@ class ProductCartSelectRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == 'member/delivery_address'){
-            return true;
-        }else{
-            return false;
-        }
-
+        return true;
     }
 
     /**
@@ -29,10 +24,9 @@ class ProductCartSelectRequest extends FormRequest
     public function rules()
     {
         return [
-            'cartlist_id' => ['required','integer','exists:product_cart_lists,id'],
+            'cartlist_id' => 'required|integer|exists:product_cart_lists,id',
         ];
     }
-
     /**
      * バリデータのエラーメッセージをカスタマイズする。
      *

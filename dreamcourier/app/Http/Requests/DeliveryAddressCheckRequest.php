@@ -145,9 +145,9 @@ class DeliveryAddressCheckRequest extends FormRequest
             'phone_select.required'=> '選択が漏れています',
             'phone_select.in'=> '不正な値です',
             'phone_number1.required' => '入力が漏れています',
-            'phone_number1.digits_between' => '１〜１１桁で入力してください',
+            'phone_number1.max' => '１〜１１桁で入力してください',
             'phone_number2.required' => '入力が漏れています',
-            'phone_number2.digits_between' => '１〜４桁で入力してください',
+            'phone_number2.max' => '１〜４桁で入力してください',
             'phone_number3.required' => '入力が漏れています',
             'phone_number3.digits' => '４桁で入力してください',
         ];
