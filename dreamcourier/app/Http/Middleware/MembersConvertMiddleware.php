@@ -43,11 +43,11 @@ class MembersConvertMiddleware
         #全角→半角に変換 (n:数字)
         #年月日→ゼロサプレス
         if (isset($data['birthday_year']))
-            $data['birthday_year'] = ltrim(mb_convert_kana($data['birthday_year'], 'n'),"0");
+            $data['birthday_year'] = ltrim(mb_convert_kana($data['birthday_year'], 'n'),'0');
         if (isset($data['birthday_month']))
-            $data['birthday_month'] = ltrim(mb_convert_kana($data['birthday_month'], 'n'),"0");
+            $data['birthday_month'] = ltrim(mb_convert_kana($data['birthday_month'], 'n'),'0');
         if (isset($data['birthday_day']))
-            $data['birthday_day'] = ltrim(mb_convert_kana($data['birthday_day'], 'n'),"0");
+            $data['birthday_day'] = ltrim(mb_convert_kana($data['birthday_day'], 'n'),'0');
         if (isset($data['postal_code1']))
             $data['postal_code1'] = mb_convert_kana($data['postal_code1'], 'n');
         if (isset($data['postal_code2']))

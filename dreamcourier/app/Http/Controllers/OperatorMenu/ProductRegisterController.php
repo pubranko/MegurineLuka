@@ -35,17 +35,17 @@ class ProductRegisterController extends Controller
         # 3.上記2.のファイル名で添付フォルダ（storage/app/public/tmep）へ保存
         # 4.上記のファイルにクライアントからアクセスするパスをリクエストに保存　※クライアント側からアクセスできるpublicにはstorage/appへのシンボルがある
         $data['wk_product_image_original_filename'] = $request->file('product_image')->getClientOriginalName();
-        $data['wk_product_image_filename'] = $data['product_code']."_product_image_".Carbon::now()->timestamp.".".$request->file('product_image')->getClientOriginalExtension();
+        $data['wk_product_image_filename'] = $data['product_code'].'_product_image_'.Carbon::now()->timestamp.'.'.$request->file('product_image')->getClientOriginalExtension();
         $request->file('product_image')
                 ->storeAs('public/temp/',$data['wk_product_image_filename']);
-        $data['wk_product_image_pathname_client'] = "/storage/temp/".$data['wk_product_image_filename'];
+        $data['wk_product_image_pathname_client'] = '/storage/temp/'.$data['wk_product_image_filename'];
         ### 商品サムネイルファイルの処理
         # 上記1.〜4.参照
         $data['wk_product_thumbnail_original_filename'] = $request->file('product_thumbnail')->getClientOriginalName();
-        $data['wk_product_thumbnail_filename'] = $data['product_code']."_product_thumbnail_".Carbon::now()->timestamp.".".$request->file('product_thumbnail')->getClientOriginalExtension();
+        $data['wk_product_thumbnail_filename'] = $data['product_code'].'_product_thumbnail_'.Carbon::now()->timestamp.'.'.$request->file('product_thumbnail')->getClientOriginalExtension();
         $request->file('product_thumbnail')
                 ->storeAs('public/temp/',$data['wk_product_thumbnail_filename']);
-        $data['wk_product_thumbnail_pathname_client'] = "/storage/temp/".$data['wk_product_thumbnail_filename'];
+        $data['wk_product_thumbnail_pathname_client'] = '/storage/temp/'.$data['wk_product_thumbnail_filename'];
 
         #上述の追加項目をリクエストに反映させる
         $request->merge($data);
@@ -91,10 +91,10 @@ class ProductRegisterController extends Controller
         $product_master->product_thumbnail =  'public/product_thumbnail/'.$data['wk_product_thumbnail_filename'];
         $product_master->product_search_keyword = $data['product_search_keyword'];
         $product_master->product_tag = $data['product_tag'];
-        $product_master->status = "仮登録";
-        $product_master->selling_discontinued_classification = "販売可";
+        $product_master->status = '仮登録';
+        $product_master->selling_discontinued_classification = '販売可';
         $product_master->temporary_updater_operator_code = $request->user()->operator_code;
-        $product_master->temporary_update_approver_operator_code = "";
+        $product_master->temporary_update_approver_operator_code = '';
         $product_master->save();
 
         #まだ商品在庫リストに登録されていない商品コードの場合、商品在庫リストへ空データを登録する。
