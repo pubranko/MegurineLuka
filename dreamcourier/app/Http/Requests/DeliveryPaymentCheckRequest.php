@@ -50,7 +50,7 @@ class DeliveryPaymentCheckRequest extends FormRequest
     public function rules()
     {
         return [
-            'payment_select' => ['required',Rule::in("登録済みクレジットカード","個別指定クレジットカード")],
+            'payment_select' => ['required',Rule::in('登録済みクレジットカード','個別指定クレジットカード')],
         ];
     }
     /**
@@ -62,19 +62,19 @@ class DeliveryPaymentCheckRequest extends FormRequest
     public function withValidator ($validator){
         #個別指定クレジットカードを指定した場合、以下のチェックを行う
         $validator->sometimes('card_number',['required','max:19','regex:/^[0-9-]+$/u'],function($input){
-            return $input->payment_select == "個別指定クレジットカード";
+            return $input->payment_select == '個別指定クレジットカード';
         });
         $validator->sometimes('card_month',['required','digits:2','regex:/^([0][1-9]|[1][0-2])+$/u'],function($input){
-            return $input->payment_select == "個別指定クレジットカード";
+            return $input->payment_select == '個別指定クレジットカード';
         });
         $validator->sometimes('card_year','required|digits:2',function($input){
-            return $input->payment_select == "個別指定クレジットカード";
+            return $input->payment_select == '個別指定クレジットカード';
         });
         $validator->sometimes('card_name',['required','max:50','regex:/^[a-zA-Z0-9-,. \/]+$/u'],function($input){
-            return $input->payment_select == "個別指定クレジットカード";
+            return $input->payment_select == '個別指定クレジットカード';
         });
         $validator->sometimes('card_security_code','required|digits_between:3,4',function($input){
-            return $input->payment_select == "個別指定クレジットカード";
+            return $input->payment_select == '個別指定クレジットカード';
         });
     }
 

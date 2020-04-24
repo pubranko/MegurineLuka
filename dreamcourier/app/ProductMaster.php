@@ -38,14 +38,14 @@ class ProductMaster extends Model
     public function productStockStatus(){
         $product_stock_quantity = $this->productStockList->product_stock_quantity;          #商品在庫数を取得
 
-        if($this->selling_discontinued_classification=="販売中止"){     #販売中止区分
-            $wk_product_stock_quantity_status = "販売中止";
+        if($this->selling_discontinued_classification=='販売中止'){     #販売中止区分
+            $wk_product_stock_quantity_status = '販売中止';
         }elseif($product_stock_quantity > 3){                           #商品在庫数
-            $wk_product_stock_quantity_status = "在庫あり";
+            $wk_product_stock_quantity_status = '在庫あり';
         }elseif($product_stock_quantity > 0){
-            $wk_product_stock_quantity_status = "在庫あとわずか！";
+            $wk_product_stock_quantity_status = '在庫あとわずか！';
         }else{
-            $wk_product_stock_quantity_status = "在庫なし";
+            $wk_product_stock_quantity_status = '在庫なし';
         }
 
         return $wk_product_stock_quantity_status;
@@ -55,12 +55,12 @@ class ProductMaster extends Model
      * 商品画像ファイルパス（クライアント側）
      */
     public function productImagePath(){
-        return str_replace("public","/storage",$this->product_image);
+        return str_replace('public','/storage',$this->product_image);
     }
     /**
      * 商品サムネイルファイルパス（クライアント側）
      */
     public function productThumbnailPath(){
-        return str_replace("public","/storage",$this->product_thumbnail);
+        return str_replace('public','/storage',$this->product_thumbnail);
     }
 }
