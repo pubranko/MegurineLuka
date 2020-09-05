@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+body {
+    // 会員向けページの全体のテーマカラー
+    background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226)) fixed;
+    margin    : 0em;
+    height    : 100%;
+}
+
+html {
+    height: 100%;
+
+}
+
+@import "_member_constants.scss"; //コンスタント値
+@import "_member_header.scss"; //ヘッダー
+@import "_member_sideber.scss"; //サイドバー
+@import "_member_center.scss"; //センター

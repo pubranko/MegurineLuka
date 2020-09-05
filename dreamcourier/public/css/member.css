@@ -1,285 +1,431 @@
-body {  /* 会員向けページの全体のテーマカラー */
-    background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226) ) fixed;
-    margin:0em;
-  }
-html, body{
-  height:100%;
+@charset "UTF-8";
+
+body {
+  background: -webkit-gradient(linear, left top, left bottom, from(#d6faff), to(#adc8e2)) fixed;
+  background: linear-gradient(#d6faff, #adc8e2) fixed;
+  margin: 0em;
+  height: 100%;
 }
+
+html {
+  height: 100%;
+}
+
 /* ヘッダー部の要素 */
-.header-box{
+
+.header-box {
   position: fixed;
-  z-index:9999;     /*boxが重なった場合、常に上に表示させるよう優先度を9999にしている*/
-  background:#97b2f0;
-  width:100%;
-  padding:0em 0em 0.5em 0.5em;
-  margin-bottom:2em;
-}
-.header-line{
-  display: inline;  /* リストを横に並べる */
-  font-size:1.1em;
-}
-.header-line li{  /* リストの間隔を調整 */
-  margin-right: 5px;
-}
-.title-font{
-  font-size:1.5em;
+  z-index: 9999;
+  background: #97b2f0;
+  width: 100%;
+  padding: 0em 0em 0.5em 0.5em;
+  margin-bottom: 2em;
 }
 
-/* ヘッダー部：サイトのメニューバーボタンの設定 */
-.btn-gradient-3d {
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  padding: 0.5em 0.5em;     /* ボタンの内側余白：上下、左右*/
-  text-decoration: none;  /* テキストの装飾：なし */
-  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
-  width: 200px;           /* ボタンの横幅位 */
-  height: 50px;           /* ボタンの高さ */
-  line-height: 50px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
-  text-align: center;     /* テキストの中央寄せ */
-  border-radius: 4px;     /* 角の丸み */
-  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
-  font-size:2em;          /* 文字サイズ*/
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
-  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
-  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
-  margin-top:10px;         /*メニューバーの上のマージン*/
-}
-.btn-gradient-3d:active {
-  -webkit-transform: translateY(4px); /* webkit：ブラウザーによっては、translateYが開発中の場合がある。webkitをつけるとそれが使える */
-  transform: translateY(4px);         /* translateY：縦方向に移動：下に4px動く */
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
-  border-bottom: none;  /* ボタン下辺の線の設定 */
+.header-line {
+  display: inline;
+  font-size: 1.1em li;
+  font-size-margin-right: 5px;
 }
 
-/* 会員登録時の、会員向けの説明用の枠の書式*/
-.mbr-message-box{ 
-  border:5px solid #FFCC33;
-  padding:10px;
-  background:#ffffcc;
-  font-size:20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  max-width: 1040px;
+.header-title-font {
+  font-size: 1.5em;
 }
-.mbr-register-box{
-  padding-top:3.5em;
 
-}
 /*サイドバーとコンテンツ（カテゴリー一覧、商品の詳細）を横に並べて表示させる*/
-.contents-flex{
-  display:flex;     /*横並び*/
+
+.contents-flex {
+  display: -webkit-box;
+  display: flex;
 }
+
 /*サイドバー*/
-.side-bar-box{
-  position: fixed;  /*表示位置を固定*/
-  width:10em;
-  height:100%;
-  margin-top:2em;
-  padding:0.2em 0em 0em 0.5em;
+
+.side-bar-box {
+  position: fixed;
+  width: 10em;
+  height: 100%;
+  margin-top: 2em;
+  padding: 0.2em 0em 0em 0.5em;
   flex-shrink: 0;
 }
-.side-bar-box > ul{
-  padding-left: 0;        /*リストの文字を左寄せ*/
+
+.side-bar-box > ul {
+  padding-left: 0;
 }
-.side-bar-box > ul > li{
-  list-style: none;       /*リストのマーカーの種類：なし*/
+
+.side-bar-box > ul > li {
+  list-style: none;
 }
-.center-box{
-  position: relative;     /*表示位置を相対位置にする*/
-  margin-top:3em;
-  margin-left:10em;
+
+/* センターボックス */
+
+.center-box {
+  position: relative;
+  margin-top: 3em;
+  margin-left: 10em;
 }
 
 /* カテゴリーの見出しの書式 */
-.category-message{ 
-  /*position: relative; /*ボックスの配置方法：相対位置*/
-  padding: 0.1em 0.5em; /*内側の余白*/
-  background: -webkit-linear-gradient(to right, rgb(255, 186, 115), transparent); /*背景色　webkit:古いブラウザー用*/
-  background: linear-gradient(to right, rgb(255, 186, 115), transparent);         /*背景色　グラデーション*/
-  color: #545454;   /*文字色*/
+
+.category-message {
+  padding: 0.1em 0.5em;
+  background: -webkit-gradient(linear, left top, right top, from(#ffba73), to(transparent));
+  background: linear-gradient(to right, #ffba73, transparent);
+  color: #545454;
   font-size: 2em;
   font-style: italic;
   font-weight: bold;
-  margin-top:0.2em;
-  margin-bottom:0.2em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
 }
+
 /* サムネイルとイメージのサイズ調整*/
-.img_product_thumbnail{
-  width: 160px;    /* 横幅を固定 */
-  height: auto;    /* 高さは自動指定 */
+
+.img_product_thumbnail {
+  width: 160px;
+  height: auto;
 }
-.img_product_image{
-  width: 480px;    /* 横幅を固定 */
-  height: auto;    /* 高さは自動指定 */
+
+.img_product_image {
+  width: 480px;
+  height: auto;
+}
+
+/*バリデーションエラーで表示される文言のフォント*/
+
+.help-block {
+  color: red;
 }
 
 /*各商品のboxを横に並べて表示する*/
-.product-contents{
-  overflow:hidden;    /*ボックスの範囲内に内容が収まらない場合に、はみ出た部分の表示の仕方：表示しない*/
-  margin:0 0 0 0;
-  padding:0;
-  padding-bottom:1em;
-  list-style:none;    /*リストのマーカーの種類：なし*/
+
+.product-contents {
+  overflow: hidden;
+  margin: 0 0 0 0;
+  padding: 0;
+  padding-bottom: 1em;
+  list-style: none;
 }
-.product-contents li{
-  float:left;                 /*要素を左から並べる*/
-  border:1px solid #dadada; /* #b0c4de*/
-  width:160px;                /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+
+.product-contents li {
+  float: left;
+  border: 1px solid #dadada;
+  width: 160px;
 }
-.product-contents img{
-  margin-bottom:0.0em;  /*サムネイルの下のマージン*/
+
+.product-contents img {
+  margin-bottom: 0em;
 }
-.product-contents-text{
-  margin-top:0em;       /*pタグの上余白をゼロ*/
-  margin-bottom:0em;    /*pタグの下余白をゼロ*/
-  text-align: center;   /*テキストの中央寄せ*/
-  /*white-space: nowrap;  /*改行を無効*/
-  /*overflow: hidden;     /*はみ出た文字を非表示*/
+
+.product-contents .product-contents-text {
+  margin-top: 0em;
+  margin-bottom: 0em;
+  text-align: center;
 }
 
 /*商品の詳細画面の書式*/
-.show-product-tag{
-  font-size:1.1em;
-  border:solid 2px black;
-  /*width:1057px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  /*min-width:20%;*/
-  max-width:1057px;
-  margin-top:0.5em;
-  margin-bottom:0.5em;
+
+.show-product-tag {
+  font-size: 1.1em;
+  border: solid 2px black;
+  max-width: 1057px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   border-left: solid 10px #6795fd;
 }
-.show-product-tag ul{  /* リストの間隔を調整 */
-  display: inline;  /* リストを横に並べる */
-  margin-left: -3%; /* 【商品タグ】とタグ名称の隙間を縮める*/
+
+.show-product-tag ul {
+  display: inline;
+  margin-left: -3%;
 }
-.show-product-tag ul li{  /* リストの間隔を調整 */
-  display: inline;  /* リストを横に並べる */
+
+.show-product-tag ul li {
+  display: inline;
   margin-right: 5px;
 }
 
-.show-product-image{
+.show-product-image {
   max-width: 480px;
-  height: auto;    /* 高さは自動指定 */
+  height: auto;
   margin-right: 10px;
 }
 
-.product-info{
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  vertical-align:top;     /*商品画像の右の情報を、上寄せにする*/
-}
-.show-product-name{
-  font-size:24px;
-  border:solid 2px black;
-  max-width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  height:100px;
-  margin-bottom:0.2em;
-  border-left: solid 10px #6795fd;
-
-}
-.show-product-description{
-  font-size:20px;
-  border:solid 2px black;
-  max-width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  height:300px;
-  margin-bottom:0.2em;
-  border-left: solid 10px #6795fd;
-}
-.show-product-code{
-  font-size:18px;
-  border:solid 2px black;
-  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  margin-bottom:0.3em;
-  border-left: solid 10px #6795fd;
-}
-.show-product-price{
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  font-size:18px;
-  border:solid 2px black;
-  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  margin-bottom:0.2em;
-  margin-right:10px;
-  border-left: solid 10px #6795fd;
-}
-.show-product-stock_quantity_status{
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  font-size:18px;
-  border:solid 2px black;
-  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  border-left: solid 10px #6795fd;
-}
-.show-product-botton {    /*ボタンの書式*/
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
-  text-decoration: none;  /* テキストの装飾：なし */
-  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
-  width: 150px;           /* ボタンの横幅位 */
-  height: 50px;           /* ボタンの高さ */
-  line-height: 27px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
-  text-align: center;     /* テキストの中央寄せ */
-  border-radius: 4px;     /* 角の丸み */
-  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
-  font-size:1.5em;          /* 文字サイズ*/
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
-  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
-  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
-  margin-top:10px;         /*メニューバーの上のマージン*/
-}
-.show-product-botton-add {    /*カートへ追加ボタンの書式*/
-  line-height: 45px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
+.product-info {
+  display: inline-block;
+  vertical-align: top;
 }
 
-.show-product-cartlist{
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  font-size:1.2em;
-  border:solid 2px black;
-  width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  height:100px;
-  margin-bottom:5px;
+.show-product-name {
+  font-size: 2em;
+  border: solid 2px black;
+  max-width: 574px;
+  height: 100px;
+  margin-bottom: 0.2em;
   border-left: solid 10px #6795fd;
 }
 
-/*商品*/
-.cartlists-product-name{
-  font-size:1.1em;
-  border:solid 2px black;
-  max-width:574px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  height:95px;
-  margin-bottom:5px;
+.show-product-description {
+  font-size: 2em;
+  border: solid 2px black;
+  max-width: 574px;
+  height: 300px;
+  margin-bottom: 0.2em;
   border-left: solid 10px #6795fd;
 }
-.cartlists-product-code{
-  font-size:1em;
-  border:solid 2px black;
-  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  margin-bottom:5px;
+
+.show-product-code {
+  font-size: 1.5em;
+  border: solid 2px black;
+  min-width: 270px;
+  margin-bottom: 0.3em;
   border-left: solid 10px #6795fd;
 }
-.cartlists-product-price{
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  font-size:1em;
-  border:solid 2px black;
-  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
-  margin-bottom:5px;
-  margin-right:10px;
+
+.show-product-price {
+  display: inline-block;
+  font-size: 1.5em;
+  border: solid 2px black;
+  min-width: 270px;
+  margin-bottom: 0.2em;
+  margin-right: 10px;
   border-left: solid 10px #6795fd;
 }
-.cartlists-product-stock_quantity_status{
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  font-size:1em;
-  border:solid 2px black;
-  min-width:270px;      /*box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる*/
+
+.show-product-stock_quantity_status {
+  display: inline-block;
+  font-size: 1.5em;
+  border: solid 2px black;
+  min-width: 270px;
   border-left: solid 10px #6795fd;
+}
+
+.show-product-botton {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  font-weight: bold;
+  width: 150px;
+  height: 50px;
+  line-height: 27px;
+  text-align: center;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5em;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6795fd), to(#67ceff));
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #5e7fca;
+  margin-top: 10px;
+}
+
+.show-product-botton-add {
+  line-height: 45px;
+}
+
+.show-product-cartlist {
+  display: inline-block;
+  font-size: 1.2em;
+  border: solid 2px black;
+  width: 574px;
+  height: 100px;
+  margin-bottom: 5px;
+  border-left: solid 10px #6795fd;
+}
+
+/*カートリスト*/
+
+.cartlists-product-name {
+  font-size: 1.1em;
+  border: solid 2px black;
+  max-width: 574px;
+  height: 95px;
+  margin-bottom: 5px;
+  border-left: solid 10px #6795fd;
+}
+
+.cartlists-product-code {
+  font-size: 1em;
+  border: solid 2px black;
+  min-width: 270px;
+  margin-bottom: 5px;
+  border-left: solid 10px #6795fd;
+}
+
+.cartlists-product-price {
+  display: inline-block;
+  font-size: 1em;
+  border: solid 2px black;
+  min-width: 270px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  border-left: solid 10px #6795fd;
+}
+
+.cartlists-product-stock_quantity_status {
+  display: inline-block;
+  font-size: 1em;
+  border: solid 2px black;
+  min-width: 270px;
+  border-left: solid 10px #6795fd;
+}
+
+/*カート一覧、購入手続き画面のコンテンツボックス*/
+
+.content-left-box {
+  position: absolute;
+  margin-top: 3em;
+  margin-left: 1em;
+}
+
+/*カート一覧画面の枠調整*/
+
+.cart-lists-box {
+  margin-top: 10px;
+  border: groove 6px #5e7fca;
+  padding: 5px;
+  max-width: 950px;
+}
+
+/*カート一覧画面のボタン*/
+
+.cartlists-button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  font-weight: bold;
+  width: 150px;
+  height: 50px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5em;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6795fd), to(#67ceff));
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #5e7fca;
+  margin-top: 10px;
+}
+
+.cartlists-button2 {
+  display: block;
+  height: 30px;
+  line-height: 35px;
+}
+
+.delivery-button {
+  padding: 0.5em 1em;
+  text-decoration: none;
+  font-weight: bold;
+  width: 250px;
+  height: 50px;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5em;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6795fd), to(#67ceff));
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #5e7fca;
+  margin-top: 10px;
+}
+
+/*配達先情報の入力ボックス*/
+
+.delivery-Individual-box {
+  margin-top: 5px;
+  margin-left: 25px;
+  border: solid 2px #b6acac;
+  max-width: 650px;
+  padding: 10px;
+}
+
+.delivery-Individual-box > p {
+  margin-top: -5px;
+  margin-bottom: 2px;
+  font-size: 1.2em;
+  font: bold;
+}
+
+/*入力フィールドの書式 id指定*/
+
+#receiver_name,
+#last_name,
+#first_name,
+#last_name_kana,
+#first_name_kana {
+  width: 500px;
+}
+
+#postal_code1,
+#postal_code2 {
+  width: 40px;
+}
+
+#address1 {
+  width: 80px;
+}
+
+#address2,
+#address3,
+#address4,
+#address5,
+#address6 {
+  width: 500px;
+}
+
+#phone_number1,
+#phone_number2,
+#phone_number3,
+#card_security_code,
+#birthday_year,
+#birthday_month,
+#birthday_day {
+  width: 50px;
+}
+
+#card_number {
+  width: 160px;
+}
+
+/*購入手続き（確認）画面*/
+
+.delivery_check {
+  margin-left: 1em;
+}
+
+/*購入手続き（確認）のテーブル書式*/
+
+.delivery_check_table {
+  border-collapse: collapse;
+  margin-top: 10px;
+  border: groove 6px #5e7fca;
+  padding: 5px;
+  max-width: 950px;
+}
+
+.delivery_check_table .delivery_check_table > tr th td {
+  border-collapse: collapse;
+  border: 1px solid black;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 /*ページネーションの設定*/
+
 .pagination {
   display: -webkit-box;
   display: flex;
   padding-left: 0;
-  list-style: none;       /*リストのマーカーの種類：なし*/
+  list-style: none;
   border-radius: 0.25rem;
 }
+
 .page-link {
   position: relative;
   display: block;
@@ -290,6 +436,7 @@ html, body{
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
+
 .page-link:hover {
   z-index: 2;
   color: #1d68a7;
@@ -297,26 +444,31 @@ html, body{
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
+
 .page-link:focus {
   z-index: 3;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
+
 .page-item:first-child .page-link {
   margin-left: 0;
   border-top-left-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
 }
+
 .page-item:last-child .page-link {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
+
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
   background-color: #3490dc;
   border-color: #3490dc;
 }
+
 .page-item.disabled .page-link {
   color: #6c757d;
   pointer-events: none;
@@ -325,119 +477,19 @@ html, body{
   border-color: #dee2e6;
 }
 
-/*カート一覧、購入手続き画面のコンテンツボックス*/
-.content-left-box{
-  position: absolute;
-  margin-top:3em;/**/
-  margin-left:1em;/**/
+/* 会員登録時の、会員向けの説明用の枠の書式*/
+
+.mbr-message-box {
+  border: 5px solid #FFCC33;
+  padding: 10px;
+  background: #ffffcc;
+  font-size: 2em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 1040px;
 }
 
-/*カート一覧画面の枠調整*/
-.cart-lists-box{
-  margin-top:10px;
-  border:groove 6px #5e7fca;
-  padding: 5px;
-  max-width:950px;
-}
-/*カート一覧画面のボタン*/
-.cartlists-button {       /*ボタンの書式*/
-  display: inline-block;  /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
-  text-decoration: none;  /* テキストの装飾：なし */
-  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
-  width: 150px;           /* ボタンの横幅位 */
-  height: 50px;           /* ボタンの高さ */
-  line-height: 45px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
-  text-align: center;     /* テキストの中央寄せ */
-  border-radius: 4px;     /* 角の丸み */
-  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
-  font-size:1.5em;          /* 文字サイズ*/
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
-  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
-  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
-  margin-top:10px;         /*メニューバーの上のマージン*/
-}
-.cartlists-button2 {      /*ボタンの書式*/
-  display: block;         /*要素を横に並べる＆ブロックにする＆隙間有り*/
-  height: 30px;           /* ボタンの高さ */
-  line-height: 35px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
-}
-
-.delivery-button{
-  padding: 0.5em 1em;     /* ボタンの内側余白：上下、左右*/
-  text-decoration: none;  /* テキストの装飾：なし */
-  font-weight: bold;      /* フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400） */
-  width: 250px;           /* ボタンの横幅位 */
-  height: 50px;           /* ボタンの高さ */
-  line-height: 25px;      /* ボタンの上辺からの位置：0で上辺と文字が重なる */
-  text-align: center;     /* テキストの中央寄せ */
-  border-radius: 4px;     /* 角の丸み */
-  color: rgba(255, 255, 255, 0.90);  /* 文字色 */
-  font-size:1.5em;          /* 文字サイズ*/
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);  /* テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)*/
-  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);  /* ボタンの背景色：線形グラデーション*/
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);  /* ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29) */
-  border-bottom: solid 3px #5e7fca; /* ボタン下辺の線の設定 */
-  margin-top:10px;         /*メニューバーの上のマージン*/
-
-}
-/*バリデーションエラーで表示される文言のフォント*/
-.help-block{
-  color: red;
-}
-
-/*配達先情報の入力ボックス*/
-.delivery-Individual-box{
-  margin-top:5px;
-  margin-left:25px;
-  border:solid 2px #b6acac;
-  max-width:650px;
-  padding:10px;
-}
-.delivery-Individual-box > p{
-  margin-top:-5px;
-  margin-bottom:2px;
-  font-size:1.2em;
-  font:bold;
-}
-
-/*入力フィールドの書式 id指定*/
-#receiver_name,#last_name,#first_name,#last_name_kana,#first_name_kana{
-  width:500px;
-}
-#postal_code1,#postal_code2{
-  width:40px;
-}
-#address1{
-  width:80px;
-}
-#address2,#address3,#address4,#address5,#address6{
-  width:500px;
-}
-#phone_number1,#phone_number2,#phone_number3,#card_security_code,#birthday_year,#birthday_month,#birthday_day{
-  width:50px;
-}
-#card_number{
-  width:160px;
-}
-
-/*購入手続き（確認）画面*/
-.delivery_check{
-  margin-left:1em;
-}
-/*購入手続き（確認）のテーブル書式*/
-.delivery_check_table{
-  border-collapse: collapse;
-  margin-top:10px;
-  border:groove 6px #5e7fca;
-  padding: 5px;
-  max-width:950px;
-}
-.delivery_check_table > tr,th,td{
-  border-collapse: collapse;
-  border:1px solid black;
-  padding-left: 1em;
-  padding-right: 1em;
+.mbr-register-box {
+  padding-top: 3.5em;
 }
 

@@ -1,0 +1,21 @@
+/* ヘッダー部の要素 */
+.header-box {
+    position     : fixed;
+    z-index      : 9999; //boxが重なった場合、常に上に表示させるよう優先度を9999にしている
+    background   : #97b2f0;
+    width        : 100%;
+    padding      : 0em 0em 0.5em 0.5em;
+    margin-bottom: 2em;
+}
+
+.header-line {
+    display: inline; //リストを横に並べる
+
+    font-size: map-get($text_font_size, md2) li {
+        margin-right: 5px; //リストの間隔を調整
+    }
+}
+
+.header-title-font {
+    font-size: map-get($text_font_size, lg1);
+}

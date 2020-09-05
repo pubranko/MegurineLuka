@@ -1,0 +1,61 @@
+/* センターボックス */
+.center-box {
+    position   : relative; //表示位置を相対位置にする
+    margin-top : 3em;
+    margin-left: 10em;
+}
+
+/* カテゴリーの見出しの書式 */
+.category-message {
+    //position: relative; //ボックスの配置方法：相対位置
+    padding      : 0.1em 0.5em; //内側の余白
+    background   : -webkit-linear-gradient(to right, rgb(255, 186, 115), transparent); //背景色　webkit:古いブラウザー用
+    background   : linear-gradient(to right, rgb(255, 186, 115), transparent); //背景色　グラデーション
+    color        : #545454; //文字色
+    font-size    : $font_size_midasi_2;
+    font-style   : italic;
+    font-weight  : bold;
+    margin-top   : 0.2em;
+    margin-bottom: 0.2em;
+}
+
+/* サムネイルとイメージのサイズ調整*/
+.img_product_thumbnail {
+    width : 160px; // 横幅を固定
+    height: auto; // 高さは自動指定
+}
+
+.img_product_image {
+    width : 480px; // 横幅を固定
+    height: auto; // 高さは自動指定
+}
+
+/*バリデーションエラーで表示される文言のフォント*/
+.help-block {
+    color: red;
+}
+
+@import "_member_center_product_list.scss"; //商品一覧
+@import "_member_center_product_show.scss"; //商品詳細
+@import "_member_center_cart_list.scss"; //カートリスト
+@import "_member_center_delivery.scss"; //購入手続き
+@import "_member_center_pagination.scss"; //購入手続き
+
+//
+//
+//
+//
+/* 会員登録時の、会員向けの説明用の枠の書式*/
+.mbr-message-box {
+    border       : 5px solid #FFCC33;
+    padding      : 10px;
+    background   : #ffffcc;
+    font-size    : map-get($text_font_size, lg2);
+    margin-top   : 10px;
+    margin-bottom: 10px;
+    max-width    : 1040px;
+}
+
+.mbr-register-box {
+    padding-top: 3.5em;
+}
