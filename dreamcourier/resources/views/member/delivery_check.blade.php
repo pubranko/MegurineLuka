@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-left-box">
-    <div class="mbr-message-box">
+    <div class="c-message-type1">
         下記の内容でお間違えがないでしょうか？<br/>
         ご確認の上、「上記の内容で購入」ボタンを押してください。
         @foreach($errors->all() as $error)
@@ -14,7 +14,7 @@
     <p>◎商品情報</p>
     <div class="delivery_check">
         <div class="cart-lists-box">
-            <img class="img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
+            <img class="c-img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
             <div class="product-info">
                 <div class="cartlists-product-name">
                     <a>【商品名】{{$wk_product['product_name']}}</a>
@@ -72,13 +72,13 @@
     <form id="member-address-form" method="POST" action="{{ url('/member/delivery_register') }}">
         {{ csrf_field() }}
         <div class="form-group">
-            <button type="submit" class="delivery-button">
+            <button type="submit" class="c-button-type1-4">
                 上記の内容で購入
             </button>
         </div>
     </form>
     <div class="col-md-6">
-        <button class="delivery-button" type="button" onclick=history.back()>戻る</button>
+        <button class="c-button-type1-4" type="button" onclick=history.back()>戻る</button>
     </div>
 </div>
 @endsection

@@ -1,12 +1,12 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="container mbr-register-box">
+<div class="container l-mbr-register-box">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">夢の宅配便　会員新規登録（入力）</div>
-                <div class="mbr-message-box">
+                <div class="c-message-type1">
                     以下の会員登録に必要な情報を入力してください。
                 </div>
 
@@ -22,7 +22,7 @@
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -38,7 +38,7 @@
                                 <input id="last_name" type="text" class="form-control" name="last_name" value={{old('last_name')}}>
 
                                 @if ($errors->has('last_name'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
                                 @endif
@@ -52,7 +52,7 @@
                                 <input id="first_name" type="text" class="form-control" name="first_name" value={{old('first_name')}}>
 
                                 @if ($errors->has('first_name'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
@@ -67,7 +67,7 @@
                                 <input id="last_name_kana" type="text" class="form-control" name="last_name_kana" value={{old('last_name_kana')}}>
 
                                 @if ($errors->has('last_name_kana'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('last_name_kana') }}</strong>
                                     </span>
                                 @endif
@@ -82,7 +82,7 @@
                                 <input id="first_name_kana" type="text" class="form-control" name="first_name_kana" value={{old('first_name_kana')}}>
 
                                 @if ($errors->has('first_name_kana'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('first_name_kana') }}</strong>
                                     </span>
                                 @endif
@@ -114,27 +114,27 @@
                                 /
                                 <input id="birthday_day" type="text" class="form-control" name="birthday_day" value={{old('birthday_day')}}>
                                 @if ($errors->has('birthday_era'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('birthday_era') }}</strong>
                                     </span>
                                 @elseif($errors->has('birthday_year'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('birthday_year') }}</strong>
                                     </span>
                                 @elseif($errors->has('birthday_month'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('birthday_month') }}</strong>
                                     </span>
                                 @elseif($errors->has('birthday_day'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('birthday_day') }}</strong>
                                     </span>
                                 @elseif($errors->has('wk_birthday_ymd'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('wk_birthday_ymd') }}</strong>
                                     </span>
                                 @elseif($errors->has('wk_birthday_era_ymd'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('wk_birthday_era_ymd') }}</strong>
                                     </span>
                                 @endif
@@ -153,7 +153,7 @@
                                 <input type="radio" name="sex" value="女性" @if(old('sex')=='女性') checked @endif>女性
 
                                 @if ($errors->has('sex'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('sex') }}</strong>
                                     </span>
                                 @endif
@@ -170,11 +170,11 @@
                                 -
                                 <input id="postal_code2" type="text" class="form-control" name="postal_code2" value={{old('postal_code2')}}>
                                 @if ($errors->has('postal_code1'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('postal_code1') }}</strong>
                                     </span>
                                 @elseif ($errors->has('postal_code2'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('postal_code2') }}</strong>
                                     </span>
                                 @endif
@@ -191,7 +191,7 @@
                                 <input id="address1" type="text" class="form-control" name="address1" readonly value={{old('address1')}}>
 
                                 @if ($errors->has('address1'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('address1') }}</strong>
                                     </span>
                                 @endif
@@ -206,7 +206,7 @@
                                 <input id="address2" type="text" class="form-control" name="address2" readonly value={{old('address2')}}>
 
                                 @if ($errors->has('address2'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('address2') }}</strong>
                                     </span>
                                 @endif
@@ -221,7 +221,7 @@
                                 <input id="address3" type="text" class="form-control" name="address3" readonly value={{old('address3')}}>
 
                                 @if ($errors->has('address3'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('address3') }}</strong>
                                     </span>
                                 @endif
@@ -236,7 +236,7 @@
                                 <input id="address4" type="text" class="form-control" name="address4" value={{old('address4')}}>
 
                                 @if ($errors->has('address4'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('address4') }}</strong>
                                     </span>
                                 @endif
@@ -251,7 +251,7 @@
                                 <input id="address5" type="text" class="form-control" name="address5" value={{old('address5')}}>
 
                                 @if ($errors->has('address5'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('address5') }}</strong>
                                     </span>
                                 @endif
@@ -266,7 +266,7 @@
                                 <input id="address6" type="text" class="form-control" name="address6" value={{old('address6')}}>
 
                                 @if ($errors->has('address6'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('address6') }}</strong>
                                     </span>
                                 @endif
@@ -287,15 +287,15 @@
                                 <input id="phone_number3" type="text" class="form-control" name="phone_number3" value={{old('phone_number3')}}>
 
                                 @if ($errors->has('phone_number1'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('phone_number1') }}</strong>
                                     </span>
                                 @elseif ($errors->has('phone_number2'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('phone_number2') }}</strong>
                                     </span>
                                 @elseif ($errors->has('phone_number3'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('phone_number3') }}</strong>
                                     </span>
                                 @endif

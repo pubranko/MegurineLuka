@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-left-box">
-    <div class="mbr-message-box">
+    <div class="c-message-type1">
         商品の支払い方法を指定してください。
     </div>
 
@@ -14,7 +14,7 @@
             <input type="radio" name="payment_select" value="登録済みクレジットカード" checked @if(old('payment_select')=='登録済みクレジットカード') checked @endif>登録済みクレジットカード<br/>
             <input type="radio" name="payment_select" value="個別指定クレジットカード" @if(old('payment_select')=='個別指定クレジットカード') checked @endif>個別指定・クレジットカード情報入力
             @if ($errors->has('payment_select'))
-                <span class="help-block">
+                <span class="c-help-block">
                     <strong>{{ $errors->first('payment_select') }}</strong>
                 </span>
             @endif
@@ -31,7 +31,7 @@
                     <input id="card_number" type="text" class="form-control" name="card_number" value={{old('card_number')}}>
 
                     @if ($errors->has('card_number'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('card_number') }}</strong>
                         </span>
                     @endif
@@ -66,11 +66,11 @@
                         @endforeach
                     </select>
                     @if ($errors->has('card_month'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('card_month') }}</strong>
                         </span>
                     @elseif($errors->has('card_year'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('card_year') }}</strong>
                         </span>
                     @endif
@@ -85,7 +85,7 @@
                     <a>　必須　</a>
                     <input id="card_name" type="text" class="form-control" name="card_name" value="{{old('card_name')}}">
                     @if ($errors->has('card_name'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('card_name') }}</strong>
                         </span>
                     @endif
@@ -98,7 +98,7 @@
                     <a>　必須　</a>
                     <input id="card_security_code" type="text" class="form-control" name="card_security_code" value="{{old('card_security_code')}}">
                     @if ($errors->has('card_security_code'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('card_security_code') }}</strong>
                         </span>
                     @endif
@@ -106,13 +106,13 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="delivery-button">
+            <button type="submit" class="c-button-type1-4">
                 確認画面へ
             </button>
         </div>
     </form>
     <div class="col-md-6">
-        <button class="delivery-button" type="button" onclick=history.back()>戻る</button>
+        <button class="c-button-type1-4" type="button" onclick=history.back()>戻る</button>
     </div>
 </div>
 @endsection

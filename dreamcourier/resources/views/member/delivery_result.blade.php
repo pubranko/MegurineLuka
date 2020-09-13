@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-left-box">
-    <div class="mbr-message-box">
+    <div class="c-message-type1">
         お買い上げいただきまして、ありがとうございます。<br/>
         ご希望いただきました配達日時に商品をお届けいたします。
     </div>
@@ -16,7 +16,7 @@
     <p>◎商品情報</p>
     <div class="delivery_check">
         <div class="cart-lists-box">
-            <img class="img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
+            <img class="c-img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
             <div class="product-info">
                 <div class="cartlists-product-name">
                     <a>【商品名】{{$wk_product['product_name']}}</a>

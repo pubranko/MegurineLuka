@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+/*
+* foundation/base.css
+*/
+html {
+    height: 100%;
+    margin: 0em;
+
+}
+
+body {
+    margin : 0em;
+    height : 100%;
+
+    @if $site_division=="member" {
+        // 会員向けページの全体のテーマカラー
+        background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226)) fixed;
+    }
+
+}

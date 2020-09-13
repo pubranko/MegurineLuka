@@ -1,4 +1,4 @@
-<div class=side-bar-box>
+<div class=l-side-bar-box>
     <ul>
         <li><b>＜カテゴリー＞</b></li>
         @if (Auth::guest())

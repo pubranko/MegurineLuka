@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class=contents-flex>
+<div class=l-contents-flex>
     @include('member.subviews.side_bar')
 
-    <div class=center-box>
+    <div class=l-center-box>
         @foreach($wk_lists as $list)
-            <p class="category-message">{{$list["introduction_tag"]}}</p>
+            <p class="c-category-message">{{$list["introduction_tag"]}}</p>
             <ul class="product-contents">
                 @foreach ($list["wk_products"] as $wk_product)
                     @if (Auth::guest())
@@ -16,7 +16,7 @@
                         <a href="{{ url('/member/show?id='.$wk_product["id"]) }}">
                     @endif
                     <li>
-                        <div><img class="img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}"></div>
+                        <div><img class="c-img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}"></div>
                         <p class="product-contents-text">{{$wk_product["product_code"]}}</p>
                         <p class="product-contents-text">{{$wk_product["product_name"]}}</p>
                         <p class="product-contents-text">{{$wk_product["product_price"]}} 円</p>

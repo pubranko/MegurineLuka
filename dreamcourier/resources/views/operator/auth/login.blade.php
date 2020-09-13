@@ -32,7 +32,7 @@
                                 <input id="password" type="password" class="form-control" name="password">
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif

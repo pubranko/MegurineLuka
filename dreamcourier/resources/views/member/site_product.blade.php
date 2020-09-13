@@ -1,10 +1,10 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class=contents-flex>
+<div class=l-contents-flex>
     @include('member.subviews.side_bar')
 
-    <div class=center-box>
+    <div class=l-center-box>
         <div class="show-product-tag">
             <a>【商品タグ】</a>
             <ul>
@@ -20,7 +20,7 @@
             </ul>
         </div>
 
-        <img class="show-product-image" src="{{url($wk_product["wk_product_image"])}}">
+        <img class="c-img_product_image" src="{{url($wk_product["wk_product_image"])}}">
 
         <div class="product-info">
             <div class="show-product-name">
@@ -43,7 +43,7 @@
         <div>
             @if (Auth::guest())
             @else
-                <div class="show-product-botton show-product-botton-add" >
+                <div class="c-button-type1-2" >
                     <a  @if($wk_product["wk_product_stock_quantity_status"] == "販売中止") 
                         @elseif($wk_product["wk_product_stock_quantity_status"] == "在庫なし") 
                         @else
@@ -53,13 +53,13 @@
                     </a>
                 </div>
                 @isset ($wk_product["cart_add_flg"])
-                    <div class="show-product-botton show-product-botton-add" >
+                    <div class="c-button-type1-2" >
                         <a  href="/member/cart_index">購入手続きへ</a>
                     </div>
                 @endisset
             @endif
             <div>
-                <button  class="show-product-botton" type="button" onclick=history.back()>戻る</button>
+                <button  class="c-button-type1-1" type="button" onclick=history.back()>戻る</button>
             </div>
         </div>
     </div>

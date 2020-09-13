@@ -20,7 +20,7 @@
                                 <input id="product_code" type="text" class="form-control" name="product_code" value="{{ old('product_code') }}">
 
                                 @if ($errors->has('product_code'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_code') }}</strong>
                                     </span>
                                 @endif
@@ -35,7 +35,7 @@
                                 <input id="product_name" type="text" class="form-control" name="product_name" value={{old('product_name')}}>
 
                                 @if ($errors->has('product_name'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_name') }}</strong>
                                     </span>
                                 @endif
@@ -50,7 +50,7 @@
                                 <input id="product_description" type="text" class="form-control" name="product_description" value={{old('product_description')}}>
 
                                 @if ($errors->has('product_description'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_description') }}</strong>
                                     </span>
                                 @endif
@@ -65,7 +65,7 @@
                                 <input id="product_price" type="text" class="form-control" name="product_price" value={{old('product_price')}}>
 
                                 @if ($errors->has('product_price'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_price') }}</strong>
                                     </span>
                                 @endif
@@ -80,7 +80,7 @@
                                 <input id="product_thumbnail" type="file" class="form-control" name="product_thumbnail">
 
                                 @if ($errors->has('product_thumbnail'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_thumbnail') }}</strong>
                                     </span>
                                 @endif
@@ -95,7 +95,7 @@
                                 <input id="product_image" type="file" class="form-control" name="product_image">
 
                                 @if ($errors->has('product_image'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_image') }}</strong>
                                     </span>
                                 @endif
@@ -110,7 +110,7 @@
                                 <input id="product_search_keyword" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
 
                                 @if ($errors->has('product_search_keyword'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_search_keyword') }}</strong>
                                     </span>
                                 @endif
@@ -125,7 +125,7 @@
                                 <input id="product_tag" type="text" class="form-control" name="product_tag" value={{old('product_tag')}}>
 
                                 @if ($errors->has('product_tag'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('product_tag') }}</strong>
                                     </span>
                                 @endif
@@ -143,15 +143,15 @@
                                 <input id="sales_period_from" type="time" class="form-control" name="sales_period_time_from" value={{old('sales_period_time_from')}}>
 
                                 @if ($errors->has('sales_period_date_from'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('sales_period_date_from') }}</strong>
                                     </span>
                                 @elseif ($errors->has('sales_period_time_from'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('sales_period_time_from') }}</strong>
                                     </span>
                                 @elseif ($errors->has('wk_sales_period_from'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('wk_sales_period_from') }}</strong>
                                     </span>
                                 @endif
@@ -171,15 +171,15 @@
                                 <input id="sales_period_to" type="time" class="form-control" name="sales_period_time_to" value={{old('sales_period_time_to')}}>
 
                                 @if ($errors->has('sales_period_date_to'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('sales_period_date_to') }}</strong>
                                     </span>
                                 @elseif ($errors->has('sales_period_time_to'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('sales_period_time_to') }}</strong>
                                     </span>
                                 @elseif ($errors->has('wk_sales_period_to'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('wk_sales_period_to') }}</strong>
                                     </span>
                                 @endif

@@ -1,0 +1,22 @@
+/*サイドバーとコンテンツ（カテゴリー一覧、商品の詳細）を横に並べて表示させる*/
+.l-contents-flex {
+    display: flex; //横並び
+}
+
+/*サイドバー*/
+.l-side-bar-box {
+    position   : fixed; //表示位置を固定
+    width      : 10em;
+    height     : 100%;
+    margin-top : 2em;
+    padding    : 0.2em 0em 0em 0.5em;
+    flex-shrink: 0;
+
+    >ul {
+        padding-left: 0; //リストの文字を左寄せ
+    }
+
+    >ul>li {
+        list-style: none; //リストのマーカーの種類：なし
+    }
+}

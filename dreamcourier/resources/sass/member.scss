@@ -1,18 +1,113 @@
 @charset "UTF-8";
 
-body {
-    // 会員向けページの全体のテーマカラー
-    background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226)) fixed;
-    margin    : 0em;
-    height    : 100%;
-}
+// body {
+//     // 会員向けページの全体のテーマカラー
+//     background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226)) fixed;
+//     margin    : 0em;
+//     height    : 100%;
+// }
 
-html {
-    height: 100%;
+// html {
+//     height: 100%;
 
-}
+// }
 
-@import "_member_constants.scss"; //コンスタント値
-@import "_member_header.scss"; //ヘッダー
-@import "_member_sideber.scss"; //サイドバー
-@import "_member_center.scss"; //センター
+// @import "_member_constants.scss"; //コンスタント値
+// @import "_member_header.scss"; //ヘッダー
+// @import "_member_sideber.scss"; //サイドバー
+// @import "_member_center.scss"; //センター
+
+
+// ================================================================
+// member向けか、operator向けのどちらで動いているか示す区分
+// ================================================================
+$site_division: "member";
+
+// ===============================================================
+// Foundation
+// ===============================================================
+@import "foundation/_mixins";
+@import "foundation/_variable";
+
+// --------------------------------------------
+// Reset
+// --------------------------------------------
+@import "foundation/_reset";
+
+// --------------------------------------------
+// Base
+// --------------------------------------------
+@import "foundation/_base";
+
+// ===============================================================
+// Layout
+// ===============================================================
+
+@import "layout/_member_header";
+@import "layout/_member_footer";
+@import "layout/_member_main";
+@import "layout/_member_sideber";
+@import "layout/_member_product_list.scss"; //商品一覧
+@import "layout/_member_product_show.scss"; //商品詳細
+@import "layout/_member_cart_list.scss";    //カートリスト
+@import "layout/_member_delivery.scss";     //購入手続き
+
+// ===============================================================
+// Object
+// ===============================================================
+@import "object/project/_member_pagination.scss";   //ページネーション
+
+
+// --------------------------------------------
+// Component
+// --------------------------------------------
+// ボタン　type1〜3,4あたり。mixinsとどう分ける？
+@import "object/component/_button.scss";
+@import "object/component/_message.scss";
+@import "object/component/_image_size.scss";
+// default
+// @import "object/component/heading";
+// @import "object/component/label";
+// @import "object/component/tab";
+// @import "object/component/media";
+// @import "object/component/search";
+// @import "object/component/form";
+// @import "object/component/pagenation";
+// @import "object/component/link";
+// @import "object/component/table";
+// @import "object/component/text";
+// @import "object/component/button";
+// ab1
+// @import "object/component/ab1-heading";
+// @import "object/component/ab1-text";
+
+// --------------------------------------------
+// Project
+// --------------------------------------------
+// default
+// @import "object/project/header";
+// @import "object/project/footer";
+// @import "object/project/top";
+// @import "object/project/main";
+// @import "object/project/side";
+// @import "object/project/news";
+// @import "object/project/gallery";
+// @import "object/project/search";
+// @import "object/project/ranking";
+// @import "object/project/special";
+// ab1
+// @import "object/project/ab1-special";
+
+// --------------------------------------------
+// Utility
+// --------------------------------------------
+// @import "object/utility/typography";
+// @import "object/utility/dimension";
+// @import "object/utility/spaces";
+// @import "object/utility/display";
+// @import "object/utility/position";
+// @import "object/utility/state";
+// @import "object/utility/media_float";
+// @import "object/utility/clearfix";
+// @import "object/utility/img_replacement";
+// @import "object/utility/misc";

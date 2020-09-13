@@ -1,0 +1,79 @@
+/*配達先情報の入力ボックス*/
+.delivery-Individual-box {
+    margin-top : 5px;
+    margin-left: 25px;
+    padding    : 10px;
+    border     : solid 2px #b6acac;
+    max-width  : 650px;
+
+
+    >p {
+        margin-top   : -5px;
+        margin-bottom: 2px;
+        font-size    : map-get($text_font_size, md3);
+        font         : bold;
+    }
+}
+
+/*入力フィールドの書式 id指定*/
+#receiver_name,
+#last_name,
+#first_name,
+#last_name_kana,
+#first_name_kana {
+    width: 500px;
+}
+
+#postal_code1,
+#postal_code2 {
+    width: 40px;
+}
+
+#address1 {
+    width: 80px;
+}
+
+#address2,
+#address3,
+#address4,
+#address5,
+#address6 {
+    width: 500px;
+}
+
+#phone_number1,
+#phone_number2,
+#phone_number3,
+#card_security_code,
+#birthday_year,
+#birthday_month,
+#birthday_day {
+    width: 50px;
+}
+
+#card_number {
+    width: 160px;
+}
+
+/*購入手続き（確認）画面*/
+.delivery_check {
+    margin-left: 1em;
+}
+
+/*購入手続き（確認）のテーブル書式*/
+
+.delivery_check_table {
+
+    margin-top     : 10px;
+    padding        : 5px;
+    max-width      : 950px;
+    border         : groove 6px #5e7fca;
+    border-collapse: collapse;
+
+    .delivery_check_table>tr th td {
+        padding-left   : 1em;
+        padding-right  : 1em;
+        border         : 1px solid black;
+        border-collapse: collapse;
+    }
+}

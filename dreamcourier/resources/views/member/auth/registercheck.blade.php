@@ -1,12 +1,12 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="container mbr-register-box">
+<div class="container l-mbr-register-box">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">夢の宅配便　会員新規登録（確認）</div>
-                <div class="mbr-message-box">
+                <div class="c-message-type1">
                     以下の内容で会員登録を行います。　問題がなければ、ログインに使用するパスワードを入力し、
                     「上記の内容で入会する」ボタンを押してください。
                 </div>
@@ -17,7 +17,7 @@
                             <div class="col-md-6">
                                 <a>　{{ $email }}　</a>
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -112,7 +112,7 @@
                                 <a>　{{$phone_number1}} - {{$phone_number2}} - {{$phone_number3}}　</a>
                             </div>
 
-                        <div class="mbr-message-box">
+                        <div class="c-message-type1">
                             上記の内容で問題がなければ、ログインに使用するパスワードを入力し、
                             「上記の内容で入会する」ボタンを押してください。
                         </div>
@@ -131,7 +131,7 @@
                                 <input id="password" type="password" class="form-control" name="password" value="">
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
@@ -146,7 +146,7 @@
                                 <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" value="" >
 
                                 @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
+                                    <span class="c-help-block">
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif

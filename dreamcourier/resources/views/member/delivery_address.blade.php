@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-left-box">
-    <div class="mbr-message-box">
+    <div class="c-message-type1">
         商品のお届け先を指定してください。
     </div>
 
@@ -15,7 +15,7 @@
                 <input type="radio" name="address_select" value="登録済み住所" checked @if(old('address_select')=='登録済み住所') checked @endif>登録されている住所へ配送する<br/>
                 <input type="radio" name="address_select" value="個別指定住所" @if(old('address_select')=='個別指定住所') checked @endif>配達先を指定する
                 @if ($errors->has('address_select'))
-                <span class="help-block">
+                <span class="c-help-block">
                     <strong>{{ $errors->first('address_select') }}</strong>
                 </span>
             @endif
@@ -33,7 +33,7 @@
                     <a>　必須　</a>
                     <input id="receiver_name" type="text" class="form-control" name="receiver_name" value={{old('receiver_name')}}>
                     @if ($errors->has('receiver_name'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('receiver_name') }}</strong>
                         </span>
                     @endif
@@ -50,11 +50,11 @@
                     -
                     <input id="postal_code2" type="text" class="form-control" name="postal_code2" value={{old('postal_code2')}}>
                     @if ($errors->has('postal_code1'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('postal_code1') }}</strong>
                         </span>
                     @elseif ($errors->has('postal_code2'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('postal_code2') }}</strong>
                         </span>
                     @endif
@@ -71,7 +71,7 @@
                     <input id="address1" type="text" class="form-control" name="address1" readonly value={{old('address1')}}>
 
                     @if ($errors->has('address1'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('address1') }}</strong>
                         </span>
                     @endif
@@ -86,7 +86,7 @@
                     <input id="address2" type="text" class="form-control" name="address2" readonly value={{old('address2')}}>
 
                     @if ($errors->has('address2'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('address2') }}</strong>
                         </span>
                     @endif
@@ -101,7 +101,7 @@
                     <input id="address3" type="text" class="form-control" name="address3" readonly value={{old('address3')}}>
 
                     @if ($errors->has('address3'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('address3') }}</strong>
                         </span>
                     @endif
@@ -116,7 +116,7 @@
                     <input id="address4" type="text" class="form-control" name="address4" value={{old('address4')}}>
 
                     @if ($errors->has('address4'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('address4') }}</strong>
                         </span>
                     @endif
@@ -131,7 +131,7 @@
                     <input id="address5" type="text" class="form-control" name="address5" value={{old('address5')}}>
 
                     @if ($errors->has('address5'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('address5') }}</strong>
                         </span>
                     @endif
@@ -146,7 +146,7 @@
                     <input id="address6" type="text" class="form-control" name="address6" value={{old('address6')}}>
 
                     @if ($errors->has('address6'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('address6') }}</strong>
                         </span>
                     @endif
@@ -160,7 +160,7 @@
             <input type="radio" name="phone_select" value="登録済み電話番号" checked @if(old('phone_select')=='登録済み電話番号') checked @endif>登録されている電話番号を連絡先とする<br/>
             <input type="radio" name="phone_select" value="個別指定電話番号" @if(old('phone_select')=='個別指定電話番号') checked @endif>連絡先電話番号を指定する
             @if ($errors->has('phone_select'))
-                <span class="help-block">
+                <span class="c-help-block">
                     <strong>{{ $errors->first('phone_select') }}</strong>
                 </span>
             @endif
@@ -183,15 +183,15 @@
                     <input id="phone_number3" type="text" class="form-control" name="phone_number3" value={{old('phone_number3')}}>
 
                     @if ($errors->has('phone_number1'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('phone_number1') }}</strong>
                         </span>
                     @elseif ($errors->has('phone_number2'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('phone_number2') }}</strong>
                         </span>
                     @elseif ($errors->has('phone_number3'))
-                        <span class="help-block">
+                        <span class="c-help-block">
                             <strong>{{ $errors->first('phone_number3') }}</strong>
                         </span>
                     @endif
@@ -201,13 +201,13 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="delivery-button">
+            <button type="submit" class="c-button-type1-4">
                 配達日時指定へ
             </button>
         </div>
     </form>
     <div class="col-md-6">
-        <button class="delivery-button" type="button" onclick=history.back()>戻る</button>
+        <button class="c-button-type1-4" type="button" onclick=history.back()>戻る</button>
     </div>
 </div>
 @endsection

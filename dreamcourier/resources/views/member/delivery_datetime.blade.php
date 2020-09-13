@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="content-left-box">
-    <div class="mbr-message-box">
+    <div class="c-message-type1">
         <ul>
             <li>商品の配達日時を指定してください。</li>
             <li>最短お届け時間は、現時点より12時間以降となります。</li>
@@ -18,11 +18,11 @@
             <label for="delivery_date" class="col-md-4 control-label">◎お届け希望日　　　</label>
             <input id="delivery_date" type="date" class="form-control" name="delivery_date" value={{old('delivery_date')}}>
             @if ($errors->has('delivery_date'))
-                <span class="help-block">
+                <span class="c-help-block">
                     <strong>{{ $errors->first('delivery_date') }}</strong>
                 </span>
             @elseif($errors->has('wk_delivery_datetime'))
-                <span class="help-block">
+                <span class="c-help-block">
                     <strong>{{ $errors->first('wk_delivery_datetime') }}</strong>
                 </span>
             @endif
@@ -48,11 +48,11 @@
                 <option value='22:00〜24:00' @if(old('delivery_time')=='22:00〜24:00') selected  @endif>22:00〜24:00</option>
             </select>
             @if ($errors->has('delivery_time'))
-                <span class="help-block">
+                <span class="c-help-block">
                     <strong>{{ $errors->first('delivery_time') }}</strong>
                 </span>
             @elseif($errors->has('wk_delivery_datetime'))
-                <span class="help-block">
+                <span class="c-help-block">
                     <strong>{{ $errors->first('wk_delivery_datetime') }}</strong>
                 </span>
             @endif
@@ -60,13 +60,13 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="delivery-button">
+            <button type="submit" class="c-button-type1-4">
                 支払い方法指定へ
             </button>
         </div>
     </form>
     <div class="col-md-6">
-        <button class="delivery-button" type="button" onclick=history.back()>戻る</button>
+        <button class="c-button-type1-4" type="button" onclick=history.back()>戻る</button>
     </div>
 </div>
 @endsection
