@@ -1,23 +1,4 @@
 @charset "UTF-8";
-
-// body {
-//     // 会員向けページの全体のテーマカラー
-//     background: linear-gradient(rgb(214, 250, 255), rgb(173, 200, 226)) fixed;
-//     margin    : 0em;
-//     height    : 100%;
-// }
-
-// html {
-//     height: 100%;
-
-// }
-
-// @import "_member_constants.scss"; //コンスタント値
-// @import "_member_header.scss"; //ヘッダー
-// @import "_member_sideber.scss"; //サイドバー
-// @import "_member_center.scss"; //センター
-
-
 // ================================================================
 // member向けか、operator向けのどちらで動いているか示す区分
 // ================================================================
@@ -43,14 +24,17 @@ $site_division: "member";
 // Layout
 // ===============================================================
 
-@import "layout/_member_header";
+@import "layout/_l-member-header.scss";
+@import "layout/_l-member-sidebar.scss";
 @import "layout/_member_footer";
-@import "layout/_member_main";
-@import "layout/_member_sideber";
-@import "layout/_member_product_list.scss"; //商品一覧
-@import "layout/_member_product_show.scss"; //商品詳細
-@import "layout/_member_cart_list.scss";    //カートリスト
-@import "layout/_member_delivery.scss";     //購入手続き
+@import "layout/_l-body-flex.scss";
+@import "layout/_l-body-nomal.scss";
+@import "layout/_l-main.scss";
+@import "layout/_l-cart-lists.scss";        //カートリスト
+@import "layout/_l-product-lists.scss";     //商品一覧
+@import "layout/_l-product-tag.scss";       //商品詳細：タグ
+@import "layout/_l-product-details.scss";   //商品詳細：明細
+@import "layout/_l-delivery-check.scss";    //ただのマージン、、、あとで見直し
 
 // ===============================================================
 // Object
@@ -62,9 +46,11 @@ $site_division: "member";
 // Component
 // --------------------------------------------
 // ボタン　type1〜3,4あたり。mixinsとどう分ける？
-@import "object/component/_button.scss";
-@import "object/component/_message.scss";
-@import "object/component/_image_size.scss";
+@import "object/component/_c-button.scss";
+@import "object/component/_c-message.scss";
+@import "object/component/_c-image_size.scss";
+@import "object/component/_c-table-type1.scss";
+@import "object/component/_c-delivery-destination.scss";
 // default
 // @import "object/component/heading";
 // @import "object/component/label";

@@ -24,38 +24,38 @@
 
 </head>
 <body>
-            <div class="l-header-box">
+            <div class="l-member-header">
                 @if (Auth::guest())
-                    <a class="l-header-line l-header-title-font" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+                    <a class="l-member-header__title" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
                 @else
-                    <a class="l-header-line l-header-title-font" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+                    <a class="l-member-header__title" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
                 @endif
-                <ul class="l-header-line">
-                    <li class="l-header-line">
+                <ul class="l-member-header__line">
+                    <li class="l-member-header__line">
                         @if (Auth::guest())
-                            <form class="l-header-line" method="GET" action="{{ url('/keyword') }}">
+                            <form class="l-member-header__line" method="GET" action="{{ url('/keyword') }}">
                                 <input placeholder="商品をキーワードで検索" id="product_search_keyword" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
                                 <input type="submit" name="search" value="検索">
                             </form>
                         @else
-                            <form class="l-header-line" method="GET" action="{{ url('/member/keyword') }}">
+                            <form class="l-member-header__line" method="GET" action="{{ url('/member/keyword') }}">
                                 <input placeholder="商品をキーワードで検索" id="product_search_keyword" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
                                 <input type="submit" name="search" value="検索">
                             </form>
                         @endif
                     </li>
                     @if (Auth::guest())
-                        <li class="l-header-line">
+                        <li class="l-member-header__line">
                             <a href="{{ url('/member/login') }}">ログイン</a>
                         </li>
-                        <li class="l-header-line">
+                        <li class="l-member-header__line">
                             <a href="{{ url('/member/register/in') }}">新規会員登録</a>
                         </li>
                     @else
-                        <li class="l-header-line">
+                        <li class="l-member-header__line">
                             {{ "こんにちは、".Auth::user()->last_name." ".Auth::user()->first_name."さん" }}
                         </li>
-                        <li class="l-header-line">
+                        <li class="l-member-header__line">
                             <a href="{{ url('/member/cart_index') }}"　onclick="event.preventDefault(); document.getElementById('member-cart-form').submit();">
                                 カート一覧へ
                             </a>
@@ -63,7 +63,7 @@
                                 {{ csrf_field() }}
                             </form>-->
                         </li>
-                        <li class="l-header-line">
+                        <li class="l-member-header__line">
                             <a href="{{ url('/member/menu') }}"　onclick="event.preventDefault(); document.getElementById('member-menu-form').submit();">
                                 会員メニュー
                             </a>
@@ -71,7 +71,7 @@
                                 {{ csrf_field() }}
                             </form>
                         </li>
-                        <li class="l-header-line">
+                        <li class="l-member-header__line">
                             <a href="{{ url('/member/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         ログアウト
                             </a>

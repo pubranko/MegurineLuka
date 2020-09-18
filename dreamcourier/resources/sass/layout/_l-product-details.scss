@@ -1,33 +1,10 @@
-/*商品の詳細画面の書式*/
-.show-product-tag {
-    margin-top   : 0.5em;
-    margin-bottom: 0.5em;
-    max-width    : 1057px;
-    //min-width:20%;
-    border       : solid 2px black; //width:1057px;      //box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる
-    border-left  : solid 10px #6795fd;
-    font-size    : map-get($text_font_size, md2);
-}
-
-.show-product-tag ul {
-    // リストの間隔を調整
-    display    : inline; // リストを横に並べる
-    margin-left: -3%; // 【商品タグ】とタグ名称の隙間を縮める
-}
-
-.show-product-tag ul li {
-    // リストの間隔を調整
-    display     : inline; // リストを横に並べる
-    margin-right: 5px;
-}
-
-.product-info {
+.l-product-details {
     display       : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
     margin-left: 10px;
     vertical-align: top; //商品画像の右の情報を、上寄せにする
 }
 
-.show-product-name {
+.l-product-details__name {
     margin-bottom: 0.2em;
     max-width    : 574px; //box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる
     height       : 100px;
@@ -36,7 +13,7 @@
     font-size    : map-get($text_font_size, lg2);
 }
 
-.show-product-description {
+.l-product-details__description {
     margin-bottom: 0.2em;
     max-width    : 574px; //box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる
     height       : 300px;
@@ -45,7 +22,7 @@
     font-size    : map-get($text_font_size, lg2);
 }
 
-.show-product-code {
+.l-product-details__code {
     margin-bottom: 0.3em;
     min-width    : 270px; //box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる
     border       : solid 2px black;
@@ -53,7 +30,7 @@
     font-size    : map-get($text_font_size, lg1);
 }
 
-.show-product-price {
+.l-product-details__price {
     display      : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
     margin-bottom: 0.2em;
     margin-right : 10px;
@@ -63,7 +40,7 @@
     font-size    : map-get($text_font_size, lg1);
 }
 
-.show-product-stock_quantity_status {
+.l-product-details__stock_quantity_status {
     display    : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
     min-width  : 270px; //box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる
     border     : solid 2px black;

@@ -1,7 +1,7 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="container l-mbr-register-box">
+<div class="container l-body-nomal">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -10,7 +10,7 @@
                     以下の会員登録に必要な情報を入力してください。
                 </div>
 
-                <div class="panel-body">
+                <div class="c-delivery-destination">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/member/register/check') }}">
                         {{ csrf_field() }}
 
@@ -19,7 +19,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input type="email" name="email" value="{{ old('email') }}">
 
                                 @if ($errors->has('email'))
                                     <span class="c-help-block">
@@ -35,7 +35,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="last_name" type="text" class="form-control" name="last_name" value={{old('last_name')}}>
+                                <input type="text" class="c-delivery-destination__last_name" name="last_name" value={{old('last_name')}}>
 
                                 @if ($errors->has('last_name'))
                                     <span class="c-help-block">
@@ -49,7 +49,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="first_name" type="text" class="form-control" name="first_name" value={{old('first_name')}}>
+                                <input type="text" class="c-delivery-destination__first_name" name="first_name" value={{old('first_name')}}>
 
                                 @if ($errors->has('first_name'))
                                     <span class="c-help-block">
@@ -64,7 +64,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="last_name_kana" type="text" class="form-control" name="last_name_kana" value={{old('last_name_kana')}}>
+                                <input type="text" class="c-delivery-destination__last_name_kana" name="last_name_kana" value={{old('last_name_kana')}}>
 
                                 @if ($errors->has('last_name_kana'))
                                     <span class="c-help-block">
@@ -79,7 +79,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="first_name_kana" type="text" class="form-control" name="first_name_kana" value={{old('first_name_kana')}}>
+                                <input type="text" class="c-delivery-destination__first_name_kana" name="first_name_kana" value={{old('first_name_kana')}}>
 
                                 @if ($errors->has('first_name_kana'))
                                     <span class="c-help-block">
@@ -99,7 +99,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <select id="birthday" class="form-control" name="birthday_era">
+                                <select name="birthday_era">
                                     <option value="" @if(old('birthday_era')=='') selected  @endif>選択してください</option>
                                     <option value="西暦" @if(old('birthday_era')=='西暦') selected  @endif>西暦</option>
                                     <option value="令和" @if(old('birthday_era')=='令和') selected  @endif>令和</option>
@@ -108,11 +108,11 @@
                                     <option value="大正" @if(old('birthday_era')=='大正') selected  @endif>大正</option>
                                     <option value="明治" @if(old('birthday_era')=='明治') selected  @endif>明治</option>
                                 </select>
-                                <input id="birthday_year" type="text" class="form-control" name="birthday_year" value={{old('birthday_year')}}>
+                                <input type="text" class="c-delivery-destination__birthday_year" name="birthday_year" value={{old('birthday_year')}}>
                                 /
-                                <input id="birthday_month" type="text" class="form-control" name="birthday_month" value={{old('birthday_month')}}>
+                                <input type="text" class="c-delivery-destination__birthday_month" name="birthday_month" value={{old('birthday_month')}}>
                                 /
-                                <input id="birthday_day" type="text" class="form-control" name="birthday_day" value={{old('birthday_day')}}>
+                                <input type="text" class="c-delivery-destination__birthday_day" name="birthday_day" value={{old('birthday_day')}}>
                                 @if ($errors->has('birthday_era'))
                                     <span class="c-help-block">
                                         <strong>{{ $errors->first('birthday_era') }}</strong>
@@ -166,9 +166,9 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="postal_code1" type="text" class="form-control" name="postal_code1" value={{old('postal_code1')}}>
+                                <input type="text" class="c-delivery-destination__postal_code1" name="postal_code1" value={{old('postal_code1')}}>
                                 -
-                                <input id="postal_code2" type="text" class="form-control" name="postal_code2" value={{old('postal_code2')}}>
+                                <input type="text" class="c-delivery-destination__postal_code2" name="postal_code2" value={{old('postal_code2')}}>
                                 @if ($errors->has('postal_code1'))
                                     <span class="c-help-block">
                                         <strong>{{ $errors->first('postal_code1') }}</strong>
@@ -188,7 +188,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address1" type="text" class="form-control" name="address1" readonly value={{old('address1')}}>
+                                <input type="text" class="c-delivery-destination__address1" name="address1" readonly value={{old('address1')}}>
 
                                 @if ($errors->has('address1'))
                                     <span class="c-help-block">
@@ -203,7 +203,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address2" type="text" class="form-control" name="address2" readonly value={{old('address2')}}>
+                                <input type="text" class="c-delivery-destination__address2" name="address2" readonly value={{old('address2')}}>
 
                                 @if ($errors->has('address2'))
                                     <span class="c-help-block">
@@ -218,7 +218,7 @@
 
                             <div class="col-md-6">
                                 <a>　表示　</a>
-                                <input id="address3" type="text" class="form-control" name="address3" readonly value={{old('address3')}}>
+                                <input type="text" class="c-delivery-destination__address3" name="address3" readonly value={{old('address3')}}>
 
                                 @if ($errors->has('address3'))
                                     <span class="c-help-block">
@@ -233,7 +233,7 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="address4" type="text" class="form-control" name="address4" value={{old('address4')}}>
+                                <input type="text" class="c-delivery-destination__address4" name="address4" value={{old('address4')}}>
 
                                 @if ($errors->has('address4'))
                                     <span class="c-help-block">
@@ -248,7 +248,7 @@
 
                             <div class="col-md-6">
                                 <a>　任意　</a>
-                                <input id="address5" type="text" class="form-control" name="address5" value={{old('address5')}}>
+                                <input type="text" class="c-delivery-destination__address5" name="address5" value={{old('address5')}}>
 
                                 @if ($errors->has('address5'))
                                     <span class="c-help-block">
@@ -263,7 +263,7 @@
 
                             <div class="col-md-6">
                                 <a>　任意　</a>
-                                <input id="address6" type="text" class="form-control" name="address6" value={{old('address6')}}>
+                                <input type="text" class="c-delivery-destination__address6" name="address6" value={{old('address6')}}>
 
                                 @if ($errors->has('address6'))
                                     <span class="c-help-block">
@@ -280,11 +280,11 @@
 
                             <div class="col-md-6">
                                 <a>　必須　</a>
-                                <input id="phone_number1" type="text" class="form-control" name="phone_number1" value={{old('phone_number1')}}>
+                                <input type="text" class="c-delivery-destination__phone_number1" name="phone_number1" value={{old('phone_number1')}}>
                                 -
-                                <input id="phone_number2" type="text" class="form-control" name="phone_number2" value={{old('phone_number2')}}>
+                                <input type="text" class="c-delivery-destination__phone_number2" name="phone_number2" value={{old('phone_number2')}}>
                                 -
-                                <input id="phone_number3" type="text" class="form-control" name="phone_number3" value={{old('phone_number3')}}>
+                                <input type="text" class="c-delivery-destination__phone_number3" name="phone_number3" value={{old('phone_number3')}}>
 
                                 @if ($errors->has('phone_number1'))
                                     <span class="c-help-block">
@@ -313,6 +313,8 @@
                         </div>
                     </form>
                 </div>
+
+
             </div>
         </div>
     </div>

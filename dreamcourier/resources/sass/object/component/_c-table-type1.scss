@@ -1,0 +1,16 @@
+/*購入手続き（確認）のテーブル書式*/
+.c-table-type1{
+
+    margin-top     : 10px;
+    padding        : 5px;
+    max-width      : 950px;
+    border         : groove 6px #5e7fca;
+    border-collapse: collapse;
+
+    .c-table-type1__cell {
+        padding-left   : 1em;
+        padding-right  : 1em;
+        border         : 1px solid black;
+        border-collapse: collapse;
+    }
+}

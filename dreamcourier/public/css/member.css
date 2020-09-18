@@ -399,7 +399,7 @@ body {
 
 /* ヘッダー部の要素 */
 
-.l-header-box {
+.l-member-header {
   position: fixed;
   z-index: 9999;
   margin-bottom: 2em;
@@ -408,38 +408,27 @@ body {
   width: 100%;
 }
 
-.l-header-line {
+.l-member-header__line {
   display: inline;
-  font-size: 1.1em li;
-  font-size-margin-right: 5px;
+  font-size: 1.1em;
 }
 
-.l-header-title-font {
+.l-member-header__line li {
+  margin-right: 50px;
+}
+
+.l-member-header__title {
+  display: inline;
   font-size: 1.5em;
 }
 
-/* センターボックス */
-
-.l-center-box {
-  position: relative;
-  margin-top: 3em;
-  margin-left: 10em;
-}
-
-.l-mbr-register-box {
-  padding-top: 3.5em;
-}
-
-/*サイドバーとコンテンツ（カテゴリー一覧、商品の詳細）を横に並べて表示させる*/
-
-.l-contents-flex {
-  display: -webkit-box;
-  display: flex;
+.l-member-header__title li {
+  margin-right: 50px;
 }
 
 /*サイドバー*/
 
-.l-side-bar-box {
+.l-member-sidebar {
   position: fixed;
   width: 10em;
   height: 100%;
@@ -448,121 +437,45 @@ body {
   flex-shrink: 0;
 }
 
-.l-side-bar-box > ul {
+.l-member-sidebar .l-member-sidebar__lists {
   padding-left: 0;
 }
 
-.l-side-bar-box > ul > li {
+.l-member-sidebar .l-member-sidebar__line {
   list-style: none;
 }
 
-/*各商品のboxを横に並べて表示する*/
+/*サイドバーとコンテンツ（カテゴリー一覧、商品の詳細）を横に並べて表示させる*/
 
-.product-contents {
-  overflow: hidden;
-  margin: 0 0 0 0;
-  padding: 0;
-  padding-bottom: 1em;
-  list-style: none;
+.l-body-flex {
+  display: -webkit-box;
+  display: flex;
 }
 
-.product-contents li {
-  float: left;
-  width: 160px;
-  border: 1px solid #dadada;
+.l-body-nomal {
+  position: absolute;
+  margin-top: 3.5em;
+  margin-left: 1em;
 }
 
-.product-contents img {
-  margin-bottom: 0em;
-}
+/* センターボックス */
 
-.product-contents .product-contents-text {
-  margin-top: 0em;
-  margin-bottom: 0em;
-  text-align: center;
-}
-
-/*商品の詳細画面の書式*/
-
-.show-product-tag {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  max-width: 1057px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.1em;
-}
-
-.show-product-tag ul {
-  display: inline;
-  margin-left: -3%;
-}
-
-.show-product-tag ul li {
-  display: inline;
-  margin-right: 5px;
-}
-
-.product-info {
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: top;
-}
-
-.show-product-name {
-  margin-bottom: 0.2em;
-  max-width: 574px;
-  height: 100px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 2em;
-}
-
-.show-product-description {
-  margin-bottom: 0.2em;
-  max-width: 574px;
-  height: 300px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 2em;
-}
-
-.show-product-code {
-  margin-bottom: 0.3em;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.5em;
-}
-
-.show-product-price {
-  display: inline-block;
-  margin-bottom: 0.2em;
-  margin-right: 10px;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.5em;
-}
-
-.show-product-stock_quantity_status {
-  display: inline-block;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.5em;
+.l-main {
+  position: relative;
+  margin-top: 3em;
+  margin-left: 10em;
 }
 
 /*カートリスト*/
 
-.cart-lists-box {
+.l-cart-lists {
   margin-top: 10px;
   padding: 5px;
   max-width: 970px;
   border: groove 6px #5e7fca;
 }
 
-.cartlists-product-name {
+.l-cart-lists__product-name {
   margin-bottom: 5px;
   max-width: 574px;
   height: 95px;
@@ -571,7 +484,7 @@ body {
   font-size: 1.1em;
 }
 
-.cartlists-product-code {
+.l-cart-lists__product-code {
   margin-bottom: 5px;
   min-width: 270px;
   border: solid 2px black;
@@ -579,7 +492,7 @@ body {
   font-size: 1em;
 }
 
-.cartlists-product-price {
+.l-cart-lists__product-price {
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 5px;
@@ -589,7 +502,7 @@ body {
   font-size: 1em;
 }
 
-.cartlists-product-stock_quantity_status {
+.l-cart-lists__product-stock_quantity_status {
   display: inline-block;
   min-width: 270px;
   border: solid 2px black;
@@ -597,93 +510,107 @@ body {
   font-size: 1em;
 }
 
-/*カート一覧、購入手続き画面のコンテンツボックス*/
+/*各商品のboxを横に並べて表示する*/
 
-.content-left-box {
-  position: absolute;
-  margin-top: 3em;
-  margin-left: 1em;
+.l-product-lists {
+  overflow: hidden;
+  margin: 0 0 0 0;
+  padding: 0;
+  padding-bottom: 1em;
+  list-style: none;
 }
 
-/*配達先情報の入力ボックス*/
-
-.delivery-Individual-box {
-  margin-top: 5px;
-  margin-left: 25px;
-  padding: 10px;
-  border: solid 2px #b6acac;
-  max-width: 650px;
-}
-
-.delivery-Individual-box > p {
-  margin-top: -5px;
-  margin-bottom: 2px;
-  font-size: 1.2em;
-  font: bold;
-}
-
-/*入力フィールドの書式 id指定*/
-
-#receiver_name,
-#last_name,
-#first_name,
-#last_name_kana,
-#first_name_kana {
-  width: 500px;
-}
-
-#postal_code1,
-#postal_code2 {
-  width: 40px;
-}
-
-#address1 {
-  width: 80px;
-}
-
-#address2,
-#address3,
-#address4,
-#address5,
-#address6 {
-  width: 500px;
-}
-
-#phone_number1,
-#phone_number2,
-#phone_number3,
-#card_security_code,
-#birthday_year,
-#birthday_month,
-#birthday_day {
-  width: 50px;
-}
-
-#card_number {
+.l-product-lists__line {
+  float: left;
   width: 160px;
+  border: 1px solid #dadada;
+}
+
+.l-product-lists__img {
+  margin-bottom: 0em;
+}
+
+.l-product-lists__text {
+  margin-top: 0em;
+  margin-bottom: 0em;
+  text-align: center;
+}
+
+/*商品の詳細画面の書式*/
+
+.l-product-tag {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  max-width: 1057px;
+  border: solid 2px black;
+  border-left: solid 10px #6795fd;
+  font-size: 1.1em;
+}
+
+.l-product-tag__lists {
+  display: inline;
+  margin-left: -3%;
+}
+
+.l-product-tag__line {
+  display: inline;
+  margin-right: 5px;
+}
+
+.l-product-details {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.l-product-details__name {
+  margin-bottom: 0.2em;
+  max-width: 574px;
+  height: 100px;
+  border: solid 2px black;
+  border-left: solid 10px #6795fd;
+  font-size: 2em;
+}
+
+.l-product-details__description {
+  margin-bottom: 0.2em;
+  max-width: 574px;
+  height: 300px;
+  border: solid 2px black;
+  border-left: solid 10px #6795fd;
+  font-size: 2em;
+}
+
+.l-product-details__code {
+  margin-bottom: 0.3em;
+  min-width: 270px;
+  border: solid 2px black;
+  border-left: solid 10px #6795fd;
+  font-size: 1.5em;
+}
+
+.l-product-details__price {
+  display: inline-block;
+  margin-bottom: 0.2em;
+  margin-right: 10px;
+  min-width: 270px;
+  border: solid 2px black;
+  border-left: solid 10px #6795fd;
+  font-size: 1.5em;
+}
+
+.l-product-details__stock_quantity_status {
+  display: inline-block;
+  min-width: 270px;
+  border: solid 2px black;
+  border-left: solid 10px #6795fd;
+  font-size: 1.5em;
 }
 
 /*購入手続き（確認）画面*/
 
-.delivery_check {
+.l-delivery-check {
   margin-left: 1em;
-}
-
-/*購入手続き（確認）のテーブル書式*/
-
-.delivery_check_table {
-  margin-top: 10px;
-  padding: 5px;
-  max-width: 950px;
-  border: groove 6px #5e7fca;
-  border-collapse: collapse;
-}
-
-.delivery_check_table .delivery_check_table > tr th td {
-  padding-left: 1em;
-  padding-right: 1em;
-  border: 1px solid black;
-  border-collapse: collapse;
 }
 
 /*ページネーションの設定*/
@@ -831,5 +758,80 @@ body {
 .c-img_product_image {
   width: 480px;
   height: auto;
+}
+
+/*購入手続き（確認）のテーブル書式*/
+
+.c-table-type1 {
+  margin-top: 10px;
+  padding: 5px;
+  max-width: 950px;
+  border: groove 6px #5e7fca;
+  border-collapse: collapse;
+}
+
+.c-table-type1 .c-table-type1__cell {
+  padding-left: 1em;
+  padding-right: 1em;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+/*配達先情報の入力ボックス*/
+
+.c-delivery-destination {
+  margin-top: 5px;
+  margin-left: 25px;
+  padding: 10px;
+  border: solid 2px #b6acac;
+  max-width: 650px;
+}
+
+.c-delivery-destination__heading {
+  margin-top: -5px;
+  margin-bottom: 2px;
+  font-size: 1.2em;
+  font: bold;
+}
+
+/*入力フィールドの書式 id指定*/
+
+.c-delivery-destination__receiver_name,
+.c-delivery-destination__last_name,
+.c-delivery-destination__first_name,
+.c-delivery-destination__last_name_kana,
+.c-delivery-destination__first_name_kana {
+  width: 500px;
+}
+
+.c-delivery-destination__postal_code1,
+.c-delivery-destination__postal_code2 {
+  width: 40px;
+}
+
+.c-delivery-destination__address1 {
+  width: 80px;
+}
+
+.c-delivery-destination__address2,
+.c-delivery-destination__address3,
+.c-delivery-destination__address4,
+.c-delivery-destination__address5,
+.c-delivery-destination__address6 {
+  width: 500px;
+}
+
+.c-delivery-destination__phone_number1,
+.c-delivery-destination__phone_number2,
+.c-delivery-destination__phone_number3,
+.c-delivery-destination__card_security_code,
+.c-delivery-destination__birthday_year,
+.c-delivery-destination__birthday_month,
+.c-delivery-destination__birthday_day {
+  width: 50px;
+}
+
+.c-delivery-destination__card_number {
+  width: 160px;
 }
 

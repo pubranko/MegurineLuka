@@ -1,16 +1,16 @@
-<div class=l-side-bar-box>
-    <ul>
-        <li><b>＜カテゴリー＞</b></li>
+<div class=l-member-sidebar>
+    <ul class=l-member-sidebar__lists>
+        <li class=l-member-sidebar__line><b>＜カテゴリー＞</b></li>
         @if (Auth::guest())
-            <li><a href="/">HOME</a></li>
+            <li class=l-member-sidebar__line><a href="/">HOME</a></li>
         @else
-            <li><a href="/member/home">HOME</a></li>
+            <li class=l-member-sidebar__line><a href="/member/home">HOME</a></li>
         @endif
         @foreach($wk_side_bar_lists as $list)
             @if (Auth::guest())
-                <li><a href="/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
+                <li class=l-member-sidebar__line><a href="/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
             @else
-                <li><a href="/member/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
+                <li class=l-member-sidebar__line><a href="/member/keyword?product_search_tag={{$list}}">{{$list}}</a></li>
             @endif
         @endforeach
     </ul>

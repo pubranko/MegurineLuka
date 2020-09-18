@@ -1,0 +1,55 @@
+/*配達先情報の入力ボックス*/
+.c-delivery-destination {
+    margin-top : 5px;
+    margin-left: 25px;
+    padding    : 10px;
+    border     : solid 2px #b6acac;
+    max-width  : 650px;
+}
+
+.c-delivery-destination__heading {
+    margin-top   : -5px;
+    margin-bottom: 2px;
+    font-size    : map-get($text_font_size, md3);
+    font         : bold;
+}
+
+/*入力フィールドの書式 id指定*/
+.c-delivery-destination__receiver_name,
+.c-delivery-destination__last_name,
+.c-delivery-destination__first_name,
+.c-delivery-destination__last_name_kana,
+.c-delivery-destination__first_name_kana {
+    width: 500px;
+}
+
+.c-delivery-destination__postal_code1,
+.c-delivery-destination__postal_code2 {
+    width: 40px;
+}
+
+.c-delivery-destination__address1 {
+    width: 80px;
+}
+
+.c-delivery-destination__address2,
+.c-delivery-destination__address3,
+.c-delivery-destination__address4,
+.c-delivery-destination__address5,
+.c-delivery-destination__address6 {
+    width: 500px;
+}
+
+.c-delivery-destination__phone_number1,
+.c-delivery-destination__phone_number2,
+.c-delivery-destination__phone_number3,
+.c-delivery-destination__card_security_code,
+.c-delivery-destination__birthday_year,
+.c-delivery-destination__birthday_month,
+.c-delivery-destination__birthday_day {
+    width: 50px;
+}
+
+.c-delivery-destination__card_number {
+    width: 160px;
+}

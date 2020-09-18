@@ -1,7 +1,7 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="content-left-box">
+<div class="l-body-nomal">
     <div class="c-message-type1">
         <ul>
             <li>商品の配達日時を指定してください。</li>

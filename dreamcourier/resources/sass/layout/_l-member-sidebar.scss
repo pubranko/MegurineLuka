@@ -1,10 +1,5 @@
-/*サイドバーとコンテンツ（カテゴリー一覧、商品の詳細）を横に並べて表示させる*/
-.contents-flex {
-    display: flex; //横並び
-}
-
 /*サイドバー*/
-.side-bar-box {
+.l-member-sidebar {
     position   : fixed; //表示位置を固定
     width      : 10em;
     height     : 100%;
@@ -12,11 +7,11 @@
     padding    : 0.2em 0em 0em 0.5em;
     flex-shrink: 0;
 
-    >ul {
+    .l-member-sidebar__lists {
         padding-left: 0; //リストの文字を左寄せ
     }
 
-    >ul>li {
+    .l-member-sidebar__line {
         list-style: none; //リストのマーカーの種類：なし
     }
 }

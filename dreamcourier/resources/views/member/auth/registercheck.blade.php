@@ -1,7 +1,7 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="container l-mbr-register-box">
+<div class="container l-body-nomal">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

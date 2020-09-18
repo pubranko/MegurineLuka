@@ -1,15 +1,15 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class=l-contents-flex>
+<div class="l-body-flex"W>
     @include('member.subviews.side_bar')
 
-    <div class=l-center-box>
-        <div class="show-product-tag">
+    <div class="l-main">
+        <div class="l-product-tag">
             <a>【商品タグ】</a>
-            <ul>
+            <ul class="l-product-tag__lists">
                 @foreach($wk_product["wk_product_tag_lists"] as $wk_product_tag)
-                    <li>
+                    <li class="l-product-tag__line">
                         @if (Auth::guest())
                             <a href="/keyword?product_search_tag={{$wk_product_tag}}" class="">{{$wk_product_tag}}</a>
                         @else
@@ -22,20 +22,20 @@
 
         <img class="c-img_product_image" src="{{url($wk_product["wk_product_image"])}}">
 
-        <div class="product-info">
-            <div class="show-product-name">
+        <div class="l-product-details">
+            <div class="l-product-details__name">
                 <a>【商品名】{{$wk_product["product_name"]}}</a>
             </div>
-            <div class="show-product-description">
+            <div class="l-product-details__description">
                 <a>【商品説明】{{$wk_product["product_description"]}}</a>
             </div>
-            <div class="show-product-code">
+            <div class="l-product-details__code">
                 <a>【商品コード】{{$wk_product["product_code"]}}</a>
             </div>
-            <div class="show-product-price">
+            <div class="l-product-details__price">
                 <a>販売価格：{{$wk_product["product_price"]}} 円</a>
             </div>
-            <div class="show-product-stock_quantity_status">
+            <div class="l-product-details__stock_quantity_status">
                 <a>販売状況：{{$wk_product["wk_product_stock_quantity_status"]}}</a>
             </div>
         </div>
