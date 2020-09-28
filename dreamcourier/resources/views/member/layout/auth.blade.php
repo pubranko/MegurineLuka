@@ -24,68 +24,44 @@
 
 </head>
 <body>
-            <div class="l-member-header">
-                @if (Auth::guest())
-                    <a class="l-member-header__title" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
-                @else
-                    <a class="l-member-header__title" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
-                @endif
-                <ul class="l-member-header__line">
-                    <li class="l-member-header__line">
-                        @if (Auth::guest())
-                            <form class="l-member-header__line" method="GET" action="{{ url('/keyword') }}">
-                                <input placeholder="商品をキーワードで検索" id="product_search_keyword" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
-                                <input type="submit" name="search" value="検索">
-                            </form>
-                        @else
-                            <form class="l-member-header__line" method="GET" action="{{ url('/member/keyword') }}">
-                                <input placeholder="商品をキーワードで検索" id="product_search_keyword" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
-                                <input type="submit" name="search" value="検索">
-                            </form>
-                        @endif
-                    </li>
-                    @if (Auth::guest())
-                        <li class="l-member-header__line">
-                            <a href="{{ url('/member/login') }}">ログイン</a>
-                        </li>
-                        <li class="l-member-header__line">
-                            <a href="{{ url('/member/register/in') }}">新規会員登録</a>
-                        </li>
-                    @else
-                        <li class="l-member-header__line">
-                            {{ "こんにちは、".Auth::user()->last_name." ".Auth::user()->first_name."さん" }}
-                        </li>
-                        <li class="l-member-header__line">
-                            <a href="{{ url('/member/cart_index') }}"　onclick="event.preventDefault(); document.getElementById('member-cart-form').submit();">
-                                カート一覧へ
-                            </a>
-                            <!--<form id="member-cart-form" action="{{ url('/member/cart_index') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>-->
-                        </li>
-                        <li class="l-member-header__line">
-                            <a href="{{ url('/member/menu') }}"　onclick="event.preventDefault(); document.getElementById('member-menu-form').submit();">
-                                会員メニュー
-                            </a>
-                            <form id="member-menu-form" action="{{ url('/member/menu') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                        <li class="l-member-header__line">
-                            <a href="{{ url('/member/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        ログアウト
-                            </a>
-
-                            <form id="logout-form" action="{{ url('/member/logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    @endif
-                </ul>
-            </div>
+    <div class="l-member-header">
+        @if (Auth::guest())
+            <a class="l-member-header__title u-mr-50" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+            <form method="GET" action="{{ url('/keyword') }}">
+                <input placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                <input type="submit" name="search" value="検索">
+            </form>
+            <a class="l-member-header__line u-mr-50" href="{{ url('/member/login') }}">ログイン</a>
+            <a class="l-member-header__line u-mr-50" href="{{ url('/member/register/in') }}">新規会員登録</a>
+        @else
+            <a class="l-member-header__title u-mr-50" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+            <form method="GET" action="{{ url('/member/keyword') }}">
+                <input placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                <input type="submit" name="search" value="検索">
+            </form>
+            <a class="l-member-header__line u-mr-50">{{ "こんにちは、".Auth::user()->last_name." ".Auth::user()->first_name."さん" }}</a>
+            <a class="l-member-header__line u-mr-50" href="{{ url('/member/cart_index') }}"　onclick="event.preventDefault(); document.getElementById('member-cart-form').submit();">
+                カート一覧へ
+            </a>
+            <a class="l-member-header__line u-mr-50" href="{{ url('/member/menu') }}"　onclick="event.preventDefault(); document.getElementById('member-menu-form').submit();">
+                会員メニュー
+            </a>
+            <form id="member-menu-form" action="{{ url('/member/menu') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+            <a class="l-member-header__line u-mr-50" href="{{ url('/member/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        ログアウト
+            </a>
+            <form id="logout-form" action="{{ url('/member/logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+        @endif
+    </div>
 
     @yield('content')
 
+    <div class="l-member-footer">
+    </div>
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>

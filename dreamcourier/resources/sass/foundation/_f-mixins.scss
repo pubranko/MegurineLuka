@@ -1,0 +1,11 @@
+//とりあえず
+
+//各項目の枠線の共通定義
+@mixin f-frame-border-type1{
+    border       : solid 0.15rem black;
+    border-left  : solid 0.65rem #6795fd;
+}
+
+@mixin f-frame-border-type2{
+    border   : groove 0.4rem #5e7fca;
+}

@@ -1,8 +1,8 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="l-body-nomal">
-    <div class="c-message-type1">
+<div class="l-body-nomal u-mt-350 u-ml-100">
+    <div class="c-operation-message u-mtb-70">
         <ul>
             <li>商品の配達日時を指定してください。</li>
             <li>最短お届け時間は、現時点より12時間以降となります。</li>
@@ -60,13 +60,13 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="c-button-type1-4">
+            <button type="submit" class="c-button-type1-4 u-mt-50">
                 支払い方法指定へ
             </button>
         </div>
     </form>
     <div class="col-md-6">
-        <button class="c-button-type1-4" type="button" onclick=history.back()>戻る</button>
+        <button class="c-button-type1-1 u-mt-50" type="button" onclick=history.back()>戻る</button>
     </div>
 </div>
 @endsection

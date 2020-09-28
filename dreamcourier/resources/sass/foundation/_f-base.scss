@@ -4,13 +4,13 @@
 * foundation/base.css
 */
 html {
+    margin: 0rem;
     height: 100%;
-    margin: 0em;
 
 }
 
 body {
-    margin : 0em;
+    margin : 0rem;
     height : 100%;
 
     @if $site_division=="member" {

@@ -1,0 +1,31 @@
+/* 商品の詳細表示 */
+.c-product-details {
+    display       : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    vertical-align: top; //商品画像の右の情報を、上寄せにする
+}
+
+.c-product-details__name {
+    height       : 6.5rem;
+    @include f-frame-border-type1;
+}
+
+.c-product-details__description {
+    height       : 19.5rem;//300px;
+    @include f-frame-border-type1;
+}
+
+.c-product-details__code {
+    @include f-frame-border-type1;
+}
+
+.c-product-details__price {
+    display      : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    min-width:15rem;
+    @include f-frame-border-type1;
+}
+
+.c-product-details__stock_quantity_status {
+    display    : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    min-width:15rem;
+    @include f-frame-border-type1;
+}

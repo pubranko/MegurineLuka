@@ -1,0 +1,10 @@
+/* 会員向けの操作説明用の書式*/
+.c-operation-message {
+    //表示位置
+    padding      : 0.3rem;
+    //形
+    border       : 0.3rem solid #FFCC33;
+    background   : #ffffcc;
+    //テキストの書式
+    font-size    : map-get($text_font_size, message-sm);
+}

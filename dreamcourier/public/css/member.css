@@ -386,12 +386,12 @@ template {
 */
 
 html {
+  margin: 0rem;
   height: 100%;
-  margin: 0em;
 }
 
 body {
-  margin: 0em;
+  margin: 0rem;
   height: 100%;
   background: -webkit-gradient(linear, left top, left bottom, from(#d6faff), to(#adc8e2)) fixed;
   background: linear-gradient(#d6faff, #adc8e2) fixed;
@@ -401,44 +401,41 @@ body {
 
 .l-member-header {
   position: fixed;
+  display: -webkit-box;
+  display: flex;
   z-index: 9999;
-  margin-bottom: 2em;
-  padding: 0em 0em 0.5em 0.5em;
+  padding: 0.3rem 0rem 0.3rem 0.5rem;
   background: #97b2f0;
   width: 100%;
 }
 
 .l-member-header__line {
   display: inline;
-  font-size: 1.1em;
-}
-
-.l-member-header__line li {
-  margin-right: 50px;
+  line-height: 2rem;
+  font-size: 1rem;
 }
 
 .l-member-header__title {
   display: inline;
-  font-size: 1.5em;
-}
-
-.l-member-header__title li {
-  margin-right: 50px;
+  font-size: 1.8rem;
 }
 
 /*サイドバー*/
 
 .l-member-sidebar {
   position: fixed;
-  width: 10em;
+  width: 10rem;
   height: 100%;
-  margin-top: 2em;
-  padding: 0.2em 0em 0em 0.5em;
-  flex-shrink: 0;
+  padding: 0.2rem 0rem 0rem 0.5rem;
 }
 
 .l-member-sidebar .l-member-sidebar__lists {
   padding-left: 0;
+}
+
+.l-member-sidebar .l-member-sidebar__heading {
+  list-style: none;
+  font-weight: bold;
 }
 
 .l-member-sidebar .l-member-sidebar__line {
@@ -452,166 +449,218 @@ body {
   display: flex;
 }
 
+/* サイドバー等のnavが無い場合のbody。
+    会員登録画面でヘッダー部分に重ならないようにしている、、、
+*/
+
 .l-body-nomal {
   position: absolute;
-  margin-top: 3.5em;
-  margin-left: 1em;
 }
 
 /* センターボックス */
 
 .l-main {
   position: relative;
-  margin-top: 3em;
-  margin-left: 10em;
 }
 
-/*カートリスト*/
+/*
+*   ボタンの定義
+*/
 
-.l-cart-lists {
-  margin-top: 10px;
-  padding: 5px;
-  max-width: 970px;
-  border: groove 6px #5e7fca;
-}
-
-.l-cart-lists__product-name {
-  margin-bottom: 5px;
-  max-width: 574px;
-  height: 95px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.1em;
-}
-
-.l-cart-lists__product-code {
-  margin-bottom: 5px;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1em;
-}
-
-.l-cart-lists__product-price {
+.c-button-type1-4,
+.c-button-type1-3,
+.c-button-type1-2,
+.c-button-type1-1 {
   display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1em;
-}
-
-.l-cart-lists__product-stock_quantity_status {
-  display: inline-block;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1em;
-}
-
-/*各商品のboxを横に並べて表示する*/
-
-.l-product-lists {
-  overflow: hidden;
-  margin: 0 0 0 0;
-  padding: 0;
-  padding-bottom: 1em;
-  list-style: none;
-}
-
-.l-product-lists__line {
-  float: left;
-  width: 160px;
-  border: 1px solid #dadada;
-}
-
-.l-product-lists__img {
-  margin-bottom: 0em;
-}
-
-.l-product-lists__text {
-  margin-top: 0em;
-  margin-bottom: 0em;
+  padding: 0.5rem 1rem;
+  width: 9.5rem;
+  height: 3rem;
+  border-radius: 0.3rem;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6795fd), to(#67ceff));
+  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+  box-shadow: 0rem 0.1rem 0.3rem rgba(0, 0, 0, 0.29);
+  border-bottom: solid 0.2rem #5e7fca;
+  text-decoration: none;
+  font-weight: bold;
+  line-height: 1.6rem;
   text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
+  text-shadow: 0.1rem 0.1rem 0.1rem rgba(255, 255, 255, 0.5);
+}
+
+.c-button-type1-2 {
+  line-height: 3rem;
+}
+
+.c-button-type1-3 {
+  display: block;
+  height: 2rem;
+  line-height: 1.8rem;
+  font-size: 1.2rem;
+}
+
+.c-button-type1-4 {
+  width: 15rem;
+  line-height: 1.5rem;
+}
+
+/* カテゴリーの見出しの書式 */
+
+.c-category-heading {
+  padding: 0.3rem 0.5rem;
+  background: -webkit-gradient(linear, left top, right top, from(#ffba73), to(transparent));
+  background: linear-gradient(to right, #ffba73, transparent);
+  color: #545454;
+  font-size: 1.8rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/*バリデーションエラーで表示される文言のフォント*/
+
+.c-help-block {
+  color: red;
+}
+
+/* 会員向けの操作説明用の書式*/
+
+.c-operation-message {
+  padding: 0.3rem;
+  border: 0.3rem solid #FFCC33;
+  background: #ffffcc;
+}
+
+/* サムネイルとイメージのサイズ調整*/
+
+.c-img_product_thumbnail {
+  width: 10rem;
+  height: auto;
+}
+
+.c-img_product_image {
+  width: 30rem;
+  height: auto;
+}
+
+/*購入手続き（確認）のテーブル書式*/
+
+.c-table-type1 {
+  border: groove 0.4rem #5e7fca;
+  border-collapse: collapse;
+}
+
+.c-table-type1__cell {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border: 0.1rem solid black;
+  border-collapse: collapse;
+}
+
+/*配達先情報の入力ボックス*/
+
+.c-delivery-destination {
+  padding: 0rem 0.5rem 0.5rem 0.5rem;
+  border: groove 0.4rem #5e7fca;
+}
+
+.c-delivery-destination__heading {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/*入力フィールドの書式*/
+
+.c-delivery-destination__receiver_name,
+.c-delivery-destination__last_name,
+.c-delivery-destination__first_name,
+.c-delivery-destination__last_name_kana,
+.c-delivery-destination__first_name_kana {
+  width: 30rem;
+}
+
+.c-delivery-destination__postal_code1,
+.c-delivery-destination__postal_code2 {
+  width: 2.5rem;
+}
+
+.c-delivery-destination__address1 {
+  width: 5rem;
+}
+
+.c-delivery-destination__address2,
+.c-delivery-destination__address3,
+.c-delivery-destination__address4,
+.c-delivery-destination__address5,
+.c-delivery-destination__address6 {
+  width: 30rem;
+}
+
+.c-delivery-destination__phone_number1,
+.c-delivery-destination__phone_number2,
+.c-delivery-destination__phone_number3,
+.c-delivery-destination__card_security_code,
+.c-delivery-destination__birthday_year,
+.c-delivery-destination__birthday_month,
+.c-delivery-destination__birthday_day {
+  width: 3rem;
+}
+
+.c-delivery-destination__card_number {
+  width: 10rem;
+}
+
+/* 商品の詳細表示 */
+
+.c-product-details {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.c-product-details__name {
+  height: 6.5rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+.c-product-details__description {
+  height: 19.5rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+.c-product-details__code {
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+.c-product-details__price {
+  display: inline-block;
+  min-width: 15rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+.c-product-details__stock_quantity_status {
+  display: inline-block;
+  min-width: 15rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
 }
 
 /*商品の詳細画面の書式*/
 
-.l-product-tag {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  max-width: 1057px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.1em;
+.c-product-tag {
+  padding: 0.1rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
 }
 
-.l-product-tag__lists {
-  display: inline;
-  margin-left: -3%;
-}
-
-.l-product-tag__line {
-  display: inline;
-  margin-right: 5px;
-}
-
-.l-product-details {
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: top;
-}
-
-.l-product-details__name {
-  margin-bottom: 0.2em;
-  max-width: 574px;
-  height: 100px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 2em;
-}
-
-.l-product-details__description {
-  margin-bottom: 0.2em;
-  max-width: 574px;
-  height: 300px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 2em;
-}
-
-.l-product-details__code {
-  margin-bottom: 0.3em;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.5em;
-}
-
-.l-product-details__price {
-  display: inline-block;
-  margin-bottom: 0.2em;
-  margin-right: 10px;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.5em;
-}
-
-.l-product-details__stock_quantity_status {
-  display: inline-block;
-  min-width: 270px;
-  border: solid 2px black;
-  border-left: solid 10px #6795fd;
-  font-size: 1.5em;
-}
-
-/*購入手続き（確認）画面*/
-
-.l-delivery-check {
-  margin-left: 1em;
-}
+/**
+    laravelオリジナルのページネーション。
+    クラス名等はオリジナルから変更不可。
+    ネーミングルール等の例外とする。
+*/
 
 /*ページネーションの設定*/
 
@@ -674,164 +723,1034 @@ body {
   color: #6c757d;
 }
 
-/*
-*   ボタンの定義
+/*カートボックス*/
+
+.p-cart-box {
+  padding: 0.3rem;
+  border: groove 0.4rem #5e7fca;
+}
+
+.p-cart-box__layout {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.p-cart-box__product-name {
+  height: 6rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+.p-cart-box__product-code {
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+.p-cart-box__product-price {
+  display: inline-block;
+  min-width: 15rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+.p-cart-box__product-stock_quantity_status {
+  display: inline-block;
+  min-width: 15rem;
+  border: solid 0.15rem black;
+  border-left: solid 0.65rem #6795fd;
+}
+
+/*商品一覧の簡易表示　各商品のboxを横に並べて表示する*/
+
+.p-product-lists {
+  overflow: hidden;
+  padding: 0;
+  list-style: none;
+}
+
+.p-product-lists__line {
+  float: left;
+  width: 10rem;
+  border: 0.1rem solid #b3aaaa;
+}
+
+.p-product-lists__text {
+  text-align: center;
+}
+
+/*  各要素のマージンの定義を行う。
+    0rem〜3remまでは0.1刻みで用意。それ以外は都度定義する。
+    基本的には各要素にはmarginを持たせない。
+    クラスのネーミング(top,bottom,right,left)
+        1. u-m〜は共通。
+        2. top:u-mt
+        3. bottom:u-mb
+        4. right:u-mr
+        5. left:u-ml
+        6. all:u-m
+        7. 上下、左右の場合、tbrlを混ぜる。
+            u-mtb(topとbottom)
+            u-mlr(leftとright)
+        8. 上右のような場合は、独立したクラスをそれぞれ使用することとする。（u-mtrのように定義しない）
+    クラスのネーミング(大きさ)
+        1. marginの実際の大きさは1remに対する%で記載
+        2. u-mtb-50(上下に0.5rem)
+        3. u-mlr-120(左右1.2rem)
 */
 
-.c-button-type1-4,
-.c-button-type1-3,
-.c-button-type1-2,
-.c-button-type1-1 {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 0.5em 1em;
-  width: 150px;
-  height: 50px;
-  border-radius: 4px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#6795fd), to(#67ceff));
-  background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
-  border-bottom: solid 3px #5e7fca;
-  text-decoration: none;
-  font-weight: bold;
-  line-height: 27px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.5em;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+/* 0remから3remまではデフォルトで用意*/
+
+.u-mt-0 {
+  margin-top: 0rem;
 }
 
-.c-button-type1-2 {
-  line-height: 45px;
+.u-mt-10 {
+  margin-top: 0.1rem;
 }
 
-.c-button-type1-3 {
-  display: block;
-  height: 30px;
-  line-height: 35px;
+.u-mt-20 {
+  margin-top: 0.2rem;
 }
 
-.c-button-type1-4 {
-  width: 250px;
-  line-height: 25px;
+.u-mt-30 {
+  margin-top: 0.3rem;
 }
 
-/* 会員向けの説明用の枠の書式*/
-
-.c-message-type1 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  max-width: 1040px;
-  border: 5px solid #FFCC33;
-  background: #ffffcc;
-  font-size: 2em;
+.u-mt-40 {
+  margin-top: 0.4rem;
 }
 
-/*バリデーションエラーで表示される文言のフォント*/
-
-.c-help-block {
-  color: red;
+.u-mt-50 {
+  margin-top: 0.5rem;
 }
 
-/* カテゴリーの見出しの書式 */
-
-.c-category-message {
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-  padding: 0.1em 0.5em;
-  background: -webkit-gradient(linear, left top, right top, from(#ffba73), to(transparent));
-  background: linear-gradient(to right, #ffba73, transparent);
-  color: #545454;
-  font-size: 2em;
-  font-style: italic;
-  font-weight: bold;
+.u-mt-60 {
+  margin-top: 0.6rem;
 }
 
-/* サムネイルとイメージのサイズ調整*/
-
-.c-img_product_thumbnail {
-  width: 160px;
-  height: auto;
+.u-mt-70 {
+  margin-top: 0.7rem;
 }
 
-.c-img_product_image {
-  width: 480px;
-  height: auto;
+.u-mt-80 {
+  margin-top: 0.8rem;
 }
 
-/*購入手続き（確認）のテーブル書式*/
-
-.c-table-type1 {
-  margin-top: 10px;
-  padding: 5px;
-  max-width: 950px;
-  border: groove 6px #5e7fca;
-  border-collapse: collapse;
+.u-mt-90 {
+  margin-top: 0.9rem;
 }
 
-.c-table-type1 .c-table-type1__cell {
-  padding-left: 1em;
-  padding-right: 1em;
-  border: 1px solid black;
-  border-collapse: collapse;
+.u-mt-100 {
+  margin-top: 1rem;
 }
 
-/*配達先情報の入力ボックス*/
-
-.c-delivery-destination {
-  margin-top: 5px;
-  margin-left: 25px;
-  padding: 10px;
-  border: solid 2px #b6acac;
-  max-width: 650px;
+.u-mt-110 {
+  margin-top: 1.1rem;
 }
 
-.c-delivery-destination__heading {
-  margin-top: -5px;
-  margin-bottom: 2px;
-  font-size: 1.2em;
-  font: bold;
+.u-mt-120 {
+  margin-top: 1.2rem;
 }
 
-/*入力フィールドの書式 id指定*/
-
-.c-delivery-destination__receiver_name,
-.c-delivery-destination__last_name,
-.c-delivery-destination__first_name,
-.c-delivery-destination__last_name_kana,
-.c-delivery-destination__first_name_kana {
-  width: 500px;
+.u-mt-130 {
+  margin-top: 1.3rem;
 }
 
-.c-delivery-destination__postal_code1,
-.c-delivery-destination__postal_code2 {
-  width: 40px;
+.u-mt-140 {
+  margin-top: 1.4rem;
 }
 
-.c-delivery-destination__address1 {
-  width: 80px;
+.u-mt-150 {
+  margin-top: 1.5rem;
 }
 
-.c-delivery-destination__address2,
-.c-delivery-destination__address3,
-.c-delivery-destination__address4,
-.c-delivery-destination__address5,
-.c-delivery-destination__address6 {
-  width: 500px;
+.u-mt-160 {
+  margin-top: 1.6rem;
 }
 
-.c-delivery-destination__phone_number1,
-.c-delivery-destination__phone_number2,
-.c-delivery-destination__phone_number3,
-.c-delivery-destination__card_security_code,
-.c-delivery-destination__birthday_year,
-.c-delivery-destination__birthday_month,
-.c-delivery-destination__birthday_day {
-  width: 50px;
+.u-mt-170 {
+  margin-top: 1.7rem;
 }
 
-.c-delivery-destination__card_number {
-  width: 160px;
+.u-mt-180 {
+  margin-top: 1.8rem;
+}
+
+.u-mt-190 {
+  margin-top: 1.9rem;
+}
+
+.u-mt-200 {
+  margin-top: 2rem;
+}
+
+.u-mt-210 {
+  margin-top: 2.1rem;
+}
+
+.u-mt-220 {
+  margin-top: 2.2rem;
+}
+
+.u-mt-230 {
+  margin-top: 2.3rem;
+}
+
+.u-mt-240 {
+  margin-top: 2.4rem;
+}
+
+.u-mt-250 {
+  margin-top: 2.5rem;
+}
+
+.u-mt-260 {
+  margin-top: 2.6rem;
+}
+
+.u-mt-270 {
+  margin-top: 2.7rem;
+}
+
+.u-mt-280 {
+  margin-top: 2.8rem;
+}
+
+.u-mt-290 {
+  margin-top: 2.9rem;
+}
+
+.u-mt-300 {
+  margin-top: 3rem;
+}
+
+.u-mt-350 {
+  margin-top: 3.5rem;
+}
+
+.u-mb-0 {
+  margin-bottom: 0rem;
+}
+
+.u-mb-10 {
+  margin-bottom: 0.1rem;
+}
+
+.u-mb-20 {
+  margin-bottom: 0.2rem;
+}
+
+.u-mb-30 {
+  margin-bottom: 0.3rem;
+}
+
+.u-mb-40 {
+  margin-bottom: 0.4rem;
+}
+
+.u-mb-50 {
+  margin-bottom: 0.5rem;
+}
+
+.u-mb-60 {
+  margin-bottom: 0.6rem;
+}
+
+.u-mb-70 {
+  margin-bottom: 0.7rem;
+}
+
+.u-mb-80 {
+  margin-bottom: 0.8rem;
+}
+
+.u-mb-90 {
+  margin-bottom: 0.9rem;
+}
+
+.u-mb-100 {
+  margin-bottom: 1rem;
+}
+
+.u-mb-110 {
+  margin-bottom: 1.1rem;
+}
+
+.u-mb-120 {
+  margin-bottom: 1.2rem;
+}
+
+.u-mb-130 {
+  margin-bottom: 1.3rem;
+}
+
+.u-mb-140 {
+  margin-bottom: 1.4rem;
+}
+
+.u-mb-150 {
+  margin-bottom: 1.5rem;
+}
+
+.u-mb-160 {
+  margin-bottom: 1.6rem;
+}
+
+.u-mb-170 {
+  margin-bottom: 1.7rem;
+}
+
+.u-mb-180 {
+  margin-bottom: 1.8rem;
+}
+
+.u-mb-190 {
+  margin-bottom: 1.9rem;
+}
+
+.u-mb-200 {
+  margin-bottom: 2rem;
+}
+
+.u-mb-210 {
+  margin-bottom: 2.1rem;
+}
+
+.u-mb-220 {
+  margin-bottom: 2.2rem;
+}
+
+.u-mb-230 {
+  margin-bottom: 2.3rem;
+}
+
+.u-mb-240 {
+  margin-bottom: 2.4rem;
+}
+
+.u-mb-250 {
+  margin-bottom: 2.5rem;
+}
+
+.u-mb-260 {
+  margin-bottom: 2.6rem;
+}
+
+.u-mb-270 {
+  margin-bottom: 2.7rem;
+}
+
+.u-mb-280 {
+  margin-bottom: 2.8rem;
+}
+
+.u-mb-290 {
+  margin-bottom: 2.9rem;
+}
+
+.u-mb-300 {
+  margin-bottom: 3rem;
+}
+
+.u-ml-0 {
+  margin-left: 0rem;
+}
+
+.u-ml-10 {
+  margin-left: 0.1rem;
+}
+
+.u-ml-20 {
+  margin-left: 0.2rem;
+}
+
+.u-ml-30 {
+  margin-left: 0.3rem;
+}
+
+.u-ml-40 {
+  margin-left: 0.4rem;
+}
+
+.u-ml-50 {
+  margin-left: 0.5rem;
+}
+
+.u-ml-60 {
+  margin-left: 0.6rem;
+}
+
+.u-ml-70 {
+  margin-left: 0.7rem;
+}
+
+.u-ml-80 {
+  margin-left: 0.8rem;
+}
+
+.u-ml-90 {
+  margin-left: 0.9rem;
+}
+
+.u-ml-100 {
+  margin-left: 1rem;
+}
+
+.u-ml-110 {
+  margin-left: 1.1rem;
+}
+
+.u-ml-120 {
+  margin-left: 1.2rem;
+}
+
+.u-ml-130 {
+  margin-left: 1.3rem;
+}
+
+.u-ml-140 {
+  margin-left: 1.4rem;
+}
+
+.u-ml-150 {
+  margin-left: 1.5rem;
+}
+
+.u-ml-160 {
+  margin-left: 1.6rem;
+}
+
+.u-ml-170 {
+  margin-left: 1.7rem;
+}
+
+.u-ml-180 {
+  margin-left: 1.8rem;
+}
+
+.u-ml-190 {
+  margin-left: 1.9rem;
+}
+
+.u-ml-200 {
+  margin-left: 2rem;
+}
+
+.u-ml-210 {
+  margin-left: 2.1rem;
+}
+
+.u-ml-220 {
+  margin-left: 2.2rem;
+}
+
+.u-ml-230 {
+  margin-left: 2.3rem;
+}
+
+.u-ml-240 {
+  margin-left: 2.4rem;
+}
+
+.u-ml-250 {
+  margin-left: 2.5rem;
+}
+
+.u-ml-260 {
+  margin-left: 2.6rem;
+}
+
+.u-ml-270 {
+  margin-left: 2.7rem;
+}
+
+.u-ml-280 {
+  margin-left: 2.8rem;
+}
+
+.u-ml-290 {
+  margin-left: 2.9rem;
+}
+
+.u-ml-300 {
+  margin-left: 3rem;
+}
+
+.u-ml-1000 {
+  margin-left: 10rem;
+}
+
+.u-mr-0 {
+  margin-right: 0rem;
+}
+
+.u-mr-10 {
+  margin-right: 0.1rem;
+}
+
+.u-mr-20 {
+  margin-right: 0.2rem;
+}
+
+.u-mr-30 {
+  margin-right: 0.3rem;
+}
+
+.u-mr-40 {
+  margin-right: 0.4rem;
+}
+
+.u-mr-50 {
+  margin-right: 0.5rem;
+}
+
+.u-mr-60 {
+  margin-right: 0.6rem;
+}
+
+.u-mr-70 {
+  margin-right: 0.7rem;
+}
+
+.u-mr-80 {
+  margin-right: 0.8rem;
+}
+
+.u-mr-90 {
+  margin-right: 0.9rem;
+}
+
+.u-mr-100 {
+  margin-right: 1rem;
+}
+
+.u-mr-110 {
+  margin-right: 1.1rem;
+}
+
+.u-mr-120 {
+  margin-right: 1.2rem;
+}
+
+.u-mr-130 {
+  margin-right: 1.3rem;
+}
+
+.u-mr-140 {
+  margin-right: 1.4rem;
+}
+
+.u-mr-150 {
+  margin-right: 1.5rem;
+}
+
+.u-mr-160 {
+  margin-right: 1.6rem;
+}
+
+.u-mr-170 {
+  margin-right: 1.7rem;
+}
+
+.u-mr-180 {
+  margin-right: 1.8rem;
+}
+
+.u-mr-190 {
+  margin-right: 1.9rem;
+}
+
+.u-mr-200 {
+  margin-right: 2rem;
+}
+
+.u-mr-210 {
+  margin-right: 2.1rem;
+}
+
+.u-mr-220 {
+  margin-right: 2.2rem;
+}
+
+.u-mr-230 {
+  margin-right: 2.3rem;
+}
+
+.u-mr-240 {
+  margin-right: 2.4rem;
+}
+
+.u-mr-250 {
+  margin-right: 2.5rem;
+}
+
+.u-mr-260 {
+  margin-right: 2.6rem;
+}
+
+.u-mr-270 {
+  margin-right: 2.7rem;
+}
+
+.u-mr-280 {
+  margin-right: 2.8rem;
+}
+
+.u-mr-290 {
+  margin-right: 2.9rem;
+}
+
+.u-mr-300 {
+  margin-right: 3rem;
+}
+
+.u-mtb-0 {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+.u-mtb-10 {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.u-mtb-20 {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.u-mtb-30 {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.u-mtb-40 {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.u-mtb-50 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.u-mtb-60 {
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.u-mtb-70 {
+  margin-top: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.u-mtb-80 {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.u-mtb-90 {
+  margin-top: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.u-mtb-100 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.u-mtb-110 {
+  margin-top: 1.1rem;
+  margin-bottom: 1.1rem;
+}
+
+.u-mtb-120 {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.u-mtb-130 {
+  margin-top: 1.3rem;
+  margin-bottom: 1.3rem;
+}
+
+.u-mtb-140 {
+  margin-top: 1.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.u-mtb-150 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.u-mtb-160 {
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.u-mtb-170 {
+  margin-top: 1.7rem;
+  margin-bottom: 1.7rem;
+}
+
+.u-mtb-180 {
+  margin-top: 1.8rem;
+  margin-bottom: 1.8rem;
+}
+
+.u-mtb-190 {
+  margin-top: 1.9rem;
+  margin-bottom: 1.9rem;
+}
+
+.u-mtb-200 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.u-mtb-210 {
+  margin-top: 2.1rem;
+  margin-bottom: 2.1rem;
+}
+
+.u-mtb-220 {
+  margin-top: 2.2rem;
+  margin-bottom: 2.2rem;
+}
+
+.u-mtb-230 {
+  margin-top: 2.3rem;
+  margin-bottom: 2.3rem;
+}
+
+.u-mtb-240 {
+  margin-top: 2.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.u-mtb-250 {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.u-mtb-260 {
+  margin-top: 2.6rem;
+  margin-bottom: 2.6rem;
+}
+
+.u-mtb-270 {
+  margin-top: 2.7rem;
+  margin-bottom: 2.7rem;
+}
+
+.u-mtb-280 {
+  margin-top: 2.8rem;
+  margin-bottom: 2.8rem;
+}
+
+.u-mtb-290 {
+  margin-top: 2.9rem;
+  margin-bottom: 2.9rem;
+}
+
+.u-mtb-300 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.u-mlr-0 {
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+
+.u-mlr-10 {
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+}
+
+.u-mlr-20 {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+.u-mlr-30 {
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.u-mlr-40 {
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+}
+
+.u-mlr-50 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.u-mlr-60 {
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+}
+
+.u-mlr-70 {
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+
+.u-mlr-80 {
+  margin-left: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+.u-mlr-90 {
+  margin-left: 0.9rem;
+  margin-right: 0.9rem;
+}
+
+.u-mlr-100 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.u-mlr-110 {
+  margin-left: 1.1rem;
+  margin-right: 1.1rem;
+}
+
+.u-mlr-120 {
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+}
+
+.u-mlr-130 {
+  margin-left: 1.3rem;
+  margin-right: 1.3rem;
+}
+
+.u-mlr-140 {
+  margin-left: 1.4rem;
+  margin-right: 1.4rem;
+}
+
+.u-mlr-150 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.u-mlr-160 {
+  margin-left: 1.6rem;
+  margin-right: 1.6rem;
+}
+
+.u-mlr-170 {
+  margin-left: 1.7rem;
+  margin-right: 1.7rem;
+}
+
+.u-mlr-180 {
+  margin-left: 1.8rem;
+  margin-right: 1.8rem;
+}
+
+.u-mlr-190 {
+  margin-left: 1.9rem;
+  margin-right: 1.9rem;
+}
+
+.u-mlr-200 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.u-mlr-210 {
+  margin-left: 2.1rem;
+  margin-right: 2.1rem;
+}
+
+.u-mlr-220 {
+  margin-left: 2.2rem;
+  margin-right: 2.2rem;
+}
+
+.u-mlr-230 {
+  margin-left: 2.3rem;
+  margin-right: 2.3rem;
+}
+
+.u-mlr-240 {
+  margin-left: 2.4rem;
+  margin-right: 2.4rem;
+}
+
+.u-mlr-250 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
+.u-mlr-260 {
+  margin-left: 2.6rem;
+  margin-right: 2.6rem;
+}
+
+.u-mlr-270 {
+  margin-left: 2.7rem;
+  margin-right: 2.7rem;
+}
+
+.u-mlr-280 {
+  margin-left: 2.8rem;
+  margin-right: 2.8rem;
+}
+
+.u-mlr-290 {
+  margin-left: 2.9rem;
+  margin-right: 2.9rem;
+}
+
+.u-mlr-300 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.u-m-0 {
+  margin: 0rem;
+}
+
+.u-m-10 {
+  margin: 0.1rem;
+}
+
+.u-m-20 {
+  margin: 0.2rem;
+}
+
+.u-m-30 {
+  margin: 0.3rem;
+}
+
+.u-m-40 {
+  margin: 0.4rem;
+}
+
+.u-m-50 {
+  margin: 0.5rem;
+}
+
+.u-m-60 {
+  margin: 0.6rem;
+}
+
+.u-m-70 {
+  margin: 0.7rem;
+}
+
+.u-m-80 {
+  margin: 0.8rem;
+}
+
+.u-m-90 {
+  margin: 0.9rem;
+}
+
+.u-m-100 {
+  margin: 1rem;
+}
+
+.u-m-110 {
+  margin: 1.1rem;
+}
+
+.u-m-120 {
+  margin: 1.2rem;
+}
+
+.u-m-130 {
+  margin: 1.3rem;
+}
+
+.u-m-140 {
+  margin: 1.4rem;
+}
+
+.u-m-150 {
+  margin: 1.5rem;
+}
+
+.u-m-160 {
+  margin: 1.6rem;
+}
+
+.u-m-170 {
+  margin: 1.7rem;
+}
+
+.u-m-180 {
+  margin: 1.8rem;
+}
+
+.u-m-190 {
+  margin: 1.9rem;
+}
+
+.u-m-200 {
+  margin: 2rem;
+}
+
+.u-m-210 {
+  margin: 2.1rem;
+}
+
+.u-m-220 {
+  margin: 2.2rem;
+}
+
+.u-m-230 {
+  margin: 2.3rem;
+}
+
+.u-m-240 {
+  margin: 2.4rem;
+}
+
+.u-m-250 {
+  margin: 2.5rem;
+}
+
+.u-m-260 {
+  margin: 2.6rem;
+}
+
+.u-m-270 {
+  margin: 2.7rem;
+}
+
+.u-m-280 {
+  margin: 2.8rem;
+}
+
+.u-m-290 {
+  margin: 2.9rem;
+}
+
+.u-m-300 {
+  margin: 3rem;
+}
+
+.u-heading-font-size {
+  font-size: 1rem;
+}
+
+.u-heading-font-size--lg {
+  font-size: 1.8rem;
+}
+
+.u-heading-font-size--md {
+  font-size: 1.5rem;
+}
+
+.u-heading-font-size--sm {
+  font-size: 1.2rem;
 }
 

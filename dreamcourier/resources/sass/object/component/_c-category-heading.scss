@@ -1,0 +1,13 @@
+/* カテゴリーの見出しの書式 */
+.c-category-heading {
+    //表示位置
+    padding      : 0.3rem 0.5rem; //内側の余白
+    //形
+    background   : -webkit-linear-gradient(to right, rgb(255, 186, 115), transparent); //背景色　webkit:古いブラウザー用
+    background   : linear-gradient(to right, rgb(255, 186, 115), transparent); //背景色　グラデーション
+    //テキストの書式
+    color        : #545454; //文字色
+    font-size    : map-get($text_font_size, head-lg);
+    font-style   : italic;
+    font-weight  : bold;
+}

@@ -4,44 +4,47 @@
 %base-button-type1 {
     //表示位置
     display         : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
-    margin-top      : 10px; //メニューバーの上のマージン
-    padding         : 0.5em 1em; // ボタンの内側余白：上下、左右
+    padding         : 0.5rem 1rem; // ボタンの内側余白：上下、左右
     //形
-    width           : 150px; // ボタンの横幅位
-    height          : 50px; // ボタンの高さ
-    border-radius   : 4px; // 角の丸み
+    width           : 9.5rem; // ボタンの横幅位
+    height          : 3rem; // ボタンの高さ
+    border-radius   : 0.3rem; // 角の丸み
     background-image: linear-gradient(#6795fd 0%, #67ceff 100%); // ボタンの背景色：線形グラデーション
-    box-shadow      : 0px 2px 2px rgba(0, 0, 0, 0.29); // ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29)
-    border-bottom   : solid 3px #5e7fca; // ボタン下辺の線の設定
+    box-shadow      : 0rem 0.1rem 0.3rem rgba(0, 0, 0, 0.29); // ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29)
+    border-bottom   : solid 0.2rem #5e7fca; // ボタン下辺の線の設定
     //テキストの書式
     text-decoration : none; // テキストの装飾：なし
     font-weight     : bold; // フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400）
-    line-height     : 27px; // ボタンの上辺からの位置：0で上辺と文字が重なる
+    line-height     : 1.6rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
     text-align      : center; // テキストの中央寄せ
     color           : rgba(255, 255, 255, 0.90); // 文字色
-    font-size       : 1.5em; // 文字サイズ
-    text-shadow     : 1px 1px 1px rgba(255, 255, 255, 0.5); // テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)
+    font-size       : map-get($text_font_size, button-md); // 文字サイズ
+    text-shadow     : 0.1rem 0.1rem 0.1rem rgba(255, 255, 255, 0.5); // テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)
 }
 
+//戻る
 .c-button-type1-1 {
     @extend %base-button-type1;
 }
 
+//カートへ追加ボタン
 .c-button-type1-2 {
-    //カートへ追加ボタンの書式
     @extend %base-button-type1;
-    line-height: 45px; // ボタンの上辺からの位置：0で上辺と文字が重なる
+    line-height: 3rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
 }
 
+//キャンセル
 .c-button-type1-3 {
     @extend %base-button-type1;
     display    : block; //要素を横に並べる＆ブロックにする＆隙間有り
-    height     : 30px; // ボタンの高さ
-    line-height: 35px; // ボタンの上辺からの位置：0で上辺と文字が重なる
+    height     : 2rem; // ボタンの高さ
+    line-height: 1.8rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
+    font-size  : map-get($text_font_size, button-sm); // 文字サイズ
 }
 
+//購入手続き時の各種ボタン
 .c-button-type1-4 {
     @extend %base-button-type1;
-    width      : 250px; // ボタンの横幅位
-    line-height: 25px; // ボタンの上辺からの位置：0で上辺と文字が重なる
+    width      : 15rem; // ボタンの横幅位
+    line-height: 1.5rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
 }

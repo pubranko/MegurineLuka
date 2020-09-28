@@ -1,27 +1,22 @@
 /* ヘッダー部の要素 */
 .l-member-header {
     //表示位置
-    position     : fixed;
-    z-index      : 9999; //boxが重なった場合、常に上に表示させるよう優先度を9999にしている
-    margin-bottom: 2em;
-    padding      : 0em 0em 0.5em 0.5em;
+    position  : fixed;
+    display   : flex;
+    z-index   : 9999; //boxが重なった場合、常に上に表示させるよう優先度を9999にしている
+    padding   : 0.3rem 0rem 0.3rem 0.5rem;
     //形
-    background   : #97b2f0;
-    width        : 100%;
+    background: #97b2f0;
+    width     : 100%;
 }
 
 .l-member-header__line {
-    display  : inline; //リストを横に並べる
-    li {
-        margin-right: 50px; //リストの間隔を調整
-    }
-    font-size: map-get($text_font_size, md2);
+    display         : inline; //リストを横に並べる
+    line-height     : 2rem; //テキスト縦位置調整
+    font-size       : 1rem;
 }
 
 .l-member-header__title {
-    display  : inline; //リストを横に並べる
-    li {
-        margin-right: 50px; //リストの間隔を調整
-    }
-    font-size: map-get($text_font_size, lg1);
+    display         : inline; //リストを横に並べる
+    font-size       : map-get($text_font_size, title);
 }

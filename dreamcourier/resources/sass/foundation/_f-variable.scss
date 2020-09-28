@@ -1,0 +1,35 @@
+//map 呼び出すときは、map-get($text_font_size, lg1)
+$text_font_size: (sm1: 0.9em,
+    md1: 1em,
+    md2: 1.1em,
+    md3: 1.2em,
+    lg1: 1.5em,
+    lg2: 2em,
+
+    title:1.8rem,         //タイトル
+
+    head-lg: 1.8rem,    //大見出し Large headline
+    head-md: 1.5rem,    //中見出し Middle heading
+    head-sm:1.2rem,     //小見出し Small heading
+
+    message-lg:1.8rem,  //ユーザーへの強調メッセージ大
+    message-md:1.4rem,  //ユーザーへの強調メッセージ中
+
+    button-lg:1.8rem,
+    button-md:1.5rem,
+    button-sm:1.2rem,
+
+    emphasis-lg:3rem,
+    emphasis-md:2rem,
+    emphasis-sm:1.5rem,
+);
+
+
+//font-sizeのルール
+//sm:1em未満
+
+$header_font_size:();
+
+//https://hail2u.net/blog/coding/sass-variable-naming-and-bem.html
+//ここを参考にネーミングを考える。
+//「どういう変数を参照するか」が優先的に意識されるので、先に型があった方が良い

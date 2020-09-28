@@ -7,18 +7,18 @@ $site_division: "member";
 // ===============================================================
 // Foundation
 // ===============================================================
-@import "foundation/_mixins";
-@import "foundation/_variable";
+@import "foundation/_f-mixins";
+@import "foundation/_f-variable";
 
 // --------------------------------------------
 // Reset
 // --------------------------------------------
-@import "foundation/_reset";
+@import "foundation/_f-reset";
 
 // --------------------------------------------
 // Base
 // --------------------------------------------
-@import "foundation/_base";
+@import "foundation/_f-base";
 
 // ===============================================================
 // Layout
@@ -26,67 +26,45 @@ $site_division: "member";
 
 @import "layout/_l-member-header.scss";
 @import "layout/_l-member-sidebar.scss";
-@import "layout/_member_footer";
+@import "layout/_l-member_footer";
 @import "layout/_l-body-flex.scss";
 @import "layout/_l-body-nomal.scss";
 @import "layout/_l-main.scss";
-@import "layout/_l-cart-lists.scss";        //カートリスト
-@import "layout/_l-product-lists.scss";     //商品一覧
-@import "layout/_l-product-tag.scss";       //商品詳細：タグ
-@import "layout/_l-product-details.scss";   //商品詳細：明細
-@import "layout/_l-delivery-check.scss";    //ただのマージン、、、あとで見直し
+
 
 // ===============================================================
 // Object
 // ===============================================================
-@import "object/project/_member_pagination.scss";   //ページネーション
-
-
 // --------------------------------------------
 // Component
 // --------------------------------------------
 // ボタン　type1〜3,4あたり。mixinsとどう分ける？
 @import "object/component/_c-button.scss";
-@import "object/component/_c-message.scss";
+
+@import "object/component/_c-category-heading.scss";
+@import "object/component/_c-help-block.scss";
+@import "object/component/_c-operation-message";
+
 @import "object/component/_c-image_size.scss";
 @import "object/component/_c-table-type1.scss";
 @import "object/component/_c-delivery-destination.scss";
-// default
-// @import "object/component/heading";
-// @import "object/component/label";
-// @import "object/component/tab";
-// @import "object/component/media";
-// @import "object/component/search";
-// @import "object/component/form";
-// @import "object/component/pagenation";
-// @import "object/component/link";
-// @import "object/component/table";
-// @import "object/component/text";
-// @import "object/component/button";
-// ab1
-// @import "object/component/ab1-heading";
-// @import "object/component/ab1-text";
+@import "object/component/_c-product-details.scss";   //商品詳細：明細
+@import "object/component/_c-product-tag.scss";       //商品詳細：タグ
 
 // --------------------------------------------
 // Project
 // --------------------------------------------
-// default
-// @import "object/project/header";
-// @import "object/project/footer";
-// @import "object/project/top";
-// @import "object/project/main";
-// @import "object/project/side";
-// @import "object/project/news";
-// @import "object/project/gallery";
-// @import "object/project/search";
-// @import "object/project/ranking";
-// @import "object/project/special";
-// ab1
-// @import "object/project/ab1-special";
+@import "object/project/_p_pagination.scss";        //ページネーション(laravelオリジナル)
+@import "object/project/_p-cart-box.scss";        //カートリスト
+@import "object/project/_p-product-lists.scss";     //商品一覧
 
 // --------------------------------------------
 // Utility
 // --------------------------------------------
+@import "object/utility/_u-margin.scss";     //
+@import "object/utility/_u-heading-font-size.scss";     //
+@import "object/utility/_u-test.scss";     //
+
 // @import "object/utility/typography";
 // @import "object/utility/dimension";
 // @import "object/utility/spaces";
