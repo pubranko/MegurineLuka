@@ -1,16 +1,16 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="container l-body-nomal u-mt-350 u-ml-100">
+<div class="container l-body-nomal u-margin--t-350 u-margin--l-100">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">夢の宅配便　会員新規登録（入力）</div>
-                <div class="c-operation-message u-mtb-70">
+                <div class="c-operation-message u-margin--tb-70">
                     以下の会員登録に必要な情報を入力してください。
                 </div>
 
-                <div class="c-delivery-destination u-mt-30 u-ml-100">
+                <div class="c-delivery-destination u-margin--t-30 u-margin--l-100">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/member/register/check') }}">
                         {{ csrf_field() }}
 

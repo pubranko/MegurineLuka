@@ -1,14 +1,14 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="l-body-nomal u-mt-350 u-ml-100">
-    <div class="c-operation-message u-mtb-70">
+<div class="l-body-nomal u-margin--t-350 u-margin--l-100">
+    <div class="c-operation-message u-margin--tb-70">
         お買い上げいただきまして、ありがとうございます。<br/>
         ご希望いただきました配達日時に商品をお届けいたします。
     </div>
-    <p>◎お取引情報</p>
-    <div class="u-ml-100">
-        <table class="c-table-type1 u-mt-20">
+    <p class="c-delivery-destination__heading">◎お取引情報</p>
+    <div class="u-margin--l-100">
+        <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
                 <th class="c-table-type1__cell">お取引番号</th>
                 <td class="c-table-type1__cell">{{$transaction_number}}</td>
@@ -16,18 +16,18 @@
         </table>
     </div>
 
-    <p>◎商品情報</p>
-    <div class="u-ml-100">
-        <div class="p-cart-box u-mt-70">
-            <img class="c-img_product_thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
-            <div class="p-cart-box__layout u-ml-70">
-                <div class="p-cart-box__product-name u-mb-40">
+    <p class="c-delivery-destination__heading">◎商品情報</p>
+    <div class="u-margin--l-100">
+        <div class="p-cart-box u-margin--t-70">
+            <img class="c-product-details__thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
+            <div class="p-cart-box__layout u-margin--l-70">
+                <div class="p-cart-box__product-name u-margin--b-40">
                     <a>【商品名】{{$wk_product['product_name']}}</a>
                 </div>
-                <div class="p-cart-box__product-code u-mb-40">
+                <div class="p-cart-box__product-code u-margin--b-40">
                     <a>【商品コード】{{$wk_product['product_code']}}</a>
                 </div>
-                <div class="p-cart-box__product-price u-mb-40">
+                <div class="p-cart-box__product-price u-margin--b-40">
                     <a>【販売価格】{{$wk_product['product_price']}} 円</a>
                 </div>
                 <div class="p-cart-box__product-stock_quantity_status">
@@ -36,9 +36,9 @@
             </div>
         </div>
     </div>
-    <p>◎配達先情報</p>
-    <div class="u-ml-100">
-        <table class="c-table-type1 u-mt-20">
+    <p class="c-delivery-destination__heading">◎配達先情報</p>
+    <div class="u-margin--l-100">
+        <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
                 <th class="c-table-type1__cell">受取人氏名</th>
                 <td class="c-table-type1__cell">{{$wk_delivery_destination['receiver_name']}}</td>
@@ -65,9 +65,9 @@
         </table>
     </div>
 
-    <p>◎配達日時</p>
-    <div class="u-ml-100">
-        <table class="c-table-type1 u-mt-20">
+    <p class="c-delivery-destination__heading">◎配達日時</p>
+    <div class="u-margin--l-100">
+        <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
                 <th class="c-table-type1__cell">配達希望日</th>
                 <td class="c-table-type1__cell">{{$wk_datetime['delivery_date_edit']}}</td>
@@ -79,9 +79,9 @@
         </table>
     </div>
 
-    <p>◎支払い方法</p>
-    <div class="u-ml-100">
-        <table class="c-table-type1 u-mt-20">
+    <p class="c-delivery-destination__heading">◎支払い方法</p>
+    <div class="u-margin--l-100">
+        <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
                 <th class="c-table-type1__cell">クレジットカード番号</th>
                 <td class="c-table-type1__cell">{{$wk_credit_card['card_number']}}</td>

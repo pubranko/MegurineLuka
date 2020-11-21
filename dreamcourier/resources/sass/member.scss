@@ -7,8 +7,13 @@ $site_division: "member";
 // ===============================================================
 // Foundation
 // ===============================================================
-@import "foundation/_f-mixins";
-@import "foundation/_f-variable";
+//@import "foundation/_f-mixins.scss";
+@import "foundation/_f-variable.scss";
+@import "foundation/_f-font-size.scss";
+@import "foundation/_f-palette.scss";
+@import "foundation/_f-colors.scss";
+@import "foundation/_f-frame.scss";
+@import "foundation/_f-input-form.scss";
 
 // --------------------------------------------
 // Reset
@@ -45,7 +50,6 @@ $site_division: "member";
 @import "object/component/_c-help-block.scss";
 @import "object/component/_c-operation-message";
 
-@import "object/component/_c-image_size.scss";
 @import "object/component/_c-table-type1.scss";
 @import "object/component/_c-delivery-destination.scss";
 @import "object/component/_c-product-details.scss";   //商品詳細：明細

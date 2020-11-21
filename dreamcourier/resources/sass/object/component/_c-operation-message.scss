@@ -3,8 +3,9 @@
     //表示位置
     padding      : 0.3rem;
     //形
-    border       : 0.3rem solid #FFCC33;
-    background   : #ffffcc;
+    border       : 0.3rem solid map-get($colors,message-border-1);//#FFCC33;
+    //background   : map-get($colors,message-background-1); //#ffffcc;
     //テキストの書式
     font-size    : map-get($text_font_size, message-sm);
+    color : map-get($colors,message-text-1);
 }

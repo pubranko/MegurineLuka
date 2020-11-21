@@ -1,12 +1,12 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="container l-body-nomal u-mt-350 u-ml-100">
+<div class="container l-body-nomal u-margin--t-350 u-margin--l-100">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">夢の宅配便　会員新規登録（確認）</div>
-                <div class="c-operation-message u-mtb-70">
+                <div class="c-operation-message u-margin--tb-70">
                     以下の内容で会員登録を行います。　問題がなければ、ログインに使用するパスワードを入力し、
                     「上記の内容で入会する」ボタンを押してください。
                 </div>
@@ -112,7 +112,7 @@
                                 <a>　{{$phone_number1}} - {{$phone_number2}} - {{$phone_number3}}　</a>
                             </div>
 
-                        <div class="c-operation-message u-mtb-70">
+                        <div class="c-operation-message u-margin--tb-70">
                             上記の内容で問題がなければ、ログインに使用するパスワードを入力し、
                             「上記の内容で入会する」ボタンを押してください。
                         </div>

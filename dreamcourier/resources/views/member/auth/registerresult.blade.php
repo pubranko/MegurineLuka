@@ -1,13 +1,13 @@
 @extends('member.layout.auth')
 
 @section('content')
-<div class="container l-body-nomal u-mt-350 u-ml-100">
+<div class="container l-body-nomal u-margin--t-350 u-margin--l-100">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">夢の宅配便　会員新規登録（結果）</div>
                 <div class="panel-body">
-                    <div class="c-operation-message u-mtb-70">
+                    <div class="c-operation-message u-margin--tb-70">
                         <a>夢の宅配便への入会ありがとうございます。<br/>></a>
                         <a>入会の手続きは終わりましたが、お買い物をしていただくには支払方法の登録が必要です。<br/>></a>
                         <a>よろしければ、支払方法のご登録を下記のボタンより行ってください。</a>

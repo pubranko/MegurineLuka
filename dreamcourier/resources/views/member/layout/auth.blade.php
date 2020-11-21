@@ -26,30 +26,30 @@
 <body>
     <div class="l-member-header">
         @if (Auth::guest())
-            <a class="l-member-header__title u-mr-50" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+            <a class="l-member-header__title u-margin--r-50" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
             <form method="GET" action="{{ url('/keyword') }}">
-                <input placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
-                <input type="submit" name="search" value="検索">
+                <input class="l-member-search-box" placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                <button type="submit" class="c-button--type2-4">検索</button>
             </form>
-            <a class="l-member-header__line u-mr-50" href="{{ url('/member/login') }}">ログイン</a>
-            <a class="l-member-header__line u-mr-50" href="{{ url('/member/register/in') }}">新規会員登録</a>
+            <a class="l-member-header__line u-margin--r-50" href="{{ url('/member/login') }}">ログイン</a>
+            <a class="l-member-header__line u-margin--r-50" href="{{ url('/member/register/in') }}">新規会員登録</a>
         @else
-            <a class="l-member-header__title u-mr-50" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
+            <a class="l-member-header__title u-margin--r-50" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
             <form method="GET" action="{{ url('/member/keyword') }}">
-                <input placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
-                <input type="submit" name="search" value="検索">
+                <input class="l-member-search-box" placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                <button type="submit" class="c-button--type2-4">検索</button>
             </form>
-            <a class="l-member-header__line u-mr-50">{{ "こんにちは、".Auth::user()->last_name." ".Auth::user()->first_name."さん" }}</a>
-            <a class="l-member-header__line u-mr-50" href="{{ url('/member/cart_index') }}"　onclick="event.preventDefault(); document.getElementById('member-cart-form').submit();">
+            <a class="l-member-header__line u-margin--r-50">{{ "こんばんは、".Auth::user()->last_name." ".Auth::user()->first_name."さん" }}</a>
+            <a class="l-member-header__line u-margin--r-50" href="{{ url('/member/cart_index') }}"　onclick="event.preventDefault(); document.getElementById('member-cart-form').submit();">
                 カート一覧へ
             </a>
-            <a class="l-member-header__line u-mr-50" href="{{ url('/member/menu') }}"　onclick="event.preventDefault(); document.getElementById('member-menu-form').submit();">
+            <a class="l-member-header__line u-margin--r-50" href="{{ url('/member/menu') }}"　onclick="event.preventDefault(); document.getElementById('member-menu-form').submit();">
                 会員メニュー
             </a>
             <form id="member-menu-form" action="{{ url('/member/menu') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
-            <a class="l-member-header__line u-mr-50" href="{{ url('/member/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a class="l-member-header__line u-margin--r-50" href="{{ url('/member/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ログアウト
             </a>
             <form id="logout-form" action="{{ url('/member/logout') }}" method="POST" style="display: none;">
