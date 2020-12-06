@@ -1,0 +1,14 @@
+/*購入手続き（確認）のテーブル書式*/
+.c-table-type1 {
+    @include f-frame--type1;
+    border-collapse: collapse;
+    color         : map-get($colors,product-text-type1-1); //文字色
+}
+
+.c-table-type1__cell {
+    padding-left   : 0.5rem;
+    padding-right  : 0.5rem;
+    padding-top  : 0.5rem;
+    padding-bottom : 0.5rem;
+    @include f-frame--type2;
+}

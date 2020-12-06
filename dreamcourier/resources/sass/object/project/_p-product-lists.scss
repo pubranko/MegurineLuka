@@ -1,0 +1,17 @@
+/*商品一覧の簡易表示　各商品のboxを横に並べて表示する*/
+.p-product-lists {
+    overflow  : hidden; //ボックスの範囲内に内容が収まらない場合に、はみ出た部分の表示の仕方：表示しない
+    padding   : 0;
+    list-style: none; //リストのマーカーの種類：なし
+}
+
+.p-product-lists__line {
+    float : left; //要素を左から並べる
+    width : 10rem; //box1つに使う横幅。19%だと、余裕があっても常に５つ横に並べる。160pxでサムネイルと合わせる
+    border: 0.1rem solid map-get($colors,product-details-border-1);
+}
+
+.p-product-lists__text {
+    text-align   : center; //テキストの中央寄せ
+    color         : map-get($colors,product-text-type1-1); //文字色
+}

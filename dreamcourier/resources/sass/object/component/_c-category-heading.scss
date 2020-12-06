@@ -1,0 +1,14 @@
+/* カテゴリーの見出しの書式 */
+.c-category-heading {
+    //表示位置
+    padding      : 0.3rem 0.5rem; //内側の余白
+    //形
+    border: 0.1rem solid map-get($colors,message-border-1);
+    //テキストの書式
+    font-size    : map-get($text_font_size, head-lg);
+    font-style   : italic;
+    font-weight  : bold;
+
+    color: transparent;
+    -webkit-text-stroke: 1.5px map-get($colors,message-text-1);
+}

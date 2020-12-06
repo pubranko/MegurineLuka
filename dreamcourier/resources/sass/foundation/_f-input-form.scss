@@ -1,0 +1,36 @@
+/*ここは入力フィールドのmixinを定義する。*/
+
+//入力フォーム
+@mixin f-input-form--type1 {
+    padding-left:0.3rem;
+    background: map-get($colors,input-background-type1-1);
+    border     : solid 0.01rem map-get($colors,input-border-type1-1);
+    border-radius: 0.5rem;
+    color           :map-get($colors,input-text-type1-1);
+}
+
+//自動入力フォーム
+@mixin f-input-form--type2 {
+    padding-left:0.3rem;
+    background: map-get($colors,input-background-type2-1);
+    border     : solid 0.01rem map-get($colors,input-border-type2-1);
+    border-radius: 0.5rem;
+    color           :map-get($colors,input-text-type2-1);
+}
+
+//入力フォーム
+@mixin f-input-form--type3 {
+    padding-left:0.3rem;
+    background: map-get($colors,head-background-1);
+    border     : solid 0.01rem map-get($colors,header-border-1);
+    border-radius: 0.5rem;
+    color           : map-get($colors,header-text-1);
+
+    &:hover,
+    &:active {
+        background    : map-get($colors,header-text-1);     //背景色
+        color         : map-get($colors,head-background-1); //文字色
+        cursor        : pointer;     //カーソル : ボタン上のマウスの形を変える
+    }
+
+}

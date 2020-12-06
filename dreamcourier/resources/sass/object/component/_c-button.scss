@@ -1,0 +1,60 @@
+/*
+*   ボタンの定義
+*/
+/* ボタン （aタグ、buttonタグに利用可） */
+%base-button--type2 {
+    //表示位置
+    display       : inline-block;
+    padding       : 1.1rem 1rem; // ボタンの内側余白：上下、左右
+    //形
+    border        : 0.2rem solid map-get($colors, button-border-1);     /* 枠の指定 */
+    box-shadow :  //x軸 y軸 ぼかし 広がり カラー
+        0.0rem 0.0rem 0.3rem 0.1rem map-get($colors, button-shadow-1),       //外側
+        0.0rem 0.0rem 0.3rem 0.1rem map-get($colors, button-shadow-1) inset; //内側
+    border-radius : 5%;          //角丸
+    background:rgba(0,0,0,0);   //背景色を透明に
+    //テキストの書式
+    font-size     : map-get($text_font_size, button-md); // 文字サイズ
+    text-align    : center;      //文字位置
+    color         : map-get($colors,button-text-1-1); //文字色
+    //その他
+    transition    : .3s;         //なめらか変化
+    &:hover,
+    &:active {
+        color     : map-get($colors,button-text-1-2); //文字色
+        background    : map-get($colors,button-text-1-1);     //背景色
+        cursor        : pointer;     //カーソル : ボタン上のマウスの形を変える
+    }
+}
+
+//大：配送手続きへ、カートへ追加
+.c-button--type2-1 {
+    @extend %base-button--type2;
+}
+//中：キャンセル、配達日時指定へ
+.c-button--type2-2 {
+    @extend %base-button--type2;
+    display       : block; //要素を横に並べる＆ブロックにする＆隙間有り
+    padding       : 0.3rem 1rem; // ボタンの内側余白：上下、左右
+    font-size     : map-get($text_font_size, button-sm); // 文字サイズ
+}
+//小：戻る
+.c-button--type2-3 {
+    @extend %base-button--type2;
+    display       : block; //要素を横に並べる＆ブロックにする＆隙間有り
+    padding       : 0.1rem 1rem; // ボタンの内側余白：上下、左右
+    font-size     : map-get($text_font_size, button-sm); // 文字サイズ
+}
+//小：検索、郵便番号からの検索
+.c-button--type2-4 {
+    @extend %base-button--type2;
+    padding       : 0.1rem 1rem; // ボタンの内側余白：上下、左右
+    font-size     : map-get($text_font_size, button-sm); // 文字サイズ
+}
+
+//小：検索
+.c-button--type2-5 {
+    @extend %base-button--type2;
+    padding       : 0rem 1rem; // ボタンの内側余白：上下、左右
+    font-size     : map-get($text_font_size, button-tn); // 文字サイズ
+}

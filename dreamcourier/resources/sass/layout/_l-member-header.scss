@@ -1,0 +1,28 @@
+/* ヘッダー部の要素 */
+.l-member-header {
+    //表示位置
+    position  : fixed;
+    display   : flex;
+    z-index   : 9999; //boxが重なった場合、常に上に表示させるよう優先度を9999にしている
+    padding   : 0.3rem 0rem 0.3rem 0.5rem;
+    //形
+    background: map-get($colors,head-background-1);
+    width     : 100%;
+}
+
+.l-member-header--search-box{
+    @include f-input-form--type3;
+}
+
+.l-member-header__line {
+    display         : inline; //リストを横に並べる
+    line-height     : 2rem; //テキスト縦位置調整
+    font-size       : 1rem;
+    color           : map-get($colors,header-text-1);
+}
+
+.l-member-header__title {
+    display         : inline; //リストを横に並べる
+    font-size       : map-get($text_font_size, title);
+    color           : map-get($colors,header-text-1);
+}

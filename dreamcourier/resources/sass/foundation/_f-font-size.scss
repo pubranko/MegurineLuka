@@ -1,0 +1,16 @@
+//map 呼び出すときは、map-get($text_font_size, lg1)
+$text_font_size: (title:1.8rem, //タイトル
+    head-lg:1.8rem, //見出し：大
+    head-md:1.5rem, //見出し：中
+    head-sm:1.2rem, //見出し：小
+    message-lg:1.8rem, //ユーザーへの操作メッセージ：大
+    message-md:1.5rem, //ユーザーへの操作メッセージ：中
+    message-sm:1.2rem, //ユーザーへの操作メッセージ：小
+    button-lg:1.8rem, //ボタン内の文字：大
+    button-md:1.5rem, //ボタン内の文字：中
+    button-sm:1.2rem, //ボタン内の文字：小
+    button-tn:1.0rem, //ボタン内の文字：極小 tiny
+    emphasis-lg:3rem,   //強調文字：大
+    emphasis-md:2rem,   //強調文字：中
+    emphasis-sm:1.5rem, //強調文字：小
+);

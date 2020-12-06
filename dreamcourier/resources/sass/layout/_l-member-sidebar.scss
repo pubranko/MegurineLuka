@@ -1,0 +1,25 @@
+/*サイドバー*/
+.l-member-sidebar {
+    position   : fixed; //表示位置を固定
+    width      : 10rem;  //横幅調整：暫定
+    height     : 100%;
+    padding    : 0.2rem 0rem 0rem 0.5rem;
+
+    .l-member-sidebar__lists {
+        padding-left: 0; //リストの文字を左寄せ
+    }
+
+    .l-member-sidebar__heading {
+        list-style: none; //リストのマーカーの種類：なし
+        font-weight: bold;
+        color         : map-get($colors,sidebar-text-type1-1); //文字色
+    }
+
+    .l-member-sidebar__line {
+        list-style: none; //リストのマーカーの種類：なし
+    }
+
+    .l-member-sidebar__text {
+        color         : map-get($colors,sidebar-text-type1-1); //文字色
+    }
+}

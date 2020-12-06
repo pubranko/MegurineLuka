@@ -1,0 +1,41 @@
+//map 呼び出すときは、map-get($colors,head-background-1)
+/*ネーミング
+1. 要素(body、button、messageなど)
+2. 種類(背景色、枠線、テキスト、)
+3. タイプ番号(ボタンの種類を分けたい場合)
+4. 枝番(同一タイプ内でアクションによって色分けしたい場合など)
+*/
+$colors: (
+    head-background-1:palette("shades", "black"),
+    header-border-1:palette("orange", "base"),
+    header-text-1:palette("orange", "base"),
+
+    message-background-1:palette("orange", "lighten-4"),
+    message-border-1:palette("orange", "darken-2"),
+    message-text-1:palette("orange", "base"),
+    message-text-2:palette("orange", "darken-4"),
+    message-text-3:palette("orange", "darken-4"),
+
+    error-message-text-1:palette("materialize-red", "base"),
+
+    button-border-1:palette("orange", "darken-2"),
+    button-shadow-1:palette("orange", "darken-4"),
+    button-text-1-1:palette("orange", "base"),
+    button-text-1-2:palette("indigo", "darken-2"),
+
+    product-details-border-1:palette("indigo", "darken-2"),
+
+    frame-type1-1:palette("orange", "darken-2"),
+    frame-type1-2:palette("orange", "darken-4"),
+
+    product-text-type1-1:palette("orange", "base"),
+    sidebar-text-type1-1:palette("orange", "base"),
+
+    input-background-type1-1:palette("orange", "lighten-4"),
+    input-border-type1-1:palette("orange", "darken-4"),
+    input-text-type1-1:palette("shades", "black"),
+
+    input-background-type2-1:palette("shades", "black"),
+    input-border-type2-1:palette("orange", "base"),
+    input-text-type2-1:palette("orange", "base"),
+);

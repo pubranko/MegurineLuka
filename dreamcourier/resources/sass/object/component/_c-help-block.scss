@@ -1,0 +1,4 @@
+/*バリデーションエラーで表示される文言のフォント*/
+.c-help-block {
+    color:  map-get($colors,error-message-text-1);
+}

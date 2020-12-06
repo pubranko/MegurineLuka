@@ -1,0 +1,106 @@
+/*  各要素のマージンの定義を行う。
+    0rem〜3remまでは0.1刻みで用意。それ以外は都度定義する。
+    基本的には各要素にはmarginを持たせない。
+    クラスのネーミング(top,bottom,right,left)
+        1. u-margin〜は共通。
+        2. top:u-margin--t
+        3. bottom:u-margin--b
+        4. right:u-margin--r
+        5. left:u-margin--l
+        6. all:u-margin--
+        7. 上下、左右の場合、tbrlを混ぜる。
+            u-margin--tb(topとbottom)
+            u-margin--lr(leftとright)
+        8. 上右のような場合は、独立したクラスをそれぞれ使用することとする。（u-mtrのように定義しない）
+    クラスのネーミング(大きさ)
+        1. marginの実際の大きさは1remに対する%で記載
+        2. u-margin--tb-50(上下に0.5rem)
+        3. u-margin--lr-120(左右1.2rem)
+*/
+
+//上
+$i:0;
+
+@while $i <=3 {
+    .u-margin--t-#{$i*100} {
+        margin-top:#{$i}rem;
+    }
+
+    $i : $i+0.1;
+}
+
+.u-margin--t-350 {
+    margin-top: 3.5rem;
+}
+
+//下
+$i:0;
+
+@while $i <=3 {
+    .u-margin--b-#{$i*100} {
+        margin-bottom:#{$i}rem;
+    }
+
+    $i : $i+0.1;
+}
+
+//左
+$i:0;
+
+@while $i <=3 {
+    .u-margin--l-#{$i*100} {
+        margin-left:#{$i}rem;
+    }
+
+    $i : $i+0.1;
+}
+
+.u-margin--l-1000 {
+    margin-left: 10rem
+}
+
+//右
+$i:0;
+
+@while $i <=3 {
+    .u-margin--r-#{$i*100} {
+        margin-right:#{$i}rem;
+    }
+
+    $i : $i+0.1;
+}
+
+//上下
+$i:0;
+
+@while $i <=3 {
+    .u-margin--tb-#{$i*100} {
+        margin-top   :#{$i}rem;
+        margin-bottom:#{$i}rem;
+    }
+
+    $i : $i+0.1;
+}
+
+//左右
+$i:0;
+
+@while $i <=3 {
+    .u-margin--lr-#{$i*100} {
+        margin-left :#{$i}rem;
+        margin-right:#{$i}rem;
+    }
+
+    $i : $i+0.1;
+}
+
+//上下左右
+$i:0;
+
+@while $i <=3 {
+    .u-margin--#{$i*100} {
+        margin:#{$i}rem;
+    }
+
+    $i : $i+0.1;
+}

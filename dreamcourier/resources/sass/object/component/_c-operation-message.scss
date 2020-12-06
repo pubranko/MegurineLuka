@@ -1,0 +1,11 @@
+/* 会員向けの操作説明用の書式*/
+.c-operation-message {
+    //表示位置
+    padding      : 0.3rem;
+    //形
+    max-width: 40rem;
+    border       : 0.3rem solid map-get($colors,message-border-1);
+    //テキストの書式
+    font-size    : map-get($text_font_size, message-sm);
+    color : map-get($colors,message-text-1);
+}

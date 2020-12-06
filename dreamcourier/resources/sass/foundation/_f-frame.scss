@@ -1,0 +1,23 @@
+/*ここは枠線のmixinを定義する。
+  基本的に、単純な枠で括りたい場合の枠線のみ。
+  ボタンの枠など、パーツ固有の枠はそれぞれのパーツに定義する。
+*/
+
+//各項目の枠線の共通定義
+@mixin f-frame--type1 {
+  //border     : ridge 0.15rem map-get($colors, frame-type1-1);
+  //border-left: ridge 0.4rem map-get($colors, frame-type1-2);
+  box-shadow : 
+    0.0rem 0.0rem 0.3rem map-get($colors, frame-type1-1),
+    0.0rem 0.0rem 0.3rem map-get($colors, frame-type1-1) inset;
+  ;
+}
+
+//テーブルの下線
+@mixin f-frame--type2 {
+  //border     : ridge 0.15rem map-get($colors, frame-type1-1);
+  //border-left: ridge 0.4rem map-get($colors, frame-type1-2);
+  box-shadow : 
+    0.0rem 0.0rem 0.05rem map-get($colors, frame-type1-1) inset;
+  ;
+}

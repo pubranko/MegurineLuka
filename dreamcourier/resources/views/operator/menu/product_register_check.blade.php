@@ -16,7 +16,7 @@
                             <a>　{{ $product_code }}　</a>
 
                             @if ($errors->has('product_code'))
-                                <span class="help-block">
+                                <span class="c-help-block">
                                     <strong>{{ $errors->first('product_code') }}</strong>
                                 </span>
                             @endif
@@ -43,7 +43,7 @@
                         <a>{{$wk_product_thumbnail_original_filename}}</a>
                     </div>
                     <div class="col-md-6">
-                        <img class="img_product_thumbnail" src="{{$wk_product_thumbnail_pathname_client}}">
+                        <img class="c-img_product_thumbnail" src="{{$wk_product_thumbnail_pathname_client}}">
                     </div>
 
                     <label class="col-md-4 control-label">商品画像</label>
@@ -51,7 +51,7 @@
                         <a>{{$wk_product_image_original_filename}}</a>
                     </div>
                     <div class="col-md-6">
-                        <img class="img_product_image" src="{{$wk_product_image_pathname_client}}">
+                        <img class="c-img_product_image" src="{{$wk_product_image_pathname_client}}">
                     </div>
 
                     <label class="col-md-4 control-label">商品検索キーワード</label>
@@ -72,15 +72,15 @@
                             <a>　{{$wk_sales_period_from}}　</a>
 
                             @if ($errors->has('sales_period_date_from'))
-                                <span class="help-block">
+                                <span class="c-help-block">
                                     <strong>{{ $errors->first('sales_period_date_from') }}</strong>
                                 </span>
                             @elseif ($errors->has('sales_period_time_from'))
-                                <span class="help-block">
+                                <span class="c-help-block">
                                     <strong>{{ $errors->first('sales_period_time_from') }}</strong>
                                 </span>
                             @elseif ($errors->has('wk_sales_period_from'))
-                                <span class="help-block">
+                                <span class="c-help-block">
                                     <strong>{{ $errors->first('wk_sales_period_from') }}</strong>
                                 </span>
                             @endif
@@ -98,15 +98,15 @@
                             <a>　{{$wk_sales_period_to}}　</a>
 
                             @if ($errors->has('sales_period_date_to'))
-                                <span class="help-block">
+                                <span class="c-help-block">
                                     <strong>{{ $errors->first('sales_period_date_to') }}</strong>
                                 </span>
                             @elseif ($errors->has('sales_period_time_to'))
-                                <span class="help-block">
+                                <span class="c-help-block">
                                     <strong>{{ $errors->first('sales_period_time_to') }}</strong>
                                 </span>
                             @elseif ($errors->has('wk_sales_period_to'))
-                                <span class="help-block">
+                                <span class="c-help-block">
                                     <strong>{{ $errors->first('wk_sales_period_to') }}</strong>
                                 </span>
                             @endif

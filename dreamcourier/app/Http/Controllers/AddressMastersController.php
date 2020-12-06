@@ -19,12 +19,14 @@ class AddressMastersController extends Controller
         $q = AddressMaster::query();
         $address = $q->where('zip',$postcode1.'-'.$postcode2)->first();
         if($address){
-            $response = '{'result_flg':'有り','.
-                        ''ken_name':''.$address['ken_name'].
-                        '','city_name':''.$address['city_name'].
-                        '','town_name':''.$address['town_name'].''}';
+            $response = '{"result_flg":"有り",'.
+                        '"ken_name":"'.$address["ken_name"].
+                        '","city_name":"'.$address["city_name"].
+                        '","town_name":"'.$address["town_name"].'"}';
+
         }else{
-            $response = '{'result_flg':'無し'}';
+            $response = '{"result_flg":"無し"}';
+
         }
         return $response;
     }

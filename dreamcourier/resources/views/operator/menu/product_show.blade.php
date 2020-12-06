@@ -56,12 +56,12 @@
 
                     <label class="col-md-4 control-label">商品サムネイル</label>
                     <div class="col-md-6">
-                        <img class="img_product_thumbnail" src="{{$product_master->product_thumbnail}}">
+                        <img class="c-img_product_thumbnail" src="{{$product_master->product_thumbnail}}">
                     </div>
 
                     <label class="col-md-4 control-label">商品画像</label>
                     <div class="col-md-6">
-                        <img class="img_product_image" src="{{$product_master->product_image}}">
+                        <img class="c-img_product_image" src="{{$product_master->product_image}}">
                     </div>
 
                     <label class="col-md-4 control-label">ステータス</label>

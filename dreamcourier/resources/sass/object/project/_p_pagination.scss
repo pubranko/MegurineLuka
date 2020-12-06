@@ -1,0 +1,66 @@
+/**
+    laravelオリジナルのページネーション。
+    クラス名等はオリジナルから変更不可。
+    ネーミングルール等の例外とする。
+*/
+/*ページネーションの設定*/
+.pagination {
+    display      : -webkit-box;
+    display      : flex;
+    padding-left : 0;
+    list-style   : none; //リストのマーカーの種類：なし
+    border-radius: 0.25rem;
+}
+
+.page-link {
+    position        : relative;
+    display         : block;
+    margin-left     : -1px;
+    padding         : 0.5rem 0.75rem;
+    border          : 1px solid #dee2e6;
+    line-height     : 1.25;
+    background-color: #fff;
+    color           : #3490dc;
+
+
+    &:hover {
+        z-index         : 2;
+        background-color: #e9ecef;
+        border-color    : #dee2e6;
+        color           : #1d68a7;
+        text-decoration : none;
+    }
+
+    &:focus {
+        z-index   : 3;
+        outline   : 0;
+        box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+    }
+
+
+    .page-item:first-child & {
+        margin-left              : 0;
+        border-top-left-radius   : 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+    }
+
+    .page-item:last-child & {
+        border-top-right-radius   : 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+
+    .page-item.active & {
+        z-index         : 3;
+        background-color: #3490dc;
+        border-color    : #3490dc;
+        color           : #fff;
+    }
+
+    .page-item.disabled & {
+        pointer-events  : none;
+        cursor          : auto;
+        background-color: #fff;
+        border-color    : #dee2e6;
+        color           : #6c757d;
+    }
+}

@@ -1,0 +1,36 @@
+/*カートボックス*/
+.p-cart-box {
+    padding  : 0.3rem;
+    @include f-frame--type1;
+    color: map-get($colors,product-text-type1-1);
+}
+
+.p-cart-box__layout{
+    display       : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    vertical-align: top; //商品画像の右の情報を、上寄せにする
+}
+
+.p-cart-box__product-name {
+    height     : 6rem;
+    @include f-frame--type1;
+
+}
+
+.p-cart-box__product-code {
+    height     : 1.3rem;
+    @include f-frame--type1;
+}
+
+.p-cart-box__product-price {
+    height     : 1.3rem;
+    display    : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    min-width  : 15rem;
+    @include f-frame--type1;
+}
+
+.p-cart-box__product-stock_quantity_status {
+    height     : 1.3rem;
+    display    : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    min-width  : 15rem;
+    @include f-frame--type1;
+}

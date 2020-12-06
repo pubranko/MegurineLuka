@@ -1,0 +1,10 @@
+/*商品の詳細画面の書式*/
+.c-product-tag {
+    padding    : 0.1rem;
+    @include f-frame--type1;
+    color         : map-get($colors,product-text-type1-1); //文字色
+}
+
+.c-product-tag__text{
+    color         : map-get($colors,product-text-type1-1); //文字色
+}
