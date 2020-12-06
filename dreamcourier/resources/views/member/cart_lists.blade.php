@@ -5,7 +5,7 @@
 <div class="l-body-nomal u-margin--t-350 u-margin--l-100">
     @foreach($wk_products as $wk_product)
         <div class="p-cart-box u-margin--t-70">
-            <img class="c-product-details__thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
+            <img class="p-product-details__thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
             <div class="p-cart-box__layout u-margin--l-70">
                 <div class="p-cart-box__product-name u-margin--t-30">
                     <a>【商品名】{{$wk_product['product_name']}}</a>

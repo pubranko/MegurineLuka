@@ -9,16 +9,16 @@
 
     <form id="member-address-form" method="POST" action="{{ url('/member/delivery_address') }}">
         {{ csrf_field() }}
-        <p class="c-delivery-destination__heading u-margin--tb-50">◎お届け先指定</p>
+        <p class="p-member-info__heading u-margin--tb-50">◎お届け先指定</p>
         <div class="form-group{{ $errors->has('address_select') ? ' has-error' : '' }}">
             <div class="form-group{{ $errors->has('address_select') ? ' has-error' : '' }}">
                 <label>
                     <input class="u-margin--l-100 u-margin--tb-50" type="radio" name="address_select" value="登録済み住所" checked
-                    @if(old('address_select')=='登録済み住所' ) checked @endif><a class="c-delivery-destination__text">登録されている住所へ配送する</a><br />
+                    @if(old('address_select')=='登録済み住所' ) checked @endif><a class="p-member-info__text">登録されている住所へ配送する</a><br />
                 </label>
                 <label>
                     <input class="u-margin--l-100 u-margin--b-50" type="radio" name="address_select" value="個別指定住所"
-                    @if(old('address_select')=='個別指定住所' ) checked @endif><a class="c-delivery-destination__text">配達先を指定する</a>
+                    @if(old('address_select')=='個別指定住所' ) checked @endif><a class="p-member-info__text">配達先を指定する</a>
                 </label>
                 @if ($errors->has('address_select'))
                 <span class="c-help-block">
@@ -28,8 +28,8 @@
             </div>
         </div>
 
-        <div class="c-delivery-destination u-margin--t-30 u-margin--l-200">
-            <p class="c-delivery-destination__heading u-margin--tb-50">○個別指定・配達先情報</p>
+        <div class="p-member-info u-margin--t-30 u-margin--l-200">
+            <p class="p-member-info__heading u-margin--tb-50">○個別指定・配達先情報</p>
 
             <div class="u-margin--l-100">
                 <div class="form-group{{ $errors->has('receiver_name') ? ' has-error' : '' }}">
@@ -37,7 +37,7 @@
 
                     <div>
                         <a>　必須　</a>
-                        <input type="text" class="c-delivery-destination__receiver_name u-margin--tb-50" name="receiver_name"
+                        <input type="text" class="p-member-info__receiver_name u-margin--tb-50" name="receiver_name"
                             value={{old('receiver_name')}}>
                         @if ($errors->has('receiver_name'))
                         <span class="c-help-block">
@@ -52,10 +52,10 @@
                     <label for="postal_code">郵便番号（postal_code）</label>
                  <div>
                         <a>　必須　</a>
-                        <input type="text" class="c-delivery-destination__postal_code1  u-margin--tb-50" name="postal_code1"
+                        <input type="text" class="p-member-info__postal_code1  u-margin--tb-50" name="postal_code1"
                             value={{old('postal_code1')}}>
                         -
-                        <input type="text" class="c-delivery-destination__postal_code2 u-margin--tb-50" name="postal_code2"
+                        <input type="text" class="p-member-info__postal_code2 u-margin--tb-50" name="postal_code2"
                             value={{old('postal_code2')}}>
                         @if ($errors->has('postal_code1'))
                         <span class="c-help-block">
@@ -76,7 +76,7 @@
 
                     <div>
                         <a>　表示　</a>
-                        <input type="text" class="c-delivery-destination__address1 u-margin--tb-50" name="address1" readonly
+                        <input type="text" class="p-member-info__address1 u-margin--tb-50" name="address1" readonly
                             value={{old('address1')}}>
 
                         @if ($errors->has('address1'))
@@ -92,7 +92,7 @@
 
                     <div>
                         <a>　表示　</a>
-                        <input type="text" class="c-delivery-destination__address2 u-margin--tb-50" name="address2" readonly
+                        <input type="text" class="p-member-info__address2 u-margin--tb-50" name="address2" readonly
                             value={{old('address2')}}>
 
                         @if ($errors->has('address2'))
@@ -108,7 +108,7 @@
 
                     <div>
                         <a>　表示　</a>
-                        <input type="text" class="c-delivery-destination__address3 u-margin--tb-50" name="address3" readonly
+                        <input type="text" class="p-member-info__address3 u-margin--tb-50" name="address3" readonly
                             value={{old('address3')}}>
 
                         @if ($errors->has('address3'))
@@ -124,7 +124,7 @@
 
                     <div>
                         <a>　必須　</a>
-                        <input type="text" class="c-delivery-destination__address4 u-margin--tb-50" name="address4"
+                        <input type="text" class="p-member-info__address4 u-margin--tb-50" name="address4"
                             value={{old('address4')}}>
 
                         @if ($errors->has('address4'))
@@ -140,7 +140,7 @@
 
                     <div>
                         <a>　任意　</a>
-                        <input type="text" class="c-delivery-destination__address5 u-margin--tb-50" name="address5"
+                        <input type="text" class="p-member-info__address5 u-margin--tb-50" name="address5"
                             value={{old('address5')}}>
 
                         @if ($errors->has('address5'))
@@ -156,7 +156,7 @@
 
                     <div>
                         <a>　任意　</a>
-                        <input type="text" class="c-delivery-destination__address6 u-margin--tb-50" name="address6"
+                        <input type="text" class="p-member-info__address6 u-margin--tb-50" name="address6"
                             value={{old('address6')}}>
 
                         @if ($errors->has('address6'))
@@ -169,15 +169,15 @@
             </div>
         </div>
 
-        <p class="c-delivery-destination__heading u-margin--tb-50">◎連絡先指定</p>
+        <p class="p-member-info__heading u-margin--tb-50">◎連絡先指定</p>
         <div class="form-group{{ $errors->has('phone_select') ? ' has-error' : '' }}">
             <label>
                 <input class="u-margin--l-100 u-margin--tb-50" type="radio" name="phone_select" value="登録済み電話番号" checked
-                @if(old('phone_select')=='登録済み電話番号' ) checked @endif><a class="c-delivery-destination__text">登録されている電話番号を連絡先とする</a><br />
+                @if(old('phone_select')=='登録済み電話番号' ) checked @endif><a class="p-member-info__text">登録されている電話番号を連絡先とする</a><br />
             </label>
             <label>
                 <input class="u-margin--l-100 u-margin--b-50" type="radio" name="phone_select" value="個別指定電話番号"
-                @if(old('phone_select')=='個別指定電話番号' ) checked @endif><a class="c-delivery-destination__text">連絡先電話番号を指定する</a>
+                @if(old('phone_select')=='個別指定電話番号' ) checked @endif><a class="p-member-info__text">連絡先電話番号を指定する</a>
             </label>
             @if ($errors->has('phone_select'))
             <span class="c-help-block">
@@ -186,8 +186,8 @@
             @endif
         </div>
 
-        <div class="c-delivery-destination u-margin--t-30 u-margin--l-200">
-            <p class="c-delivery-destination__heading u-margin--tb-50">○個別指定・連絡先電話番号</p>
+        <div class="p-member-info u-margin--t-30 u-margin--l-200">
+            <p class="p-member-info__heading u-margin--tb-50">○個別指定・連絡先電話番号</p>
             <div class="u-margin--l-100">
                 <div class="form-group{{ $errors->has('phone_number1') ? ' has-error' : '' }}">
                 <div class="form-group{{ $errors->has('phone_number2') ? ' has-error' : '' }}">
@@ -195,13 +195,13 @@
                     <label for="phone_number1">電話番号</label>
                  <div>
                         <a>　必須　</a>
-                        <input type="text" class="c-delivery-destination__phone_number1" name="phone_number1"
+                        <input type="text" class="p-member-info__phone_number1" name="phone_number1"
                             value={{old('phone_number1')}}>
                         -
-                        <input type="text" class="c-delivery-destination__phone_number2" name="phone_number2"
+                        <input type="text" class="p-member-info__phone_number2" name="phone_number2"
                             value={{old('phone_number2')}}>
                         -
-                        <input type="text" class="c-delivery-destination__phone_number3" name="phone_number3"
+                        <input type="text" class="p-member-info__phone_number3" name="phone_number3"
                             value={{old('phone_number3')}}>
                      @if ($errors->has('phone_number1'))
                         <span class="c-help-block">

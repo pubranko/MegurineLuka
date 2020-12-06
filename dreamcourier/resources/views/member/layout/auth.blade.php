@@ -28,7 +28,7 @@
         @if (Auth::guest())
             <a class="l-member-header__title u-margin--r-50" href="{{ url('/') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
             <form method="GET" action="{{ url('/keyword') }}">
-                <input class="l-member-search-box" placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                <input class="l-member-header--search-box" placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
                 <button type="submit" class="c-button--type2-4">検索</button>
             </form>
             <a class="l-member-header__line u-margin--r-50" href="{{ url('/member/login') }}">ログイン</a>
@@ -36,7 +36,7 @@
         @else
             <a class="l-member-header__title u-margin--r-50" href="{{ url('/member/home') }}">{{ config('app.name', 'Laravel Multi Auth Guard') }}</a>  <!-- .envにあるAPP_NAMEを取得 -->
             <form method="GET" action="{{ url('/member/keyword') }}">
-                <input class="l-member-search-box" placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
+                <input class="l-member-header--search-box" placeholder="商品をキーワードで検索" type="text" class="form-control" name="product_search_keyword" value={{old('product_search_keyword')}}>
                 <button type="submit" class="c-button--type2-4">検索</button>
             </form>
             <a class="l-member-header__line u-margin--r-50">{{ "こんばんは、".Auth::user()->last_name." ".Auth::user()->first_name."さん" }}</a>

@@ -1,0 +1,53 @@
+/* 商品の詳細表示 */
+.p-product-details {
+    display       : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    vertical-align: top; //商品画像の右の情報を、上寄せにする
+    color         : map-get($colors,product-text-type1-1); //文字色
+}
+
+.p-product-details__name {
+    height       : 6.5rem;
+    max-width    : 32rem;
+    @include f-frame--type1;
+}
+
+.p-product-details__description {
+    height       : 19.5rem;;
+    max-width    : 32rem;
+    @include f-frame--type1;
+}
+
+.p-product-details__code {
+    max-width    : 32rem;
+    @include f-frame--type1;
+}
+
+.p-product-details__price {
+    display      : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    min-width:15rem;
+    @include f-frame--type1;
+}
+
+.p-product-details__stock_quantity_status {
+    display    : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
+    min-width:15rem;
+    @include f-frame--type1;
+}
+
+.p-product-details__thumbnail {
+    width : 10rem; // 横幅を固定
+    height: auto; // 高さは自動指定
+    border: 0.1rem solid map-get($colors,product-details-border-1);
+}
+.p-product-details__thumbnail--type2 {
+    width : 10rem; // 横幅を固定
+    height: auto; // 高さは自動指定
+    border-bottom: 0.1rem solid map-get($colors,product-details-border-1);
+}
+
+
+.p-product-details__image {
+    width : 30rem; // 横幅を固定
+    height: auto; // 高さは自動指定
+    border: 0.1rem solid map-get($colors,product-details-border-1);
+}

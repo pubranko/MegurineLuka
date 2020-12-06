@@ -7,28 +7,21 @@ $site_division: "member";
 // ===============================================================
 // Foundation
 // ===============================================================
-//@import "foundation/_f-mixins.scss";
-@import "foundation/_f-variable.scss";
-@import "foundation/_f-font-size.scss";
-@import "foundation/_f-palette.scss";
-@import "foundation/_f-colors.scss";
-@import "foundation/_f-frame.scss";
-@import "foundation/_f-input-form.scss";
-
-// --------------------------------------------
 // Reset
-// --------------------------------------------
 @import "foundation/_f-reset";
 
-// --------------------------------------------
 // Base
-// --------------------------------------------
 @import "foundation/_f-base";
 
+// function,map,mixinの定義
+@import "foundation/_f-palette.scss";       //function : パレット→利用可能な各色を定義
+@import "foundation/_f-colors.scss";        //map : 当プロジェクトで使用する色を上記のパレットより割当
+@import "foundation/_f-font-size.scss";     //map : 当プロジェクトで使用するフォントサイズを定義
+@import "foundation/_f-frame.scss";         //mixin : 当プロジェクトで使用する区切り線を定義
+@import "foundation/_f-input-form.scss";    //mixin : 当プロジェクトで使用するインプットフォームを定義
 // ===============================================================
 // Layout
 // ===============================================================
-
 @import "layout/_l-member-header.scss";
 @import "layout/_l-member-sidebar.scss";
 @import "layout/_l-member_footer";
@@ -36,38 +29,33 @@ $site_division: "member";
 @import "layout/_l-body-nomal.scss";
 @import "layout/_l-main.scss";
 
-
 // ===============================================================
 // Object
 // ===============================================================
 // --------------------------------------------
 // Component
 // --------------------------------------------
-// ボタン　type1〜3,4あたり。mixinsとどう分ける？
 @import "object/component/_c-button.scss";
-
-@import "object/component/_c-category-heading.scss";
-@import "object/component/_c-help-block.scss";
-@import "object/component/_c-operation-message";
-
 @import "object/component/_c-table-type1.scss";
-@import "object/component/_c-delivery-destination.scss";
-@import "object/component/_c-product-details.scss";   //商品詳細：明細
+
+@import "object/component/_c-help-block.scss";
+@import "object/component/_c-category-heading.scss";
+@import "object/component/_c-operation-message";
 @import "object/component/_c-product-tag.scss";       //商品詳細：タグ
 
 // --------------------------------------------
 // Project
 // --------------------------------------------
-@import "object/project/_p_pagination.scss";        //ページネーション(laravelオリジナル)
-@import "object/project/_p-cart-box.scss";        //カートリスト
-@import "object/project/_p-product-lists.scss";     //商品一覧
+@import "object/project/_p_pagination.scss";            //ページネーション(laravelオリジナル)
+@import "object/project/_p-product-lists.scss";         //商品一覧
+@import "object/project/_p-product-details.scss";       //商品詳細：明細
+@import "object/project/_p-cart-box.scss";              //カートリスト
+@import "object/project/_p-member-info.scss";  //配達先・日時・支払い方法等
 
 // --------------------------------------------
 // Utility
 // --------------------------------------------
 @import "object/utility/_u-margin.scss";     //
-@import "object/utility/_u-heading-font-size.scss";     //
-@import "object/utility/_u-test.scss";     //
 
 // @import "object/utility/typography";
 // @import "object/utility/dimension";

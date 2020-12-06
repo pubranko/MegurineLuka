@@ -1,0 +1,101 @@
+/*会員情報や配達先情報の入力ボックス*/
+.p-member-info {
+    padding  : 0.1rem 0.5rem 0.5rem 0.5rem;
+    @include f-frame--type1;
+    color         : map-get($colors,product-text-type1-1); //文字色
+}
+
+.p-member-info__heading {
+    font-size  : map-get($text_font_size, head-sm);
+    font-weight: bold;
+    color         : map-get($colors,product-text-type1-1); //文字色
+}
+
+.p-member-info__text {
+    color         : map-get($colors,product-text-type1-1); //文字色
+}
+
+/*入力フィールドの書式*/
+.p-member-info__email,
+.p-member-info__receiver_name,
+.p-member-info__last_name,
+.p-member-info__first_name,
+.p-member-info__last_name_kana,
+.p-member-info__first_name_kana {
+    width: 30rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__postal_code1,
+.p-member-info__postal_code2 {
+    width: 2.5rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__address1 {
+    width: 5rem;
+    @include f-input-form--type2;
+}
+
+.p-member-info__address2,
+.p-member-info__address3{
+    width: 30rem;
+    @include f-input-form--type2;
+}
+
+.p-member-info__address4,
+.p-member-info__address5,
+.p-member-info__address6 {
+    width: 30rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__phone_number1,
+.p-member-info__phone_number2,
+.p-member-info__phone_number3,
+.p-member-info__card_security_code,
+.p-member-info__birthday_year,
+.p-member-info__birthday_month,
+.p-member-info__birthday_day {
+    width: 3rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__delivery_date,
+.p-member-info__delivery_time {
+    height: 1.8rem;
+    @include f-input-form--type1;
+
+}
+
+.p-member-info__card_number {
+    width: 11rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__card_month,
+.p-member-info__card_year{
+    width: 3rem;
+    text-align: center;
+    @include f-input-form--type1;
+}
+
+.p-member-info__card_name{
+    width: 20rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__card_security_code{
+    width: 3rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__card_security_code{
+    width: 3rem;
+    @include f-input-form--type1;
+}
+
+.p-member-info__password {
+    width: 10rem;
+    @include f-input-form--type1;
+}

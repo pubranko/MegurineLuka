@@ -10,16 +10,16 @@
         </ul>
     </div>
 
-    <p class="c-delivery-destination__heading">◎お届け希望日時</p>
+    <p class="p-member-info__heading">◎お届け希望日時</p>
 
     <form id="member-address-form" method="POST" action="{{ url('/member/delivery_datetime') }}">
-        <div class="c-delivery-destination u-margin--l-200">
+        <div class="p-member-info u-margin--l-200">
             {{ csrf_field() }}
 
             <div class="u-margin--t-50 form-group{{ $errors->has('delivery_date') ? ' has-error' : '' }}">
                 <div class="form-group{{ $errors->has('wk_delivery_datetime') ? ' has-error' : '' }}">
                     <label for="delivery_date" class="col-md-4 control-label">お届け希望日　　　</label>
-                    <input id="delivery_date" type="date" class="c-delivery-destination__delivery_date" name="delivery_date"
+                    <input id="delivery_date" type="date" class="p-member-info__delivery_date" name="delivery_date"
                         value={{old('delivery_date')}}>
                     @if ($errors->has('delivery_date'))
                     <span class="c-help-block">
@@ -36,7 +36,7 @@
             <div class="u-margin--tb-50 form-group{{ $errors->has('delivery_time') ? ' has-error' : '' }}">
                 <div class="form-group{{ $errors->has('wk_delivery_datetime') ? ' has-error' : '' }}">
                     <label for="delivery_time" class="col-md-4 control-label">お届け希望時間帯　</label>
-                    <select id="delivery_time" class="c-delivery-destination__delivery_time" name="delivery_time">
+                    <select id="delivery_time" class="p-member-info__delivery_time" name="delivery_time">
                         <option value='' @if(old('delivery_time')=='' ) selected @endif>選択してください</option>
                         <option value='0:00〜2:00' @if(old('delivery_time')=='0:00〜2:00' ) selected @endif>0:00〜2:00
                         </option>

@@ -1,60 +1,16 @@
 /*
 *   ボタンの定義
 */
-%base-button-type1 {
-    //表示位置
-    display         : inline-block; //要素を横に並べる＆ブロックにする＆隙間有り
-    padding         : 0.5rem 1rem; // ボタンの内側余白：上下、左右
-    //形
-    width           : 9.5rem; // ボタンの横幅位
-    height          : 3rem; // ボタンの高さ
-    border-radius   : 0.3rem; // 角の丸み
-    background-image: linear-gradient(#6795fd 0%, #67ceff 100%); // ボタンの背景色：線形グラデーション
-    box-shadow      : 0rem 0.1rem 0.3rem rgba(0, 0, 0, 0.29); // ボックスに影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(黒の0.29)
-    border-bottom   : solid 0.2rem #5e7fca; // ボタン下辺の線の設定
-    //テキストの書式
-    text-decoration : none; // テキストの装飾：なし
-    font-weight     : bold; // フォントの太さ：boldは700と同じ（100〜900の9種類：標準は400）
-    line-height     : 1.6rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
-    text-align      : center; // テキストの中央寄せ
-    color           : rgba(255, 255, 255, 0.90); // 文字色
-    font-size       : map-get($text_font_size, button-md); // 文字サイズ
-    text-shadow     : 0.1rem 0.1rem 0.1rem rgba(255, 255, 255, 0.5); // テキストの影をつける：水平方向、垂直方向、影のぼかし、rgbaで色指定(白の0.5)
-}
-//戻る
-.c-button-type1-1 {
-    @extend %base-button-type1;
-}
-//カートへ追加ボタン
-.c-button-type1-2 {
-    @extend %base-button-type1;
-    line-height: 3rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
-}
-//キャンセル
-.c-button-type1-3 {
-    @extend %base-button-type1;
-    display    : block; //要素を横に並べる＆ブロックにする＆隙間有り
-    height     : 2rem; // ボタンの高さ
-    line-height: 1.8rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
-    font-size  : map-get($text_font_size, button-sm); // 文字サイズ
-}
-//購入手続き時の各種ボタン
-.c-button-type1-4 {
-    @extend %base-button-type1;
-    width      : 15rem; // ボタンの横幅位
-    line-height: 1.5rem; // ボタンの上辺からの位置：0で上辺と文字が重なる
-}
-
 /* ボタン （aタグ、buttonタグに利用可） */
 %base-button--type2 {
     //表示位置
     display       : inline-block;
     padding       : 1.1rem 1rem; // ボタンの内側余白：上下、左右
     //形
-    border        : 0.2rem solid map-get($colors, button-border-1);//#000066;    /* 枠の指定 */
+    border        : 0.2rem solid map-get($colors, button-border-1);     /* 枠の指定 */
     box-shadow :  //x軸 y軸 ぼかし 広がり カラー
-        0.0rem 0.0rem 0.3rem 0.1rem map-get($colors, border-type1-2),       //外側
-        0.0rem 0.0rem 0.3rem 0.1rem map-get($colors, border-type1-2) inset; //内側
+        0.0rem 0.0rem 0.3rem 0.1rem map-get($colors, button-shadow-1),       //外側
+        0.0rem 0.0rem 0.3rem 0.1rem map-get($colors, button-shadow-1) inset; //内側
     border-radius : 5%;          //角丸
     background:rgba(0,0,0,0);   //背景色を透明に
     //テキストの書式
@@ -89,9 +45,16 @@
     padding       : 0.1rem 1rem; // ボタンの内側余白：上下、左右
     font-size     : map-get($text_font_size, button-sm); // 文字サイズ
 }
-//小：検索
+//小：検索、郵便番号からの検索
 .c-button--type2-4 {
     @extend %base-button--type2;
     padding       : 0.1rem 1rem; // ボタンの内側余白：上下、左右
     font-size     : map-get($text_font_size, button-sm); // 文字サイズ
+}
+
+//小：検索
+.c-button--type2-5 {
+    @extend %base-button--type2;
+    padding       : 0rem 1rem; // ボタンの内側余白：上下、左右
+    font-size     : map-get($text_font_size, button-tn); // 文字サイズ
 }

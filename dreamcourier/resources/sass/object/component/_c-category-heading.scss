@@ -3,17 +3,12 @@
     //表示位置
     padding      : 0.3rem 0.5rem; //内側の余白
     //形
-    //background   : -webkit-linear-gradient(to right, rgb(255, 186, 115), transparent); //背景色　webkit:古いブラウザー用
-    //background   : linear-gradient(to right, rgb(255, 186, 115), transparent); //背景色　グラデーション
     border: 0.1rem solid map-get($colors,message-border-1);
     //テキストの書式
     font-size    : map-get($text_font_size, head-lg);
     font-style   : italic;
     font-weight  : bold;
-    //color        : #545454; //文字色
 
     color: transparent;
-    //color:map-get($colors,message-text-3);
     -webkit-text-stroke: 1.5px map-get($colors,message-text-1);
-    //text-shadow: 0 0 50px map-get($colors,message-text-2);
 }

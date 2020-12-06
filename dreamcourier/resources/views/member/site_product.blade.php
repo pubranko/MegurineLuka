@@ -16,22 +16,22 @@
             @endforeach
         </div>
 
-        <img class="c-product-details__image" src="{{url($wk_product["wk_product_image"])}}">
+        <img class="p-product-details__image" src="{{url($wk_product["wk_product_image"])}}">
 
-        <div class="c-product-details u-margin--l-70">
-            <div class="c-product-details__name u-margin--t-20">
+        <div class="p-product-details u-margin--l-70">
+            <div class="p-product-details__name u-margin--t-20">
                 <a>【商品名】{{$wk_product["product_name"]}}</a>
             </div>
-            <div class="c-product-details__description u-margin--t-50">
+            <div class="p-product-details__description u-margin--t-50">
                 <a>【商品説明】{{$wk_product["product_description"]}}</a>
             </div>
-            <div class="c-product-details__code u-margin--t-50">
+            <div class="p-product-details__code u-margin--t-50">
                 <a>【商品コード】{{$wk_product["product_code"]}}</a>
             </div>
-            <div class="c-product-details__price u-margin--r-110 u-margin--t-50">
+            <div class="p-product-details__price u-margin--r-110 u-margin--t-50">
                 <a>【販売価格】{{$wk_product["product_price"]}} 円</a>
             </div>
-            <div class="c-product-details__stock_quantity_status ">
+            <div class="p-product-details__stock_quantity_status ">
                 <a>【販売状況】{{$wk_product["wk_product_stock_quantity_status"]}}</a>
             </div>
         </div>

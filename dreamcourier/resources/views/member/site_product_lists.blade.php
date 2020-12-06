@@ -16,7 +16,7 @@
                         <a class="u-margin--0" href="{{ url('/member/show?id='.$wk_product["id"]) }}">
                     @endif
                     <li class="p-product-lists__line u-margin--r-30">
-                        <div><img class="c-product-details__thumbnail--type2" src="{{url($wk_product["wk_product_thumbnail"])}}"></div>
+                        <div><img class="p-product-details__thumbnail--type2" src="{{url($wk_product["wk_product_thumbnail"])}}"></div>
                         <p class="p-product-lists__text u-margin--tb-10">{{$wk_product["product_code"]}}</p>
                         <p class="p-product-lists__text u-margin--tb-10">{{$wk_product["product_name"]}}</p>
                         <p class="p-product-lists__text u-margin--tb-10">{{$wk_product["product_price"]}} 円</p>

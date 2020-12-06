@@ -6,7 +6,7 @@
         お買い上げいただきまして、ありがとうございます。<br/>
         ご希望いただきました配達日時に商品をお届けいたします。
     </div>
-    <p class="c-delivery-destination__heading">◎お取引情報</p>
+    <p class="p-member-info__heading">◎お取引情報</p>
     <div class="u-margin--l-100">
         <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
@@ -16,10 +16,10 @@
         </table>
     </div>
 
-    <p class="c-delivery-destination__heading">◎商品情報</p>
+    <p class="p-member-info__heading">◎商品情報</p>
     <div class="u-margin--l-100">
         <div class="p-cart-box u-margin--t-70">
-            <img class="c-product-details__thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
+            <img class="p-product-details__thumbnail" src="{{url($wk_product["wk_product_thumbnail"])}}">
             <div class="p-cart-box__layout u-margin--l-70">
                 <div class="p-cart-box__product-name u-margin--b-40">
                     <a>【商品名】{{$wk_product['product_name']}}</a>
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <p class="c-delivery-destination__heading">◎配達先情報</p>
+    <p class="p-member-info__heading">◎配達先情報</p>
     <div class="u-margin--l-100">
         <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
@@ -65,7 +65,7 @@
         </table>
     </div>
 
-    <p class="c-delivery-destination__heading">◎配達日時</p>
+    <p class="p-member-info__heading">◎配達日時</p>
     <div class="u-margin--l-100">
         <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
@@ -79,7 +79,7 @@
         </table>
     </div>
 
-    <p class="c-delivery-destination__heading">◎支払い方法</p>
+    <p class="p-member-info__heading">◎支払い方法</p>
     <div class="u-margin--l-100">
         <table class="c-table-type1 u-margin--t-20">
             <tr class="c-table-type1__cell">
@@ -97,6 +97,6 @@
         </table>
     </div>
 
-    <a href="/member/cart_index" class="btn-gradient-3d">カート一覧へ</a>
+    <a href="/member/cart_index" class="c-button--type2-5 u-margin--t-70">カート一覧へ</a>
 </div>
 @endsection
